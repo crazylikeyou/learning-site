@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 14 课 · 第三周验收</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第三周验收 · 交流与方向</h1>
+<p class="sub">检查邀请、喜好、能力和授受。关键是人物关系和动作方向，不是只认词形。</p>
+<p class="meta">10 题 · 建议 12 分钟 · 过关 8/10</p>
+
+<div id="quiz"></div>
+
+<h2>口头附加题</h2>
+<p>邀请朋友周末吃饭。对方答应后，再问对方喜欢什么；最后描述你送给朋友一样小礼物。要求使用 `ませんか`、`が好き`、`あげました` 各一次。</p>
+
+<div class="lesson-nav">
+  <a href="0013-giving-receiving.html">← 第 13 课</a>
+  <a href="0015-comparison.html">第 15 课 · 比较 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "「要不要一起散步？」是？", opts: ["一緒に散歩しませんか。", "一緒に散歩しましょうか。", "一緒に散歩してください。", "一緒に散歩しました。"], answer: 0, why: "`ませんか` 是邀请对方一起做。" },
+    { stem: "「好啊，走吧」是？", opts: ["いいですね。行きませんか。", "いいですね。行きましょう。", "いいですね。行ってください。", "いいですね。行きました。"], answer: 1, why: "接受邀请并提议一起行动，用 `行きましょう`。" },
+    { stem: "私は音楽 <strong>__</strong> 好きです。", opts: ["を", "が", "に", "で"], answer: 1, why: "`好き` 的评价对象用 `が`。" },
+    { stem: "田中さんは料理 <strong>__</strong> 上手です。", opts: ["を", "が", "へ", "と"], answer: 1, why: "`上手` 前的能力领域用 `が`。" },
+    { stem: "「我会读平假名」是？", opts: ["ひらがなが読めます。", "ひらがなを読みます。", "ひらがなに読めます。", "ひらがなで読みます。"], answer: 0, why: "可能形 `読めます`，能力对象用 `が` 很自然。" },
+    { stem: "「我给了朋友一本书」是？", opts: ["私は友だちに本をあげました。", "友だちは私に本をくれました。", "私は友だちに本をもらいました。", "友だちは私に本をあげました。"], answer: 0, why: "我向外给朋友，用 `あげました`。" },
+    { stem: "「朋友给了我一本书」是？", opts: ["私は友だちに本をあげました。", "友だちは私に本をくれました。", "私は友だちに本をもらいました。", "友だちは本に私をくれました。"], answer: 1, why: "别人给我，用 `くれました`。" },
+    { stem: "「我从老师那里得到一本书」是？", opts: ["先生は私に本をあげました。", "先生は私に本をくれました。", "私は先生に本をもらいました。", "私は先生に本をあげました。"], answer: 2, why: "从得到者“我”的视角，用 `もらいました`。" },
+    { stem: "下面哪一句不自然？", opts: ["私の趣味は音楽です。", "私は音楽が好きです。", "私は音楽を好きです。", "音楽が好きな友だちがいます。"], answer: 2, why: "基础句式中 `好き` 的对象用 `が`，不是 `を`。" },
+    { stem: "`食べる` 的邀请形式是？", opts: ["食べましょうかください。", "食べませんか。", "食べてください。", "食べましたか。"], answer: 1, why: "礼貌邀请使用 `食べませんか`。" }
+  ], function (correct) {
+    if (correct >= 8) return "第三周过关。最后一周开始做比较、连接和整段表达。";
+    return "第三周未过关。把邀请、好き、授受三组各写三句，再重测，不急着进综合阅读。";
+  });
+});
+</script>
+</body>
+</html>
