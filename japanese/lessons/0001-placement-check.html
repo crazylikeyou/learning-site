@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 1 课 · 日语起点摸底</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+
+<h1>第 1 课 · 起点摸底</h1>
+<p class="sub">你现在是从假名、助词、活用还是 N4 衔接开始。15 道题，别查书；不确定就凭第一反应选。</p>
+<p class="meta">2026-10-22 · 预计 12 分钟 · 目标起点：一年后 N3</p>
+
+<blockquote>
+这节课不负责把所有入门知识讲一遍，只做诊断。总分告诉你大概层级，错题分布才决定下一课。靠猜对的题不算稳定掌握，做完请把“不确定题”也告诉我。
+</blockquote>
+
+<div class="routine">
+  <div><strong>题 1–3 · 假名</strong><span>是否能在不默背整张表的情况下直接解码。</span></div>
+  <div><strong>题 4–6 · 助词</strong><span>是否知道句子成分由什么关系连接。</span></div>
+  <div><strong>题 7–12 · 活用</strong><span>时态、否定、て形、可能和条件。</span></div>
+  <div><strong>题 13–15 · 短读</strong><span>能否从句子中提取事实，而不是逐字翻译。</span></div>
+</div>
+
+<div id="quiz"></div>
+
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<h2>不计分的听力基线</h2>
+<p>完成选择题后，打开 <a href="https://www3.nhk.or.jp/news/easy/">NHK News Easy</a> 任意一条 1–3 分钟音频，只听一遍，不作暂停。按下面自评：</p>
+<ol>
+  <li><strong>0：</strong>几乎只听到连续声音。</li>
+  <li><strong>1：</strong>能抓到几个词和数字。</li>
+  <li><strong>2：</strong>能说出主题，但细节大多模糊。</li>
+  <li><strong>3：</strong>能说出主题和至少两个细节。</li>
+</ol>
+<p>把等级发给我。听力从第 1 周就安排，但起点不同，材料长度和语速会不同。</p>
+
+<div class="foot">
+  <p>做完后报告：总分、错题编号、靠猜的题号、听力自评、每天大概能学多少分钟。</p>
+  <p>如果题目里的日语本身看不懂，这不是失败，也是有效信息；直接告诉我哪一题读不懂。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "平假名 <span class='jp'>ひ</span> 的罗马字是？",
+    opts: ["shi", "hi", "bi", "pi"],
+    answer: 1,
+    why: "`ひ` 是 hi。不要把平假名和片假名、浊音混在一起；形与音的对应要靠随机识别来练。"
+  },
+  {
+    stem: "片假名 <span class='jp'>カ</span> 的罗马字是？",
+    opts: ["ka", "ga", "ke", "ku"],
+    answer: 0,
+    why: "`カ` 是 ka，对应平假名 `か`。片假名多用于外来语、拟声词和强调，不是另一套发音。"
+  },
+  {
+    stem: "平假名 <span class='jp'>を</span> 作为助词时怎样读？",
+    opts: ["wo，明显读出 w", "o，与を的发音相同", "to", "e"],
+    answer: 1,
+    why: "作为助词通常读 o，罗马字仍常标作 wo。另：助词 `へ` 通常读 e，不能说 `に` 和 `へ` 完全一样，但读音要准。"
+  },
+  {
+    stem: "わたし <strong>__</strong> 学生です。",
+    opts: ["を", "に", "は", "で"],
+    answer: 2,
+    why: "`わたしは学生です。` 中用 `は` 提示主题：“至于我，是学生。”这里不是英语式的主语标记，而是主题标记。"
+  },
+  {
+    stem: "七時 <strong>__</strong> 起きます。",
+    opts: ["を", "に", "へ", "が"],
+    answer: 1,
+    why: "具体时间点用 `に`：`七時に起きます`。相对时间如`今日`、`明日`通常不加 `に`。"
+  },
+  {
+    stem: "水 <strong>__</strong> 飲みます。",
+    opts: ["が", "を", "で", "と"],
+    answer: 1,
+    why: "`水を飲みます`。`を` 标出动作直接作用的对象。和移动动词 `公園を歩く` 里的 `を` 表示经过范围，是不同用法。"
+  },
+  {
+    stem: "昨日、映画 <strong>__</strong>。",
+    opts: ["見ます", "見ました", "見ません", "見て"],
+    answer: 1,
+    why: "`昨日` 表示已完成，礼貌肯定过去形是 `見ました`。`見ます` 是非过去形，不等于只能表示将来。"
+  },
+  {
+    stem: "明日は学校へ <strong>__</strong>。",
+    opts: ["行きます", "行きません", "行きました", "行って"],
+    answer: 1,
+    why: "句子要表达“明天不去学校”，用礼貌否定 `行きません`。`行って` 是て形，不能在这里结束这个礼貌句。"
+  },
+  {
+    stem: "`書く` 的て形是？",
+    opts: ["書いて", "書きて", "書んで", "書って"],
+    answer: 0,
+    why: "以 `く` 结尾的五段动词通常变 `いて`：`書く → 書いて`。例外是 `行く → 行って`，需要单独记。"
+  },
+  {
+    stem: "`読む` 的ない形是？",
+    opts: ["読みない", "読まない", "読まなくて", "読めない"],
+    answer: 1,
+    why: "五段动词 `読む` 的未然形是 `読ま`，接 `ない` 得 `読まない`。`読めない` 是可能形 `読める` 的否定。"
+  },
+  {
+    stem: "日本語が少し <strong>__</strong>。",
+    opts: ["話します", "話せます", "話されます", "話させます"],
+    answer: 1,
+    why: "表示“能说一点日语”用可能形 `話せる`，礼貌形为 `話せます`。可能形和被动、使役要分开。"
+  },
+  {
+    stem: "時間 <strong>__</strong>、映画を見に行きます。",
+    opts: ["あると", "あれば", "あっても", "あるから"],
+    answer: 1,
+    why: "`あれば` 是 `ある` 的假定形，表示“如果有时间”。`あると` 更像“有时间的话就总会……”，语义与这里不完全等。"
+  },
+  {
+    stem: "田中さんは毎朝七時に起きて、新聞を読んでから会社へ行きます。田中さんが新聞を読むのはいつ？",
+    opts: ["起きる前", "会社へ行った後", "起きてから会社へ行くまで", "会社で"],
+    answer: 2,
+    why: "`起きて、新聞を読んでから会社へ行きます`：先起床，再读报，然后去公司。`～てから` 表示动作先后。"
+  },
+  {
+    stem: "この店は駅から近いですが、値段が高いです。店について正しいのは？",
+    opts: ["駅から遠くて安い", "駅から近いが高い", "駅から近くて安い", "駅から遠いが高い"],
+    answer: 1,
+    why: "`～が～` 在这里连接转折：离车站近，但价格高。不要把两个信息都读成优点。"
+  },
+  {
+    stem: "友だちに「明日は忙しい」と言われました。最も近い意味は？",
+    opts: ["我说朋友明天很忙", "朋友告诉我他明天很忙", "我让朋友明天忙", "朋友问我明天忙不忙"],
+    answer: 1,
+    why: "`言われました` 是 `言う` 的被动形，`友だちに言われました` 表示“被朋友说了/朋友对我说了”。文中的说话者是朋友。"
+  }
+];
+
+const quiz = document.getElementById("quiz");
+let answered = 0;
+let correct = 0;
+const wrongIdx = [];
+
+QUESTIONS.forEach((q, qi) => {
+  const box = document.createElement("div");
+  box.className = "q";
+  box.innerHTML = `<p><span class="mono">${String(qi + 1).padStart(2, "0")}</span>&nbsp; <span class="stem">${q.stem}</span></p>`;
+  const ol = document.createElement("ol");
+  ol.className = "opts";
+  q.opts.forEach((text, oi) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="jp">${text}</span>`;
+    li.addEventListener("click", () => {
+      if (box.dataset.done) return;
+      box.dataset.done = "1";
+      answered++;
+      const isRight = oi === q.answer;
+      if (isRight) correct++; else wrongIdx.push(qi + 1);
+      [...ol.children].forEach((el, k) => {
+        el.classList.add("locked");
+        if (k === q.answer) el.classList.add("correct");
+        else if (k === oi) el.classList.add("wrong");
+      });
+      why.classList.add("show");
+      if (answered === QUESTIONS.length) finish();
+    });
+    ol.appendChild(li);
+  });
+  const why = document.createElement("p");
+  why.className = "why";
+  why.innerHTML = "<strong>为什么：</strong>" + q.why.replace(/`([^`]+)`/g, "<span class='jp'>$1</span>");
+  box.appendChild(ol);
+  box.appendChild(why);
+  quiz.appendChild(box);
+});
+
+function finish() {
+  const el = document.getElementById("score");
+  el.hidden = false;
+  document.getElementById("scoreText").textContent = `答对 ${correct} / ${QUESTIONS.length}`;
+  let msg;
+  if (correct <= 4) {
+    msg = "先走零基础路线：进入第 2 课，连续三天做假名随机识别；暂时不求教材速度。";
+  } else if (correct <= 8) {
+    msg = "已有零散知识，但还没有稳定系统。先快速修假名，再从助词、动词分类和礼貌形开始搭骨架。";
+  } else if (correct <= 12) {
+    msg = "N5 地基已经露出轮廓。下一课重点判断活用是否真会；会的话直接进入 N5 后半与 N4 衔接。";
+  } else {
+    msg = "这套摸底已接近上限，不能据此认定 N3。请加做一次 N4 分项测，并如实标出靠猜的题。";
+  }
+  document.getElementById("advice").textContent = msg + (wrongIdx.length ? ` 错题编号：${wrongIdx.join("、")}。` : " 本轮没有错题。");
+}
+</script>
+</body>
+</html>
+

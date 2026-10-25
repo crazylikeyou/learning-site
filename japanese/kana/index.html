@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>五十音学习站 · 平假名 / 片假名</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">あ</span>
+    <div class="brand-text">
+      <h1>五十音学习站</h1>
+      <p>清音 46 ・ 浊音 25 ・ 拗音 33 ＝ 104 音 ×（平假名 / 片假名）</p>
+    </div>
+  </div>
+
+  <div class="topbar-tools">
+    <div class="seg" id="scriptSwitch" role="group" aria-label="假名种类">
+      <button type="button" data-script="h" class="is-on">平假名 あ</button>
+      <button type="button" data-script="k">片假名 ア</button>
+    </div>
+    <div class="voice-box">
+      <label for="voiceSelect">发音</label>
+      <select id="voiceSelect" aria-label="选择日语语音"></select>
+      <label for="rateRange">语速</label>
+      <input id="rateRange" type="range" min="0.5" max="1.4" step="0.05" value="0.9" aria-label="语速" />
+      <span id="rateOut" class="rate-out">0.9×</span>
+      <button type="button" id="testSpeak" class="ghost-btn">🔊 试听</button>
+    </div>
+    <button type="button" id="themeBtn" class="ghost-btn icon" title="切换深浅色">◐</button>
+  </div>
+</header>
+
+<div class="stick">
+  <div class="progress-strip">
+    <div class="progress-left">
+      <span class="muted">总进度</span>
+      <strong id="totalMastered">0</strong>
+      <span class="muted">/ 208</span>
+    </div>
+    <div class="bar big"><i id="totalBar" style="width:0%"></i></div>
+    <div class="progress-right">
+      <span class="chip hira">平 <b id="hiraMastered">0</b>/104</span>
+      <span class="chip kata">片 <b id="kataMastered">0</b>/104</span>
+      <button type="button" id="resetProgress" class="link-btn">重置进度</button>
+    </div>
+  </div>
+
+  <nav class="tabs" id="tabs" role="tablist">
+    <button type="button" role="tab" data-view="chart" class="is-on">五十音图</button>
+    <button type="button" role="tab" data-view="cards">卡片记忆</button>
+    <button type="button" role="tab" data-view="quiz">闯关测验</button>
+    <button type="button" role="tab" data-view="write">书写练习</button>
+    <button type="button" role="tab" data-view="guide">发音要点</button>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- ============ 五十音图 ============ -->
+  <section class="view is-on" id="view-chart" role="tabpanel" aria-label="五十音图">
+    <p class="view-intro">
+      点任意假名可以听发音、看例词并标记「已掌握」；点<b>行标题</b>或<b>段标题</b>可以连读一整行 / 一整段。
+      竖排叫「行」（あ行、か行…），横排叫「段」（あ段、い段…），记住这套坐标，以后查动词变形会非常省力。
+    </p>
+    <div id="chartRoot"></div>
+  </section>
+
+  <!-- ============ 卡片记忆 ============ -->
+  <section class="view" id="view-cards" role="tabpanel" aria-label="卡片记忆">
+    <div class="panel-toolbar">
+      <div class="field"><span>范围</span>
+        <select id="cardScope">
+          <option value="all">全部 104 音</option>
+          <option value="seion" selected>清音 46</option>
+          <option value="dakuon">浊音・半浊音 25</option>
+          <option value="yoon">拗音 33</option>
+        </select>
+      </div>
+      <div class="field"><span>顺序</span>
+        <select id="cardOrder">
+          <option value="seq">按五十音顺序</option>
+          <option value="rand" selected>随机打乱</option>
+        </select>
+      </div>
+      <label class="check"><input type="checkbox" id="cardUnmastered" checked /> 只练未掌握的</label>
+      <button type="button" id="cardRestart" class="btn ghost right">重新开始</button>
+    </div>
+
+    <div class="card-stage">
+      <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="翻转卡片">
+        <div class="face front">
+          <span class="card-kana" id="cardFrontKana">あ</span>
+          <span class="card-hint">点卡片或按空格翻转</span>
+        </div>
+        <div class="face back">
+          <div class="card-romaji" id="cardRomaji">a</div>
+          <div class="card-ex" id="cardEx"></div>
+        </div>
+      </div>
+      <div class="card-meta" id="cardMeta">0 / 0</div>
+      <div class="card-btns">
+        <button type="button" id="cardAgain" class="btn danger">还不会 ←</button>
+        <button type="button" id="cardFlip" class="btn ghost">翻转</button>
+        <button type="button" id="cardKnow" class="btn ok">记住了 →</button>
+      </div>
+      <p class="hint" id="cardDone" hidden>这一轮已经练完了 🎉 换一组范围或点「重新开始」。</p>
+    </div>
+  </section>
+
+  <!-- ============ 闯关测验 ============ -->
+  <section class="view" id="view-quiz" role="tabpanel" aria-label="闯关测验">
+    <div class="panel-toolbar">
+      <div class="field"><span>题型</span>
+        <select id="quizMode">
+          <option value="k2r">看假名 → 选罗马音</option>
+          <option value="r2k">看罗马音 → 选假名</option>
+          <option value="listen" selected>听发音 → 选假名</option>
+        </select>
+      </div>
+      <div class="field"><span>范围</span>
+        <select id="quizScope">
+          <option value="seion" selected>清音 46</option>
+          <option value="dakuon">浊音・半浊音 25</option>
+          <option value="yoon">拗音 33</option>
+          <option value="all">全部 104 音</option>
+        </select>
+      </div>
+      <div class="field"><span>假名</span>
+        <select id="quizScript">
+          <option value="h" selected>平假名</option>
+          <option value="k">片假名</option>
+          <option value="mix">平 + 片 混合</option>
+        </select>
+      </div>
+      <button type="button" id="quizStart" class="btn primary right">开始测验</button>
+    </div>
+    <div id="quizStage"></div>
+  </section>
+
+  <!-- ============ 书写练习 ============ -->
+  <section class="view" id="view-write" role="tabpanel" aria-label="书写练习">
+    <div class="write-layout">
+      <aside class="write-picker">
+        <div class="field col"><span>范围</span>
+          <select id="writeScope">
+            <option value="seion" selected>清音</option>
+            <option value="dakuon">浊音・半浊音</option>
+            <option value="yoon">拗音</option>
+          </select>
+        </div>
+        <div class="kana-picker" id="kanaPicker"></div>
+      </aside>
+
+      <div class="write-stage">
+        <div class="write-top">
+          <div class="write-current">
+            <span class="write-kana" id="writeKana">あ</span>
+            <div class="write-info">
+              <b id="writeRomaji">a</b>
+              <small id="writeMeta">3 画</small>
+              <button type="button" id="writeSpeak" class="ghost-btn small">🔊 发音</button>
+            </div>
+          </div>
+          <div class="write-tools">
+            <label class="check"><input type="checkbox" id="writeGuide" checked /> 描红</label>
+            <label class="check"><input type="checkbox" id="writeGrid" checked /> 米字格</label>
+            <button type="button" id="writeUndo" class="btn ghost">撤销</button>
+            <button type="button" id="writeClear" class="btn ghost">清空</button>
+            <button type="button" id="writeNext" class="btn ghost">下一个 →</button>
+          </div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="writeCanvas" width="720" height="720"></canvas>
+        </div>
+        <p class="hint">用鼠标或手指沿浅灰范例描红。写完点「下一个」，把一行一行的假名手写过去——手写的记忆效果比默看好得多。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 发音要点 ============ -->
+  <section class="view" id="view-guide" role="tabpanel" aria-label="发音要点">
+    <div id="guideRoot"></div>
+  </section>
+
+  <div class="warn" id="ttsWarn" hidden></div>
+</main>
+
+<!-- ============ 假名详情 ============ -->
+<aside class="detail" id="detail" aria-live="polite">
+  <button type="button" class="detail-close" id="detailClose" aria-label="关闭">✕</button>
+  <div class="detail-kana-row">
+    <div class="kana-box"><span id="detailH">あ</span><small>平假名</small></div>
+    <div class="kana-box"><span id="detailK">ア</span><small>片假名</small></div>
+  </div>
+  <div class="detail-romaji" id="detailRomaji">a</div>
+  <div class="detail-meta" id="detailMeta">清音 ・ あ行 あ段 ・ 3 画</div>
+
+  <div class="detail-btns">
+    <button type="button" class="btn primary" id="detailSpeak">🔊 听发音</button>
+    <button type="button" class="btn ok" id="detailMaster">标记已掌握</button>
+  </div>
+
+  <div class="detail-block">
+    <h4>例词</h4>
+    <div class="ex-line" id="detailExH"></div>
+    <div class="ex-line" id="detailExK"></div>
+  </div>
+
+  <div class="detail-note" id="detailNote" hidden></div>
+  <button type="button" class="btn ghost wide" id="detailWrite">✎ 到书写练习里练这个假名</button>
+</aside>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

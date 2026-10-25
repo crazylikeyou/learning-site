@@ -1,0 +1,86 @@
+.jp {
+  font-family: "Yu Gothic", "YuGothic", "Meiryo", "Noto Sans JP", sans-serif;
+  line-height: 1.9;
+}
+
+.kana-grid {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0 1.5rem;
+  font-family: "Yu Gothic", "YuGothic", "Meiryo", "Noto Sans JP", sans-serif;
+}
+
+.kana-grid th,
+.kana-grid td {
+  border: 1px solid var(--rule);
+  padding: .65rem .8rem;
+  text-align: center;
+}
+
+.kana-grid th {
+  font-size: .82rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.kana-grid td:first-child {
+  color: var(--muted);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: .82rem;
+}
+
+.big-kana {
+  font-family: "Yu Gothic", "YuGothic", "Meiryo", "Noto Sans JP", sans-serif;
+  font-size: 1.55rem;
+  line-height: 1.2;
+}
+
+.routine {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+  margin: 1.2rem 0;
+}
+
+.routine > div {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: .9rem 1rem;
+}
+
+.routine strong { display: block; margin-bottom: .2rem; }
+.routine span { color: var(--muted); font-size: .88rem; }
+
+.gate {
+  margin: 1.2rem 0;
+  padding: .9rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: #faf7f1;
+}
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+  margin: 1rem 0 2rem;
+}
+
+.link-grid a {
+  display: block;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+  text-decoration: none;
+}
+
+.link-grid a:hover { border-color: var(--accent); }
+.link-grid strong { display: block; margin-bottom: .25rem; }
+.link-grid span { color: var(--muted); font-size: .86rem; }
+
+@media (max-width: 620px) {
+  .routine,
+  .link-grid { grid-template-columns: 1fr; }
+  .kana-grid th,
+  .kana-grid td { padding: .48rem .35rem; }
+}
+

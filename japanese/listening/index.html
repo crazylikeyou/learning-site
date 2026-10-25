@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>日语微听力 · 一句只抓一个信息</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<style>
+  .listen-card {
+    margin: 1.6rem 0;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+  .listen-card h2 {
+    margin: 0 0 .6rem;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+  }
+  .listen-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55rem;
+    align-items: center;
+    margin: .4rem 0 .9rem;
+  }
+  button, select {
+    font: inherit;
+    border: 1px solid var(--rule);
+    background: #faf8f3;
+    color: var(--ink);
+    padding: .45rem .8rem;
+    border-radius: 3px;
+  }
+  button { cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  button:disabled { cursor: default; opacity: .55; }
+  .listen-question { font-weight: 600; margin: .7rem 0; }
+  .transcript {
+    display: none;
+    margin-top: .8rem;
+    padding: .8rem 1rem;
+    border-left: 3px solid var(--accent);
+    background: #faf7f1;
+  }
+  .transcript.show { display: block; }
+  .voice-status {
+    font-size: .88rem;
+    color: var(--muted);
+    margin: .4rem 0 1.3rem;
+  }
+  .voice-status.bad { color: var(--bad); }
+  .rulebox {
+    margin: 1.2rem 0;
+    padding: .9rem 1rem;
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+  .rulebox ol { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<h1>日语微听力</h1>
+<p class="sub">一句只抓一个信息。听不到整句也没关系，先稳定抓到人名、时间、动作或转折。</p>
+<p class="meta">自评 1 分起点 · 每天 10–15 分钟 · 不需要访问 NHK</p>
+
+<div class="voice-status" id="voiceStatus">正在检查本机日语语音……</div>
+
+<div class="listen-tools">
+  <label for="voice">声音：</label>
+  <select id="voice"></select>
+  <label for="rate">速度：</label>
+  <input id="rate" type="range" min="0.6" max="1.1" step="0.05" value="0.8">
+  <span id="rateText" class="mono">0.80×</span>
+</div>
+
+<div class="rulebox">
+  <strong>每轮这样做</strong>
+  <ol>
+    <li>先直接播放，不看原文，只找题干要的一个信息。</li>
+    <li>最多重听两遍。仍听不懂就选“没听清”，这是有效数据。</li>
+    <li>作答后再看原文、跟读两遍，最后从头重听一遍。</li>
+    <li>当天只做一轮。第二天重做全部题目，不追求一次性完成很多。</li>
+  </ol>
+</div>
+
+<div id="drill"></div>
+
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>记录每轮答对数、最常没抓到的词，以及正常速度是否需要降慢。三天后再决定是否提高到 0.9 倍速或增加句子长度。</p>
+  <p><a href="../lessons/0003-verb-classes.html">← 返回第 3 课</a> · <a href="../">日语课程首页</a></p>
+</div>
+
+<script>
+const ITEMS = [
+  {
+    text: "おはようございます。",
+    question: "这句话最可能在什么时间说？",
+    opts: ["早上", "晚上", "离开公司时"],
+    answer: 0,
+    note: "おはようございます：早上好。先只抓“问候”和时间场景。"
+  },
+  {
+    text: "私は学生です。",
+    question: "说话人是什么身份？",
+    opts: ["老师", "学生", "公司职员"],
+    answer: 1,
+    note: "私は学生です。= 我是学生。`学生` 是关键词，`です` 是礼貌判断。"
+  },
+  {
+    text: "今日は月曜日です。",
+    question: "今天是星期几？",
+    opts: ["星期一", "星期二", "星期日"],
+    answer: 0,
+    note: "今日は月曜日です。= 今天是星期一。"
+  },
+  {
+    text: "水を飲みます。",
+    question: "要做什么？",
+    opts: ["喝水", "买水", "看水"],
+    answer: 0,
+    note: "水を飲みます。= 喝水。`水を` 是动作对象；助词 `を` 读 o。"
+  },
+  {
+    text: "田中さんは七時に起きます。",
+    question: "田中几点起床？",
+    opts: ["六点", "七点", "八点"],
+    answer: 1,
+    note: "田中さんは七時に起きます。先抓人 `田中さん`，再抓数字 `七時`。"
+  },
+  {
+    text: "明日は学校へ行きません。",
+    question: "明天去学校吗？",
+    opts: ["去", "不去", "已经去过"],
+    answer: 1,
+    note: "行きません 是礼貌否定。不要只听到 `行き` 就判断为“去”。"
+  },
+  {
+    text: "昨日、映画を見ました。",
+    question: "什么时候看了电影？",
+    opts: ["昨天", "今天", "明天"],
+    answer: 0,
+    note: "昨日、映画を見ました。= 昨天看了电影。`見ました` 是过去肯定。"
+  },
+  {
+    text: "週末、友だちと公園へ行きます。",
+    question: "和谁一起去公园？",
+    opts: ["家人", "朋友", "老师"],
+    answer: 1,
+    note: "友だちと 表示“和朋友一起”。句子里有几个词，但题目只问同行者。"
+  },
+  {
+    text: "この店は駅から近いですが、高いです。",
+    question: "这家店怎么样？",
+    opts: ["离车站近，但价格高", "离车站远，但便宜", "离车站近，也便宜"],
+    answer: 0,
+    note: "近いですが、高いです。`が` 把前后变成转折：近，但贵。"
+  },
+  {
+    text: "時間があれば、図書館へ行きます。",
+    question: "什么情况下会去图书馆？",
+    opts: ["有时间", "没时间", "朋友来"],
+    answer: 0,
+    note: "時間があれば = 如果有时间。先抓条件，再抓结果 `図書館へ行きます`。"
+  }
+];
+
+let answered = 0;
+let correct = 0;
+const wrong = [];
+let japaneseVoices = [];
+
+const drill = document.getElementById("drill");
+const voiceSelect = document.getElementById("voice");
+const status = document.getElementById("voiceStatus");
+const rate = document.getElementById("rate");
+const rateText = document.getElementById("rateText");
+
+function loadVoices() {
+  const all = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  japaneseVoices = all.filter(v => v.lang && v.lang.toLowerCase().startsWith("ja"));
+  voiceSelect.innerHTML = "";
+  japaneseVoices.forEach((v, i) => {
+    const option = document.createElement("option");
+    option.value = String(i);
+    option.textContent = `${v.name} (${v.lang})`;
+    voiceSelect.appendChild(option);
+  });
+
+  if (!window.speechSynthesis || !japaneseVoices.length) {
+    voiceSelect.innerHTML = "<option>未找到日语语音</option>";
+    status.textContent = "没有检测到日语语音。请在 Windows 设置中为日语添加语音包，然后刷新本页。";
+    status.classList.add("bad");
+  } else {
+    status.textContent = `已找到 ${japaneseVoices.length} 个本机日语语音。播放前先自己听，不要看原文。`;
+    status.classList.remove("bad");
+  }
+}
+
+function speak(text) {
+  if (!window.speechSynthesis || !japaneseVoices.length) {
+    status.textContent = "当前无法播放：本机没有可用的日语语音。";
+    status.classList.add("bad");
+    return;
+  }
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "ja-JP";
+  utter.voice = japaneseVoices[Number(voiceSelect.value)] || japaneseVoices[0];
+  utter.rate = Number(rate.value);
+  utter.pitch = 1;
+  utter.onerror = () => {
+    status.textContent = "播放失败。先确认系统日语语音可用，再刷新本页。";
+    status.classList.add("bad");
+  };
+  speechSynthesis.speak(utter);
+}
+
+rate.addEventListener("input", () => {
+  rateText.textContent = Number(rate.value).toFixed(2) + "×";
+});
+
+ITEMS.forEach((item, qi) => {
+  const card = document.createElement("section");
+  card.className = "listen-card";
+  card.innerHTML = `
+    <h2><span class="mono">${String(qi + 1).padStart(2, "0")}</span> · 只抓一个信息</h2>
+    <div class="listen-tools">
+      <button type="button" class="play">▶ 播放</button>
+      <button type="button" class="slow">慢速再听</button>
+      <span class="mono plays">已播放 0 次</span>
+    </div>
+    <p class="listen-question"></p>
+    <ol class="opts"></ol>
+    <p class="transcript"></p>
+  `;
+  card.querySelector(".listen-question").textContent = item.question;
+
+  let plays = 0;
+  const play = () => {
+    plays++;
+    card.querySelector(".plays").textContent = `已播放 ${plays} 次`;
+    speak(item.text);
+  };
+  card.querySelector(".play").addEventListener("click", play);
+  card.querySelector(".slow").addEventListener("click", () => {
+    if (!window.speechSynthesis || !japaneseVoices.length) {
+      status.textContent = "当前无法播放：本机没有可用的日语语音。";
+      status.classList.add("bad");
+      return;
+    }
+    plays++;
+    card.querySelector(".plays").textContent = `已播放 ${plays} 次`;
+    const old = Number(rate.value);
+    const utter = new SpeechSynthesisUtterance(item.text);
+    utter.lang = "ja-JP";
+    utter.voice = japaneseVoices[Number(voiceSelect.value)] || japaneseVoices[0];
+    utter.rate = Math.max(0.55, old - 0.15);
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utter);
+  });
+
+  const opts = card.querySelector(".opts");
+  item.opts.forEach((text, oi) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    li.addEventListener("click", () => {
+      if (card.dataset.done) return;
+      card.dataset.done = "1";
+      answered++;
+      if (oi === item.answer) correct++; else wrong.push(qi + 1);
+      [...opts.children].forEach((el, k) => {
+        el.classList.add("locked");
+        if (k === item.answer) el.classList.add("correct");
+        else if (k === oi) el.classList.add("wrong");
+      });
+      const transcript = card.querySelector(".transcript");
+      transcript.innerHTML = `<span class="jp">${item.text}</span><br><span>${item.note}</span>`;
+      transcript.classList.add("show");
+      if (answered === ITEMS.length) finish();
+    });
+    opts.appendChild(li);
+  });
+  drill.appendChild(card);
+});
+
+function finish() {
+  document.getElementById("score").hidden = false;
+  document.getElementById("scoreText").textContent = `答对 ${correct} / ${ITEMS.length}`;
+  let msg;
+  if (correct <= 4) {
+    msg = "从 0.7 倍速开始，每题只播放一次，先找出题干里的一个关键词。不要切换到完整新闻。";
+  } else if (correct <= 7) {
+    msg = "已经能抓到部分关键词。保持一句一题，增加“否定、时间、转折”三类词的辨听。";
+  } else {
+    msg = "短句信息抓取已经可用。下一次提高到 0.9 倍速，再逐步加入两句连听。";
+  }
+  document.getElementById("advice").textContent = msg + (wrong.length ? ` 错题编号：${wrong.join("、")}。` : " 本轮全对。");
+}
+
+if ("speechSynthesis" in window) {
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+} else {
+  status.textContent = "当前浏览器不支持语音合成，请改用 Chrome 或 Edge。";
+  status.classList.add("bad");
+}
+</script>
+</body>
+</html>
