@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 7 课 · い形容词与な形容词</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 7 课 · 形容词不是同一个模板</h1>
+<p class="sub">先看形容词本身属于 い 类还是 な 类，再决定过去和否定怎么变。</p>
+<p class="meta">预计 22 分钟 · 对应周测二 · 重点：现在/过去、肯定/否定</p>
+
+<div class="objective">
+  <strong>本课只解决一件事</strong>
+  先辨认形容词类别，再套四个基本形式；修饰名词时还要注意 な 类保留 `な`。
+</div>
+
+<h2>一、い形容词：词尾的 い 是规则的一部分</h2>
+
+<table class="kana-grid">
+  <thead><tr><th>形式</th><th><span class="jp">高い</span></th><th>用途</th></tr></thead>
+  <tbody>
+    <tr><td>现在肯定</td><td><span class="jp">高いです</span></td><td>现在/一般事实</td></tr>
+    <tr><td>现在否定</td><td><span class="jp">高くないです</span></td><td>不高</td></tr>
+    <tr><td>过去肯定</td><td><span class="jp">高かったです</span></td><td>当时很高/很贵</td></tr>
+    <tr><td>过去否定</td><td><span class="jp">高くなかったです</span></td><td>当时不高</td></tr>
+  </tbody>
+</table>
+
+<p>变化时，原来词尾的 <span class="jp">い</span> 会被换掉：<span class="jp">高い → 高くない / 高かった</span>。不要说成 `高いなかった`。</p>
+
+<div class="example">
+  <div class="phrase"><span class="jp">この本は高いです。</span><button class="speak" data-say="この本は高いです。">播放</button></div>
+  <div class="phrase"><span class="jp">昨日は寒かったです。</span><button class="speak" data-say="昨日は寒かったです。">播放</button></div>
+  <small>`この本は` 是话题；`昨日は` 把时间提成话题。</small>
+</div>
+
+<h2>二、な形容词：判断句和名词修饰分两条</h2>
+
+<table class="kana-grid">
+  <thead><tr><th>形式</th><th><span class="jp">静か</span></th><th>用途</th></tr></thead>
+  <tbody>
+    <tr><td>现在肯定</td><td><span class="jp">静かです</span></td><td>安静</td></tr>
+    <tr><td>现在否定</td><td><span class="jp">静かじゃないです</span></td><td>不安静</td></tr>
+    <tr><td>过去肯定</td><td><span class="jp">静かでした</span></td><td>当时安静</td></tr>
+    <tr><td>过去否定</td><td><span class="jp">静かじゃなかったです</span></td><td>当时不安静</td></tr>
+  </tbody>
+</table>
+
+<p>な形容词本身不在判断句里带 `だ` 的礼貌形时，使用 `です`：`静かです`，不是 `静かだです`。修饰名词时却要加 <span class="jp">な</span>：<span class="jp">静かな部屋</span>。</p>
+
+<div class="example">
+  <div class="phrase"><span class="jp">この部屋は静かです。</span><button class="speak" data-say="この部屋は静かです。">播放</button></div>
+  <div class="phrase"><span class="jp">静かな部屋が好きです。</span><button class="speak" data-say="静かな部屋が好きです。">播放</button></div>
+</div>
+
+<h2>三、只先单列一个不规则词：いい</h2>
+
+<p><span class="jp">いい</span>（好）在现在肯定时是 `いいです`，但过去和否定从 `よい` 的规则走：</p>
+
+<div class="answer-grid">
+  <div><span class="jp">いいです</span> — 好</div>
+  <div><span class="jp">よくないです</span> — 不好</div>
+  <div><span class="jp">よかったです</span> — 当时好</div>
+  <div><span class="jp">よくなかったです</span> — 当时不好</div>
+</div>
+
+<p>不要把所有以 `い` 结尾的词都自动当い形容词。`きれい`、`嫌い` 虽然写起来以い结尾，语法上按な形容词处理：`きれいです`、`きれいな町`。</p>
+
+<h2>四、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>各写两句：一个い形容词描述食物，一个な形容词描述房间；每个词至少用一次过去否定。朗读时注意 `です` 不要读成重音很重的独立词。</p>
+
+<div class="lesson-nav">
+  <a href="0006-week-1-check.html">← 第一周验收</a>
+  <a href="0008-existence.html">第 8 课 · あります / います →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "この本は <strong>__</strong>。", opts: ["高いです", "高です", "高いでした", "高いないです"], answer: 0, why: "い形容词现在肯定：`高いです`。" },
+    { stem: "昨日は <strong>__</strong>。", opts: ["寒いでした", "寒かったです", "寒かったでした", "寒くです"], answer: 1, why: "い形容词过去肯定把 `い` 变成 `かった`：`寒かったです`。" },
+    { stem: "この部屋は <strong>__</strong>。", opts: ["静かです", "静かいです", "静かだです", "静くです"], answer: 0, why: "な形容词接礼貌判断直接用 `です`：`静かです`。" },
+    { stem: "「安静的房间」是？", opts: ["静か部屋", "静かい部屋", "静かな部屋", "静く部屋"], answer: 2, why: "な形容词修饰名词时保留 `な`：`静かな部屋`。" },
+    { stem: "「当时不好」是？", opts: ["いいでした", "いくないでした", "よかったです", "よくなかったです"], answer: 3, why: "`いい` 的过去否定用 `よくなかったです`。" },
+    { stem: "哪一句正确？", opts: ["きれいな町です。", "きれいい町です。", "きれいの町です。", "きれく町です。"], answer: 0, why: "`きれい` 虽然以い结尾，但按な形容词处理：`きれいな町`。" }
+  ]);
+});
+</script>
+</body>
+</html>
+
