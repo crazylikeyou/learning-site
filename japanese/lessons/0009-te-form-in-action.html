@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 9 课 · て形的三种高频用法</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 9 课 · て形不只是“一个变形”</h1>
+<p class="sub">同一个て形，可以连接动作顺序、提出请求，也能表示正在做。先认出句尾模式。</p>
+<p class="meta">预计 24 分钟 · 对应周测二 · 前置：第 3 课</p>
+
+<h2>一、动作顺序：て，然后……</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">朝ごはんを食べて、学校へ行きます。</span><button class="speak" data-say="朝ごはんを食べて、学校へ行きます。">播放</button></div>
+  <small>先吃早饭，然后去学校。前面的 `食べて` 不单独结束句子，最后的 `行きます` 承担礼貌语气。</small>
+</div>
+
+<p>可以用多个て形串动作：<span class="jp">起きて、顔を洗って、朝ごはんを食べます。</span>顺序按句子出现顺序理解。</p>
+
+<h2>二、请求：てください</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">ここに名前を書いてください。</span><button class="speak" data-say="ここに名前を書いてください。">播放</button></div>
+  <small>请在这里写名字。`書いて` + `ください` 构成礼貌请求。</small>
+</div>
+
+<p>不要直接说动词辞书形再加 `ください`：`書くください` 是错的；应先把动词变成て形。</p>
+
+<h2>三、正在做：ています</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">今、本を読んでいます。</span><button class="speak" data-say="今本を読んでいます。">播放</button></div>
+  <small>现在正在读书。`読んで` + `います`。</small>
+  <div class="phrase"><span class="jp">雨が降っています。</span><button class="speak" data-say="雨が降っています。">播放</button></div>
+  <small>正在下雨。`降って` 来自 `降る`。</small>
+</div>
+
+<p>本阶段先把它理解为“动作正在进行”。将来还会遇到表示状态延续的用法，不在这里扩展。</p>
+
+<h2>四、てから：做完 A 之后，再做 B</h2>
+
+<div class="pattern">
+  <span class="jp">宿題をしてから、ゲームをします。</span><br>
+  <small>做完作业后玩游戏。`てから` 比普通 `て` 更明确突出“先完成 A”。</small>
+</div>
+
+<h2>五、遇到新动词：先判类，再变て形</h2>
+
+<table class="kana-grid">
+  <thead><tr><th>结尾</th><th>て形</th><th>例</th></tr></thead>
+  <tbody>
+    <tr><td>う・つ・る</td><td>って</td><td><span class="jp">買う→買って；待つ→待って；帰る→帰って</span></td></tr>
+    <tr><td>む・ぶ・ぬ</td><td>んで</td><td><span class="jp">読む→読んで；遊ぶ→遊んで</span></td></tr>
+    <tr><td>く／ぐ</td><td>いて／いで</td><td><span class="jp">書く→書いて；泳ぐ→泳いで</span></td></tr>
+    <tr><td>す</td><td>して</td><td><span class="jp">話す→話して</span></td></tr>
+    <tr><td>Ⅱ类</td><td>去る + て</td><td><span class="jp">食べる→食べて；見る→見て</span></td></tr>
+    <tr><td>不规则</td><td>单独记</td><td><span class="jp">行く→行って；する→して；来る→来て</span></td></tr>
+  </tbody>
+</table>
+
+<h2>六、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>写五句一天流程，至少使用两个 `て` 的顺序连接和一个 `てから`；再写一个请求和一个正在进行的动作。把整段朗读一遍。</p>
+
+<div class="lesson-nav">
+  <a href="0008-existence.html">← 第 8 课</a>
+  <a href="0010-week-2-check.html">第 10 课 · 周测二 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "「先读书，再睡觉」是？", opts: ["本を読んで、寝ます。", "本を読む、寝ます。", "本を読みて、寝ます。", "本を読んでいます、寝ます。"], answer: 0, why: "`読む` 的て形是 `読んで`；用て形连接先后动作。" },
+    { stem: "「请打开窗户」是？", opts: ["窓を開くください。", "窓を開けてください。", "窓を開いてください。", "窓を開きてください。"], answer: 1, why: "`開ける` 是一段动词，去る加て得 `開けて`，再接 `ください`。" },
+    { stem: "「现在正在看电影」是？", opts: ["今、映画を見ます。", "今、映画を見ました。", "今、映画を見ています。", "今、映画を見てください。"], answer: 2, why: "正在进行的动作用 `て形 + います`。" },
+    { stem: "「写完作业再玩」是？", opts: ["宿題をしてから、遊びます。", "宿題をして、遊びますから。", "宿題をするから、遊んでいます。", "宿題をしから、遊びます。"], answer: 0, why: "`してから` 表示先完成作业，再做下一动作。" },
+    { stem: "「正在下雨」是？", opts: ["雨が降ります。", "雨が降っています。", "雨を降ってください。", "雨が降くです。"], answer: 1, why: "`降る` 的て形为 `降って`，`降っています` 表示正在下雨。" },
+    { stem: "`書く` 的て形是？", opts: ["書いて", "書って", "書きて", "書んで"], answer: 0, why: "以 `く` 结尾通常变 `いて`。" }
+  ]);
+});
+</script>
+</body>
+</html>
+
