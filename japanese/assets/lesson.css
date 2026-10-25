@@ -1,0 +1,134 @@
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.4rem 0 2.6rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--rule);
+  font-size: .9rem;
+}
+
+.lesson-nav a { text-decoration: none; }
+
+.objective {
+  margin: 1.3rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.objective strong { display: block; margin-bottom: .25rem; }
+
+.example,
+.pattern {
+  margin: 1.1rem 0;
+  padding: .95rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  background: #faf7f1;
+}
+
+.example .jp,
+.pattern .jp { font-size: 1.03rem; }
+.example small,
+.pattern small { display: block; color: var(--muted); margin-top: .25rem; }
+
+.phrase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .7rem;
+  align-items: center;
+  margin: .55rem 0;
+}
+
+.speak {
+  border: 1px solid var(--rule);
+  background: #fff;
+  color: var(--accent);
+  padding: .28rem .55rem;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.speak:hover { border-color: var(--accent); }
+
+.dialogue {
+  margin: 1.2rem 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.dialogue p { margin: .5rem 0; }
+
+.translation {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.checklist {
+  padding-left: 1.2rem;
+}
+
+.checklist li { margin: .55rem 0; }
+
+.week-card {
+  margin: 1.1rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.week-card h3 {
+  margin: 0 0 .5rem;
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+.week-card ol { margin: .5rem 0 0; }
+
+.week-card li { margin: .35rem 0; }
+
+.test-note {
+  margin: 1.2rem 0;
+  padding: .9rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: #faf7f1;
+}
+
+.reading {
+  margin: 1.2rem 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+  font-family: "Yu Gothic", "YuGothic", "Meiryo", "Noto Sans JP", sans-serif;
+  line-height: 2;
+}
+
+.reading h3 {
+  margin: 0 0 .7rem;
+  font-family: "Songti SC", "SimSun", Georgia, serif;
+}
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .7rem;
+  margin: 1rem 0;
+}
+
+.answer-grid > div {
+  padding: .75rem .85rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+@media (max-width: 620px) {
+  .lesson-nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .answer-grid { grid-template-columns: 1fr; }
+  .phrase { gap: .4rem; }
+}
+
