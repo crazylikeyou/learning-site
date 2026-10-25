@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 12 课 · 喜好与能力</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 12 课 · 喜欢什么，会做什么</h1>
+<p class="sub">这一课把 `が` 用到喜好和能力上，同时开始区分“会一个动作”和“会做一件事”。</p>
+<p class="meta">预计 22 分钟 · 对应周测三 · 重点：好き、上手、できます</p>
+
+<h2>一、好き／嫌い：评价对象常用 が</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">私は日本の音楽が好きです。</span><button class="speak" data-say="私は日本の音楽が好きです。">播放</button></div>
+  <div class="phrase"><span class="jp">私は納豆が好きじゃないです。</span><button class="speak" data-say="私は納豆が好きじゃないです。">播放</button></div>
+  <small>`好き`、`嫌い` 语法上是な形容词，不是动词。它们评价的对象用 `が`。</small>
+</div>
+
+<p>不要直接套中文“我喜欢咖啡”写 `私はコーヒーを好きです`。基础句型是 `私はコーヒーが好きです`。</p>
+
+<h2>二、上手／下手：评价能力</h2>
+
+<div class="pattern">
+  <span class="jp">田中さんは料理が上手です。</span> — 田中擅长做饭。<br>
+  <span class="jp">私は歌が下手です。</span> — 我不擅长唱歌。
+</div>
+
+<p>`上手`、`下手` 也是な形容词。习惯上不用 `私は上手です` 自夸“我很擅长”，涉及自己时更自然的是 `得意です`，但以后会学；本阶段先识别评价他人的用法。</p>
+
+<h2>三、できます：能做某事</h2>
+
+<p>`できます` 可以接名词，表示“会某项技能／某物可用”：</p>
+
+<div class="example">
+  <div class="phrase"><span class="jp">私は日本語ができます。</span><button class="speak" data-say="私は日本語ができます。">播放</button></div>
+  <div class="phrase"><span class="jp">この店でカードが使えます。</span><button class="speak" data-say="この店でカードが使えます。">播放</button></div>
+</div>
+
+<p>“会做某动作”更常用可能形：`日本語を少し話せます`、`ひらがなを読めます`。基础礼貌形可直接说 `話せます`。</p>
+
+<h2>四、动词辞书形 + ことができます</h2>
+
+<div class="pattern">
+  <span class="jp">私は簡単な料理を作ることができます。</span><br>
+  <small>我能做简单的菜。动词用辞书形 `作る`，再加 `ことができます`。</small>
+</div>
+
+<p>这种形式比较完整，适合说明能力；日常对话中，可能形 `作れます` 也很常见。先用一个句型稳住，不把所有可能表达一次塞进来。</p>
+
+<h2>五、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>写四句：喜欢/不喜欢什么、哪个人擅长什么、自己会一种语言技能、自己会完成一件日常动作。每一项都说明为什么用 `が` 或 `を`。</p>
+
+<div class="lesson-nav">
+  <a href="0011-invitation.html">← 第 11 课</a>
+  <a href="0013-giving-receiving.html">第 13 课 · 给予与接受 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "私は日本語 <strong>__</strong> 好きです。", opts: ["を", "が", "に", "で"], answer: 1, why: "`好き` 的评价对象用 `が`。" },
+    { stem: "田中さんは料理 <strong>__</strong> 上手です。", opts: ["を", "と", "が", "へ"], answer: 2, why: "`上手` 的评价对象用 `が`。" },
+    { stem: "「我会说一点日语」最自然的是？", opts: ["日本語を少し話します。", "日本語が少し話せます。", "日本語に少し話せます。", "日本語を少し話せください。"], answer: 1, why: "能力用可能形 `話せます`，会说的语言作对象时可标示为 `日本語が`。" },
+    { stem: "「我能做简单的菜」用完整句型是？", opts: ["簡単な料理を作りますことができます。", "簡単な料理を作ることができます。", "簡単な料理を作ってことができます。", "簡単な料理を作りことができます。"], answer: 1, why: "辞书形 `作る` + `ことができます`。" },
+    { stem: "哪一句是错误表达？", opts: ["私は音楽が好きです。", "私はコーヒーを好きです。", "田中さんは歌が上手です。", "私はカードが使えます。"], answer: 1, why: "`好き` 前的基础对象助词是 `が`，不是 `を`。" },
+    { stem: "`読む` 的可能形是？", opts: ["読みます", "読めます", "読んでいます", "読ませます"], answer: 1, why: "五段动词可能形 `読む→読める`，礼貌形 `読めます`。" }
+  ]);
+});
+</script>
+</body>
+</html>
+
