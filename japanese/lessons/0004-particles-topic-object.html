@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 4 课 · は、が、を：先看句子在做什么</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 4 课 · は、が、を</h1>
+<p class="sub">不要从“中文对应哪个字”选助词。先判断这个成分是在提出主题、指出主语，还是承受动作。</p>
+<p class="meta">预计 20 分钟 · 对应周测一 · 重点：基本语序与动作对象</p>
+
+<div class="objective">
+  <strong>本课只解决一件事</strong>
+  看到一个名词，先判断它后面要连接什么角色；而不是把所有助词当成固定翻译。
+</div>
+
+<h2>一、日语句子的骨架</h2>
+<p>礼貌体的基本语序通常是：<strong>话题/主语 + 时间 + 地点 + 对象 + 动词</strong>。日语把“这个名词是什么角色”交给助词，所以助词不能省。</p>
+
+<div class="example">
+  <div class="phrase">
+    <span class="jp">私は　毎朝　日本語を　勉強します。</span>
+    <button class="speak" data-say="私は毎朝日本語を勉強します。">播放</button>
+  </div>
+  <small>我每天早晨学习日语。`を` 标出动作“学习”的对象。</small>
+</div>
+
+<h2>二、は：提出“现在说的是什么”</h2>
+<p><span class="jp">は</span> 读作 <strong>wa</strong>。它把前面的名词提成话题，相当于“至于……”。它不一定标“主语”，也可以把时间、地点提成话题。</p>
+
+<div class="pattern">
+  <span class="jp">私は学生です。</span><br>
+  <small>至于我，是学生。`私は` 不等于英语机械意义上的 I；这里先把“我”设为话题。</small>
+</div>
+
+<p>当两个主体形成对比时，`は` 很常见：<span class="jp">田中さんは先生で、山田さんは学生です。</span>（田中老师，山田学生。）</p>
+
+<h2>三、が：指出谁是主语，或给出新信息</h2>
+<p><span class="jp">が</span> 直接指向动作或状态的主体。特别适合回答“谁？”、“哪一个？”以及首次出现、需要强调的新信息。</p>
+
+<div class="pattern">
+  <span class="jp">田中さんが先生です。</span><br>
+  <small>是田中老师／田中才是那位老师。`が` 把田中突出为答案。</small>
+</div>
+
+<p>本阶段先掌握一个可执行区别：已经有明确话题时用 <span class="jp">は</span>；回答“谁做了/谁是谁”时，答案常用 <span class="jp">が</span>。不要在第一条规则就试图解释所有 <span class="jp">は/が</span> 的细微差别。</p>
+
+<h2>四、を：动作直接作用的对象</h2>
+<p><span class="jp">を</span> 作为助词通常读 <strong>o</strong>。它跟在名词后面，表示“对这个对象做动作”。</p>
+
+<div class="example">
+  <div class="phrase"><span class="jp">水を飲みます。</span><button class="speak" data-say="水を飲みます。">播放</button></div>
+  <div class="phrase"><span class="jp">本を読みます。</span><button class="speak" data-say="本を読みます。">播放</button></div>
+  <div class="phrase"><span class="jp">映画を見ました。</span><button class="speak" data-say="映画を見ました。">播放</button></div>
+  <small>喝“水”、读“书”、看“电影”。动作直接落到谁，谁就用 `を`。</small>
+</div>
+
+<p>别把 `を` 和移动经过混在一起。本课先只处理“动作对象”：<span class="jp">パンを食べます</span>、<span class="jp">日本語を勉強します</span>。</p>
+
+<h2>五、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>写三句：一句自我介绍，一句“某人做某事”，一句回答“谁是什么”。每句朗读两遍，并标出你用了哪个助词以及为什么。</p>
+
+<div class="lesson-nav">
+  <a href="0003-verb-classes.html">← 第 3 课</a>
+  <a href="0005-particles-place-time.html">第 5 课 · に、で、へ、と →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "わたし <strong>__</strong> 学生です。", opts: ["を", "に", "は", "が"], answer: 2, why: "先把“我”设为话题：`わたしは学生です`。" },
+    { stem: "山田さん <strong>__</strong> 先生ですか。", opts: ["は", "を", "に", "で"], answer: 0, why: "这里把山田提成话题：`山田さんは先生ですか`，询问“山田是老师吗”。" },
+    { stem: "水 <strong>__</strong> 飲みます。", opts: ["は", "が", "を", "へ"], answer: 2, why: "“水”是喝这个动作直接作用的对象，用 `を`，读作 o。" },
+    { stem: "「誰が来ましたか。」最自然的回答是？", opts: ["田中さんは来ました。", "田中さんが来ました。", "田中さんを来ました。", "田中さんで来ました。"], answer: 1, why: "问题用 `が` 问“谁”，答案也用 `が` 把田中作为新信息指出：`田中さんが来ました`。" },
+    { stem: "今日 <strong>__</strong> 映画を見ます。", opts: ["を", "は", "に", "へ"], answer: 1, why: "`今日は映画を見ます` 把“今天”提成话题，`映画を` 才是看的对象。" },
+    { stem: "哪一句的 `を` 使用正确？", opts: ["学校を行きます。", "日本語を勉強します。", "先生を学生です。", "私を田中です。"], answer: 1, why: "`日本語を勉強します` 中，日语是学习的对象。去学校通常说 `学校へ行きます` 或 `学校に行きます`。" }
+  ], function (correct, total) {
+    if (correct >= 5) return "基本角色判断已过关。下一课把地点、时间和方向也接进句子。";
+    return "先回到三个例句，指出每句的话题、主语和动作对象，再做一次。";
+  });
+});
+</script>
+</body>
+</html>
+
