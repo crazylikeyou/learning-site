@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 6 课 · 第一周验收</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第一周验收 · 句子骨架</h1>
+<p class="sub">不是考你记了多少术语，而是看能否在一句里正确安排动作、时间、地点和对象。</p>
+<p class="meta">10 题 · 建议 12 分钟 · 过关 8/10</p>
+
+<div class="test-note">
+  先不看第 3–5 课。做完后只重做错题；如果同一条助词规则错两次以上，回看对应例句，不要继续刷新题。
+</div>
+
+<div id="quiz"></div>
+
+<h2>口头附加题</h2>
+<p>不看笔记，连续说三句：你几点起床、在哪里学习、和谁一起做什么。再听一遍微听力，记录是否比第一次多抓到一个人名或时间。</p>
+
+<div class="lesson-nav">
+  <a href="0005-particles-place-time.html">← 第 5 课</a>
+  <a href="0007-adjectives.html">第 7 课 · 形容词 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "わたし <strong>__</strong> 毎朝パンを食べます。", opts: ["を", "は", "が", "に"], answer: 1, why: "“我”是全句话题，用 `は`；面包是动作对象，用 `を`。" },
+    { stem: "映画 <strong>__</strong> 見ます。", opts: ["が", "に", "を", "で"], answer: 2, why: "电影是看的对象，`を`。" },
+    { stem: "教室 <strong>__</strong> 日本語を勉強します。", opts: ["に", "へ", "で", "と"], answer: 2, why: "学习发生在教室，用 `で`。" },
+    { stem: "六時 <strong>__</strong> 起きます。", opts: ["で", "に", "を", "へ"], answer: 1, why: "具体时间点用 `に`。" },
+    { stem: "母 <strong>__</strong> スーパーへ行きます。", opts: ["と", "を", "で", "が"], answer: 0, why: "`母と` 表示“和母亲一起”。" },
+    { stem: "「誰が学生ですか。」最合适的回答是？", opts: ["山田さんは学生です。", "山田さんが学生です。", "山田さんを学生です。", "山田さんに学生です。"], answer: 1, why: "问句用 `が` 问“谁”，回答也用 `が` 给出新信息。" },
+    { stem: "電車 <strong>__</strong> 学校へ行きます。", opts: ["で", "に", "を", "と"], answer: 0, why: "电车是交通手段，用 `で`。" },
+    { stem: "公園 <strong>__</strong> 子どもがいます。", opts: ["で", "に", "を", "へ"], answer: 1, why: "孩子存在于公园，存在位置用 `に`。" },
+    { stem: "コーヒー <strong>__</strong> ケーキを買います。", opts: ["へ", "に", "と", "で"], answer: 2, why: "两个名词并列，用 `と`。" },
+    { stem: "哪一句最自然？", opts: ["学校に日本語を勉強します。", "学校で日本語を勉強します。", "学校を日本語へ勉強します。", "学校と日本語に勉強します。"], answer: 1, why: "学习发生在学校：`学校で日本語を勉強します`。" }
+  ], function (correct, total) {
+    if (correct >= 8) return "第一周过关。进入形容词后，仍要在句子里持续复习这组助词。";
+    return "本周未过关。先重做 0004 和 0005 的错题，再回来，不急着学形容词。";
+  });
+});
+</script>
+</body>
+</html>
