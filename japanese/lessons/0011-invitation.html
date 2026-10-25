@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 11 课 · 邀请、提议与婉拒</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 11 课 · 邀请、提议与婉拒</h1>
+<p class="sub">从“会造句”进入“会对人说话”。重点是语气：直接命令、邀请和提议是三种不同功能。</p>
+<p class="meta">预计 20 分钟 · 对应周测三 · 重点：ませんか、ましょう、ましょうか</p>
+
+<h2>一、ませんか：邀请对方一起做</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">一緒に映画を見ませんか。</span><button class="speak" data-say="一緒に映画を見ませんか。">播放</button></div>
+  <small>要不要一起看电影？这不是单纯否定，而是礼貌邀请。</small>
+  <div class="phrase"><span class="jp">土曜日に公園へ行きませんか。</span><button class="speak" data-say="土曜日に公園へ行きませんか。">播放</button></div>
+</div>
+
+<p>`ませんか` 把邀请留出让对方选择的空间。肯定回答可以用 `いいですね。行きましょう`。</p>
+
+<h2>二、ましょう：提议“我们一起……”</h2>
+
+<div class="pattern">
+  <span class="jp">昼ごはんを食べましょう。</span> — 我们吃午饭吧。<br>
+  <span class="jp">一緒に帰りましょう。</span> — 一起回去吧。
+</div>
+
+<p>`ましょう` 更主动，像已经提出方向并邀请对方加入。邀请初次见面的人时，通常先用 `ませんか` 更柔和。</p>
+
+<h2>三、ましょうか：提出帮助</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">荷物を持ちましょうか。</span><button class="speak" data-say="荷物を持ちましょうか。">播放</button></div>
+  <small>要我帮你拿行李吗？话者提出自己可以做某事。</small>
+</div>
+
+<p>区分：`行きましょう` 是“我们去吧”；`行きましょうか` 是“要不要去／我来安排去吗”，取决于上下文。</p>
+
+<h2>四、答应与婉拒</h2>
+
+<div class="dialogue">
+  <p><span class="jp">A：明日、一緒に昼ごはんを食べませんか。</span></p>
+  <p><span class="jp">B：いいですね。食べましょう。</span></p>
+  <p class="translation">A：明天要不要一起午饭？ B：好啊，一起吃吧。</p>
+</div>
+
+<div class="dialogue">
+  <p><span class="jp">A：今週の土曜日、映画を見ませんか。</span></p>
+  <p><span class="jp">B：すみません、土曜日はちょっと…。</span></p>
+  <p class="translation">A：这周六要不要看电影？ B：不好意思，周六有点……</p>
+</div>
+
+<p>`ちょっと…` 不直接说“我不去”，用未说完的 `有点……` 缓冲拒绝。读时语气要柔和，不能像在报告事实。</p>
+
+<h2>五、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>写两组各三句对话：第一组邀请朋友吃饭并答应；第二组邀请同事看电影并礼貌拒绝。每组至少使用 `ませんか` 一次。</p>
+
+<div class="lesson-nav">
+  <a href="0010-week-2-check.html">← 第二周验收</a>
+  <a href="0012-preference-ability.html">第 12 课 · 喜好与能力 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "「要不要一起喝咖啡？」是？", opts: ["一緒にコーヒーを飲みましょうか。", "一緒にコーヒーを飲みませんか。", "一緒にコーヒーを飲んでください。", "一緒にコーヒーを飲みました。"], answer: 1, why: "礼貌邀请对方一起做，使用 `ませんか`。" },
+    { stem: "「我们走吧」是？", opts: ["行きません。", "行きましょう。", "行ってください。", "行きましたか。"], answer: 1, why: "`行きましょう` 表示“我们走吧”。" },
+    { stem: "看到对方拿重行李，主动说「我来帮你吧」最合适的是？", opts: ["持ちます。", "持ちませんか。", "持ちましょうか。", "持ってください。"], answer: 2, why: "`ましょうか` 用于主动提出帮助。" },
+    { stem: "对邀请「映画を見ませんか」的肯定回答是？", opts: ["いいですね。見ましょう。", "いいですね。見てください。", "すみません、見ました。", "映画を嫌いです。"], answer: 0, why: "先表示同意，再用 `ましょう` 接受并推进活动。" },
+    { stem: "哪一句是礼貌婉拒？", opts: ["行きません。", "行ってはいけません。", "すみません、日曜日はちょっと…。", "日曜日に行きますか。"], answer: 2, why: "`ちょっと…` 以未说完的缓冲表达拒绝，更委婉。" },
+    { stem: "`食べる` 的邀请形式是？", opts: ["食べませんか", "食べてください", "食べています", "食べました"], answer: 0, why: "一段动词 `食べる` 的ます形 `食べます`，邀请形式 `食べませんか`。" }
+  ]);
+});
+</script>
+</body>
+</html>
+
