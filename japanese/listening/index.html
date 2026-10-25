@@ -25,6 +25,7 @@
     gap: .55rem;
     align-items: center;
     margin: .4rem 0 .9rem;
+    min-width: 0;
   }
   button, select {
     font: inherit;
@@ -37,6 +38,11 @@
   button { cursor: pointer; }
   button:hover { border-color: var(--accent); }
   button:disabled { cursor: default; opacity: .55; }
+  #voice {
+    flex: 1 1 16rem;
+    min-width: 0;
+    max-width: 100%;
+  }
   .listen-question { font-weight: 600; margin: .7rem 0; }
   .transcript {
     display: none;
@@ -59,6 +65,9 @@
     background: #fff;
   }
   .rulebox ol { margin-bottom: 0; }
+  @media (max-width: 620px) {
+    #voice { flex-basis: 100%; width: 100%; }
+  }
 </style>
 </head>
 <body>
