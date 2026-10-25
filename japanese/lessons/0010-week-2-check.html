@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 10 课 · 第二周验收</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第二周验收 · 描写与状态</h1>
+<p class="sub">这次要同时处理形容词、存在句和て形，重点看会不会把相似规则互相污染。</p>
+<p class="meta">10 题 · 建议 12 分钟 · 过关 8/10</p>
+
+<div id="quiz"></div>
+
+<h2>口头附加题</h2>
+<p>用 5–8 句描述你的房间：有什么、谁在、物品在哪里、房间安静还是热闹、你现在正在做什么。至少用一次过去形。</p>
+
+<div class="lesson-nav">
+  <a href="0009-te-form-in-action.html">← 第 9 课</a>
+  <a href="0011-invitation.html">第 11 课 · 邀请与提议 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "この料理は <strong>__</strong>。", opts: ["おいしいでした", "おいしかったです", "おいしくかったです", "おいしいかったです"], answer: 1, why: "い形容词过去肯定：`おいしかったです`。" },
+    { stem: "この町は <strong>__</strong>。", opts: ["にぎやかです", "にぎやかいです", "にぎやかだです", "にぎやくです"], answer: 0, why: "な形容词现在礼貌肯定：`にぎやかです`。" },
+    { stem: "「安静的房间」是？", opts: ["静か部屋", "静かな部屋", "静かい部屋", "静く部屋"], answer: 1, why: "な形容词修饰名词时加 `な`。" },
+    { stem: "机の上に本 <strong>__</strong>。", opts: ["がいます", "があります", "をあります", "にいます"], answer: 1, why: "书是无生命物体，用 `があります`。" },
+    { stem: "公園に子ども <strong>__</strong>。", opts: ["があります", "がいます", "をいます", "でいます"], answer: 1, why: "孩子是有生命主体，用 `がいます`。" },
+    { stem: "「请读这本书」是？", opts: ["この本を読むください。", "この本を読んでください。", "この本を読みてください。", "この本を読んでいます。"], answer: 1, why: "`読む→読んで`，再接 `ください`。" },
+    { stem: "「现在正在等田中」是？", opts: ["今、田中さんを待ちます。", "今、田中さんを待っています。", "今、田中さんが待ってください。", "今、田中さんに待ちました。"], answer: 1, why: "等待的对象用 `を`，正在进行用 `待っています`。" },
+    { stem: "「吃完饭后去学校」是？", opts: ["ご飯を食べてから、学校へ行きます。", "ご飯を食べるから、学校へ行ってください。", "ご飯を食べていますから、学校です。", "ご飯を食べてください、学校へ行く。"], answer: 0, why: "`食べてから` 表示先吃完饭，然后去学校。" },
+    { stem: "「昨天不冷」是？", opts: ["昨日は寒いでした。", "昨日は寒くなかったです。", "昨日は寒かったないです。", "昨日は寒くないでした。"], answer: 1, why: "い形容词过去否定：`寒くなかったです`。" },
+    { stem: "「猫在桌子下面」是？", opts: ["机の下に猫があります。", "机の下に猫がいます。", "机の下を猫にいます。", "机の下で猫がいます。"], answer: 1, why: "存在位置用 `に`，猫有生命用 `います`。" }
+  ], function (correct) {
+    if (correct >= 8) return "第二周过关。第三周开始把句子用于邀请、喜好和信息交换。";
+    return "先回炉第二周错题。形容词与存在句各重写三句，再进入第三周。";
+  });
+});
+</script>
+</body>
+</html>
