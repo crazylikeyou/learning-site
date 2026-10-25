@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 5 课 · に、で、へ、と：时间、地点和同行者</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 5 课 · に、で、へ、と</h1>
+<p class="sub">都用中文解释成“在、到、和”会混。先问它们各自连接哪类信息。</p>
+<p class="meta">预计 22 分钟 · 对应周测一 · 重点：动作发生的位置与方向</p>
+
+<h2>一、に：时间点、到达点、存在的位置</h2>
+<p><span class="jp">に</span> 像钉子，把动作或存在钉在某个点上。</p>
+
+<div class="example">
+  <div class="phrase"><span class="jp">七時に起きます。</span><button class="speak" data-say="七時に起きます。">播放</button></div>
+  <div class="phrase"><span class="jp">学校に行きます。</span><button class="speak" data-say="学校に行きます。">播放</button></div>
+  <div class="phrase"><span class="jp">教室にいます。</span><button class="speak" data-say="教室にいます。">播放</button></div>
+  <small>具体时间点、移动的到达点、人或物存在的位置。</small>
+</div>
+
+<p>`今日`、`明日`、`毎日` 这类相对时间通常不加 `に`；带数字的具体时间点常加：`七時に`。</p>
+
+<h2>二、で：动作发生的场所，或手段</h2>
+<p><span class="jp">で</span> 标出“动作在这里发生”，也可以标“用这个手段”。它关心动作发生的舞台，不是最终到达点。</p>
+
+<div class="example">
+  <div class="phrase"><span class="jp">図書館で勉強します。</span><button class="speak" data-say="図書館で勉強します。">播放</button></div>
+  <div class="phrase"><span class="jp">電車で行きます。</span><button class="speak" data-say="電車で行きます。">播放</button></div>
+  <small>在图书馆学习；乘电车去。`で` 不是“到”？它连接活动地点或手段。</small>
+</div>
+
+<div class="pattern">
+  学校に<strong>行きます</strong>。 — “学校”是到达点，用 に。<br>
+  学校で<strong>勉強します</strong>。 — “学习”发生在学校，用 で。
+</div>
+
+<h2>三、へ：朝某方向去（读 e）</h2>
+<p><span class="jp">へ</span> 作助词读 <strong>e</strong>，强调方向；和移动动词尤其常见。<span class="jp">学校へ行きます</span> 与 <span class="jp">学校に行きます</span> 都可成立。</p>
+
+<h2>四、と：和某人一起，或并列名词</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">友だちと映画を見ます。</span><button class="speak" data-say="友だちと映画を見ます。">播放</button></div>
+  <div class="phrase"><span class="jp">コーヒーとパンを買います。</span><button class="speak" data-say="コーヒーとパンを買います。">播放</button></div>
+  <small>和朋友看电影；买咖啡和面包。一个是共同参与者，一个是名词并列。</small>
+</div>
+
+<h2>五、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>写四句：具体时间起床、在某处学习、和某人去某地、买两样东西。每句只改一个信息，尽量使用 <span class="jp">に・で・へ・と</span> 各一次。</p>
+
+<div class="lesson-nav">
+  <a href="0004-particles-topic-object.html">← 第 4 课</a>
+  <a href="0006-week-1-check.html">第 6 课 · 周测一 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "七時 <strong>__</strong> 起きます。", opts: ["で", "に", "を", "と"], answer: 1, why: "七点是具体时间点，用 `に`。" },
+    { stem: "図書館 <strong>__</strong> 勉強します。", opts: ["に", "へ", "で", "を"], answer: 2, why: "学习发生在图书馆，动作场所用 `で`。" },
+    { stem: "学校 <strong>__</strong> 行きます。", opts: ["で", "を", "に", "と"], answer: 2, why: "学校是移动终点，用 `に`；这里也可用表示方向的 `へ`。选项中只有 `に` 合适。" },
+    { stem: "友だち <strong>__</strong> 公園へ行きます。", opts: ["と", "を", "で", "に"], answer: 0, why: "`友だちと` 表示“和朋友一起”。" },
+    { stem: "電車 <strong>__</strong> 会社へ行きます。", opts: ["に", "で", "へ", "を"], answer: 1, why: "电车是移动手段，用 `で`。" },
+    { stem: "哪一句表示“在教室里有老师”？", opts: ["教室に先生がいます。", "教室で先生にいます。", "教室を先生がいます。", "教室へ先生でいます。"], answer: 0, why: "存在位置用 `に`，存在的人是主语，用 `が`：`教室に先生がいます`。" }
+  ], function (correct) {
+    if (correct >= 5) return "地点和方向的区分已经可用。接下来用周测检查能否放进完整句子。";
+    return "重点重看 `に vs で` 的对照，再完成周测一。";
+  });
+});
+</script>
+</body>
+</html>
+
