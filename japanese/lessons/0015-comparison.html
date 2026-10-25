@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 15 课 · 比较：より、ほど、どちら</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 15 课 · 比较与选择</h1>
+<p class="sub">比较句先看谁放在比较基准后面，再看形容词是肯定还是否定。</p>
+<p class="meta">预计 20 分钟 · 对应周测四与月测 · 重点：より、ほど、どちら</p>
+
+<h2>一、A 比 B 更……：A は B より + 形容词</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">電車はバスより速いです。</span><button class="speak" data-say="電車はバスより速いです。">播放</button></div>
+  <small>电车比公交车快。`バスより` 是“比公交车”。</small>
+  <div class="phrase"><span class="jp">今日は昨日より寒いです。</span><button class="speak" data-say="今日は昨日より寒いです。">播放</button></div>
+</div>
+
+<h2>二、B 的ほうが更……：A より B のほうが</h2>
+
+<div class="pattern">
+  <span class="jp">バスより電車のほうが速いです。</span><br>
+  <small>比起公交车，电车更快。意思和上一句相同，只是把“更快的一方”推到后面突出。</small>
+</div>
+
+<h2>三、A 不如 B……：A は B ほど + 否定</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">バスは電車ほど速くないです。</span><button class="speak" data-say="バスは電車ほど速くないです。">播放</button></div>
+  <small>公交车不如电车快。`ほど` 后面必须出现否定，才能表达“不如”。</small>
+</div>
+
+<h2>四、二选一问“哪一个”：どちら</h2>
+
+<div class="dialogue">
+  <p><span class="jp">A：コーヒーと紅茶とどちらが好きですか。</span></p>
+  <p><span class="jp">B：コーヒーのほうが好きです。</span></p>
+  <p class="translation">A：咖啡和红茶更喜欢哪个？ B：更喜欢咖啡。</p>
+</div>
+
+<p>`どちら` 问两者，`どれ` 问三者以上的选择。回答时用 `Aのほうが...` 非常自然。</p>
+
+<h2>五、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>用 `より`、`ほど`、`どちら` 各写一组比较。主题可以从城市、交通工具、食物、季节中任选；每组都要读出声。</p>
+
+<div class="lesson-nav">
+  <a href="0014-week-3-check.html">← 第三周验收</a>
+  <a href="0016-reason-contrast.html">第 16 课 · 原因与转折 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "電車はバス <strong>__</strong> 速いです。", opts: ["ほど", "より", "でも", "が"], answer: 1, why: "“电车比公交车快”：`バスより`。" },
+    { stem: "バスは電車 <strong>__</strong> 速くないです。", opts: ["より", "ほど", "でも", "と"], answer: 1, why: "`ほど + 否定` 表示“不如”：`電車ほど速くない`。" },
+    { stem: "「咖啡和茶更喜欢哪个？」是？", opts: ["コーヒーとお茶とどれが好きですか。", "コーヒーとお茶とどちらが好きですか。", "コーヒーよりお茶は何が好きですか。", "コーヒーほどお茶が好きですか。"], answer: 1, why: "两者之间询问用 `どちら`。" },
+    { stem: "「比起公交车，电车更快」是？", opts: ["バスより電車のほうが速いです。", "バスは電車ほど速いです。", "電車はバスほど速いです。", "バスと電車が速いです。"], answer: 0, why: "`AよりBのほうが` 把 B 突出为更……的一方。" },
+    { stem: "哪一句正确？", opts: ["今日は昨日ほど寒いです。", "今日は昨日より寒いです。", "今日より昨日は寒いないです。", "今日は昨日まで寒いです。"], answer: 1, why: "肯定比较用 `AはBより`；若要“不如”，`ほど` 后必须接否定。" }
+  ]);
+});
+</script>
+</body>
+</html>
+
