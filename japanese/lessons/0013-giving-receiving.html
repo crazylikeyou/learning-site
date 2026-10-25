@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 13 课 · あげます、もらいます、くれます</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 13 课 · 谁给谁</h1>
+<p class="sub">这三个词不能按中文“给/收”一一对应。先看动作从哪里出发，再看是否以“我”为接受者。</p>
+<p class="meta">预计 22 分钟 · 对应周测三 · 重点：人物方向</p>
+
+<h2>一、あげます：我或某方给别人</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">私は田中さんに本をあげました。</span><button class="speak" data-say="私は田中さんに本をあげました。">播放</button></div>
+  <small>我给了田中一本书。给的人作话题 `私は`，接受者 `田中さんに`，物品 `本を`。</small>
+  <div class="phrase"><span class="jp">姉は友だちに花をあげました。</span><button class="speak" data-say="姉は友だちに花をあげました。">播放</button></div>
+</div>
+
+<h2>二、もらいます：我或某方从别人那里得到</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">私は田中さんに本をもらいました。</span><button class="speak" data-say="私は田中さんに本をもらいました。">播放</button></div>
+  <small>我从田中那里得到一本书。得到的人作话题，来源 `田中さんに`，物品 `本を`。</small>
+</div>
+
+<p>`に` 和 `から` 都可能标来源，`に` 在人物来源上很常见；`もらう` 的视角站在接受者一边。</p>
+
+<h2>三、くれます：别人给我（或我这一方）</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">田中さんは私に本をくれました。</span><button class="speak" data-say="田中さんは私に本をくれました。">播放</button></div>
+  <small>田中给了我一本书。`くれる` 的核心视角是“东西朝我这一边来”。</small>
+  <div class="phrase"><span class="jp">母は弟にお金をくれました。</span><button class="speak" data-say="母は弟にお金をくれました。">播放</button></div>
+  <small>若弟弟属于说话者“自己这一方”，给弟弟也可用 `くれました`。初学先以“给我”场景为主。</small>
+</div>
+
+<h2>四、三句对照</h2>
+
+<table class="kana-grid">
+  <thead><tr><th>动作方向</th><th>句子</th><th>视角</th></tr></thead>
+  <tbody>
+    <tr><td>我 → 田中</td><td><span class="jp">私は田中さんに本をあげました。</span></td><td>我给出去</td></tr>
+    <tr><td>田中 → 我</td><td><span class="jp">田中さんは私に本をくれました。</span></td><td>东西朝我来</td></tr>
+    <tr><td>我 ← 田中</td><td><span class="jp">私は田中さんに本をもらいました。</span></td><td>我接受</td></tr>
+  </tbody>
+</table>
+
+<p>`あげる` 和 `くれる` 都表示“给”，但视角不同：前者从我方向外给，后者从别人向我方给。`もらう` 则从接受者角度写“得到”。</p>
+
+<h2>五、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>画一个三节点小图：我、朋友、老师。用三个句子分别描述“我给老师”“朋友给我”“我从老师那里得到”，不得只换句尾而保持同一个视角。</p>
+
+<div class="lesson-nav">
+  <a href="0012-preference-ability.html">← 第 12 课</a>
+  <a href="0014-week-3-check.html">第 14 课 · 周测三 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "私は田中さん <strong>__</strong> 本をあげました。", opts: ["を", "で", "に", "へ"], answer: 2, why: "`あげる` 的接受者用 `に`。" },
+    { stem: "田中さんは私 <strong>__</strong> 本をくれました。", opts: ["を", "に", "で", "と"], answer: 1, why: "`くれました` 表示田中把书给到我，接受者“我”用 `に`。" },
+    { stem: "「我从田中那里得到书」是？", opts: ["私は田中さんに本をあげました。", "田中さんは私に本をくれました。", "私は田中さんに本をもらいました。", "田中さんは本を私でくれました。"], answer: 2, why: "以“我”为接受视角，用 `もらいました`。" },
+    { stem: "为了表达“田中给了我一本书”，最自然的是？", opts: ["田中さんは私に本をあげました。", "田中さんは私に本をくれました。", "私は田中さんに本をくれました。", "私は田中さんに本をもらいました。"], answer: 1, why: "别人把东西给我，使用 `くれました`。" },
+    { stem: "哪句表示“我给朋友花”？", opts: ["私は友だちに花をあげました。", "友だちは私に花をくれました。", "私は友だちに花をもらいました。", "友だちは花に私をあげました。"], answer: 0, why: "我给朋友，方向向外，用 `あげました`。" },
+    { stem: "`もらいます` 通常是站在谁的视角？", opts: ["给东西的人", "接受东西的人", "物品", "第三者"], answer: 1, why: "`もらう` 从得到者一侧描述“我从某人那里得到”。" }
+  ]);
+});
+</script>
+</body>
+</html>
+
