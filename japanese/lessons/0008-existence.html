@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 8 课 · あります与います</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script defer src="../assets/lesson.js"></script>
+</head>
+<body>
+
+<h1>第 8 课 · 有、在、在哪里</h1>
+<p class="sub">存在句先判断“存在的是什么”：会自己动的人或动物用 います，其他通常用 あります。</p>
+<p class="meta">预计 20 分钟 · 对应周测二 · 重点：位置 + が + あります/います</p>
+
+<h2>一、两个存在动词</h2>
+
+<div class="routine">
+  <div><strong class="jp">あります</strong><span>无生命的事物、植物、场所、活动等：本、机、店。</span></div>
+  <div><strong class="jp">います</strong><span>有生命、能自己活动的主体：人、猫、狗、老师。</span></div>
+</div>
+
+<h2>二、标准句型：位置に 物/人が あります/います</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">机の上に本があります。</span><button class="speak" data-say="机の上に本があります。">播放</button></div>
+  <small>桌子上有书。`机の上に` 是位置，`本が` 是存在的对象。</small>
+  <div class="phrase"><span class="jp">教室に学生がいます。</span><button class="speak" data-say="教室に学生がいます。">播放</button></div>
+  <small>教室里有学生。学生是有生命的主体，用 `います`。</small>
+</div>
+
+<p>这种句子通常把“存在的东西”作为新信息，因此普通肯定句使用 `が`：`本があります`、`猫がいます`。</p>
+
+<h2>三、问“有什么”“有谁”</h2>
+
+<div class="pattern">
+  <span class="jp">机の上に何がありますか。</span> — 桌子上有什么？<br>
+  <span class="jp">部屋に誰がいますか。</span> — 房间里有谁？
+</div>
+
+<h2>四、问“在哪里”：物/人は 位置に あります/います</h2>
+
+<div class="example">
+  <div class="phrase"><span class="jp">本は机の上にあります。</span><button class="speak" data-say="本は机の上にあります。">播放</button></div>
+  <div class="phrase"><span class="jp">田中さんは教室にいます。</span><button class="speak" data-say="田中さんは教室にいます。">播放</button></div>
+  <small>已经在谈“书”“田中”时，把对象放前面用 `は`，回答它所在的位置。</small>
+</div>
+
+<h2>五、拥有关系也能用</h2>
+<p><span class="jp">私は弟がいます。</span>我有弟弟。<span class="jp">時間があります。</span>有时间。这里的 `が` 标出所拥有的对象；先作为固定句型记，不要和“桌子上有书”混成同一个空间位置。</p>
+
+<h2>六、马上判断</h2>
+<div id="quiz"></div>
+
+<h2>今天的输出</h2>
+<p>看着你所在的房间，说五句“某处有某物/某人”。其中至少两句用 `あります`，两句用 `います`，再用一句回答“某人在哪里”。</p>
+
+<div class="lesson-nav">
+  <a href="0007-adjectives.html">← 第 7 课</a>
+  <a href="0009-te-form-in-action.html">第 9 课 · て形三种用法 →</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  JapaneseLesson.renderQuiz("#quiz", [
+    { stem: "机の上に本 <strong>__</strong>。", opts: ["います", "があります", "をいます", "にあります"], answer: 1, why: "书是无生命物体，存在句用 `本があります`；前面已经有 `机の上に`。" },
+    { stem: "教室に学生 <strong>__</strong>。", opts: ["があります", "がいます", "をいます", "にいます"], answer: 1, why: "学生是有生命主体，且学生是存在对象，用 `学生がいます`。" },
+    { stem: "「房间里有谁？」是？", opts: ["部屋に何がありますか。", "部屋に誰がいますか。", "部屋を誰がありますか。", "部屋で誰にいますか。"], answer: 1, why: "有生命的人用 `谁がいます`；所在位置用 `に`。" },
+    { stem: "「书在桌子上」更自然的是？", opts: ["本は机の上にあります。", "本に机の上があります。", "本が机の上をいます。", "本で机の上にいます。"], answer: 0, why: "对象已经明确为话题：`本は；位置：机の上に；存在：あります`。" },
+    { stem: "哪一句正确？", opts: ["公園に猫がいます。", "公園に猫があります。", "公園を猫がいます。", "公園で猫にいます。"], answer: 0, why: "猫用 `います`，存在位置用 `に`。" },
+    { stem: "「我有时间」是？", opts: ["私は時間にあります。", "私は時間がいます。", "私は時間があります。", "私は時間をです。"], answer: 2, why: "`時間があります` 是基础拥有句，不表示空间里存在。" }
+  ]);
+});
+</script>
+</body>
+</html>
+
