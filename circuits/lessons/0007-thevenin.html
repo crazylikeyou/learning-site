@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 7 课 · 戴维南与诺顿定理</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+
+<h1>第 7 课 · 戴维南与诺顿</h1>
+<p class="sub">把一个复杂的含源网络，压成一个电压源加一个电阻。</p>
+<p class="meta">2026-10-22 · 预计 20 分钟 · 只用置零法求内阻</p>
+
+<h2>一、定理在说什么</h2>
+
+<p>任何<strong>线性含源一端口网络</strong>，对外部来说，都可以等效成：</p>
+
+<p>一个电压源 $U_{oc}$ 串联一个电阻 $R_{eq}$ —— 这就是<strong>戴维南等效</strong>。</p>
+
+<p>或者等效成一个电流源 $I_{sc}$ 并联一个电阻 $R_{eq}$ —— 这是<strong>诺顿等效</strong>。</p>
+
+<p>两者是同一件事的两种画法，可以互相转换，关系就是欧姆定律：</p>
+
+<p>$$U_{oc} = I_{sc} \cdot R_{eq} \qquad\text{或}\qquad I_{sc} = \frac{U_{oc}}{R_{eq}}$$</p>
+
+<blockquote>
+"一端口"的意思是：这个网络对外只伸出两个接线端子（a、b）。你要把它变成对外等效的简单模型，外部电路怎么看都觉得没变化。
+</blockquote>
+
+<h2>二、三个量，三种求法</h2>
+
+<p><strong>$U_{oc}$（开路电压）</strong>：把负载摘掉，让端口悬空，测两端电压。注意悬空意味着<strong>端口支路没有电流</strong>，但网络内部的电流照常存在。</p>
+
+<p><strong>$I_{sc}$（短路电流）</strong>：把端口直接用导线短接，测流过这根短线的电流。</p>
+
+<p><strong>$R_{eq}$（等效内阻）</strong>：把网络内<strong>所有独立源置零</strong>——电压源短接、电流源断开——然后从端口看进去算串并联。</p>
+
+<p>三个量知道其中两个，第三个用关系式算出来。最常用的是 $U_{oc}$ 加 $R_{eq}$。</p>
+
+<blockquote>
+置零求内阻这一步，就是上一课的内容。上一课没吃透，这一课一定卡——两课是连着的。
+</blockquote>
+
+<h2>三、完整例子</h2>
+
+<p>电路：$24\ \mathrm{V}$ 电压源经 $R_1 = 6\ \Omega$ 接到节点 a；a 经 $R_2 = 3\ \Omega$ 接地；a 经 $R_3 = 2\ \Omega$ 接到节点 b；b 经 $R_4 = 4\ \Omega$ 接地。求从 b 与地之间看进去的戴维南等效。</p>
+
+<svg class="schematic" viewBox="0 0 470 300" role="img" aria-label="戴维南等效例题电路">
+  <defs>
+    <marker id="term" markerWidth="6" markerHeight="6" refX="3" refY="3">
+      <circle cx="3" cy="3" r="2.4" fill="#8c2f1f"/>
+    </marker>
+  </defs>
+
+  <!-- 顶部主干 -->
+  <path class="wire" d="M80 70 H130"/>
+  <rect class="comp" x="130" y="60" width="50" height="20"/>
+  <path class="wire" d="M180 70 H222"/>
+  <path class="wire" d="M238 70 H275"/>
+  <rect class="comp" x="275" y="60" width="50" height="20"/>
+  <path class="wire" d="M325 70 H372"/>
+
+  <!-- 电源 -->
+  <path class="wire" d="M80 70 V150"/>
+  <circle class="comp" cx="80" cy="170" r="20"/>
+  <path class="sign" d="M73 162 H87 M80 155 V169"/>
+  <path class="sign" d="M73 182 H87"/>
+  <path class="wire" d="M80 190 V260"/>
+
+  <!-- R2 -->
+  <path class="wire" d="M230 70 V100"/>
+  <rect class="comp" x="222" y="100" width="16" height="50"/>
+  <path class="wire" d="M230 150 V260"/>
+
+  <!-- R4 -->
+  <path class="wire" d="M380 70 V100"/>
+  <rect class="comp" x="372" y="100" width="16" height="50"/>
+  <path class="wire" d="M380 150 V260"/>
+
+  <path class="wire" d="M60 260 H440"/>
+
+  <circle class="dot" cx="80" cy="70" r="3.5"/>
+  <circle class="dot" cx="230" cy="70" r="3.5"/>
+  <circle class="dot" cx="380" cy="70" r="3.5"/>
+  <text class="node" x="230" y="56" text-anchor="middle">a</text>
+  <text class="node" x="380" y="56" text-anchor="middle">b</text>
+
+  <text class="lbl" x="155" y="52" text-anchor="middle">R₁</text>
+  <text class="val" x="155" y="98" text-anchor="middle">6 Ω</text>
+  <text class="lbl" x="300" y="52" text-anchor="middle">R₃</text>
+  <text class="val" x="300" y="98" text-anchor="middle">2 Ω</text>
+  <text class="lbl" x="252" y="120">R₂</text>
+  <text class="val" x="252" y="138">3 Ω</text>
+  <text class="lbl" x="402" y="120">R₄</text>
+  <text class="val" x="402" y="138">4 Ω</text>
+  <text class="lbl" x="104" y="166">24 V</text>
+  <text class="val" x="410" y="240">端口 ↑</text>
+</svg>
+<p class="caption">图 1 · 从 b 与地之间看进去</p>
+
+<p><strong>第一步：求开路电压 $U_{oc}$。</strong> 端口悬空，$R_4$ 上没有电流？不对——要小心这里。</p>
+
+<p>端口悬空指的是 b 与地之间<strong>除了 $R_4$ 以外没有别的连接</strong>。$R_4$ 本身还在，所以 b 点电位就是 $R_4$ 上的电压。用分压做：</p>
+
+<p>从 a 往右看，$R_3$ 与 $R_4$ 串联后与 $R_2$ 并联：$R_2 \parallel (R_3+R_4) = 3 \parallel 6 = 2\ \Omega$。</p>
+
+<p>再与 $R_1$ 串联：总电阻 $6 + 2 = 8\ \Omega$，主电流 $I = 24/8 = 3\ \mathrm{A}$。</p>
+
+<p>$V_a = I \times 2 = 6\ \mathrm{V}$（并联部分的分压），再在 $R_3$、$R_4$ 之间分一次：</p>
+
+<p>$$U_{oc} = V_b = 6 \times \frac{4}{2+4} = 4\ \mathrm{V}$$</p>
+
+<p><strong>第二步：求等效内阻 $R_{eq}$。</strong> 把 24 V 电压源短接。此时从 b 与地看进去：</p>
+
+<p>b 点有两条路到地——一条直接经 $R_4 = 4\ \Omega$；另一条经 $R_3 = 2\ \Omega$ 到 a，而从 a 到地有 $R_2 = 3\ \Omega$ 和 $R_1 = 6\ \Omega$ 并联。</p>
+
+<p>$$R_1 \parallel R_2 = \frac{6 \times 3}{6+3} = 2\ \Omega,\qquad 2 + R_3 = 4\ \Omega$$</p>
+
+<p>$$R_{eq} = 4 \parallel 4 = 2\ \Omega$$</p>
+
+<p><strong>第三步：短路电流。</strong></p>
+
+<p>$$I_{sc} = \frac{U_{oc}}{R_{eq}} = \frac{4}{2} = 2\ \mathrm{A}$$</p>
+
+<p>所以这个网络对外就相当于：$4\ \mathrm{V}$ 电压源串联 $2\ \Omega$ 电阻。接任何负载，都可以用这两个数算，不用再管里面那四个电阻。</p>
+
+<h2>四、顺带复习最大功率</h2>
+
+<p>负载电阻等于内阻时获得最大功率：$R_L = R_{eq} = 2\ \Omega$。</p>
+
+<p>$$P_{max} = \frac{U_{oc}^2}{4R_{eq}} = \frac{16}{8} = 2\ \mathrm{W}$$</p>
+
+<p>分母是 $4R_{eq}$——这是最常写错的地方，别写成 $R_{eq}$。</p>
+
+<h2>五、解答题（按考试格式）</h2>
+
+<p>下面的题按你原题的样式出：一个问题下面挂两个小问，要求写出完整过程。先自己在纸上做，做完再展开对照。</p>
+
+<div class="prob" style="margin:2.4rem 0;padding:1.2rem 1.4rem;border:1px solid #e2ded6;background:#fff">
+<h3 style="margin:0 0 .8rem;font-size:1rem">题 1（三问）</h3>
+<p>沿用本课例题的电路：$24\ \mathrm{V}$ 电压源经 $R_1 = 6\ \Omega$ 接节点 a，a 经 $R_2 = 3\ \Omega$ 接地，a 经 $R_3 = 2\ \Omega$ 接节点 b，b 经 $R_4 = 4\ \Omega$ 接地。</p>
+<p>（1）求从 b 与地之间看进去的戴维南等效电路。<br>
+（2）若在 b 与地之间接一个 $2\ \Omega$ 的负载，求流过负载的电流。<br>
+（3）负载电阻取何值时获得的功率最大？最大功率是多少？</p>
+
+<details style="margin-top:1rem">
+<summary style="cursor:pointer;color:#8c2f1f;font-size:.92rem">展开答案</summary>
+<div style="font-size:.95rem;border-left:2px solid #e2ded6;padding-left:1rem;margin-top:.6rem">
+<p><strong>（1）</strong> 开路电压：$R_3$、$R_4$ 串联后与 $R_2$ 并联得 $2\ \Omega$，总电阻 $6+2=8\ \Omega$，主电流 $3\ \mathrm{A}$，$V_a = 6\ \mathrm{V}$，再分压 $U_{oc} = 6 \times \frac{4}{2+4} = 4\ \mathrm{V}$。</p>
+<p>等效内阻：电压源短接，$R_1 \parallel R_2 = 2\ \Omega$，加 $R_3$ 得 $4\ \Omega$，再与 $R_4$ 并联得 $R_{eq} = 2\ \Omega$。</p>
+<p>所以等效为 $4\ \mathrm{V}$ 串联 $2\ \Omega$。</p>
+<p><strong>（2）</strong> 接 $2\ \Omega$ 负载后，总电阻 $2+2=4\ \Omega$，$I_L = \dfrac{4}{2+2} = 1\ \mathrm{A}$。</p>
+<p><strong>（3）</strong> 当 $R_L = R_{eq} = 2\ \Omega$ 时功率最大：$P_{max} = \dfrac{U_{oc}^2}{4R_{eq}} = \dfrac{16}{8} = 2\ \mathrm{W}$。</p>
+<p><strong>易错点：</strong>（2）里分母是 $R_{eq} + R_L$，别只写 $R_L$；（3）的分母是 $4R_{eq}$，不是 $R_{eq}$。</p>
+</div>
+</details>
+</div>
+
+<div class="prob" style="margin:2.4rem 0;padding:1.2rem 1.4rem;border:1px solid #e2ded6;background:#fff">
+<h3 style="margin:0 0 .8rem;font-size:1rem">题 2（叠加，两问）</h3>
+<p>节点 b 与地之间接三条支路：左侧 $R_1 = 4\ \Omega$ 串 $24\ \mathrm{V}$ 电压源（正极朝 b）；中间 $R_2 = 12\ \Omega$；右侧 $3\ \mathrm{A}$ 电流源注入 b。</p>
+<p>（1）用叠加定理求 $V_b$，要求分别写出两个分量。<br>
+（2）用节点电压法验算，两次结果必须一致。</p>
+
+<details style="margin-top:1rem">
+<summary style="cursor:pointer;color:#8c2f1f;font-size:.92rem">展开答案</summary>
+<div style="font-size:.95rem;border-left:2px solid #e2ded6;padding-left:1rem;margin-top:.6rem">
+<p><strong>（1）只留电压源</strong>（电流源断开）：$R_1$、$R_2$ 串联分压，$V_b' = 24 \times \dfrac{12}{4+12} = 18\ \mathrm{V}$。</p>
+<p><strong>只留电流源</strong>（电压源短接）：$R_1 \parallel R_2 = \dfrac{4 \times 12}{4+12} = 3\ \Omega$，$V_b'' = 3 \times 3 = 9\ \mathrm{V}$。</p>
+<p>方向一致，相加：$V_b = 18 + 9 = 27\ \mathrm{V}$。</p>
+<p><strong>（2）节点法：</strong>$\dfrac{V_b - 24}{4} + \dfrac{V_b}{12} = 3$，两边乘 12：$3V_b - 72 + V_b = 36$，$4V_b = 108$，$V_b = 27\ \mathrm{V}$ ✓</p>
+</div>
+</details>
+</div>
+
+<div class="p style">
+<p style="margin-top:2rem;color:#6b6b6b;font-size:.9rem">做完把过程拍照或打出来给我，我按步骤判分——考试按步给分，中间步骤对一半也能拿分。</p>
+</div>
+
+</body>
+</html>

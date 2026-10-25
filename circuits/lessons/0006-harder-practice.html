@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 6 课 · 提高练习（不超纲版）</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .prob { margin: 2.4rem 0; padding: 1.2rem 1.4rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .8rem; font-size: 1rem; letter-spacing: .02em; }
+  .prob .tag { font-family: ui-monospace, Consolas, monospace; font-size: .78rem; color: var(--muted); }
+  details { margin-top: 1rem; }
+  details summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  details[open] summary { margin-bottom: .6rem; }
+  .sol { font-size: .95rem; border-left: 2px solid var(--rule); padding-left: 1rem; }
+  .warn { background:#faf7f1; border-left:3px solid #8c2f1f; padding:.9rem 1.1rem; margin:1.4rem 0; }
+</style>
+</head>
+<body>
+
+<h1>第 6 课 · 提高练习</h1>
+<p class="sub">六道题，全部只用你学过的工具：等效变换、节点法、回路法、叠加、戴维南、相量法。难度集中在计算量和多步转化上。</p>
+<p class="meta">2026-10-22 · 预计 40 分钟 · 不含受控源、超节点、外加电源法</p>
+
+<div class="warn">
+<p style="margin:0"><strong>本课不涉及：</strong>受控源、超节点、外加电源法。<br>
+难度的来源是：多电源、多网孔、要先做等效变换再求解、复数运算、以及"算完还要回答功率"这类多问。<strong>都是你们课上教过的招式，只是组合起来更费。</strong></p>
+</div>
+
+<div class="prob">
+<h3>题 1 · 两个实际电压源并联 <span class="tag">→ 等效变换</span></h3>
+<p>两个实际电压源并联接在同一对端子上：$U_{s1} = 12\ \mathrm{V}$ 串 $R_1 = 2\ \Omega$；$U_{s2} = 6\ \mathrm{V}$ 串 $R_2 = 3\ \Omega$（两者正极同向）。求对外等效的电压源参数（等效电动势和内阻）。</p>
+<svg class="schematic" viewBox="0 0 460 300" role="img" aria-label="两个实际电压源并联">
+  <path class="wire" d="M100 70 H360"/>
+  <path class="wire" d="M100 70 V95"/>
+  <rect class="comp" x="92" y="95" width="16" height="50"/>
+  <path class="wire" d="M100 145 V165"/>
+  <circle class="comp" cx="100" cy="183" r="18"/>
+  <path class="sign" d="M93 176 H107 M100 169 V183"/>
+  <path class="sign" d="M93 196 H107"/>
+  <path class="wire" d="M100 201 V250"/>
+  <path class="wire" d="M360 70 V95"/>
+  <rect class="comp" x="352" y="95" width="16" height="50"/>
+  <path class="wire" d="M360 145 V165"/>
+  <circle class="comp" cx="360" cy="183" r="18"/>
+  <path class="sign" d="M353 176 H367 M360 169 V183"/>
+  <path class="sign" d="M353 196 H367"/>
+  <path class="wire" d="M360 201 V250"/>
+  <path class="wire" d="M70 250 H390"/>
+  <text class="lbl" x="122" y="115">R₁</text>
+  <text class="val" x="122" y="133">2 Ω</text>
+  <text class="lbl" x="126" y="180">12 V</text>
+  <text class="lbl" x="382" y="115">R₂</text>
+  <text class="val" x="382" y="133">3 Ω</text>
+  <text class="lbl" x="388" y="180">6 V</text>
+</svg>
+<p class="caption">图 · 两个实际电压源并接在同一对端子上</p>
+<details>
+<summary>查看解法</summary>
+<div class="sol">
+<p>两个电压源直接并联不能相加，必须先各自等效成电流源。</p>
+<p>左支路：$I_{s1} = 12/2 = 6\ \mathrm{A}$，并联 $R_1 = 2\ \Omega$。<br>
+右支路：$I_{s2} = 6/3 = 2\ \mathrm{A}$，并联 $R_2 = 3\ \Omega$。</p>
+<p>电流源同向，相加：$I_s = 6 + 2 = 8\ \mathrm{A}$；内阻并联：$R = \dfrac{2 \times 3}{2+3} = 1.2\ \Omega$。</p>
+<p>再转回电压源：$U_s = I_s R = 8 \times 1.2 = 9.6\ \mathrm{V}$，内阻仍是 $1.2\ \Omega$。</p>
+<p><strong>要点：</strong>两个电压源并联是常见陷阱，直接相加得到 9 V 是错的。必须走"电压源→电流源→合并→再转回"这一圈。</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 2 · 三节点网络 <span class="tag">→ 节点电压法</span></h3>
+<p>参考地为 0。$12\ \mathrm{V}$ 电压源接在节点 1 与地之间（正极在 1）。$R_1 = 3\ \Omega$ 连接 1–2，$R_2 = 6\ \Omega$ 连接 2–地，$R_3 = 2\ \Omega$ 连接 2–3，$R_4 = 6\ \Omega$ 连接 3–地。$1\ \mathrm{A}$ 电流源注入节点 3。求 $V_2, V_3$。</p>
+<svg class="schematic" viewBox="0 0 520 300" role="img" aria-label="三节点网络">
+  <defs><marker id="ar6b" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2b2b2b"/></marker></defs>
+  <path class="wire" d="M90 70 H130"/>
+  <rect class="comp" x="130" y="60" width="50" height="20"/>
+  <path class="wire" d="M180 70 H260"/>
+  <rect class="comp" x="260" y="60" width="50" height="20"/>
+  <path class="wire" d="M310 70 H380"/>
+  <path class="wire" d="M90 70 V150"/>
+  <circle class="comp" cx="90" cy="168" r="18"/>
+  <path class="sign" d="M83 161 H97 M90 154 V168"/>
+  <path class="sign" d="M83 181 H97"/>
+  <path class="wire" d="M90 186 V250"/>
+  <path class="wire" d="M220 70 V95"/>
+  <rect class="comp" x="212" y="95" width="16" height="50"/>
+  <path class="wire" d="M220 145 V250"/>
+  <path class="wire" d="M380 70 H420"/>
+  <path class="wire" d="M420 70 V150"/>
+  <circle class="comp" cx="420" cy="168" r="18"/>
+  <path class="sign" d="M420 178 V155" marker-end="url(#ar6b)"/>
+  <path class="wire" d="M420 186 V250"/>
+  <path class="wire" d="M60 250 H450"/>
+  <circle class="dot" cx="90" cy="70" r="3.5"/>
+  <circle class="dot" cx="220" cy="70" r="3.5"/>
+  <circle class="dot" cx="380" cy="70" r="3.5"/>
+  <text class="node" x="90" y="56" text-anchor="middle">1</text>
+  <text class="node" x="220" y="56" text-anchor="middle">2</text>
+  <text class="node" x="380" y="56" text-anchor="middle">3</text>
+  <text class="lbl" x="155" y="50" text-anchor="middle">R₁</text>
+  <text class="val" x="155" y="98" text-anchor="middle">3 Ω</text>
+  <text class="lbl" x="285" y="50" text-anchor="middle">R₃</text>
+  <text class="val" x="285" y="98" text-anchor="middle">2 Ω</text>
+  <text class="lbl" x="240" y="115">R₂</text>
+  <text class="val" x="240" y="133">6 Ω</text>
+  <text class="lbl" x="442" y="165">1 A</text>
+  <text class="lbl" x="112" y="172">12 V</text>
+  <text class="lbl" x="340" y="115">R₄</text>
+  <text class="val" x="340" y="133">6 Ω</text>
+  <path class="wire" d="M380 70 V95"/>
+  <rect class="comp" x="372" y="95" width="16" height="50"/>
+  <path class="wire" d="M380 145 V250"/>
+</svg>
+<p class="caption">图 · 节点 1 接 12 V 电压源，1 A 注入节点 3</p>
+<details>
+<summary>查看解法</summary>
+<div class="sol">
+<p>$V_1 = 12\ \mathrm{V}$ 已知（电压源直接接地）。</p>
+<p>节点 2，流出为正：$\dfrac{V_2 - 12}{3} + \dfrac{V_2}{6} + \dfrac{V_2 - V_3}{2} = 0$，两边乘 6：$2(V_2-12) + V_2 + 3(V_2 - V_3) = 0$，整理得 $2V_2 - V_3 = 8$。</p>
+<p>节点 3：$\dfrac{V_3 - V_2}{2} + \dfrac{V_3}{6} = 1$，两边乘 6：$3(V_3 - V_2) + V_3 = 6$，整理得 $4V_3 - 3V_2 = 6$。</p>
+<p>由第一式 $V_3 = 2V_2 - 8$，代入第二式：$4(2V_2 - 8) - 3V_2 = 6 \Rightarrow 5V_2 = 38$。</p>
+<p>$$V_2 = 7.6\ \mathrm{V}, \qquad V_3 = 7.2\ \mathrm{V}$$</p>
+<p><strong>验算节点 3：</strong>$\dfrac{7.2-7.6}{2} + \dfrac{7.2}{6} = -0.2 + 1.2 = 1\ \mathrm{A}$ ✓</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 3 · 电流源在外围支路的回路法 <span class="tag">→ 回路电流法</span></h3>
+<p>两个网孔。左侧网孔外侧支路上有一个 $2\ \mathrm{A}$ 电流源（方向与该网孔顺时针一致）。两网孔共用中间支路 $R_2 = 4\ \Omega$，右侧网孔还有 $R_3 = 6\ \Omega$。</p>
+<p>求两个回路电流，以及中间共用支路上的真实电流。</p>
+<svg class="schematic" viewBox="0 0 480 300" role="img" aria-label="电流源在外围支路的两网孔电路">
+  <defs>
+    <marker id="ar6c" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#8c2f1f"/></marker>
+    <marker id="ar6d" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2b2b2b"/></marker>
+  </defs>
+  <path class="wire" d="M90 70 H225"/>
+  <path class="wire" d="M225 70 H320"/>
+  <rect class="comp" x="320" y="60" width="50" height="20"/>
+  <path class="wire" d="M370 70 H410"/>
+  <path class="wire" d="M90 70 V150"/>
+  <circle class="comp" cx="90" cy="168" r="18"/>
+  <path class="sign" d="M90 178 V155" marker-end="url(#ar6d)"/>
+  <path class="wire" d="M90 186 V250"/>
+  <path class="wire" d="M225 70 V95"/>
+  <rect class="comp" x="217" y="95" width="16" height="50"/>
+  <path class="wire" d="M225 145 V250"/>
+  <path class="wire" d="M410 70 V250"/>
+  <path class="wire" d="M60 250 H440"/>
+  <circle class="dot" cx="90" cy="70" r="3.5"/>
+  <circle class="dot" cx="225" cy="70" r="3.5"/>
+  <circle class="dot" cx="410" cy="70" r="3.5"/>
+  <path d="M120 165 A 42 42 0 0 1 190 165" fill="none" stroke="#8c2f1f" stroke-width="1.8" marker-end="url(#ar6c)"/>
+  <path d="M290 165 A 42 42 0 0 1 360 165" fill="none" stroke="#8c2f1f" stroke-width="1.8" marker-end="url(#ar6c)"/>
+  <text class="node" x="155" y="128" text-anchor="middle">I₁</text>
+  <text class="node" x="325" y="128" text-anchor="middle">I₂</text>
+  <text class="lbl" x="112" y="168">2 A</text>
+  <text class="lbl" x="245" y="115">R₂</text>
+  <text class="val" x="245" y="133">4 Ω</text>
+  <text class="lbl" x="345" y="50" text-anchor="middle">R₃</text>
+  <text class="val" x="345" y="98" text-anchor="middle">6 Ω</text>
+</svg>
+<p class="caption">图 · 电流源在左网孔外围支路</p>
+<details>
+<summary>查看解法</summary>
+<div class="sol">
+<p>关键观察：电流源只属于左网孔，它规定了该网孔的电流。<strong>左回路电流直接已知</strong>：$I_1 = 2\ \mathrm{A}$，不用列方程。</p>
+<p>只需对右网孔列一条：$-R_2 I_1 + (R_2 + R_3)I_2 = 0$，即</p>
+<p>$$-4 \times 2 + (4+6)I_2 = 0 \;\Rightarrow\; 10I_2 = 8 \;\Rightarrow\; I_2 = 0.8\ \mathrm{A}$$</p>
+<p>中间共用支路：$I_1$ 在一个方向、$I_2$ 在相反方向，取差：</p>
+<p>$$I_{R2} = |I_1 - I_2| = 2 - 0.8 = 1.2\ \mathrm{A}$$</p>
+<p><strong>要点：</strong>电流源在外围支路时，它所在网孔的电流是已知的，方程数直接少一个——这是回路法比节点法省事的地方。反过来，电压源跨在两个非地节点之间时才是节点法的麻烦。</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 4 · 双电源叠加 <span class="tag">→ 叠加定理</span></h3>
+<p>节点 b 与地之间：左侧 $R_1 = 3\ \Omega$ 串 $18\ \mathrm{V}$ 电压源（正极朝 b）；中间 $R_2 = 6\ \Omega$；右侧 $2\ \mathrm{A}$ 电流源注入 b。求 $V_b$。</p>
+<svg class="schematic" viewBox="0 0 500 300" role="img" aria-label="三条并联支路">
+  <defs><marker id="ar6e" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2b2b2b"/></marker></defs>
+  <path class="wire" d="M110 70 H390"/>
+  <path class="wire" d="M110 70 V90"/>
+  <rect class="comp" x="102" y="90" width="16" height="50"/>
+  <path class="wire" d="M110 140 V165"/>
+  <circle class="comp" cx="110" cy="183" r="18"/>
+  <path class="sign" d="M103 176 H117 M110 169 V183"/>
+  <path class="sign" d="M103 196 H117"/>
+  <path class="wire" d="M110 201 V250"/>
+  <path class="wire" d="M250 70 V90"/>
+  <rect class="comp" x="242" y="90" width="16" height="50"/>
+  <path class="wire" d="M250 140 V250"/>
+  <path class="wire" d="M390 70 V145"/>
+  <circle class="comp" cx="390" cy="163" r="18"/>
+  <path class="sign" d="M390 173 V150" marker-end="url(#ar6e)"/>
+  <path class="wire" d="M390 181 V250"/>
+  <path class="wire" d="M80 250 H420"/>
+  <circle class="dot" cx="110" cy="70" r="3.5"/>
+  <circle class="dot" cx="250" cy="70" r="3.5"/>
+  <circle class="dot" cx="390" cy="70" r="3.5"/>
+  <text class="node" x="250" y="56" text-anchor="middle">b</text>
+  <text class="lbl" x="132" y="112">R₁</text>
+  <text class="val" x="132" y="130">3 Ω</text>
+  <text class="lbl" x="140" y="180">18 V</text>
+  <text class="lbl" x="272" y="112">R₂</text>
+  <text class="val" x="272" y="130">6 Ω</text>
+  <text class="lbl" x="418" y="160">2 A</text>
+</svg>
+<p class="caption">图 · 三条并联支路，2 A 注入 b</p>
+<details>
+<summary>查看解法</summary>
+<div class="sol">
+<p><strong>只留电压源</strong>（电流源断开）：$R_1$、$R_2$ 串联分压，$V_b' = 18 \times \dfrac{6}{3+6} = 12\ \mathrm{V}$。</p>
+<p><strong>只留电流源</strong>（电压源短接）：$R_1 \parallel R_2 = \dfrac{3 \times 6}{3+6} = 2\ \Omega$，$V_b'' = 2 \times 2 = 4\ \mathrm{V}$。</p>
+<p>两者方向一致，相加：$V_b = 12 + 4 = 16\ \mathrm{V}$。</p>
+<p><strong>节点法验算：</strong>$\dfrac{V_b - 18}{3} + \dfrac{V_b}{6} = 2$，乘 6 得 $2V_b - 36 + V_b = 12$，$3V_b = 48$，$V_b = 16\ \mathrm{V}$ ✓</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 5 · 戴维南 + 最大功率 <span class="tag">→ 电路定理</span></h3>
+<p>$12\ \mathrm{V}$ 电压源经 $R_1 = 4\ \Omega$ 接到节点 b，$R_2 = 6\ \Omega$ 由 b 接地。在 b 与地之间外接可变负载 $R_L$。求：(1) 从 $R_L$ 看进去的戴维南等效；(2) $R_L$ 取多少时获得最大功率，功率是多少。</p>
+<svg class="schematic" viewBox="0 0 470 300" role="img" aria-label="戴维南最大功率电路">
+  <path class="wire" d="M100 80 H150"/>
+  <rect class="comp" x="150" y="70" width="50" height="20"/>
+  <path class="wire" d="M200 80 H300"/>
+  <path class="wire" d="M100 80 V150"/>
+  <circle class="comp" cx="100" cy="168" r="18"/>
+  <path class="sign" d="M93 161 H107 M100 154 V168"/>
+  <path class="sign" d="M93 181 H107"/>
+  <path class="wire" d="M100 186 V260"/>
+  <path class="wire" d="M300 80 V110"/>
+  <rect class="comp" x="292" y="110" width="16" height="50"/>
+  <path class="wire" d="M300 160 V260"/>
+  <path class="wire" d="M300 80 H380"/>
+  <path class="wire" d="M380 80 V115"/>
+  <rect class="comp" x="372" y="115" width="16" height="50"/>
+  <path class="wire" d="M380 165 V260"/>
+  <path class="wire" d="M80 260 H400"/>
+  <circle class="dot" cx="100" cy="80" r="3.5"/>
+  <circle class="dot" cx="300" cy="80" r="3.5"/>
+  <circle class="dot" cx="380" cy="80" r="3.5"/>
+  <text class="node" x="300" y="66" text-anchor="middle">b</text>
+  <text class="lbl" x="175" y="62" text-anchor="middle">R₁</text>
+  <text class="val" x="175" y="108" text-anchor="middle">4 Ω</text>
+  <text class="lbl" x="318" y="130">R₂</text>
+  <text class="val" x="318" y="148">6 Ω</text>
+  <text class="lbl" x="122" y="172">12 V</text>
+  <text class="lbl" x="396" y="135">R_L</text>
+  <text class="val" x="396" y="153">可变</text>
+</svg>
+<p class="caption">图 · 从 b 与地之间接可变负载 R_L</p>
+<details>
+<summary>查看解法</summary>
+<div class="sol">
+<p><strong>开路电压：</strong>$R_L$ 断开时，$R_1$、$R_2$ 串联，$U_{oc} = 12 \times \dfrac{6}{4+6} = 7.2\ \mathrm{V}$。</p>
+<p><strong>等效内阻：</strong>电压源置零（短接），从 b 与地看进去是 $R_1 \parallel R_2 = \dfrac{4 \times 6}{4+6} = 2.4\ \Omega$。</p>
+<p><strong>最大功率条件：</strong>$R_L = R_{eq} = 2.4\ \Omega$。</p>
+<p>$$P_{max} = \frac{U_{oc}^2}{4R_{eq}} = \frac{7.2^2}{4 \times 2.4} = \frac{51.84}{9.6} = 5.4\ \mathrm{W}$$</p>
+<p><strong>要点：</strong>最大功率公式的分母是 $4R_{eq}$，不是 $R_{eq}$。另外注意这题要求"从负载看进去"，所以求内阻时要把负载移走，别把 $R_L$ 一起算进去。</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 6 · 容性负载的相量计算 <span class="tag">→ 相量法与功率</span></h3>
+<p>串联电路：$R = 6\ \Omega$，容抗 $X_C = 8\ \Omega$，接在 $\dot{U} = 100\angle 0^\circ\ \mathrm{V}$（有效值）上。求电流相量、有效值、有功功率、无功功率、视在功率和功率因数，并说明电流超前还是滞后。</p>
+<svg class="schematic" viewBox="0 0 500 250" role="img" aria-label="RC 串联电路">
+  <path class="wire" d="M90 60 H140"/>
+  <rect class="comp" x="140" y="50" width="50" height="20"/>
+  <path class="wire" d="M190 60 H260"/>
+  <path class="wire" d="M260 60 H290"/>
+  <path class="comp" d="M290 42 V78" style="fill:none"/>
+  <path class="comp" d="M306 42 V78" style="fill:none"/>
+  <path class="wire" d="M306 60 H430"/>
+  <path class="wire" d="M430 60 V195"/>
+  <path class="wire" d="M90 60 V105"/>
+  <circle class="comp" cx="90" cy="125" r="18"/>
+  <path class="sign" d="M83 118 H97 M90 111 V125"/>
+  <path class="sign" d="M83 138 H97"/>
+  <path class="wire" d="M90 143 V195"/>
+  <path class="wire" d="M70 195 H450"/>
+  <text class="lbl" x="165" y="42" text-anchor="middle">R</text>
+  <text class="val" x="165" y="90" text-anchor="middle">6 Ω</text>
+  <text class="lbl" x="298" y="34" text-anchor="middle">C</text>
+  <text class="val" x="298" y="98" text-anchor="middle">X_C = 8 Ω</text>
+  <text class="lbl" x="118" y="129">100∠0° V</text>
+</svg>
+<p class="caption">图 · R 与 C 串联</p>
+<details>
+<summary>查看解法</summary>
+<div class="sol">
+<p>阻抗 $Z = 6 - j8\ \Omega$（容性取负），$|Z| = \sqrt{36+64} = 10\ \Omega$，阻抗角 $\varphi = \arctan\dfrac{-8}{6} \approx -53.13^\circ$。</p>
+<p>$$\dot{I} = \frac{100\angle 0^\circ}{10\angle{-53.13^\circ}} = 10\angle{53.13^\circ}\ \mathrm{A}$$</p>
+<p>电流有效值 $I = 10\ \mathrm{A}$，相角为正，所以电流<strong>超前</strong>电压 53.13°（容性电路的特征）。</p>
+<p>有功功率 $P = I^2R = 100 \times 6 = 600\ \mathrm{W}$。<br>
+无功功率 $Q = -I^2X_C = -100 \times 8 = -800\ \mathrm{var}$（容性取负）。<br>
+视在功率 $S = UI = 100 \times 10 = 1000\ \mathrm{VA}$。</p>
+<p>功率因数 $\cos 53.13^\circ = 0.6$（超前）。</p>
+<p>校验：$S^2 = P^2 + Q^2$，$10^6 = 3.6 \times 10^5 + 6.4 \times 10^5$ ✓</p>
+<p><strong>要点：</strong>容性电路的无功功率带负号、功率因数写"超前"；感性则相反。这一步写错，功率题基本没分。</p>
+</div>
+</details>
+</div>
+
+<h2>做完之后</h2>
+<p>把答案和"卡在哪一步"告诉我。六道全对，说明你已经具备做整套真题的水平；错在某一题，我就知道下一课往哪个方向加压。</p>
+
+<div class="foot">
+<p>难度说明：这些题单看每一步都不难，难在组合——先等效变换再合并、先求戴维南再算最大功率、先算相量再回答功率。这正是考试大题的出法。</p>
+</div>
+
+</body>
+</html>
+
+
+

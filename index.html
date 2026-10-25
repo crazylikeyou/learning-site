@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>学习工作区</title>
+<link rel="stylesheet" href="./_shared/css/course.css">
+<style>
+  .cards { display: grid; gap: 1rem; margin: 2.5rem 0; }
+  .card {
+    display: block; padding: 1.4rem 1.6rem; border: 1px solid var(--rule);
+    background: #fff; text-decoration: none; color: var(--ink);
+    transition: border-color .15s, transform .15s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .card h2 { margin: 0 0 .5rem; font-size: 1.15rem; border: 0; padding: 0; color: var(--accent); }
+  .card p { margin: 0; font-size: .92rem; color: var(--muted); }
+  .card .n { font-family: ui-monospace,Consolas,monospace; font-size: .82rem; color: var(--muted); }
+  .hint { margin-top: 3rem; font-size: .88rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<h1>学习工作区</h1>
+<p class="sub">每个科目一个独立目录，各有自己的首页、课程和进度记录。</p>
+
+<div class="cards">
+  <a class="card" href="/japanese/">
+    <h2>日语 · 一年到 N3</h2>
+    <p>先摸底，再按 52 周主线从假名、初级教材推进到 N3 阅读与听力。</p>
+    <p class="n">japanese/</p>
+  </a>
+  <a class="card" href="./circuits/">
+    <h2>电路 · 冲刺 10-30 考试</h2>
+    <p>八节课，从摸底到相量法。节点法、回路法、叠加、戴维南、相量法全覆盖。</p>
+    <p class="n">circuits/</p>
+  </a>
+  <a class="card" href="./complex-analysis/">
+    <h2>复变函数 · 冲刺 10-30 考试</h2>
+    <p>第 1–5 章，先诊断再按题型补漏。</p>
+    <p class="n">complex-analysis/</p>
+  </a>
+</div>
+
+<p class="hint">
+页面打不开说明本地服务器没在跑，回文件夹双击「启动课程.cmd」。<br>
+服务器只监听 127.0.0.1，外网访问不到。要停就双击「停止服务器.cmd」。
+</p>
+</body>
+</html>
+

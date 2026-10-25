@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 1 课 · 复变函数摸底</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: "$$", right: "$$", display: true},
+      {left: "$", right: "$", display: false}
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+
+<h1>第 1 课 · 摸底</h1>
+<p class="sub">你现在最容易卡在哪。十道题，别查书，答不出就凭第一反应选。</p>
+<p class="meta">2026-10-22 · 预计 15 分钟 · 对应考试：10-30</p>
+<p class="meta" style="color:#8c2f1f">范围按第 1--5 章：复数、解析函数、复积分、级数、留数。题目覆盖最容易互相拖累的高频点。</p>
+
+<blockquote>
+这节课不负责把所有知识讲一遍，只做诊断。做完后，错题编号比总分更重要：我会根据你错的“根问题”决定下一课，而不是机械地从第一章重新讲。
+</blockquote>
+
+<h2>先看结论怎么用</h2>
+<p>每道题只反映一个判断点。答完把错题编号告诉我，或者直接说哪几题不确定。看不懂题干也算有效信息——我会先修问题本身，不会把它误判成不会算。</p>
+
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>做完后，下一课会根据你的错题分叉：是重搭复数与解析性，还是直接进入积分与级数题型。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "复数 $z=-\\sqrt3+i$ 的指数形式是？",
+    opts: [
+      "$2e^{5\\pi i/6}$",
+      "$2e^{i\\pi/3}$",
+      "$\\sqrt3 e^{5\\pi i/6}$",
+      "$2e^{-5\\pi i/6}$"
+    ],
+    answer: 0,
+    why: "模是 $\\sqrt{3+1}=2$，点位于第二象限，主辐角为 $5\\pi/6$。所以 $z=2e^{5\\pi i/6}$。这类题的第一步永远是模，第二步才是象限和辐角。"
+  },
+  {
+    stem: "方程 $z^3=8i$ 的三个根在复平面上的几何位置是？",
+    opts: [
+      "半径为 $2$ 的圆上，构成正三角形",
+      "半径为 $2$ 的圆上，构成正方形",
+      "半径为 $8$ 的圆上，构成正三角形",
+      "实轴上等距排列"
+    ],
+    answer: 0,
+    why: "三次方根的模是 $\\sqrt[3]{8}=2$，三个辐角相差 $2\\pi/3$。所以三个根均匀分布在 $|z|=2$ 上，构成正三角形。"
+  },
+  {
+    stem: "函数 $f(z)=|z|^2$ 的解析性是？",
+    opts: [
+      "全平面解析",
+      "只在 $z=0$ 可导，处处不解析",
+      "除 $z=0$ 外处处解析",
+      "处处不可导"
+    ],
+    answer: 1,
+    why: "写成 $f=x^2+y^2$ 后，$u=x^2+y^2,\\ v=0$。C--R 方程只在 $z=0$ 满足，因此只在 0 可导；但解析要求在某个邻域内可导，所以处处不解析。"
+  },
+  {
+    stem: "$\\operatorname{Ln}(-1)$ 的全部值是？",
+    opts: [
+      "$2k\\pi i$",
+      "$(2k+1)\\pi i$",
+      "$\\pi i$",
+      "$-1+2k\\pi i$"
+    ],
+    answer: 1,
+    why: "$\\operatorname{Ln}z=\\ln|z|+i(\\arg z+2k\\pi)$。这里 $|z|=1$，主辐角是 $\\pi$，所以全部值是 $i(\\pi+2k\\pi)=(2k+1)\\pi i$。"
+  },
+  {
+    stem: "计算 $\\displaystyle\\oint_{|z|=1}\\frac{dz}{z-2i}$。",
+    opts: ["$2\\pi i$", "$\\pi i$", "$0$", "$-2\\pi i$"],
+    answer: 2,
+    why: "奇点 $z=2i$ 在单位圆外。闭路内部没有奇点，所以在单位圆盘内除奇点外解析的被积函数沿闭路积分为 0。不要看到分母就机械写 $2\\pi i$。"
+  },
+  {
+    stem: "计算 $\\displaystyle\\oint_{|z|=2}\\frac{e^z}{z-i}\\,dz$。",
+    opts: [
+      "$2\\pi i e^i$",
+      "$2\\pi i$",
+      "$e^i$",
+      "$0$"
+    ],
+    answer: 0,
+    why: "$z=i$ 在 $|z|=2$ 内，分子 $e^z$ 在全平面解析。由 Cauchy 积分公式，积分为 $2\\pi i\\,e^i$。"
+  },
+  {
+    stem: "若 $u=x^2-y^2$，它的共轭调和函数 $v$ 是？",
+    opts: [
+      "$2xy+C$",
+      "$-2xy+C$",
+      "$x^2+y^2+C$",
+      "$x^2-y^2+C$"
+    ],
+    answer: 0,
+    why: "由 C--R 方程 $v_x=-u_y=2y$、$v_y=u_x=2x$，积分得 $v=2xy+C$。对应解析函数是 $z^2+iC$ 的实部、虚部结构。"
+  },
+  {
+    stem: "在 $|z|<1$ 内，$\\displaystyle\\frac1{z-1}$ 的展开是？",
+    opts: [
+      "$\\displaystyle-\\sum_{n=0}^{\\infty}z^n$",
+      "$\\displaystyle\\sum_{n=0}^{\\infty}z^n$",
+      "$\\displaystyle\\sum_{n=1}^{\\infty}z^{-n}$",
+      "$\\displaystyle-\\sum_{n=1}^{\\infty}z^{-n}$"
+    ],
+    answer: 0,
+    why: "$\\dfrac1{z-1}=-\\dfrac1{1-z}=-\\sum_{n=0}^{\\infty}z^n$，因为 $|z|<1$。展开时先看区域，不要把向外展开的 $z^{-n}$ 写成这个区域的答案。"
+  },
+  {
+    stem: "函数 $f(z)=\\dfrac{\\sin z}{z^3}$ 在 $z=0$ 处的类型和留数是？",
+    opts: [
+      "可去奇点，留数为 0",
+      "一阶极点，留数为 1",
+      "二阶极点，留数为 0",
+      "本性奇点，留数为 1"
+    ],
+    answer: 2,
+    why: "$\\sin z=z-\\dfrac{z^3}{3!}+\\cdots$，所以 $\\dfrac{\\sin z}{z^3}=\\dfrac1{z^2}-\\dfrac1{3!}+\\cdots$。负幂最高到 $z^{-2}$，是二阶极点；$z^{-1}$ 系数为 0，所以留数为 0。"
+  },
+  {
+    stem: "利用留数计算 $\\displaystyle\\int_0^{\\infty}\\frac{dx}{(x^2+1)^2}$。",
+    opts: [
+      "$\\dfrac{\\pi}{2}$",
+      "$\\dfrac{\\pi}{4}$",
+      "$\\pi$",
+      "$\\dfrac{1}{2}$"
+    ],
+    answer: 1,
+    why: "被积函数是偶函数，先写成 $\\frac12\\int_{-\\infty}^{\\infty}$。上半平面极点是 $i$，二阶留数为 $-i/4$，所以积分是 $\\frac12\\cdot2\\pi i\\cdot(-i/4)=\\pi/4$。"
+  }
+];
+
+const quiz = document.getElementById("quiz");
+let answered = 0;
+let correct = 0;
+const wrongIdx = [];
+
+QUESTIONS.forEach((q, qi) => {
+  const box = document.createElement("div");
+  box.className = "q";
+  box.innerHTML = `<p><span class="mono">${String(qi + 1).padStart(2, "0")}</span>&nbsp; <span class="stem">${q.stem}</span></p>`;
+  const ol = document.createElement("ol");
+  ol.className = "opts";
+  q.opts.forEach((text, oi) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    li.addEventListener("click", () => {
+      if (box.dataset.done) return;
+      box.dataset.done = "1";
+      answered++;
+      const isRight = oi === q.answer;
+      if (isRight) correct++; else wrongIdx.push(qi + 1);
+      [...ol.children].forEach((el, k) => {
+        el.classList.add("locked");
+        if (k === q.answer) el.classList.add("correct");
+        else if (k === oi) el.classList.add("wrong");
+      });
+      why.classList.add("show");
+      if (answered === QUESTIONS.length) finish();
+    });
+    ol.appendChild(li);
+  });
+  const why = document.createElement("p");
+  why.className = "why";
+  why.innerHTML = "<strong>为什么：</strong>" + q.why;
+  box.appendChild(ol);
+  box.appendChild(why);
+  quiz.appendChild(box);
+});
+
+function finish() {
+  const el = document.getElementById("score");
+  el.hidden = false;
+  document.getElementById("scoreText").textContent = `答对 ${correct} / ${QUESTIONS.length}`;
+  let msg;
+  if (correct <= 3) {
+    msg = "基础洞比较多。下一课从复数表示、辐角和解析性重新搭地基，不急着做综合题。";
+  } else if (correct <= 6) {
+    msg = "公式见过一部分，但还没有形成稳定的题型判断。下一课从错题最集中的模块切入。";
+  } else if (correct <= 8) {
+    msg = "基础可用，主要问题多半在边界条件和细节约定。接下来按题型训练，重点做错因回炉。";
+  } else {
+    msg = "基础比较扎实。接下来直接进入限时卷和高频失误点，不必按目录慢慢重讲。";
+  }
+  document.getElementById("advice").textContent = msg + (wrongIdx.length ? ` 错题编号：${wrongIdx.join("、")}。` : "");
+}
+</script>
+</body>
+</html>
+

@@ -1,0 +1,53 @@
+:root {
+  --ink: #1a1a1a;
+  --muted: #6b6b6b;
+  --rule: #e2ded6;
+  --paper: #fdfcf9;
+  --accent: #8c2f1f;
+  --ok: #2f6b46;
+  --bad: #a3352a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 6rem;
+  max-width: 44rem;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.75 "Songti SC", "SimSun", Georgia, serif;
+}
+h1 { font-size: 1.9rem; line-height: 1.3; margin: 0 0 .3rem; letter-spacing: .01em; }
+h2 { font-size: 1.15rem; margin: 2.5rem 0 .8rem; padding-bottom: .35rem; border-bottom: 1px solid var(--rule); }
+.sub { color: var(--muted); font-size: .92rem; margin: 0 0 2rem; }
+.meta { font-size: .85rem; color: var(--muted); font-family: ui-monospace, Consolas, monospace; }
+code, .mono { font-family: ui-monospace, Consolas, monospace; font-size: .92em; }
+blockquote {
+  margin: 1.5rem 0; padding: .2rem 0 .2rem 1rem;
+  border-left: 3px solid var(--accent); color: var(--muted);
+}
+.q { margin: 2rem 0; padding-bottom: 1.2rem; border-bottom: 1px dashed var(--rule); }
+.q p { margin: 0 0 .9rem; }
+.q .stem { font-weight: 600; }
+ol.opts { list-style: none; margin: 0; padding: 0; }
+ol.opts li {
+  margin: .4rem 0; padding: .55rem .8rem;
+  border: 1px solid var(--rule); border-radius: 3px;
+  cursor: pointer; transition: background .12s, border-color .12s;
+}
+ol.opts li:hover { background: #f6f3ec; }
+ol.opts li.correct { border-color: var(--ok); background: #eef6f0; }
+ol.opts li.wrong { border-color: var(--bad); background: #fbeceb; }
+ol.opts li.locked { cursor: default; }
+.why { display: none; margin: .7rem 0 0; font-size: .92rem; color: #333; }
+.why.show { display: block; }
+.score {
+  margin-top: 2.5rem; padding: 1rem 1.2rem;
+  border: 1px solid var(--rule); background: #fff;
+}
+.foot { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: .88rem; color: var(--muted); }
+a { color: var(--accent); }
+@media print {
+  body { padding: 0; max-width: none; }
+  ol.opts li:hover { background: none; }
+  .score { display: none; }
+}

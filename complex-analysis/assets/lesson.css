@@ -1,0 +1,63 @@
+.worked {
+  margin: 1.2rem 0;
+  padding: 1rem 1.1rem;
+  border-left: 3px solid #236e57;
+  background: #f3f8f5;
+}
+
+.practice {
+  margin: 1.2rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.practice ol,
+.practice ul {
+  margin-bottom: .5rem;
+}
+
+.answer-box {
+  margin-top: .9rem;
+}
+
+.answer-box summary {
+  cursor: pointer;
+  color: #185743;
+  font-weight: 600;
+}
+
+.answer-box p:first-of-type {
+  margin-top: .7rem;
+}
+
+.formula-strip {
+  margin: 1rem 0;
+  padding: .8rem 1rem;
+  border: 1px solid var(--rule);
+  background: #fbfcfa;
+  text-align: center;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 720px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+.downloads a {
+  display: block;
+  margin: .55rem 0;
+}
+
+.checklist {
+  padding-left: 1.3rem;
+}
+
+.checklist li {
+  margin: .45rem 0;
+}

@@ -1,0 +1,15 @@
+/* 电路图通用样式：所有课的 SVG 图都引用这里 */
+.schematic {
+  display: block;
+  margin: 2rem auto 0.6rem;
+  max-width: 100%;
+  height: auto;
+}
+.schematic .wire   { stroke: #2b2b2b; stroke-width: 2; fill: none; stroke-linecap: square; }
+.schematic .comp   { stroke: #2b2b2b; stroke-width: 2; fill: #fdfcf9; }
+.schematic .dot    { fill: #2b2b2b; }
+.schematic .lbl    { font-family: "Times New Roman", "Songti SC", serif; font-size: 15px; fill: #1a1a1a; }
+.schematic .val    { font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; fill: #5a5a5a; }
+.schematic .node   { font-family: "Times New Roman", serif; font-style: italic; font-size: 16px; fill: #8c2f1f; }
+.schematic .sign   { stroke: #2b2b2b; stroke-width: 1.6; }
+.caption { text-align: center; font-size: .85rem; color: #6b6b6b; margin: 0 0 2rem; }

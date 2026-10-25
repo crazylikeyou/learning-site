@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 3 课 · 回路电流法</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+
+<h1>第 3 课 · 回路电流法</h1>
+<p class="sub">当电路"网孔少、节点多"时，这套方法比节点法省方程。</p>
+<p class="meta">2026-10-22 · 预计 18 分钟 · 承接第 2 课</p>
+
+<h2>一、什么时候该用它</h2>
+
+<p>节点法列 $n-1$ 个方程，回路法列的是<strong>独立回路数</strong> $b - n + 1$。同样的电路，哪个数小就用哪个。</p>
+
+<p>平面电路（能画在纸上不交叉）有一个好用的判断：<strong>有几个网孔，就是几个回路电流</strong>。两个网孔两个方程，三个网孔三个方程。</p>
+
+<blockquote>
+如果一道题画出来只有两三个"窗户"，而节点有五六个，那基本就是在提示你用回路法。
+</blockquote>
+
+<h2>二、核心概念：回路电流不是支路电流</h2>
+
+<p>给每个网孔假设一个电流，沿着网孔环流一圈。这个量是<strong>数学上的中间量</strong>，不一定等于任何一条支路里真实流过的电流。</p>
+
+<p>真实支路电流 = 这条支路上经过的回路电流的<strong>代数和</strong>。相邻网孔共用的那条支路，两个回路电流都经过它，方向相同就相加，方向相反就相减。</p>
+
+<h2>三、三条列式规则</h2>
+
+<p><strong>规则一：所有回路电流统一取顺时针方向。</strong>这一步定了，后面互阻项才能一律写负号，不用每次判断。</p>
+
+<p><strong>规则二：自阻取正，互阻取负。</strong></p>
+
+<p>第 $k$ 个回路的方程：自阻乘本回路电流，减去与相邻回路之间的互阻乘那个回路的电流，等于本回路内电压源的代数和。</p>
+
+<p>$$\sum R_{kk} I_k - \sum R_{km} I_m = \sum E_k$$</p>
+
+<p><strong>规则三：电压源看方向。</strong>沿回路绕行方向，从负极走向正极取正，从正极走向负极取负。</p>
+
+<h2>四、完整例子</h2>
+
+<p>电路：左网孔有 $R_1 = 2\ \Omega$（上边）和 $R_2 = 4\ \Omega$（中间共用），左侧支路是 $24\ \mathrm{V}$ 电压源；右网孔有 $R_3 = 2\ \Omega$（上边）和 $R_4 = 2\ \Omega$（右边）。设左网孔电流为 $I_1$、右网孔为 $I_2$，都取顺时针。</p>
+
+<svg class="schematic" viewBox="0 0 480 320" role="img" aria-label="两个网孔的电路图">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#8c2f1f"/>
+    </marker>
+  </defs>
+
+  <!-- 顶部横线：R1 与 R3 -->
+  <path class="wire" d="M90 80 H170"/>
+  <rect class="comp" x="170" y="70" width="50" height="20"/>
+  <path class="wire" d="M220 80 H310"/>
+  <rect class="comp" x="310" y="70" width="50" height="20"/>
+  <path class="wire" d="M360 80 H410"/>
+
+  <!-- 左侧电压源 -->
+  <path class="wire" d="M90 80 V160"/>
+  <circle class="comp" cx="90" cy="180" r="20"/>
+  <path class="sign" d="M83 172 H97 M90 165 V179"/>
+  <path class="sign" d="M83 192 H97"/>
+  <path class="wire" d="M90 200 V280"/>
+
+  <!-- 中间共用支路 R2 -->
+  <path class="wire" d="M230 80 V150"/>
+  <rect class="comp" x="222" y="150" width="16" height="50"/>
+  <path class="wire" d="M230 200 V280"/>
+
+  <!-- 右侧支路 R4 -->
+  <path class="wire" d="M410 80 V150"/>
+  <rect class="comp" x="402" y="150" width="16" height="50"/>
+  <path class="wire" d="M410 200 V280"/>
+
+  <!-- 底部横线 -->
+  <path class="wire" d="M70 280 H430"/>
+
+  <!-- 节点 -->
+  <circle class="dot" cx="90" cy="80" r="3.5"/>
+  <circle class="dot" cx="230" cy="80" r="3.5"/>
+  <circle class="dot" cx="410" cy="80" r="3.5"/>
+
+  <!-- 回路电流方向 -->
+  <path d="M120 175 A 45 45 0 0 1 200 175" fill="none" stroke="#8c2f1f" stroke-width="1.8" marker-end="url(#ar)"/>
+  <path d="M300 175 A 45 45 0 0 1 380 175" fill="none" stroke="#8c2f1f" stroke-width="1.8" marker-end="url(#ar)"/>
+  <text class="node" x="160" y="135" text-anchor="middle">I₁</text>
+  <text class="node" x="340" y="135" text-anchor="middle">I₂</text>
+
+  <!-- 标注 -->
+  <text class="lbl" x="195" y="62" text-anchor="middle">R₁</text>
+  <text class="val" x="195" y="108" text-anchor="middle">2 Ω</text>
+  <text class="lbl" x="335" y="62" text-anchor="middle">R₃</text>
+  <text class="val" x="335" y="108" text-anchor="middle">2 Ω</text>
+  <text class="lbl" x="250" y="170">R₂</text>
+  <text class="val" x="250" y="188">4 Ω</text>
+  <text class="lbl" x="430" y="170">R₄</text>
+  <text class="val" x="430" y="188">2 Ω</text>
+  <text class="lbl" x="118" y="176">24 V</text>
+</svg>
+<p class="caption">图 1 · 两个网孔，中间 $R_2$ 被两个回路共用</p>
+
+<p>左网孔自阻 $R_1 + R_2 = 6\ \Omega$，与右网孔互阻 $R_2 = 4\ \Omega$，回路内电压源沿顺时针由负到正，记 $+24$：</p>
+
+<p>$$6I_1 - 4I_2 = 24$$</p>
+
+<p>右网孔自阻 $R_2 + R_3 + R_4 = 8\ \Omega$，互阻仍是 $4\ \Omega$，回路内没有电源：</p>
+
+<p>$$-4I_1 + 8I_2 = 0$$</p>
+
+<p>解这个方程组：第二式给 $I_1 = 2I_2$，代入第一式：$6(2I_2) - 4I_2 = 8I_2 = 24$，所以</p>
+
+<p>$$I_2 = 3\ \mathrm{A}, \qquad I_1 = 6\ \mathrm{A}$$</p>
+
+<p>中间共用支路上的真实电流是两个回路电流的代数和。$I_1$ 在 $R_2$ 里向下流，$I_2$ 在 $R_2$ 里向上流（它对右网孔顺时针，所以在共用支路上是往上），两者反向，取差：</p>
+
+<p>$$I_{R2} = I_1 - I_2 = 6 - 3 = 3\ \mathrm{A，方向向下}$$</p>
+
+<p>代回验算右网孔：$-4 \times 6 + 8 \times 3 = -24 + 24 = 0$，成立。</p>
+
+<h2>五、解答题</h2>
+
+<p>按考试格式做题，写出完整过程。做完再展开对照。</p>
+
+<div class="prob" style="margin:2.4rem 0;padding:1.2rem 1.4rem;border:1px solid #e2ded6;background:#fff">
+<h3 style="margin:0 0 .8rem;font-size:1rem">题 1（两问）</h3>
+<p>两个网孔，两回路电流均取顺时针。左侧支路是 $12\ \mathrm{V}$ 电压源（沿顺时针方向由负到正），$R_1 = 4\ \Omega$ 在左网孔上边、$R_2 = 2\ \Omega$ 为两网孔共用（中间支路），右网孔上边 $R_3 = 2\ \Omega$、右边 $R_4 = 2\ \Omega$。</p>
+<p>（1）用回路电流法求 $I_1$、$I_2$。<br>
+（2）求中间共用支路的真实电流，并说明方向。</p>
+<svg class="schematic" viewBox="0 0 480 300" role="img" aria-label="两网孔电路图">
+  <defs>
+    <marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#8c2f1f"/>
+    </marker>
+  </defs>
+  <path class="wire" d="M90 70 H130"/>
+  <rect class="comp" x="130" y="60" width="50" height="20"/>
+  <path class="wire" d="M180 70 H270"/>
+  <rect class="comp" x="270" y="60" width="50" height="20"/>
+  <path class="wire" d="M320 70 H390"/>
+  <path class="wire" d="M90 70 V152"/>
+  <circle class="comp" cx="90" cy="170" r="18"/>
+  <path class="sign" d="M83 163 H97 M90 156 V170"/>
+  <path class="sign" d="M83 183 H97"/>
+  <path class="wire" d="M90 188 V250"/>
+  <path class="wire" d="M225 70 V95"/>
+  <rect class="comp" x="217" y="95" width="16" height="50"/>
+  <path class="wire" d="M225 145 V250"/>
+  <path class="wire" d="M390 70 V95"/>
+  <rect class="comp" x="382" y="95" width="16" height="50"/>
+  <path class="wire" d="M390 145 V250"/>
+  <path class="wire" d="M60 250 H420"/>
+  <circle class="dot" cx="90" cy="70" r="3.5"/>
+  <circle class="dot" cx="225" cy="70" r="3.5"/>
+  <circle class="dot" cx="390" cy="70" r="3.5"/>
+  <path d="M120 165 A 42 42 0 0 1 190 165" fill="none" stroke="#8c2f1f" stroke-width="1.8" marker-end="url(#ar3)"/>
+  <path d="M290 165 A 42 42 0 0 1 360 165" fill="none" stroke="#8c2f1f" stroke-width="1.8" marker-end="url(#ar3)"/>
+  <text class="node" x="155" y="128" text-anchor="middle">I₁</text>
+  <text class="node" x="325" y="128" text-anchor="middle">I₂</text>
+  <text class="lbl" x="155" y="50" text-anchor="middle">R₁</text>
+  <text class="val" x="155" y="98" text-anchor="middle">4 Ω</text>
+  <text class="lbl" x="295" y="50" text-anchor="middle">R₃</text>
+  <text class="val" x="295" y="98" text-anchor="middle">2 Ω</text>
+  <text class="lbl" x="245" y="115">R₂</text>
+  <text class="val" x="245" y="133">2 Ω</text>
+  <text class="lbl" x="412" y="115">R₄</text>
+  <text class="val" x="412" y="133">2 Ω</text>
+  <text class="lbl" x="114" y="174">12 V</text>
+</svg>
+<p class="caption">图 · 两个网孔，中间支路被两回路共用</p>
+<details style="margin-top:1rem">
+<summary style="cursor:pointer;color:#8c2f1f;font-size:.92rem">展开答案</summary>
+<div style="font-size:.95rem;border-left:2px solid #e2ded6;padding-left:1rem;margin-top:.6rem">
+<p><strong>（1）</strong> 左网孔自阻 $R_1 + R_2 = 6\ \Omega$，互阻 $R_2 = 2\ \Omega$：</p>
+<p>$$6I_1 - 2I_2 = 12$$</p>
+<p>右网孔自阻 $R_2 + R_3 + R_4 = 6\ \Omega$，内部无电源：</p>
+<p>$$-2I_1 + 6I_2 = 0 \;\Rightarrow\; I_1 = 3I_2$$</p>
+<p>代入：$18I_2 - 2I_2 = 16I_2 = 12$，得 $I_2 = 0.75\ \mathrm{A}$，$I_1 = 2.25\ \mathrm{A}$。</p>
+<p><strong>（2）</strong> $I_1$ 在中间支路向下，$I_2$ 在中间支路向上，两者反向取差：</p>
+<p>$$I_{R2} = 2.25 - 0.75 = 1.5\ \mathrm{A，方向向下}$$</p>
+<p><strong>易错点：</strong>共用支路方向要靠"各自顺时针"自己判断，别凭感觉斜着画。判断对了才知道是相加还是相减。</p>
+</div>
+</details>
+</div>
+
+<p style="margin-top:2rem;color:#6b6b6b;font-size:.9rem">做完把过程给我，我按步判分。</p>
+
+</body>
+</html>
+

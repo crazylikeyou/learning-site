@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 2 课 · 参考节点：为什么方程只有 n−1 个</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+
+<h1>第 2 课 · 参考节点</h1>
+<p class="sub">为什么节点法只能列 $n-1$ 个方程，以及"接地"到底在做什么。</p>
+<p class="meta">2026-10-22 · 预计 15 分钟 · 对应摸底第 2 题</p>
+
+<h2>一、先破除一个印象</h2>
+
+<p>接地不是"给电路接一根线到大地"，也不是某种安全措施。在节点法里，它只做一件事：<strong>给所有节点电位定一个零点。</strong></p>
+
+<p>电位本身是相对的。把整条电路的电位同时抬高 100 V，每条支路上的电压差不变、电流不变、功率不变——物理上完全是同一个电路。所以"某点电位是 6 V"这句话本身没有绝对意义，只有 <em>两点之间的差</em> 才有意义。</p>
+
+<blockquote>
+既然整体平移不影响任何结果，我们就人为规定其中一点的电位为 0，其余节点的电位都相对它来写。这一点就是参考节点，习惯上画成接地符号。
+</blockquote>
+
+<h2>二、于是方程个数就定了</h2>
+
+<p>假设电路有 $n$ 个节点。每个节点的电位都是未知量，但整体可以平移，所以真正独立的未知量只有 $n-1$ 个。选一个点当参考，剩下的 $n-1$ 个点各列一条 KCL，正好 $n-1$ 个方程解 $n-1$ 个未知量。</p>
+
+<p>这就是为什么接地能"省掉一个未知量"——不是省了一条支路，也不是简化了计算，而是<strong>消掉了一个自由度</strong>。</p>
+
+<h2>三、标准三步</h2>
+
+<p><strong>第一步，选参考节点。</strong> 优先选连接支路最多的点，或者电压源的一端。选得好，方程最简单。</p>
+
+<p><strong>第二步，对每个非参考节点列 KCL。</strong> 统一规定"流出该节点的电流之和为 0"。支路电流用 $(V_i - V_j)/R$ 表示。遇到理想电压源跨接在两个非参考节点之间，就要引入一个附加变量（这叫改进节点法），但期末通常不会在这个点上为难人。</p>
+
+<p><strong>第三步，解线性方程组。</strong></p>
+
+<h2>四、一个完整例子</h2>
+
+<p>电路：理想电压源 $V_s = 10\ \mathrm{V}$ 接在节点 a 与地之间；$R_1 = 2\ \Omega$ 连接 a–b；$R_2 = 6\ \Omega$ 连接 b–地；$R_3 = 3\ \Omega$ 连接 b–c；$R_4 = 6\ \Omega$ 连接 c–地。</p>
+
+<svg class="schematic" viewBox="0 0 520 330" role="img" aria-label="四节点电路示意图">
+  <!-- 顶部：R1 连接 a-b，R3 连接 b-c -->
+  <path class="wire" d="M110 110 H175"/>
+  <rect class="comp" x="175" y="100" width="50" height="20"/>
+  <path class="wire" d="M225 110 H335"/>
+  <rect class="comp" x="335" y="100" width="50" height="20"/>
+  <path class="wire" d="M385 110 H410"/>
+
+  <!-- 电压源支路 a -> 地 -->
+  <path class="wire" d="M110 110 V190"/>
+  <circle class="comp" cx="110" cy="210" r="20"/>
+  <path class="sign" d="M103 202 H117 M110 195 V209"/>
+  <path class="sign" d="M103 222 H117"/>
+  <path class="wire" d="M110 230 V290"/>
+
+  <!-- R2 支路 b -> 地 -->
+  <path class="wire" d="M270 110 V180"/>
+  <rect class="comp" x="262" y="180" width="16" height="50"/>
+  <path class="wire" d="M270 230 V290"/>
+
+  <!-- R4 支路 c -> 地 -->
+  <path class="wire" d="M410 110 V180"/>
+  <rect class="comp" x="402" y="180" width="16" height="50"/>
+  <path class="wire" d="M410 230 V290"/>
+
+  <!-- 参考地 -->
+  <path class="wire" d="M80 290 H440"/>
+  <path class="wire" d="M270 290 V300"/>
+  <path class="wire" d="M258 300 H282"/>
+  <path class="wire" d="M263 307 H277"/>
+  <path class="wire" d="M268 314 H272"/>
+
+  <!-- 节点 -->
+  <circle class="dot" cx="110" cy="110" r="3.5"/>
+  <circle class="dot" cx="270" cy="110" r="3.5"/>
+  <circle class="dot" cx="410" cy="110" r="3.5"/>
+  <text class="node" x="110" y="96" text-anchor="middle">a</text>
+  <text class="node" x="270" y="96" text-anchor="middle">b</text>
+  <text class="node" x="410" y="96" text-anchor="middle">c</text>
+
+  <!-- 标注 -->
+  <text class="lbl" x="200" y="92" text-anchor="middle">R₁</text>
+  <text class="val" x="200" y="140" text-anchor="middle">2 Ω</text>
+  <text class="lbl" x="360" y="92" text-anchor="middle">R₃</text>
+  <text class="val" x="360" y="140" text-anchor="middle">3 Ω</text>
+  <text class="lbl" x="292" y="200">R₂</text>
+  <text class="val" x="292" y="217">6 Ω</text>
+  <text class="lbl" x="430" y="200">R₄</text>
+  <text class="val" x="430" y="217">6 Ω</text>
+  <text class="lbl" x="140" y="204">V<tspan class="val" dy="4">s</tspan></text>
+  <text class="val" x="140" y="224">10 V</text>
+</svg>
+<p class="caption">图 1 · a 点经电压源接地，b、c 为待求节点</p>
+
+<p>共 4 个节点（a、b、c、地），选地为参考，未知量是 $V_a, V_b, V_c$ 三个。电压源把 $a$ 点和地直接连起来，所以 $V_a = 10\ \mathrm{V}$ 已知，真正要解的是 $V_b, V_c$ 两个。</p>
+
+<p>对节点 b 列 KCL（流出为正）：</p>
+
+<p>$$\frac{V_b - 10}{2} + \frac{V_b}{6} + \frac{V_b - V_c}{3} = 0$$</p>
+
+<p>两边乘 6：$3(V_b - 10) + V_b + 2(V_b - V_c) = 0$，整理得 $3V_b - V_c = 15$。</p>
+
+<div style="margin:1.6rem 0;padding:1rem 1.2rem;border-left:3px solid #8c2f1f;background:#faf7f1">
+<p style="margin:0 0 .6rem"><strong>常见疑问：三项都是加号，可"流出为正"不是应该有正有负吗？</strong></p>
+<p style="margin:0 0 .6rem">加号来自写法统一，不是来自电流方向全一致。每条支路都写成 $\dfrac{V_b - V_j}{R}$，它的含义是"从 b 流向 j 的电流"。三项都按"离开 b"这个方向写，形状上自然一律是加号，加起来才构成 KCL：离开该节点的电流代数和为零。</p>
+<p style="margin:0 0 .6rem">正负藏在括号里。<strong>数值</strong>并不都为正——代入 $V_b = 6.43$ 后，第一项 $\dfrac{6.43-10}{2} = -1.79$ 是负数，表示 $R_1$ 上电流实际是从 a <em>流入</em> b，与假设的流出方向相反。负号就是"方向反了"的记号，KCL 完全允许。</p>
+<p style="margin:0">$(-1.79) + 1.07 + 0.71 = 0$。若改成"流入为正"，三条支路都写成 $\dfrac{V_j - V_b}{R}$，整个方程乘 $-1$，解不变。关键是<strong>全篇统一</strong>，不是每项分别判断。</p>
+</div>
+
+<p>对节点 c 列 KCL：</p>
+
+<p>$$\frac{V_c - V_b}{3} + \frac{V_c}{6} = 0$$</p>
+
+<p>两边乘 6：$2(V_c - V_b) + V_c = 0$，整理得 $V_c = \frac{2}{3}V_b$。</p>
+
+<p>代入第一式：$3V_b - \frac{2}{3}V_b = 15$，即 $\frac{7}{3}V_b = 15$，所以</p>
+
+<p>$$V_b = \frac{45}{7} \approx 6.43\ \mathrm{V}, \qquad V_c = \frac{30}{7} \approx 4.29\ \mathrm{V}$$</p>
+
+<p>代回验算：$\frac{6.43-10}{2} + \frac{6.43}{6} + \frac{6.43-4.29}{3} = -1.79 + 1.07 + 0.71 = 0$，成立。</p>
+
+<h2>五、解答题</h2>
+
+<p>按考试格式做题，写出完整过程。做完再展开对照。</p>
+
+<div class="prob" style="margin:2.4rem 0;padding:1.2rem 1.4rem;border:1px solid #e2ded6;background:#fff">
+<h3 style="margin:0 0 .8rem;font-size:1rem">题 1（两问）</h3>
+<p>$12\ \mathrm{V}$ 电压源接在节点 a 与地之间。$R_1 = 4\ \Omega$ 连接 a–b，$R_2 = 6\ \Omega$ 连接 b–地，$R_3 = 6\ \Omega$ 连接 b–c，$R_4 = 6\ \Omega$ 连接 c–地。</p>
+<p>（1）用节点电压法求 $V_b$、$V_c$。<br>
+（2）求各支路电流（$R_1$ 到 $R_4$ 上的电流），并用 KCL 验算节点 b。</p>
+<svg class="schematic" viewBox="0 0 460 300" role="img" aria-label="四节点电路图">
+  <path class="wire" d="M90 70 H125"/>
+  <rect class="comp" x="125" y="60" width="50" height="20"/>
+  <path class="wire" d="M175 70 H265"/>
+  <rect class="comp" x="265" y="60" width="50" height="20"/>
+  <path class="wire" d="M315 70 H370"/>
+  <path class="wire" d="M90 70 V142"/>
+  <circle class="comp" cx="90" cy="160" r="18"/>
+  <path class="sign" d="M83 153 H97 M90 146 V160"/>
+  <path class="sign" d="M83 173 H97"/>
+  <path class="wire" d="M90 178 V250"/>
+  <path class="wire" d="M220 70 V95"/>
+  <rect class="comp" x="212" y="95" width="16" height="50"/>
+  <path class="wire" d="M220 145 V250"/>
+  <path class="wire" d="M370 70 V95"/>
+  <rect class="comp" x="362" y="95" width="16" height="50"/>
+  <path class="wire" d="M370 145 V250"/>
+  <path class="wire" d="M60 250 H400"/>
+  <path class="wire" d="M220 250 V262"/>
+  <path class="wire" d="M208 262 H232"/>
+  <path class="wire" d="M213 269 H227"/>
+  <path class="wire" d="M218 276 H222"/>
+  <circle class="dot" cx="90" cy="70" r="3.5"/>
+  <circle class="dot" cx="220" cy="70" r="3.5"/>
+  <circle class="dot" cx="370" cy="70" r="3.5"/>
+  <text class="node" x="90" y="56" text-anchor="middle">a</text>
+  <text class="node" x="220" y="56" text-anchor="middle">b</text>
+  <text class="node" x="370" y="56" text-anchor="middle">c</text>
+  <text class="lbl" x="150" y="50" text-anchor="middle">R₁</text>
+  <text class="val" x="150" y="98" text-anchor="middle">4 Ω</text>
+  <text class="lbl" x="290" y="50" text-anchor="middle">R₃</text>
+  <text class="val" x="290" y="98" text-anchor="middle">6 Ω</text>
+  <text class="lbl" x="240" y="115">R₂</text>
+  <text class="val" x="240" y="133">6 Ω</text>
+  <text class="lbl" x="392" y="115">R₄</text>
+  <text class="val" x="392" y="133">6 Ω</text>
+  <text class="lbl" x="114" y="164">12 V</text>
+</svg>
+<p class="caption">图 · 四节点电路，a 点经电压源接地</p>
+<details style="margin-top:1rem">
+<summary style="cursor:pointer;color:#8c2f1f;font-size:.92rem">展开答案</summary>
+<div style="font-size:.95rem;border-left:2px solid #e2ded6;padding-left:1rem;margin-top:.6rem">
+<p><strong>（1）</strong> $V_a = 12\ \mathrm{V}$ 已知。对节点 b：</p>
+<p>$$\frac{V_b - 12}{4} + \frac{V_b}{6} + \frac{V_b - V_c}{6} = 0$$</p>
+<p>两边乘 12：$3(V_b - 12) + 2V_b + 2(V_b - V_c) = 0$，整理得 $7V_b - 2V_c = 36$。</p>
+<p>对节点 c：$\dfrac{V_c - V_b}{6} + \dfrac{V_c}{6} = 0$，得 $2V_c = V_b$，即 $V_c = \dfrac{V_b}{2}$。</p>
+<p>代入：$7V_b - V_b = 36$，$6V_b = 36$，所以</p>
+<p>$$V_b = 6\ \mathrm{V}, \qquad V_c = 3\ \mathrm{V}$$</p>
+<p><strong>（2）</strong> 各支路电流（设方向由高电位到低电位）：</p>
+<p>$I_1 = \dfrac{12 - 6}{4} = 1.5\ \mathrm{A}$（a→b）；$I_2 = \dfrac{6}{6} = 1\ \mathrm{A}$（b→地）；$I_3 = \dfrac{6-3}{6} = 0.5\ \mathrm{A}$（b→c）；$I_4 = \dfrac{3}{6} = 0.5\ \mathrm{A}$（c→地）。</p>
+<p>验算节点 b：流入 $1.5\ \mathrm{A}$，流出 $1 + 0.5 = 1.5\ \mathrm{A}$ ✓</p>
+<p><strong>易错点：</strong>求出节点电位只是第一步，题目问"支路电流"就必须再算一遍。这一步在 3-19 那种题里是必答的。</p>
+</div>
+</details>
+</div>
+
+<p style="margin-top:2rem;color:#6b6b6b;font-size:.9rem">做完把过程给我，我按步判分。</p>
+
+</body>
+</html>
+

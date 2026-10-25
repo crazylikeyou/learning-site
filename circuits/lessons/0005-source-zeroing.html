@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 5 课 · 电源置零与叠加定理</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+
+<h1>第 5 课 · 电源置零</h1>
+<p class="sub">电压源置零是短路，电流源置零是开路——以及为什么必须是这样。</p>
+<p class="meta">2026-10-22 · 预计 15 分钟 · 对应摸底第 6 题</p>
+
+<h2>一、规则只有两条，但要说清理由</h2>
+
+<p><strong>电压源置零 → 用导线短接。</strong> 电压源的使命是维持两端电压等于某个值。把它"关掉"，等于让它维持的电压变成 0。两端电压为 0 的理想元件就是一根导线。</p>
+
+<p><strong>电流源置零 → 断开该支路。</strong> 电流源的使命是维持流过它的电流等于某个值。关掉它，等于让它流过的电流变成 0。电流恒为 0 的支路，等于不存在。</p>
+
+<blockquote>
+共同点是：置零不是"删掉这个元件"，而是把它的<strong>输出强制设为零</strong>，再看这是什么元件。电压为 0 是导线，电流为 0 是断路。
+</blockquote>
+
+<p>这两个记反的后果很严重：电压源错当断路，电路少了一条通路，等效电阻算错，后面全错；电流源错当短路，直接制造出一堆不存在的电流。</p>
+
+<h2>二、叠加定理</h2>
+
+<p>线性电路里有多个独立源时：每次只留一个源工作，其余全部置零，算出该源单独作用时的响应；最后把所有响应<strong>代数相加</strong>。</p>
+
+<p>三条限制必须记住：</p>
+
+<p><strong>只能用于线性电路。</strong> 含二极管的电路不能叠加。</p>
+
+<p><strong>每个源单独作用时，其他源要置零，不是删除。</strong> 电路拓扑必须保持完整。</p>
+
+<p><strong>功率不能直接叠加。</strong> 因为 $P = I^2R$ 是二次关系。必须先叠加电流或电压，再算功率。</p>
+
+<h2>三、完整例子</h2>
+
+<p>节点 b 与地之间接三条支路：左侧 $R_1 = 2\ \Omega$ 串 $12\ \mathrm{V}$ 电压源（正极朝 b），中间 $R_2 = 6\ \Omega$，右侧 $3\ \mathrm{A}$ 电流源（电流注入 b）。求 $V_b$。</p>
+
+<svg class="schematic" viewBox="0 0 500 320" role="img" aria-label="三条并联支路">
+  <defs>
+    <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#2b2b2b"/>
+    </marker>
+  </defs>
+
+  <!-- 顶部汇流线 -->
+  <path class="wire" d="M110 80 H390"/>
+
+  <!-- 左支路 R1 + Vs -->
+  <path class="wire" d="M110 80 V100"/>
+  <rect class="comp" x="102" y="100" width="16" height="50"/>
+  <path class="wire" d="M110 150 V175"/>
+  <circle class="comp" cx="110" cy="195" r="20"/>
+  <path class="sign" d="M103 187 H117 M110 180 V194"/>
+  <path class="sign" d="M103 207 H117"/>
+  <path class="wire" d="M110 215 V280"/>
+
+  <!-- 中间 R2 -->
+  <path class="wire" d="M250 80 V100"/>
+  <rect class="comp" x="242" y="100" width="16" height="50"/>
+  <path class="wire" d="M250 150 V280"/>
+
+  <!-- 右支路 电流源 -->
+  <path class="wire" d="M390 80 V155"/>
+  <circle class="comp" cx="390" cy="175" r="20"/>
+  <path class="sign" d="M390 185 V162" marker-end="url(#ar2)"/>
+  <path class="wire" d="M390 195 V280"/>
+
+  <!-- 底部 -->
+  <path class="wire" d="M90 280 H410"/>
+
+  <circle class="dot" cx="110" cy="80" r="3.5"/>
+  <circle class="dot" cx="250" cy="80" r="3.5"/>
+  <circle class="dot" cx="390" cy="80" r="3.5"/>
+  <text class="node" x="250" y="66" text-anchor="middle">b</text>
+
+  <text class="lbl" x="132" y="122">R₁</text>
+  <text class="val" x="132" y="140">2 Ω</text>
+  <text class="lbl" x="140" y="192">12 V</text>
+  <text class="lbl" x="272" y="122">R₂</text>
+  <text class="val" x="272" y="140">6 Ω</text>
+  <text class="lbl" x="420" y="172">3 A</text>
+</svg>
+<p class="caption">图 1 · 三条并联支路，电源方向：电压源正极朝上，电流源向上注入 b</p>
+
+<p><strong>第一步：只留电压源，电流源置零——也就是断开右支路。</strong></p>
+
+<p>此时是 $R_1$ 与 $R_2$ 串联接在 12 V 两端，$V_b$ 是 $R_2$ 上的电压：</p>
+
+<p>$$V_b' = 12 \times \frac{6}{2+6} = 9\ \mathrm{V}$$</p>
+
+<p><strong>第二步：只留电流源，电压源置零——也就是把左支路短接成导线，只剩 $R_1$。</strong></p>
+
+<p>现在 $R_1$ 与 $R_2$ 并联，$3\ \mathrm{A}$ 全部注入这个并联电阻：</p>
+
+<p>$$R_1 \parallel R_2 = \frac{2 \times 6}{2+6} = 1.5\ \Omega \qquad V_b'' = 3 \times 1.5 = 4.5\ \mathrm{V}$$</p>
+
+<p><strong>第三步：代数相加。</strong> 两个分量方向一致（都是让 b 点电位升高），取正号：</p>
+
+<p>$$V_b = 9 + 4.5 = 13.5\ \mathrm{V}$$</p>
+
+<p><strong>验算</strong>：直接用节点法写一条方程，把电流源当成注入 b 的 3 A：</p>
+
+<p>$$\frac{V_b - 12}{2} + \frac{V_b}{6} = 3 \;\Longrightarrow\; 3V_b - 36 + V_b = 18 \;\Longrightarrow\; 4V_b = 54 \;\Longrightarrow\; V_b = 13.5\ \mathrm{V}$$</p>
+
+<p>两个方法对上了。这个验算建议你考试时也做——叠加容易在符号上翻车，用节点法复核一遍最稳。</p>
+
+<h2>四、解答题</h2>
+
+<p>按考试格式做题，写出完整过程。做完再展开对照。</p>
+
+<div class="prob" style="margin:2.4rem 0;padding:1.2rem 1.4rem;border:1px solid #e2ded6;background:#fff">
+<h3 style="margin:0 0 .8rem;font-size:1rem">题 1（三问）</h3>
+<p>节点 b 与地之间接三条支路：左侧 $R_1 = 6\ \Omega$ 串 $30\ \mathrm{V}$ 电压源（正极朝 b）；中间 $R_2 = 3\ \Omega$；右侧 $4\ \mathrm{A}$ 电流源注入 b。</p>
+<p>（1）用叠加定理求 $V_b$，要求分别写出两个分量及方向判断。<br>
+（2）用节点电压法验算。<br>
+（3）若把电流源改为从 b 流出 $4\ \mathrm{A}$，$V_b$ 变成多少？</p>
+<svg class="schematic" viewBox="0 0 500 300" role="img" aria-label="三条并联支路">
+  <defs>
+    <marker id="ar5" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#2b2b2b"/>
+    </marker>
+  </defs>
+  <path class="wire" d="M110 70 H390"/>
+  <path class="wire" d="M110 70 V90"/>
+  <rect class="comp" x="102" y="90" width="16" height="50"/>
+  <path class="wire" d="M110 140 V165"/>
+  <circle class="comp" cx="110" cy="183" r="18"/>
+  <path class="sign" d="M103 176 H117 M110 169 V183"/>
+  <path class="sign" d="M103 196 H117"/>
+  <path class="wire" d="M110 201 V250"/>
+  <path class="wire" d="M250 70 V90"/>
+  <rect class="comp" x="242" y="90" width="16" height="50"/>
+  <path class="wire" d="M250 140 V250"/>
+  <path class="wire" d="M390 70 V145"/>
+  <circle class="comp" cx="390" cy="163" r="18"/>
+  <path class="sign" d="M390 173 V150" marker-end="url(#ar5)"/>
+  <path class="wire" d="M390 181 V250"/>
+  <path class="wire" d="M80 250 H420"/>
+  <circle class="dot" cx="110" cy="70" r="3.5"/>
+  <circle class="dot" cx="250" cy="70" r="3.5"/>
+  <circle class="dot" cx="390" cy="70" r="3.5"/>
+  <text class="node" x="250" y="56" text-anchor="middle">b</text>
+  <text class="lbl" x="132" y="112">R₁</text>
+  <text class="val" x="132" y="130">6 Ω</text>
+  <text class="lbl" x="140" y="180">30 V</text>
+  <text class="lbl" x="272" y="112">R₂</text>
+  <text class="val" x="272" y="130">3 Ω</text>
+  <text class="lbl" x="418" y="160">4 A</text>
+</svg>
+<p class="caption">图 · 三条并联支路，电压源正极朝 b，电流源注入 b</p>
+<details style="margin-top:1rem">
+<summary style="cursor:pointer;color:#8c2f1f;font-size:.92rem">展开答案</summary>
+<div style="font-size:.95rem;border-left:2px solid #e2ded6;padding-left:1rem;margin-top:.6rem">
+<p><strong>（1）</strong> 只留电压源（电流源断开）：$R_1$、$R_2$ 串联分压，$V_b' = 30 \times \dfrac{3}{6+3} = 10\ \mathrm{V}$。</p>
+<p>只留电流源（电压源短接）：$R_1 \parallel R_2 = \dfrac{6 \times 3}{9} = 2\ \Omega$，$V_b'' = 4 \times 2 = 8\ \mathrm{V}$。</p>
+<p>两者都使 b 点电位升高，同号相加：$V_b = 10 + 8 = 18\ \mathrm{V}$。</p>
+<p><strong>（2）</strong> $\dfrac{V_b - 30}{6} + \dfrac{V_b}{3} = 4$，两边乘 6：$V_b - 30 + 2V_b = 24$，$3V_b = 54$，$V_b = 18\ \mathrm{V}$ ✓</p>
+<p><strong>（3）</strong> 电流源反向后，它对应的分量变号：$V_b = 10 - 8 = 2\ \mathrm{V}$。</p>
+<p>用节点法验算：$\dfrac{V_b - 30}{6} + \dfrac{V_b}{3} = -4$，乘 6 得 $3V_b - 30 = -24$，$V_b = 2\ \mathrm{V}$ ✓</p>
+<p><strong>易错点：</strong>电流源方向一改，是"从 b 流出"，在节点方程里就该写 $-4$。符号错了这道题整题报废，所以叠加完一定要用节点法验一遍。</p>
+</div>
+</details>
+</div>
+
+<p style="margin-top:2rem;color:#6b6b6b;font-size:.9rem">做完把过程给我，我按步判分。</p>
+
+</body>
+</html>
+

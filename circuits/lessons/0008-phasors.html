@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 8 课 · 相量法</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .prob { margin: 2.4rem 0; padding: 1.2rem 1.4rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .8rem; font-size: 1rem; }
+  details { margin-top: 1rem; }
+  details summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { font-size: .95rem; border-left: 2px solid var(--rule); padding-left: 1rem; margin-top: .6rem; }
+  .warn { background:#faf7f1; border-left:3px solid #8c2f1f; padding:.9rem 1.1rem; margin:1.4rem 0; }
+  table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .95rem; }
+  table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; }
+  table.k th { font-weight: 600; color: #444; }
+</style>
+</head>
+<body>
+
+<h1>第 8 课 · 相量法</h1>
+<p class="sub">把正弦量变成复数，让微分方程退化成欧姆定律。</p>
+<p class="meta">2026-10-22 · 预计 25 分钟 · 对应第八章</p>
+
+<h2>一、为什么要有相量</h2>
+
+<p>同一个正弦量有四个要素：幅值、角频率、初相、正负基准。但当电路里所有信号都同频时，角频率是共同的，可以暂时不管——<strong>真正区分各处的只有幅值和初相</strong>。</p>
+
+<p>幅值加初相，正好就是复数的模和角。于是每个正弦量对应一个复数（相量），KCL、KVL、欧姆定律全部变回代数运算，不用再解微分方程。</p>
+
+<div class="warn">
+<p style="margin:0"><strong>两个约定，考试按这个来（你黑板上的写法）：</strong></p>
+<p style="margin:.5rem 0 0">① 以 <strong>cos</strong> 为基准，正弦量写成 $u=U_m\cos(\omega t+\psi_u)$；<br>
+② 相量取<strong>有效值</strong>，大写字母加点，如 $\dot{U}=U\angle\psi_u$，其中 $U=U_m/\sqrt2$。</p>
+</div>
+
+<h2>二、遇到 sin 先换算</h2>
+
+<p>$$\sin\theta = \cos(\theta - 90^\circ)$$</p>
+
+<p>例如 $i = 10\sin(\omega t + 30^\circ)\ \mathrm{A}$，先写成 $10\cos(\omega t - 60^\circ)$，再取相量：$\dot I = \dfrac{10}{\sqrt2}\angle{-60^\circ}\ \mathrm{A}$。</p>
+
+<p>这一步每年都有人错——直接把 $30^\circ$ 抄进去。等你确定课本用的是 cos 基准，sin 就必须减 90°。</p>
+
+<h2>三、三个元件在相量世界的"电阻"</h2>
+
+<table class="k">
+<tr><th>元件</th><th>时域关系</th><th>相量关系</th><th>复阻抗</th></tr>
+<tr><td>电阻 $R$</td><td>$u=Ri$</td><td>$\dot U=R\dot I$</td><td>$Z_R=R$</td></tr>
+<tr><td>电感 $L$</td><td>$u=L\dfrac{\mathrm di}{\mathrm dt}$</td><td>$\dot U=j\omega L\dot I$</td><td>$Z_L=j\omega L$</td></tr>
+<tr><td>电容 $C$</td><td>$i=C\dfrac{\mathrm du}{\mathrm dt}$</td><td>$\dot U=\dfrac{\dot I}{j\omega C}$</td><td>$Z_C=\dfrac{1}{j\omega C}=-j\dfrac{1}{\omega C}$</td></tr>
+</table>
+
+<p>串联时阻抗直接相加：</p>
+
+<p>$$Z = R + j\left(\omega L - \frac{1}{\omega C}\right) = R + j(X_L - X_C)$$</p>
+
+<p>然后 $\dot U = Z\dot I$——和直流电路里的欧姆定律长得一模一样，只不过数字是复数。</p>
+
+<h2>四、例题（你课上的例 8-4）</h2>
+
+<p>已知 $i_s = 5\sqrt2\cos(10^3 t + 30^\circ)\ \mathrm{A}$，$R = 30\ \Omega$，$L = 0.12\ \mathrm{H}$，$C = 12.5\ \mu\mathrm{F}$，三者串联。求 $\dot U_{ad}$ 和 $\dot U_{bd}$。</p>
+
+<p><strong>第一步：算各元件的复阻抗。</strong></p>
+
+<p>$$\omega L = 10^3 \times 0.12 = 120\ \Omega,\qquad \frac{1}{\omega C} = \frac{1}{10^3 \times 12.5\times10^{-6}} = 80\ \Omega$$</p>
+
+<p>$$Z_L = j120\ \Omega,\qquad Z_C = -j80\ \Omega,\qquad Z_R = 30\ \Omega$$</p>
+
+<p><strong>第二步：写出电流相量。</strong> 幅值 $5\sqrt2$，有效值 $5$；cos 基准，初相 $30^\circ$：</p>
+
+<p>$$\dot I_s = 5\angle 30^\circ\ \mathrm{A}$$</p>
+
+<p><strong>第三步：逐段求电压。</strong></p>
+
+<p>$$\dot U_R = R\dot I = 30 \times 5\angle30^\circ = 150\angle30^\circ\ \mathrm{V}$$</p>
+
+<p>$$\dot U_L = j120 \times 5\angle30^\circ = 120\angle90^\circ \times 5\angle30^\circ = 600\angle120^\circ\ \mathrm{V}$$</p>
+
+<p>$$\dot U_C = -j80 \times 5\angle30^\circ = 80\angle{-90^\circ} \times 5\angle30^\circ = 400\angle{-60^\circ}\ \mathrm{V}$$</p>
+
+<p><strong>第四步：相量相加（必须转成直角坐标）。</strong></p>
+
+<p>$\dot U_R = 129.9 + j75$，$\dot U_L = -300 + j519.6$，$\dot U_C = 200 - j346.4$。</p>
+
+<p>$$\dot U_{ad} = (129.9 - 300 + 200) + j(75 + 519.6 - 346.4) = 29.9 + j248.2\ \mathrm{V}$$</p>
+
+<p>$$\dot U_{ad} = 250\angle83.1^\circ\ \mathrm{V}$$</p>
+
+<p>而 $\dot U_{bd} = \dot U_L + \dot U_C$：</p>
+
+<p>$$(-300 + 200) + j(519.6 - 346.4) = -100 + j173.2 = 200\angle120^\circ\ \mathrm{V}$$</p>
+
+<p><strong>关键动作：</strong>相量相加不能直接加幅值，必须先转成 $a + jb$ 再加，加完再转回极坐标。$150\angle30^\circ + 600\angle120^\circ$ 绝不等于 $750\angle150^\circ$——这是最常见、最致命的错误。</p>
+
+<h2>五、解答题</h2>
+
+<div class="prob">
+<h3>题 1（三问）</h3>
+<p>串联电路：$R = 10\ \Omega$，感抗 $X_L = 20\ \Omega$，容抗 $X_C = 30\ \Omega$，接在 $u = 100\sqrt2\cos(\omega t)\ \mathrm{V}$ 上。</p>
+<p>（1）求电流相量 $\dot I$ 和有效值 $I$。<br>
+（2）求 $\dot U_R$、$\dot U_L$、$\dot U_C$。<br>
+（3）用 KVL 验证 $\dot U_R + \dot U_L + \dot U_C = \dot U$。</p>
+<svg class="schematic" viewBox="0 0 540 250" role="img" aria-label="RLC 串联电路">
+  <path class="wire" d="M80 60 H120"/>
+  <rect class="comp" x="120" y="50" width="50" height="20"/>
+  <path class="wire" d="M170 60 H215"/>
+  <rect class="comp" x="215" y="50" width="50" height="20"/>
+  <path class="wire" d="M265 60 H310"/>
+  <path class="wire" d="M310 60 H340"/>
+  <path class="comp" d="M340 42 V78" style="fill:none"/>
+  <path class="comp" d="M356 42 V78" style="fill:none"/>
+  <path class="wire" d="M356 60 H480"/>
+  <path class="wire" d="M480 60 V195"/>
+  <path class="wire" d="M80 60 V105"/>
+  <circle class="comp" cx="80" cy="125" r="18"/>
+  <path class="sign" d="M73 118 H87 M80 111 V125"/>
+  <path class="sign" d="M73 138 H87"/>
+  <path class="wire" d="M80 143 V195"/>
+  <path class="wire" d="M60 195 H500"/>
+  <text class="lbl" x="145" y="42" text-anchor="middle">R</text>
+  <text class="val" x="145" y="90" text-anchor="middle">10 Ω</text>
+  <text class="lbl" x="240" y="42" text-anchor="middle">L</text>
+  <text class="val" x="240" y="90" text-anchor="middle">X_L = 20 Ω</text>
+  <text class="lbl" x="348" y="36" text-anchor="middle">C</text>
+  <text class="val" x="348" y="98" text-anchor="middle">X_C = 30 Ω</text>
+  <text class="lbl" x="108" y="129">u</text>
+</svg>
+<p class="caption">图 · R、L、C 串联</p>
+<details>
+<summary>展开答案</summary>
+<div class="sol">
+<p><strong>（1）</strong> $Z = 10 + j(20 - 30) = 10 - j10\ \Omega$，$|Z| = 10\sqrt2 \approx 14.14\ \Omega$，$\varphi = -45^\circ$。</p>
+<p>$$\dot I = \frac{100\angle0^\circ}{10 - j10} = \frac{100(10+j10)}{200} = 5 + j5 = 7.07\angle45^\circ\ \mathrm{A}$$</p>
+<p>有效值 $I = 7.07\ \mathrm{A}$。电流超前电压 45°（容性）。</p>
+<p><strong>（2）</strong> $\dot U_R = 10(5+j5) = 50 + j50 = 70.7\angle45^\circ$</p>
+<p>$\dot U_L = j20(5+j5) = -100 + j100 = 141.4\angle135^\circ$</p>
+<p>$\dot U_C = -j30(5+j5) = 150 - j150 = 212.1\angle{-45^\circ}$</p>
+<p><strong>（3）</strong> 实部：$50 - 100 + 150 = 100$；虚部：$50 + 100 - 150 = 0$。</p>
+<p>$$\dot U_R + \dot U_L + \dot U_C = 100 + j0 = 100\angle0^\circ = \dot U \quad✓$$</p>
+<p><strong>要点：</strong>$|\dot U_R| + |\dot U_L| + |\dot U_C| = 424 \ne 100$，但相量和确实是 100。幅值不能直接相加，永远是这条。</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 2（sin 换算）</h3>
+<p>串联电路：$R = 3\ \Omega$，$X_L = 4\ \Omega$。已知 $i = 4\sin(\omega t + 60^\circ)\ \mathrm{A}$（这里的 4 是幅值）。求电压 $u(t)$ 的时域表达式。</p>
+<details>
+<summary>展开答案</summary>
+<div class="sol">
+<p><strong>第一步：sin 转 cos。</strong></p>
+<p>$$4\sin(\omega t + 60^\circ) = 4\cos(\omega t - 30^\circ)$$</p>
+<p><strong>第二步：转有效值相量。</strong> 幅值 4，有效值 $4/\sqrt2 = 2.83$，初相 $-30^\circ$：</p>
+<p>$$\dot I = 2.83\angle{-30^\circ}\ \mathrm{A}$$</p>
+<p><strong>第三步：阻抗。</strong> $Z = 3 + j4 = 5\angle53.13^\circ\ \Omega$。</p>
+<p><strong>第四步：求电压相量。</strong></p>
+<p>$$\dot U = Z\dot I = 5\angle53.13^\circ \times 2.83\angle{-30^\circ} = 14.15\angle23.13^\circ\ \mathrm{V}$$</p>
+<p><strong>第五步：转回时域。</strong> 有效值 14.15，幅值 $14.15\sqrt2 = 20$：</p>
+<p>$$u(t) = 20\cos(\omega t + 23.13^\circ)\ \mathrm{V}$$</p>
+<p><strong>易错点：</strong>题目给的 4 是<strong>幅值</strong>不是有效值，转相量时要除以 $\sqrt2$；最后转回时域又要乘回去。这两步各错一次，答案会偏一倍。</p>
+</div>
+</details>
+</div>
+
+<p style="margin-top:2rem;color:#6b6b6b;font-size:.9rem">做完把过程给我，我按步判分。</p>
+
+</body>
+</html>
+

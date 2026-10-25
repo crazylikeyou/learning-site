@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 4 课 · 两种方法对照，以及怎么选题型</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+
+<h1>第 4 课 · 两种方法对照</h1>
+<p class="sub">同一道电路，节点法和回路法各解一遍；然后练"拿到题先看什么"。</p>
+<p class="meta">2026-10-22 · 预计 15 分钟 · 承接第 2、3 课</p>
+
+<h2>一、先记住这个动作</h2>
+
+<p>上一课你在解完 $I_2 = 3$ 之后直接交了答案，题目问的却是 $I_1$。方法没错，方程没错，只是最后一步没回头。</p>
+
+<blockquote>
+解完方程组，先把每个电流的值标回图的对应回路上，再看题目问哪个。五秒钟，换一道大题的分。
+</blockquote>
+
+<h2>二、同一道题，两条路</h2>
+
+<p>电路：$12\ \mathrm{V}$ 电压源接在节点 a 与地之间，$R_1 = 4\ \Omega$ 连接 a–b，$R_2 = 2\ \Omega$ 连接 b–地。求 $V_b$ 和总电流。</p>
+
+<svg class="schematic" viewBox="0 0 460 300" role="img" aria-label="单网孔电路">
+  <path class="wire" d="M110 90 H230"/>
+  <rect class="comp" x="230" y="80" width="50" height="20"/>
+  <path class="wire" d="M280 90 H350"/>
+
+  <path class="wire" d="M110 90 V160"/>
+  <circle class="comp" cx="110" cy="180" r="20"/>
+  <path class="sign" d="M103 172 H117 M110 165 V179"/>
+  <path class="sign" d="M103 192 H117"/>
+  <path class="wire" d="M110 200 V260"/>
+
+  <path class="wire" d="M320 90 V160"/>
+  <rect class="comp" x="312" y="160" width="16" height="50"/>
+  <path class="wire" d="M320 210 V260"/>
+
+  <path class="wire" d="M80 260 H360"/>
+
+  <circle class="dot" cx="110" cy="90" r="3.5"/>
+  <circle class="dot" cx="320" cy="90" r="3.5"/>
+
+  <text class="node" x="110" y="76" text-anchor="middle">a</text>
+  <text class="node" x="320" y="76" text-anchor="middle">b</text>
+
+  <text class="lbl" x="255" y="72" text-anchor="middle">R₁</text>
+  <text class="val" x="255" y="118" text-anchor="middle">4 Ω</text>
+  <text class="lbl" x="345" y="180">R₂</text>
+  <text class="val" x="345" y="197">2 Ω</text>
+  <text class="lbl" x="140" y="176">12 V</text>
+</svg>
+<p class="caption">图 1 · 单网孔，两个节点（另一个是地）</p>
+
+<p><strong>用节点法</strong>：未知量只有 $V_b$，地取 0，$V_a = 12$ 已知。</p>
+
+<p>$$\frac{V_b - 12}{4} + \frac{V_b}{2} = 0$$</p>
+
+<p>两边乘 4：$(V_b - 12) + 2V_b = 0$，即 $3V_b = 12$，$V_b = 4\ \mathrm{V}$。</p>
+
+<p><strong>用回路法</strong>：单网孔，只有一个回路电流 $I$，自阻 $4 + 2 = 6\ \Omega$。</p>
+
+<p>$$6I = 12 \;\Rightarrow\; I = 2\ \mathrm{A}$$</p>
+
+<p>然后 $V_b = I \times R_2 = 2 \times 2 = 4\ \mathrm{V}$。</p>
+
+<p>两条路给出同一个答案。这就是"方法只是路径，答案唯一"。考试时选那条路短、少出错的路。</p>
+
+<h2>三、选方法的判断顺序</h2>
+
+<p><strong>第一步：数一数。</strong> 平面电路里，节点法要 $n-1$ 个方程，回路法要网孔数个方程。哪个小用哪个。</p>
+
+<p><strong>第二步：看电压源的位置。</strong> 电压源如果直接接在某个节点和地之间，节点法最省——那个节点电位直接就是电源值。反过来，电压源如果跨接在两个非地节点之间，节点法要额外设变量，这时候回路法往往更顺。</p>
+
+<p><strong>第三步：看电流源的位置。</strong> 电流源在外围支路上时，回路法要额外设变量（它的电流是已知回路电流的子集），此时节点法更顺。这是第二步的镜像。</p>
+
+<h2>四、练四道</h2>
+
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>这一课的重点不是算，是<strong>判断</strong>。考场上真正吃时间的是"这题该用哪招"，一旦选对，列方程几乎不会再错。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "一个平面电路有 5 个节点、3 个网孔，没有跨接的非地电压源。用哪套方法方程更少？",
+    opts: ["回路法，3 个方程", "节点法，4 个方程", "两者一样多", "无法判断"],
+    answer: 0,
+    why: "节点法要 $5-1=4$ 个，回路法要 3 个。少一个方程就少一次出错机会，选回路法。"
+  },
+  {
+    stem: "一个电压源直接接在节点 a 与地之间。这种情况下节点法的最大好处是？",
+    opts: ["该节点电位直接已知", "可以少列一条 KCL", "电压源可以删除", "方程变成非线性"],
+    answer: 0,
+    why: "接地的电压源把该节点电位钉死在电源值上，直接代入，未知量少一个。注意是整个节点电位已知，不是少列方程——少列的那条本来就不属于非参考节点。"
+  },
+  {
+    stem: "解方程组得到 $I_1 = 6$、$I_2 = 3$，题目问的是「中间共用支路的电流」。若两电流在该支路方向相反，答案是？",
+    opts: ["3 A", "6 A", "9 A", "0 A"],
+    answer: 0,
+    why: "共用支路上两者反向，取差：$6-3=3\\ \\mathrm{A}$。若同向则相加为 9 A。判断方向后才知道是加还是减，这一步比解方程更容易错。"
+  },
+  {
+    stem: "一个单网孔的电路，电源 12 V，两个电阻串联共 $6\\ \\Omega$。回路电流是多少？",
+    opts: ["2 A", "6 A", "12 A", "0.5 A"],
+    answer: 0,
+    why: "$I = 12/6 = 2\\ \\mathrm{A}$。单网孔时回路法退化成欧姆定律，这也是为什么它可以当检验手段：算完节点法，用这个快速核对总电流。"
+  }
+];
+
+const quiz = document.getElementById("quiz");
+let answered = 0, correct = 0;
+const wrongIdx = [];
+
+QUESTIONS.forEach((q, qi) => {
+  const box = document.createElement("div");
+  box.className = "q";
+  box.innerHTML = `<p><span class="mono">${String(qi+1).padStart(2,"0")}</span> &nbsp;<span class="stem">${q.stem}</span></p>`;
+  const ol = document.createElement("ol");
+  ol.className = "opts";
+  q.opts.forEach((text, oi) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    li.addEventListener("click", () => {
+      if (box.dataset.done) return;
+      box.dataset.done = "1";
+      answered++;
+      const isRight = oi === q.answer;
+      if (isRight) correct++; else wrongIdx.push(qi + 1);
+      [...ol.children].forEach((el, k) => {
+        el.classList.add("locked");
+        if (k === q.answer) el.classList.add("correct");
+        else if (k === oi) el.classList.add("wrong");
+      });
+      why.classList.add("show");
+      if (answered === QUESTIONS.length) finish();
+    });
+    ol.appendChild(li);
+  });
+  const why = document.createElement("p");
+  why.className = "why";
+  why.innerHTML = "<strong>为什么：</strong>" + q.why;
+  box.appendChild(ol);
+  box.appendChild(why);
+  quiz.appendChild(box);
+});
+
+function finish() {
+  const el = document.getElementById("score");
+  el.hidden = false;
+  document.getElementById("scoreText").textContent = `答对 ${correct} / ${QUESTIONS.length}`;
+  let msg;
+  if (correct === 4) msg = "判断这一层也通了。下一课补摸底漏掉的第 6 题——电源置零，那是叠加定理和戴维南的前置。";
+  else if (correct >= 2) msg = "基本对，把错的那条规则抄一遍。选方法没有技巧，就是数方程、看电源位置。";
+  else msg = "先别做新题，把第二节那个单网孔电路自己用两种方法各写一遍，写完对比答案，再回来。";
+  document.getElementById("advice").textContent = msg + (wrongIdx.length ? ` 错题编号：${wrongIdx.join("、")}。` : "");
+}
+</script>
+</body>
+</html>
+
