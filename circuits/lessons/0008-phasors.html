@@ -109,6 +109,65 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <p><strong>关键动作：</strong>相量相加不能直接加幅值，必须先转成 $a + jb$ 再加，加完再转回极坐标。$150\angle30^\circ + 600\angle120^\circ$ 绝不等于 $750\angle150^\circ$——这是最常见、最致命的错误。</p>
 
+<h2>四之二、复数的四则运算</h2>
+
+<p>相量是复数，所以必须先能把复数算对。规则只有两条，但要分清场合：</p>
+
+<table class="k" style="border-collapse:collapse;width:100%;margin:1rem 0;font-size:.94rem">
+<tr><th style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem;text-align:left">运算</th><th style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem;text-align:left">用什么形式</th><th style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem;text-align:left">怎么算</th></tr>
+<tr><td style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem">加、减</td><td style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem">直角坐标 $a+jb$</td><td style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem">实部加实部，虚部加虚部</td></tr>
+<tr><td style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem">乘、除</td><td style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem">极坐标 $r\angle\theta$</td><td style="border-bottom:1px solid #e2ded6;padding:.45rem .5rem">模乘除，角加减</td></tr>
+</table>
+
+<p><strong>最容易错的一步：加减不能直接加模。</strong> $150\angle30^\circ + 600\angle120^\circ \neq 750\angle150^\circ$。必须先各自转成 $a+jb$，加完再转回极坐标。</p>
+
+<p><strong>例：</strong>设 $F_1 = 3+j4$，$F_2 = 4-j3$。</p>
+
+<p>相加：$F_1 + F_2 = 7 + j1$——直接实部虚部分别相加。</p>
+
+<p>相除：先把两者转极坐标。$|F_1| = 5$，$\theta_1 = 53.13^\circ$；$|F_2| = 5$，$\theta_2 = -36.87^\circ$。</p>
+
+<p>$$\frac{F_1}{F_2} = \frac{5\angle53.13^\circ}{5\angle{-36.87^\circ}} = 1\angle90^\circ = j$$</p>
+
+<p>验算用直角坐标：$\dfrac{3+j4}{4-j3}$，分子分母同乘 $4+j3$，分母 $16+9=25$，分子 $12+j9+j16+j^2 12 = 25j$，结果 $\dfrac{25j}{25} = j$ ✓</p>
+
+<h2>四之三、混联例题：并联后再串联</h2>
+
+<p>这才是考试里常见的形态——老师笔记里那道 $R_1 \parallel C$ 再串 $R_2+L$ 的题就是这种。</p>
+
+<p>电路：$R_1 = 6\ \Omega$ 与电容（$X_C = 6\ \Omega$）并联得到 $Z_1$；$Z_1$ 再与 $R_2 = 3\ \Omega$、电感（$X_L = 3\ \Omega$）串联。接 $U = 60\angle0^\circ\ \mathrm{V}$。求总电流和各支路电流。</p>
+
+<p><strong>第一步：并联部分的阻抗。</strong></p>
+
+<p>$$Z_1 = \frac{R_1(-jX_C)}{R_1 - jX_C} = \frac{6(-j6)}{6-j6} = \frac{-j36}{6-j6}$$</p>
+
+<p>分子分母同乘 $6+j6$：分母 $36+36 = 72$，分子 $-j36(6+j6) = -j216 + 216$。所以</p>
+
+<p>$$Z_1 = \frac{216 - j216}{72} = 3 - j3\ \Omega$$</p>
+
+<p><strong>第二步：串联总阻抗。</strong></p>
+
+<p>$$Z = Z_1 + R_2 + jX_L = (3-j3) + 3 + j3 = 6\ \Omega$$</p>
+
+<p>虚部正好抵消！说明这个电路对外呈现纯电阻。</p>
+
+<p><strong>第三步：总电流。</strong></p>
+
+<p>$$\dot I = \frac{\dot U}{Z} = \frac{60\angle0^\circ}{6} = 10\angle0^\circ\ \mathrm{A}$$</p>
+
+<p><strong>第四步：求并联段电压，再分流。</strong></p>
+
+<p>$$\dot U_{Z1} = \dot I \cdot Z_1 = 10(3-j3) = 30 - j30\ \mathrm{V}$$</p>
+
+<p>电阻支路：$\dot I_R = \dfrac{30-j30}{6} = 5 - j5\ \mathrm{A}$</p>
+
+<p>电容支路：$\dot I_C = \dfrac{30-j30}{-j6} = 5 + j5\ \mathrm{A}$</p>
+
+<p>验算：$(5-j5) + (5+j5) = 10 = \dot I$ ✓</p>
+
+<div style="margin:1.4rem 0;padding:.9rem 1.1rem;border-left:3px solid #8c2f1f;background:#faf7f1">
+<p style="margin:0"><strong>这类题的固定套路：</strong>并联先算 $Z_1$ → 串联相加得 $Z$ → 总电流 → 求出并联段两端电压 → 再逐支路求电流。<strong>不要一开始就分电流</strong>，因为你不知道并联段上的电压是多少。</p>
+</div>
 <h2>五、解答题</h2>
 
 <div class="prob">
@@ -183,4 +242,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 

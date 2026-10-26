@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>补充课 · 电阻的等效与输入电阻</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .prob { margin: 2.4rem 0; padding: 1.2rem 1.4rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .8rem; font-size: 1rem; }
+  details { margin-top: 1rem; }
+  details summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { font-size: .95rem; border-left: 2px solid var(--rule); padding-left: 1rem; margin-top: .6rem; }
+  .warn { background:#faf7f1; border-left:3px solid #8c2f1f; padding:.9rem 1.1rem; margin:1.4rem 0; }
+  table.k { border-collapse: collapse; width:100%; margin:1rem 0; font-size:.94rem; }
+  table.k th, table.k td { border-bottom:1px solid var(--rule); padding:.45rem .5rem; text-align:left; }
+</style>
+</head>
+<body>
+
+<h1>补充课 · 电阻的等效与输入电阻</h1>
+<p class="sub">对应考试大纲第二章第 1、3 条：电阻的串并联等效、无源一端口的输入电阻。</p>
+<p class="meta">2026-10-26 · 预计 20 分钟 · 补充内容</p>
+
+<h2>一、"等效"到底是什么意思</h2>
+
+<p>两个电路对外<strong>等效</strong>，指的是：从端口看进去，电压和电流的关系完全一样。内部结构可以完全不同，只要端口上满足同一个 $u=Ri$，外部电路就分辨不出来。</p>
+
+<p>所以等效是<strong>对外等效</strong>，不是内部等效。求等效电阻时，你只关心"从这两个端子看进去是多少欧"，中间怎么连是过程。</p>
+
+<h2>二、串并联：先弄清谁和谁连在一起</h2>
+
+<table class="k">
+<tr><th>连接方式</th><th>判据</th><th>等效</th></tr>
+<tr><td>串联</td><td>两个电阻只有<strong>一个公共节点</strong>，中间没有分支</td><td>$R = R_1 + R_2$</td></tr>
+<tr><td>并联</td><td>两个电阻<strong>两端分别接在同一对节点</strong>上</td><td>$\dfrac{1}{R}=\dfrac{1}{R_1}+\dfrac{1}{R_2}$，两电阻时用 $\dfrac{R_1R_2}{R_1+R_2}$</td></tr>
+</table>
+
+<p>看复杂电路时容易看错连接关系。一个可靠的办法是<strong>给节点编号</strong>：把导线能直接连通的地方都算同一个节点，标上同一号码，然后再看每个电阻夹在哪两个编号之间。</p>
+
+<blockquote>
+两个电阻"看起来挨着"，不等于串联。串联的唯一判据是它们之间<strong>没有第三个元件接出去</strong>。
+</blockquote>
+
+<h2>三、两种能一眼看穿的电路</h2>
+
+<p><strong>① 对称桥路——等电位点。</strong> 桥的四条臂电阻两两相等时，中间那条横跨的电阻两端电位相同，<strong>没有电流流过</strong>，可以直接去掉（也可以直接换成导线，结果一样）。</p>
+
+<p><strong>② 电桥平衡。</strong> 更一般的判据是对角乘积相等：</p>
+
+<p>$$R_1 R_4 = R_2 R_3$$</p>
+
+<p>满足时中间支路电流为零，等效为两条串联支路再并联。这个条件在解题时能省掉大量计算。</p>
+
+<h2>四、什么是输入电阻</h2>
+
+<p>无源一端口网络（内部没有独立源），从端口看进去的等效电阻，就叫<strong>输入电阻</strong> $R_{in}$。求法和求等效电阻完全一样：从端口往里逐级串并联化简。</p>
+
+<div class="warn">
+<p style="margin:0"><strong>和大纲的对应关系：</strong>第二章第 1 条"电阻等效变换——串联、并联"给的是工具，第 3 条"无源一端口网络——输入电阻"给的是用途。考试里这两个通常合成一道题：<em>求图示电路的输入电阻 $R_{ab}$</em>。</p>
+</div>
+
+<h2>四之二、电导：并联时更好用的写法</h2>
+
+<p>电导 $G = \dfrac{1}{R}$，单位西门子（S）。它描述"这条支路多容易通过电流"。</p>
+
+<p>电阻并联要算倒数和，用<strong>电导直接相加</strong>：</p>
+
+<p>$$G = G_1 + G_2 + \cdots \qquad\text{（并联）}$$</p>
+
+<p>算完再取倒数变回电阻。串联时仍然用电阻相加，不要混着用。</p>
+
+<p><strong>例：</strong>$G_1 = 0.5\ \mathrm{S}$、$G_2 = 0.25\ \mathrm{S}$ 并联，$G = 0.75\ \mathrm{S}$，所以 $R = \dfrac{1}{0.75} = \dfrac{4}{3} \approx 1.33\ \Omega$。</p>
+
+<p>验证一下：$G_1$ 对应 $2\ \Omega$，$G_2$ 对应 $4\ \Omega$，并联 $\dfrac{2\times4}{2+4} = \dfrac{4}{3}$ ✓ 两种算法一致。</p>
+
+<div style="margin:1.4rem 0;padding:.9rem 1.1rem;border-left:3px solid #8c2f1f;background:#faf7f1">
+<p style="margin:0">老师笔记 2-4 的 (b) 就是这种题：三条支路并联，其中两条直接给电导 $G_1$、$G_2$。这时<strong>先把电导相加</strong>比换算成电阻再并联快得多。看到单位是 S 或者字母写成 $G$，就要立刻想到"相加"。</p>
+</div>
+
+<h2>五、例题一：对称桥</h2>
+
+<p>四条臂都是 $3\ \Omega$，中间横跨 $6\ \Omega$，求 $R_{ab}$。</p>
+
+<svg class="schematic" viewBox="0 0 440 300" role="img" aria-label="对称桥电路">
+  <g transform="rotate(-26.57 160 105)">
+    <rect class="comp" x="135" y="95" width="50" height="20"/>
+  </g>
+  <g transform="rotate(26.57 160 195)">
+    <rect class="comp" x="135" y="185" width="50" height="20"/>
+  </g>
+  <g transform="rotate(26.57 340 105)">
+    <rect class="comp" x="315" y="95" width="50" height="20"/>
+  </g>
+  <g transform="rotate(-26.57 340 195)">
+    <rect class="comp" x="315" y="185" width="50" height="20"/>
+  </g>
+  <path class="wire" d="M70 150 L250 60"/>
+  <path class="wire" d="M250 60 L430 150"/>
+  <path class="wire" d="M70 150 L250 240"/>
+  <path class="wire" d="M250 240 L430 150"/>
+  <path class="wire" d="M250 60 V110"/>
+  <rect class="comp" x="242" y="110" width="16" height="50"/>
+  <path class="wire" d="M250 160 V240"/>
+  <circle class="dot" cx="70" cy="150" r="3.5"/>
+  <circle class="dot" cx="250" cy="60" r="3.5"/>
+  <circle class="dot" cx="430" cy="150" r="3.5"/>
+  <circle class="dot" cx="250" cy="240" r="3.5"/>
+  <text class="node" x="52" y="150" text-anchor="end">a</text>
+  <text class="node" x="448" y="150" text-anchor="start">b</text>
+  <text class="node" x="250" y="44" text-anchor="middle">c</text>
+  <text class="node" x="250" y="262" text-anchor="middle">d</text>
+  <text class="lbl" x="270" y="135">6 Ω</text>
+  <text class="val" x="120" y="90">3 Ω</text>
+  <text class="val" x="120" y="220">3 Ω</text>
+  <text class="val" x="330" y="90">3 Ω</text>
+  <text class="val" x="330" y="220">3 Ω</text>
+</svg>
+<p class="caption">图 · 对称桥：四条臂相等，中间横跨 6 Ω</p>
+
+<p>四臂相等，电路左右对称，c 点和 d 点电位相同——中间那条 $6\ \Omega$ 上<strong>没有电流</strong>。</p>
+
+<p>把它去掉，电路变成上下两条串联支路再并联：</p>
+
+<p>$$R_{ab} = (3+3) \parallel (3+3) = 6 \parallel 6 = 3\ \Omega$$</p>
+
+<p>用平衡条件验证：$3 \times 3 = 3 \times 3$，平衡成立，中间支路确实无电流。</p>
+
+<h2>六、例题二：逐级化简</h2>
+
+<p>端口 a—b。$R_1 = 6\ \Omega$ 从 a 接到节点 n1；n1 经 $R_2 = 3\ \Omega$ 接到 b；n1 经 $R_3 = 2\ \Omega$ 接到 n2；n2 经 $R_4 = 4\ \Omega$ 接到 b。求 $R_{ab}$。</p>
+
+<svg class="schematic" viewBox="0 0 460 260" role="img" aria-label="梯形网络">
+  <path class="wire" d="M60 70 H90"/>
+  <rect class="comp" x="90" y="60" width="50" height="20"/>
+  <path class="wire" d="M140 70 H240"/>
+  <rect class="comp" x="240" y="60" width="50" height="20"/>
+  <path class="wire" d="M290 70 H360"/>
+  <path class="wire" d="M200 70 V95"/>
+  <rect class="comp" x="192" y="95" width="16" height="50"/>
+  <path class="wire" d="M200 145 V210"/>
+  <path class="wire" d="M340 70 V95"/>
+  <rect class="comp" x="332" y="95" width="16" height="50"/>
+  <path class="wire" d="M340 145 V210"/>
+  <path class="wire" d="M40 210 H400"/>
+  <circle class="dot" cx="60" cy="70" r="3.5"/>
+  <circle class="dot" cx="200" cy="70" r="3.5"/>
+  <circle class="dot" cx="340" cy="70" r="3.5"/>
+  <text class="node" x="46" y="62" text-anchor="end">a</text>
+  <text class="node" x="420" y="214" text-anchor="start">b</text>
+  <text class="lbl" x="115" y="50" text-anchor="middle">R₁</text>
+  <text class="val" x="115" y="98" text-anchor="middle">6 Ω</text>
+  <text class="lbl" x="265" y="50" text-anchor="middle">R₃</text>
+  <text class="val" x="265" y="98" text-anchor="middle">2 Ω</text>
+  <text class="lbl" x="218" y="115">R₂</text>
+  <text class="val" x="218" y="133">3 Ω</text>
+  <text class="lbl" x="358" y="115">R₄</text>
+  <text class="val" x="358" y="133">4 Ω</text>
+</svg>
+<p class="caption">图 · 梯形网络，从离端口最远的一端开始化简</p>
+
+<p><strong>口诀：从离端口最远的地方往里收。</strong>离 a 最远的是 $R_4$。</p>
+
+<p>$R_4$ 与 $R_3$ 串联（n2 到 b 之间只有这一条路，先看串联更直观）：$2 + 4 = 6\ \Omega$。</p>
+
+<p>这条 $6\ \Omega$ 与 $R_2 = 3\ \Omega$ 并联（都接在 n1 与 b 之间）：</p>
+
+<p>$$\frac{6 \times 3}{6+3} = 2\ \Omega$$</p>
+
+<p>再与 $R_1 = 6\ \Omega$ 串联：</p>
+
+<p>$$R_{ab} = 6 + 2 = 8\ \Omega$$</p>
+
+<p><strong>易错点：</strong>不要从 a 开始算。a 端是"总入口"，那里只能先串联一次；真正能化简的起点在最远端。</p>
+
+<h2>七、解答题</h2>
+
+<div class="prob">
+<h3>题 1（对称桥）</h3>
+<p>四条臂均为 $3\ \Omega$，中间横跨 $6\ \Omega$。求 $R_{ab}$，并说明为什么中间电阻可以去掉。</p>
+<details>
+<summary>展开答案</summary>
+<div class="sol">
+<p>四臂相等 → 电路对称 → 中间横跨电阻两端等电位 → 无电流 → 可去掉。</p>
+<p>$$R_{ab} = (3+3)\parallel(3+3) = 6\parallel6 = 3\ \Omega$$</p>
+<p><strong>要点：</strong>"等电位"这个说法必须能说出口，不能只写"对称所以去掉"。等电位才是无电流的原因。</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 2（逐级化简）</h3>
+<p>$R_1 = 12\ \Omega$ 从 a 到 n1；n1 经 $R_2 = 4\ \Omega$ 到 b；n1 经 $R_3 = 2\ \Omega$ 到 n2；n2 经 $R_4 = 2\ \Omega$ 到 b。求输入电阻 $R_{ab}$。</p>
+<details>
+<summary>展开答案</summary>
+<div class="sol">
+<p>从最远端开始：$R_3$ 与 $R_4$ 串联得 $2 + 2 = 4\ \Omega$。</p>
+<p>与 $R_2 = 4\ \Omega$ 并联：$\dfrac{4 \times 4}{4+4} = 2\ \Omega$。</p>
+<p>再与 $R_1$ 串联：$R_{ab} = 12 + 2 = 14\ \Omega$。</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 3（电桥平衡判断）</h3>
+<p>桥式电路：上臂 $R_1 = 2\ \Omega$、$R_2 = 4\ \Omega$；下臂 $R_3 = 1\ \Omega$、$R_4 = 2\ \Omega$；中间横跨一个电阻。判断电路是否平衡，并求 $R_{ab}$。</p>
+<details>
+<summary>展开答案</summary>
+<div class="sol">
+<p>平衡条件 $R_1R_4 = R_2R_3$：左边 $2 \times 2 = 4$，右边 $4 \times 1 = 4$，相等 → 平衡。</p>
+<p>中间支路无电流，去掉后是两条串联支路并联：</p>
+<p>$$R_{ab} = (2+4)\parallel(1+2) = 6\parallel3 = \frac{6\times3}{6+3} = 2\ \Omega$$</p>
+<p><strong>易错点：</strong>判平衡要算<strong>对角乘积</strong>，不是相邻乘积，也不是比值随便凑。$R_1R_4$ 对应的是这条对角线两端的两个电阻。</p>
+</div>
+</details>
+</div>
+
+<div class="foot">
+<p><strong>拓展（大纲外，仅供了解）：</strong>当四个臂都不成比例、桥不平衡时，中间的横跨电阻既不能去掉也不能当导线，需要用到 Y–Δ 变换。你老师的大纲只写了"串联、并联"，说明不考这一步；如果考试真出了不平衡桥，通常也会给出足够信息让你用节点法绕开。</p>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>补充课 · 电源等效变换</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .prob { margin: 2.4rem 0; padding: 1.2rem 1.4rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .8rem; font-size: 1rem; }
+  details { margin-top: 1rem; }
+  details summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { font-size: .95rem; border-left: 2px solid var(--rule); padding-left: 1rem; margin-top: .6rem; }
+  .warn { background:#faf7f1; border-left:3px solid #8c2f1f; padding:.9rem 1.1rem; margin:1.4rem 0; }
+</style>
+</head>
+<body>
+
+<h1>补充课 · 电源等效变换</h1>
+<p class="sub">对应考试大纲第二章第 2 条：实际电压源与实际电流源的等效变换。</p>
+<p class="meta">2026-10-26 · 预计 20 分钟 · 老师笔记 2-11 那道题就靠它</p>
+
+<h2>一、为什么需要它</h2>
+
+<p>两个电压源并联，不能直接相加；两个电流源串联，也不能直接合并。可考试偏偏爱出这种电路。</p>
+
+<p>办法是把它们<strong>统一成同一种模型</strong>：都换成电流源并联电阻，就能合并；或者都换成电压源串联电阻，就能合并。</p>
+
+<h2>二、两种模型怎么互换</h2>
+
+<p><strong>实际电压源</strong>：理想电压源 $U_s$ 串联内阻 $R$。<br>
+<strong>实际电流源</strong>：理想电流源 $I_s$ 并联内阻 $R$。</p>
+
+<p>两者对外完全等效，条件是：</p>
+
+<p>$$I_s = \frac{U_s}{R} \qquad\text{或}\qquad U_s = I_s R$$</p>
+
+<p>内阻 $R$ <strong>不变</strong>，只是从"串联"挪到"并联"。</p>
+
+<div class="warn">
+<p style="margin:0"><strong>方向规则：</strong>电流源的箭头指向电压源的<strong>正极</strong>那一端。方向搞反，整个结果全反。</p>
+</div>
+
+<h2>三、三条使用纪律</h2>
+
+<p><strong>① 只对外等效，不对外等效内部。</strong> 变换后，外接部分看到的电压电流完全一样，但电源内部消耗的功率<strong>变了</strong>。所以题目问"电源发出多少功率"时，不能用变换后的电路去算。</p>
+
+<p><strong>② 理想电压源不能单独变换。</strong> 内阻为零时 $I_s = U_s/0$ 无穷大，没有意义；理想电流源同理（内阻无穷大）。必须有那个串联或并联的电阻才能换。</p>
+
+<p><strong>③ 变换是为了化简，不是为了好看。</strong> 目标是让"不能直接合并的电源"变成"能合并的并联电流源"或"能合并的串联电压源"。</p>
+
+<h2>四、例一：最简单的一次转换</h2>
+
+<p>$12\ \mathrm{V}$ 电压源串 $2\ \Omega$，转成电流源：</p>
+
+<p>$$I_s = \frac{12}{2} = 6\ \mathrm{A}，\quad \text{并联 } 2\ \Omega$$</p>
+
+<p>反过来，$6\ \mathrm{A}$ 并 $2\ \Omega$ 转回电压源就是 $12\ \mathrm{V}$ 串 $2\ \Omega$。同一件事，两种画法。</p>
+
+<h2>五、例二：两个电压源并联</h2>
+
+<p>$12\ \mathrm{V}$ 串 $2\ \Omega$ 与 $6\ \mathrm{V}$ 串 $3\ \Omega$ 并接在同一对端子上，求等效。</p>
+
+<p><strong>第一步，都转成电流源：</strong></p>
+
+<p>$I_{s1} = 12/2 = 6\ \mathrm{A}$，并 $2\ \Omega$；$I_{s2} = 6/3 = 2\ \mathrm{A}$，并 $3\ \Omega$。</p>
+
+<p><strong>第二步，同向电流源相加、电阻并联：</strong></p>
+
+<p>$$I_s = 6 + 2 = 8\ \mathrm{A}，\qquad R = \frac{2\times3}{2+3} = 1.2\ \Omega$$</p>
+
+<p><strong>第三步，转回电压源：</strong></p>
+
+<p>$$U_s = 8 \times 1.2 = 9.6\ \mathrm{V，内阻 } 1.2\ \Omega$$</p>
+
+<p>如果一开始直接把 $12\ \mathrm{V}$ 和 $6\ \mathrm{V}$ 相加得 18 V，或者取平均，都是错的——并联电源不能直接加减。</p>
+
+<h2>六、例三：化简后再分流</h2>
+
+<p>$10\ \mathrm{V}$ 串 $2\ \Omega$ 与 $4\ \mathrm{V}$ 串 $2\ \Omega$ 并联，外接 $3\ \Omega$ 负载，求负载电流。</p>
+
+<svg class="schematic" viewBox="0 0 480 250" role="img" aria-label="两电源并联接负载">
+  <path class="wire" d="M90 60 H330"/>
+  <path class="wire" d="M90 60 V80"/>
+  <circle class="comp" cx="90" cy="98" r="16"/>
+  <path class="sign" d="M84 92 H96 M90 86 V98"/>
+  <path class="sign" d="M84 109 H96"/>
+  <path class="wire" d="M90 114 V150"/>
+  <rect class="comp" x="82" y="150" width="16" height="40"/>
+  <path class="wire" d="M90 190 V210"/>
+  <path class="wire" d="M210 60 V80"/>
+  <circle class="comp" cx="210" cy="98" r="16"/>
+  <path class="sign" d="M204 92 H216 M210 86 V98"/>
+  <path class="sign" d="M204 109 H216"/>
+  <path class="wire" d="M210 114 V150"/>
+  <rect class="comp" x="202" y="150" width="16" height="40"/>
+  <path class="wire" d="M210 190 V210"/>
+  <path class="wire" d="M330 60 V150"/>
+  <rect class="comp" x="322" y="150" width="16" height="40"/>
+  <path class="wire" d="M330 190 V210"/>
+  <path class="wire" d="M60 210 H360"/>
+  <circle class="dot" cx="90" cy="60" r="3.5"/>
+  <circle class="dot" cx="210" cy="60" r="3.5"/>
+  <circle class="dot" cx="330" cy="60" r="3.5"/>
+  <text class="lbl" x="112" y="96">10 V</text>
+  <text class="lbl" x="232" y="96">4 V</text>
+  <text class="val" x="104" y="175">2 Ω</text>
+  <text class="val" x="224" y="175">2 Ω</text>
+  <text class="val" x="352" y="175">3 Ω</text>
+</svg>
+<p class="caption">图 · 两个实际电压源并联，接 3 Ω 负载</p>
+
+<p><strong>转成电流源：</strong>$10/2 = 5\ \mathrm{A}$，$4/2 = 2\ \mathrm{A}$，两个 $2\ \Omega$ 并联。</p>
+
+<p><strong>合并：</strong>$I_s = 5 + 2 = 7\ \mathrm{A}$，$R = 2 \parallel 2 = 1\ \Omega$。</p>
+
+<p><strong>转回电压源：</strong>$U_s = 7 \times 1 = 7\ \mathrm{V}$，内阻 $1\ \Omega$。</p>
+
+<p><strong>接负载算电流：</strong>回路总电阻 $1 + 3 = 4\ \Omega$，</p>
+
+<p>$$I = \frac{7}{4} = 1.75\ \mathrm{A}$$</p>
+
+<p>四步：转 → 合 → 转 → 算。多电源题基本都这么走。</p>
+
+<h2>七、解答题</h2>
+
+<div class="prob">
+<h3>题 1</h3>
+<p>$12\ \mathrm{V}$ 串 $3\ \Omega$ 与 $6\ \mathrm{V}$ 串 $6\ \Omega$ 并接在同一对端子上。求对外等效的电压源参数，并写出中间每一步。</p>
+<details>
+<summary>展开答案</summary>
+<div class="sol">
+<p>转电流源：$12/3 = 4\ \mathrm{A}$，$6/6 = 1\ \mathrm{A}$。</p>
+<p>合并：$I_s = 4 + 1 = 5\ \mathrm{A}$；$R = 3 \parallel 6 = 2\ \Omega$。</p>
+<p>转回电压源：$U_s = 5 \times 2 = 10\ \mathrm{V}$，内阻 $2\ \Omega$。</p>
+<p><strong>要点：</strong>每一步都要写出来，考试按步给分。直接写"等效为 10 V、2 Ω"只拿结果分。</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 2</h3>
+<p>$24\ \mathrm{V}$ 串 $4\ \Omega$ 与 $8\ \mathrm{V}$ 串 $4\ \Omega$ 并联后，外接 $6\ \Omega$ 负载。用等效变换求负载电流。</p>
+<details>
+<summary>展开答案</summary>
+<div class="sol">
+<p>转电流源：$24/4 = 6\ \mathrm{A}$、$8/4 = 2\ \mathrm{A}$，两个 $4\ \Omega$ 并联。</p>
+<p>合并：$I_s = 8\ \mathrm{A}$，$R = 4 \parallel 4 = 2\ \Omega$。</p>
+<p>转回电压源：$U_s = 8 \times 2 = 16\ \mathrm{V}$，内阻 $2\ \Omega$。</p>
+<p>接负载：$I = \dfrac{16}{2 + 6} = 2\ \mathrm{A}$。</p>
+</div>
+</details>
+</div>
+
+<div class="prob">
+<h3>题 3（易错）</h3>
+<p>用等效变换算出上题负载电流后，能否用变换后的电路去求"原来两个电压源各自发出的功率"？说明理由。</p>
+<details>
+<summary>展开答案</summary>
+<div class="sol">
+<p><strong>不能。</strong> 等效变换只保证<strong>对外端口</strong>的电压电流关系相同，电源内部的工作状态完全变了。</p>
+<p>变换前每个电源有自己的电流和功率；变换后合并成一个电源，原来的两个电源已经不存在了，无法反推各自的功率。</p>
+<p>要算各电源功率，必须回到原电路：先求出各支路真实电流，再用 $P = UI$ 逐个算，并判断吸收还是发出。</p>
+</div>
+</details>
+</div>
+
+<div class="foot">
+<p><strong>和笔记 2-11 的关系：</strong>那道题做了三次变换（10 V/4 Ω→2.5 A、4 V/4 Ω→1 A、6 V/2 Ω→3 A），合并后转回电压源，最后用分流公式求目标电流。方法是同一套，只是步骤更多。<strong>多一步就多一个出错机会</strong>，所以每步都要写清楚方向。</p>
+</div>
+
+</body>
+</html>

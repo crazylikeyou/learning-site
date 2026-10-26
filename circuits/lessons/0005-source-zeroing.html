@@ -51,6 +51,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <p><strong>功率不能直接叠加。</strong> 因为 $P = I^2R$ 是二次关系。必须先叠加电流或电压，再算功率。</p>
 
+<div style="margin:1.6rem 0;padding:1rem 1.2rem;border-left:3px solid #8c2f1f;background:#faf7f1">
+<p style="margin:0 0 .5rem"><strong>考试动作：每个源单独画一张分图。</strong></p>
+<p style="margin:0 0 .5rem">老师笔记里 4-2 那道含三个源的题，解法就是画了 <strong>三张独立电路图</strong>：(a) 只留 136 V、(b) 只留 50 V、(c) 只留 3 A，其余源按规则置零。每张图上只算一个分量，最后代数相加。</p>
+<p style="margin:0">为什么一定要画：不画就容易在一张图上"顺手"把别的源也算进去。三张图各自独立，反而更快、更不容易错。<strong>阅卷也是按三张图给分</strong>。</p>
+</div>
+
 <h2>三、完整例子</h2>
 
 <p>节点 b 与地之间接三条支路：左侧 $R_1 = 2\ \Omega$ 串 $12\ \mathrm{V}$ 电压源（正极朝 b），中间 $R_2 = 6\ \Omega$，右侧 $3\ \mathrm{A}$ 电流源（电流注入 b）。求 $V_b$。</p>
@@ -186,4 +192,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
