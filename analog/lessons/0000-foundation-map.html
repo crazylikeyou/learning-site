@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 0 课 · 模电起点地图</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<style>
+  .back { font-size: .9rem; }
+  .warn { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: #faf7f1; }
+  table.map { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
+  table.map th, table.map td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
+  table.map th { color: #444; font-weight: 600; }
+</style>
+</head>
+<body>
+<p class="back"><a href="../">← 返回模电课程</a></p>
+
+<h1>第 0 课 · 模电起点地图</h1>
+<p class="sub">先看清哪些旧知识能直接用、哪些只是“看起来会”、哪些必须重新补。</p>
+<p class="meta">2026-10-26 · 起点整理 · 不是章节知识课</p>
+
+<div class="warn">
+  <strong>这一课不追求讲完知识点。</strong>
+  它只负责建立课堂同步和期末复习的接口。当前状态来自历史学习记录，之后必须用模电题重新测评。
+</div>
+
+<h2>一、旧知识怎样接入模电</h2>
+<table class="map">
+  <tr><th>已有内容</th><th>模电中的用途</th><th>判断</th></tr>
+  <tr><td>串并联、输入电阻</td><td>偏置网络、放大器输入输出电阻</td><td>基础较稳</td></tr>
+  <tr><td>节点法、回路法</td><td>直流工作点与交流小信号方程</td><td>可直接迁移</td></tr>
+  <tr><td>电源置零、叠加</td><td>小信号线性化后的分析</td><td>规则会，情境应用要重练</td></tr>
+  <tr><td>戴维南、诺顿</td><td>信号源内阻、负载和端口等效</td><td>旧测试仅 1/4，需要回炉</td></tr>
+  <tr><td>相量、复阻抗</td><td>频率响应、电容和电感的交流作用</td><td>数学有基础，需换成模电语境</td></tr>
+  <tr><td>复数运算</td><td>增益、传递函数、极点和相位</td><td>可继续使用</td></tr>
+</table>
+
+<h2>二、两条不能误用的规则</h2>
+<p><strong>第一，</strong>含二极管的非线性原电路不能直接叠加。正确顺序是先确定工作点，再在工作点附近线性化。</p>
+<p><strong>第二，</strong>“电压源置零是短路”仍然成立，但模电中经常还要处理受控源；受控源不能像独立源一样随意置零。</p>
+
+<h2>三、必须补的关键接口</h2>
+<ul>
+  <li>受控源 VCVS、VCCS、CCVS、CCCS 的方程和单位。</li>
+  <li>原图、直流通路、交流通路三张图之间的变形。</li>
+  <li>二极管、MOSFET、BJT 的工作区判断。</li>
+  <li>跨导、输入电阻、输出电阻和增益的定义。</li>
+  <li>理想运放与真实运放边界条件的区别。</li>
+</ul>
+
+<h2>四、以后每次都按这条链检查</h2>
+<blockquote>
+  器件特性 → 直流工作点 → 小信号模型 → 交流等效电路 → 增益与输入输出电阻 → 频率或失真限制
+</blockquote>
+
+<p>如果某一步说不上来，就先停在一步补，不硬跳到最后的“套公式求增益”。</p>
+
+<h2>五、下一次课堂同步前</h2>
+<p>请准备以下任意信息：老师讲到的章节或页码、课堂笔记、作业题，以及目前最没听懂的一句话。下一课会根据真实课堂内容编号，不按通用教材从头开课。</p>
+</body>
+</html>
