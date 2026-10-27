@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 10 课 · 实对称矩阵的正交对角化</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 10 课 · 实对称矩阵的正交对角化</h1>
+<p class="sub">可对角化给的是 $P^{-1}AP=\Lambda$；正交对角化还要让 $P$ 的列两两垂直且长度为 $1$。</p>
+<p class="meta">对应作业第 10 次 · PDF 第 19--20 页 · 预计 30 分钟</p>
+
+<h2>一、为什么实对称矩阵特殊</h2>
+<div class="formula-card">
+  <p>若 $A^T=A$，则：</p>
+  <p>① 所有特征值都是实数；</p>
+  <p>② 不同特征值对应的特征向量自动正交；</p>
+  <p>③ 存在正交矩阵 $Q$，使 $Q^TAQ=Q^{-1}AQ=\Lambda$。</p>
+</div>
+
+<p>第 ③ 条不需要额外验证。真正的工作是：求特征值、求特征向量、把重特征值对应的向量正交化、最后单位化。</p>
+
+<h2>二、施密特正交化</h2>
+<p>给定线性无关向量 $\alpha_1,\alpha_2,\alpha_3$：</p>
+<p>$$\beta_1=\alpha_1,$$</p>
+<p>$$\beta_2=\alpha_2-\frac{(\alpha_2,\beta_1)}{(\beta_1,\beta_1)}\beta_1,$$</p>
+<p>$$\beta_3=\alpha_3-\frac{(\alpha_3,\beta_1)}{(\beta_1,\beta_1)}\beta_1
+-\frac{(\alpha_3,\beta_2)}{(\beta_2,\beta_2)}\beta_2.$$</p>
+<p>每一步都是“减掉前面方向上的投影”，最后再把每个 $\beta_i$ 除以长度。</p>
+
+<div class="worked">
+  <h3>一组可直接检查的例</h3>
+  <p>取 $\alpha_1=(1,1,1)^T$，$\alpha_2=(0,1,1)^T$，$\alpha_3=(0,0,1)^T$。</p>
+  <p>先取 $\beta_1=(1,1,1)^T$。再算</p>
+  <p>$$\beta_2=(0,1,1)^T-\frac{2}{3}(1,1,1)^T
+=\frac13(-2,1,1)^T.$$</p>
+  <p>第三个方向可以取 $\beta_3=(0,-1,1)^T$。检查：</p>
+  <p>$$(1,1,1)\cdot(0,-1,1)=0,\qquad(-2,1,1)\cdot(0,-1,1)=0.$$</p>
+  <p>再分别单位化：$\gamma_1=\beta_1/\sqrt3$，$\gamma_2=(-2,1,1)/\sqrt6$，$\gamma_3=(0,-1,1)/\sqrt2$。</p>
+</div>
+
+<h2>三、重特征值的特征向量要二次正交化</h2>
+<p>如果某个特征值出现两次，通过 $(\lambda E-A)x=0$ 得到的两个基础向量通常只保证线性无关，不一定正交。这里必须继续做施密特正交化；不同特征值之间通常已经自动正交。</p>
+
+<div class="warning">
+  <p><strong>常见丢分：</strong>把特征向量直接当 $Q$ 的列，却忘记单位化。若题目要求“正交阵 Q”，列向量必须满足 $Q^TQ=E$。</p>
+</div>
+
+<h2>四、马上检查</h2>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>下一课：把实对称矩阵对角化这套动作应用到二次型。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "实对称矩阵不同特征值对应的特征向量具有什么性质？",
+    opts: ["一定线性相关", "自动正交", "长度自动为 1", "都为实向量且相同"],
+    answer: 1,
+    why: "若 $A^T=A$，不同特征值的特征向量内积必为零；但还需要单位化才能组成正交矩阵。"
+  },
+  {
+    stem: "施密特正交化的第 2 步在做什么？",
+    opts: ["把第二个向量转置", "减去它在第一个方向上的投影", "求矩阵逆", "求特征值"],
+    answer: 1,
+    why: "投影公式正是 $\\frac{(\\alpha_2,\\beta_1)}{(\\beta_1,\\beta_1)}\\beta_1$。"
+  },
+  {
+    stem: "若 $Q$ 为正交矩阵，则 $Q^TQ$ 等于？",
+    opts: ["$Q$", "$Q^{-1}$", "单位矩阵", "零矩阵"],
+    answer: 2,
+    why: "正交矩阵的列是标准正交基，所以 $Q^TQ=E$，且 $Q^{-1}=Q^T$。"
+  }
+];
+</script>
+</body>
+</html>

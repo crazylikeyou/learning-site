@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 14 课 · 考前速查与 90 秒回忆</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 14 课 · 考前速查与 90 秒回忆</h1>
+<p class="sub">考试当天只看这一页和你的错题记录。目标是把手感叫醒，不是临时塞进新内容。</p>
+<p class="meta">2026-11-10 · 预计 20 分钟 · 轻复习</p>
+
+<h2>一、核心公式卡</h2>
+<div class="formula-card">
+  <p><strong>矩阵公式：</strong>$(AB)^T=B^TA^T$，$(AB)^{-1}=B^{-1}A^{-1}$。</p>
+  <p><strong>伴随矩阵：</strong>$AA^*=(\det A)E$，$A^{-1}=A^*/\det A$。</p>
+  <p><strong>秩与方程：</strong>$Ax=b$ 有解 $\Longleftrightarrow r(A)=r([A,b])$；齐次非零解 $\Longleftrightarrow r(A)&lt;n$。</p>
+  <p><strong>通解：</strong>$x=\eta+\sum c_i\xi_i$，其中 $\eta$ 是非齐次特解，$\xi_i$ 是齐次基础解系。</p>
+  <p><strong>特征值：</strong>$|\lambda E-A|=0$；$\dim E_\lambda=n-r(\lambda E-A)$。</p>
+  <p><strong>实对称矩阵：</strong>存在正交阵 $Q$，使 $Q^TAQ=\Lambda$。</p>
+  <p><strong>二次型：</strong>$f=x^TAx$，交叉项系数分成两半；正定 $\Longleftrightarrow$ 所有特征值大于 $0$。</p>
+</div>
+
+<h2>二、最值得在开考前扫一遍的十条</h2>
+<div class="recipe">
+  <p>1. 行列式交换两行要变号，行加倍数不变号。</p>
+  <p>2. 代数余子式符号由 $i+j$ 的奇偶决定。</p>
+  <p>3. 克莱姆法则只适用于方阵且系数行列式非零。</p>
+  <p>4. 矩阵乘法不能交换，转置和逆都要倒序。</p>
+  <p>5. 矩阵方程先整理成 $(A-kE)X=B$，再决定左乘哪个逆。</p>
+  <p>6. 左乘初等矩阵做行变换，右乘做列变换。</p>
+  <p>7. 最大无关组看原矩阵的主元列，不是行阶梯后的列。</p>
+  <p>8. 非齐次通解是一个特解加齐次基础解系，不能把两个非齐次解直接相加。</p>
+  <p>9. 可对角化要求线性无关特征向量总数为 $n$；重特征值必须单独检查。</p>
+  <p>10. 二次型矩阵必须对称，交叉项系数两处分半。</p>
+</div>
+
+<h2>三、计算前的 30 秒检查</h2>
+<div class="checkpoint">
+  <p><strong>行列式：</strong>是否交换过行？是否乘过某行但忘记缩放？</p>
+  <p><strong>矩阵：</strong>形状能不能相乘？乘积左右有没有反？</p>
+  <p><strong>方程组：</strong>是在求特解、基础解系，还是通解？自由度是否等于 $n-r$？</p>
+  <p><strong>特征值：</strong>代数重数与几何重数是否混了？P 的列顺序是否对应 Λ 的对角元？</p>
+</div>
+
+<h2>四、90 秒主动回忆</h2>
+<p>不要看上面的公式卡，先快速完成下面 8 题。答错时再回到对应卡片。</p>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<h2>五、考试当天的 10 分钟流程</h2>
+<ol>
+  <li>看完整张卷子，标记“稳做、会但不熟、暂时不会”三类题。</li>
+  <li>先拿选择填空和会做的计算题，不按题号死磕。</li>
+  <li>行列式题先找零；方程组题先化简增广矩阵；二次型先写对称矩阵。</li>
+  <li>每道计算题保留关键变形；不要为了跳步丢掉过程分。</li>
+  <li>最后 5 分钟只检查符号、维度、是否漏写特解或基础解系。</li>
+</ol>
+
+<div class="foot">
+  <p>考试结束后，把最卡的题型和现场错误补进 `learning-records/`。这张记录比“考完了”更有长期价值。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "$(AB)^{-1}$ 等于？",
+    opts: ["$A^{-1}B^{-1}$", "$B^{-1}A^{-1}$", "$A^{-1}+B^{-1}$", "$(BA)^{-1}$"],
+    answer: 1,
+    why: "逆矩阵倒序。"
+  },
+  {
+    stem: "$Ax=b$ 有解的秩判据是？",
+    opts: ["$r(A)&lt;n$", "$r(A)=r([A,b])$", "$\\det A=0$", "$b\\ne0$"],
+    answer: 1,
+    why: "系数矩阵与增广矩阵秩相等。"
+  },
+  {
+    stem: "矩阵 $A$ 可对角化的核心条件是？",
+    opts: ["可逆", "特征值互异", "有 $n$ 个线性无关特征向量", "行列式大于零"],
+    answer: 2,
+    why: "P 的列就是 n 个线性无关特征向量；特征值互异只是一个充分条件。"
+  },
+  {
+    stem: "实二次型中 $4x_1x_2$ 给矩阵的 $a_{12}$ 是？",
+    opts: ["$4$", "$2$", "$0$", "$8$"],
+    answer: 1,
+    why: "$a_{12}+a_{21}=2a_{12}=4$，所以 $a_{12}=2$。"
+  },
+  {
+    stem: "齐次方程 $Ax=0$ 有非零解的充要条件是？",
+    opts: ["$r(A)=n$", "$r(A)&lt;n$", "$r(A)&lt;m$", "$m&gt;n$"],
+    answer: 1,
+    why: "未知量个数为 n；秩小于 n 时有自由变量。"
+  },
+  {
+    stem: "若 $A$ 的特征值是 $2,3$，则 $\\det A$ 是？",
+    opts: ["$2$", "$3$", "$5$", "$6$"],
+    answer: 3,
+    why: "行列式等于所有特征值之积。"
+  },
+  {
+    stem: "左乘初等矩阵对矩阵做的是？",
+    opts: ["行变换", "列变换", "转置", "乘法交换"],
+    answer: 0,
+    why: "左乘对应行，右乘对应列。"
+  },
+  {
+    stem: "正交对角化 $Q^TAQ=\\Lambda$ 中，标准形的系数是？",
+    opts: ["顺序主子式", "矩阵的特征值", "行列式", "秩"],
+    answer: 1,
+    why: "Λ 的对角元正是 A 的特征值。"
+  }
+];
+</script>
+</body>
+</html>

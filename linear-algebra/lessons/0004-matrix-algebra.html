@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 4 课 · 矩阵运算：先看左右</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 4 课 · 矩阵运算：先看左右</h1>
+<p class="sub">矩阵不是把每个数分别相乘。先把形状、方向和顺序固定下来，后面才不会连环错。</p>
+<p class="meta">对应作业第 3 次 · PDF 第 5--6 页 · 预计 25 分钟</p>
+
+<h2>一、乘法之前先看形状</h2>
+<div class="recipe">
+  <p>$A_{m\times n}B_{n\times p}$ 才有意义，结果是 $m\times p$。</p>
+  <p>C 的第 $i$ 行第 $j$ 列，是 A 的第 $i$ 行与 B 的第 $j$ 列做点积。</p>
+  <p><strong>先标出行和列，再动笔乘。</strong>不要边看边猜。</p>
+</div>
+
+<div class="warning">
+  <p><strong>易错：</strong>$AB$ 与 $BA$ 不但通常不相等，有时其中一个甚至没有定义。题目写 $AB$ 时，先确认没有把左右顺序交换。</p>
+</div>
+
+<h2>二、秩一矩阵：作业第 3 次的核心</h2>
+<p>令 $\alpha=(1,2,3)$，$\beta=(1,\frac12,\frac13)$，$A=\alpha^T\beta$。注意 $\alpha^T$ 是列向量，$\beta$ 是行向量，所以 $A$ 是 $3\times3$ 矩阵。</p>
+
+<p>计算一个数：</p>
+<p>$$\beta\alpha^T=1\cdot1+\frac12\cdot2+\frac13\cdot3=3.$$</p>
+<p>于是</p>
+<p>$$A^n=(\alpha^T\beta)^n
+=\alpha^T(\beta\alpha^T)^{n-1}\beta
+=3^{n-1}\alpha^T\beta
+=3^{n-1}A.$$</p>
+<p>这道题的关键不是硬乘 $A^2,A^3$，而是利用结合律把中间的“行乘列”缩成一个数。</p>
+
+<h2>三、迹也是信息</h2>
+<p>若已知 $B=\alpha\alpha^T$，则</p>
+<p>$$\operatorname{tr}(B)=\operatorname{tr}(\alpha\alpha^T)
+=\operatorname{tr}(\alpha^T\alpha)=\alpha^T\alpha.$$</p>
+<p>所以不需要把列向量元素设出来。作业第 3 次第 4 题给出这样的矩阵，只要把主对角线元素相加，就得到 $\alpha^T\alpha$。</p>
+
+<h2>四、对称矩阵的乘积</h2>
+<p>设 $A^T=A$，$B^T=B$。则</p>
+<p>$$(AB)^T=B^TA^T=BA.$$</p>
+<p>所以 $AB$ 对称当且仅当 $AB=BA$。证明题只要写这条转置链，不必强行代入元素。</p>
+
+<h2>五、马上检查</h2>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>下一课：逆矩阵与分块矩阵。重点是伴随矩阵公式和矩阵方程。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "若 $A$ 是 $2\\times3$ 矩阵，$B$ 是 $3\\times4$ 矩阵，则 $AB$ 的形状是？",
+    opts: ["$3\\times3$", "$2\\times4$", "$4\\times2$", "没有定义"],
+    answer: 1,
+    why: "消去中间维度 $3$，留下外侧维度 $2\\times4$。"
+  },
+  {
+    stem: "若列向量 $\\alpha,\\beta$ 满足 $\\beta^T\\alpha=3$，则 $(\\alpha\\beta^T)^n$ 等于？",
+    opts: ["$3^n\\alpha\\beta^T$", "$3^{n-1}\\alpha\\beta^T$", "$3\\alpha\\beta^T$", "$\\alpha^n(\\beta^T)^n$"],
+    answer: 1,
+    why: "把中间成对的行乘列 $\\beta^T\\alpha=3$ 提出，用结合律保留首尾的 $\\alpha,\\beta^T$。"
+  },
+  {
+    stem: "若 $A,B$ 都对称，则 $AB$ 对称的充要条件是？",
+    opts: ["$A=B$", "$AB=BA$", "$A,B$ 都可逆", "$AB=0$"],
+    answer: 1,
+    why: "$(AB)^T=B^TA^T=BA$；它等于 $AB$ 当且仅当 $AB=BA$。"
+  }
+];
+</script>
+</body>
+</html>

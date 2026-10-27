@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 5 课 · 逆矩阵与分块矩阵</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 5 课 · 逆矩阵与分块矩阵</h1>
+<p class="sub">先证明可逆，再求逆；遇到矩阵方程，先把它整理成“未知矩阵乘已知矩阵”的等式。</p>
+<p class="meta">对应作业第 4 次 · PDF 第 7--8 页 · 预计 25 分钟</p>
+
+<h2>一、可逆的四把钥匙</h2>
+<div class="formula-card">
+  <p>对 $n$ 阶方阵 $A$，下列条件等价：</p>
+  <p>$A$ 可逆 $\Longleftrightarrow \det A\ne0$ $\Longleftrightarrow r(A)=n$ $\Longleftrightarrow$ 齐次方程 $Ax=0$ 只有零解。</p>
+  <p>学完特征值后还多一条：所有特征值都非零。</p>
+</div>
+
+<h2>二、伴随矩阵公式</h2>
+<p>$$AA^*=A^*A=(\det A)E.$$</p>
+<p>因此当 $A$ 可逆时，</p>
+<p>$$A^{-1}=\frac{1}{\det A}A^*.$$</p>
+<p>也可以反推 $A^*=(\det A)A^{-1}$。作业里一旦同时出现 $A^{-1}$ 与 $A^*$，先把 $A^*$ 全部换成 $A^{-1}$，通常一条式子就化简完。</p>
+
+<h2>三、从一个矩阵多项式得到逆</h2>
+<div class="worked">
+  <h3>由 $A^2-A-2E=O$ 证明 $A$ 与 $A+2E$ 可逆</h3>
+  <p>对 $A$：</p>
+  <p>$$A^2-A=2E\Longrightarrow A(A-E)=2E
+\Longrightarrow A\cdot\frac{A-E}{2}=E.$$</p>
+  <p>所以 $A^{-1}=\dfrac{A-E}{2}$。</p>
+  <p>对 $A+2E$，因式分解：</p>
+  <p>$$A^2-A-2E=(A+2E)(A-3E)+4E=O,$$</p>
+  <p>于是 $(A+2E)\left[-\dfrac{A-3E}{4}\right]=E$，所以 $A+2E$ 可逆。</p>
+  <p><strong>这里的动作：</strong>矩阵多项式不是用来“解出 A”，而是用来构造 $BC=E$。</p>
+</div>
+
+<h2>四、矩阵方程</h2>
+<p>若 $AB=A+2B$，先移到一边：</p>
+<p>$$AB-2B=A\Longrightarrow (A-2E)B=A.$$</p>
+<p>只有当 $A-2E$ 可逆时，才能写</p>
+<p>$$B=(A-2E)^{-1}A.$$</p>
+<p>不要直接写 $B=A(A-2E)^{-1}$，除非已知两者可交换。</p>
+
+<h2>五、分块逆</h2>
+<p>若 $A,B$ 都可逆，则</p>
+<p>$$\begin{pmatrix}O&A\\B&O\end{pmatrix}^{-1}
+=\begin{pmatrix}O&B^{-1}\\A^{-1}&O\end{pmatrix}.$$</p>
+<p>检查方法不是背形状，而是左右乘回单位块矩阵。分块运算仍遵守左右顺序。</p>
+
+<h2>六、马上检查</h2>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>下一课：初等变换与秩。把“左乘代表行变换”真正用起来。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "若 $A$ 可逆，则 $A^*$ 与 $A^{-1}$ 的关系是？",
+    opts: ["$A^*=A^{-1}$", "$A^*=(\\det A)A^{-1}$", "$A^*=(\\det A)^{-1}A^{-1}$", "$A^*=0$"],
+    answer: 1,
+    why: "由 $AA^*=(\\det A)E$，两边左乘 $A^{-1}$ 得 $A^*=(\\det A)A^{-1}$。"
+  },
+  {
+    stem: "若 $A^2-A-2E=0$，由它能直接得到哪个逆？",
+    opts: ["$A^{-1}=(A-E)/2$", "$A^{-1}=A-E$", "$A^{-1}=A/2$", "$A$ 不一定可逆"],
+    answer: 0,
+    why: "$A(A-E)=2E$，所以 $A\\cdot(A-E)/2=E$，逆为 $(A-E)/2$。"
+  },
+  {
+    stem: "若 $AB=A+2B$ 且 $A-2E$ 可逆，则 $B$ 是？",
+    opts: ["$(A-2E)^{-1}A$", "$A(A-2E)^{-1}$", "$(A+2E)^{-1}A$", "$A^{-1}(A-2E)$"],
+    answer: 0,
+    why: "先因式分解：$AB-2B=(A-2E)B=A$，再在左侧乘逆矩阵。"
+  }
+];
+</script>
+</body>
+</html>

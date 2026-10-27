@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 2 课 · 行列式：先制造零</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 2 课 · 行列式：先制造零</h1>
+<p class="sub">行列式的计算不是“展开得越早越认真”。先把结构变简单，再计算，才是稳定路线。</p>
+<p class="meta">对应作业第 1 次 · PDF 第 1--2 页 · 预计 25 分钟</p>
+
+<h2>一、看到题先问三件事</h2>
+<div class="recipe">
+  <p><strong>① 有没有一行或一列特别多零？</strong> 有就直接展开。</p>
+  <p><strong>② 行和或列和是否相同？</strong> 尝试把各行加到同一个位置，制造公共因子。</p>
+  <p><strong>③ 相邻行或列做差后，会不会产生简单模式？</strong> 对带平方、立方、连续参数的题尤其有效。</p>
+</div>
+
+<h2>二、三条最容易混的性质</h2>
+<div class="formula-card">
+  <p><strong>交换两行：</strong>$\det$ 变号。</p>
+  <p><strong>某一行乘 $k$：</strong>$\det$ 乘 $k$。</p>
+  <p><strong>一行加另一行的倍数：</strong>$\det$ 不变。</p>
+  <p><strong>两行成比例：</strong>$\det=0$；这是充分判断题，不是计算捷径。</p>
+</div>
+
+<div class="warning">
+  <p><strong>易错：</strong>“把第二行减去第一行”属于第三类操作，值不变；但“交换两行再忘记变号”是作业里最常见的失分。建议在变换旁边写 `Ri <- Ri-R1`，交换则写 `Ri <-> Rj，变号`。</p>
+</div>
+
+<h2>三、结构化行列式：看相邻列差</h2>
+<p>作业第 1 页第 1(3) 题是</p>
+<p>$$\begin{vmatrix}
+a^2&(a+1)^2&(a+2)^2&(a+3)^2\\
+b^2&(b+1)^2&(b+2)^2&(b+3)^2\\
+c^2&(c+1)^2&(c+2)^2&(c+3)^2\\
+d^2&(d+1)^2&(d+2)^2&(d+3)^2
+\end{vmatrix}.$$</p>
+
+<p>不要直接四阶展开。先看每行的形状完全相同，只把 $a,b,c,d$ 换成不同字母，于是对列做相邻差：</p>
+<p>$$C_2-C_1,\quad C_3-C_2,\quad C_4-C_3.$$</p>
+<p>平方差会产生一次式，再做一次相邻差会产生常数；最后由四项变成含有相等列或成比例列的结构，行列式为 $0$。这类题的关键不是背结果，而是发现<strong>每一行都服从同一函数</strong>。</p>
+
+<h2>四、一个完整计算</h2>
+<div class="worked">
+  <h3>计算四阶矩阵的行列式</h3>
+  <p>$$D=\begin{vmatrix}
+1&2&3&4\\
+0&1&2&3\\
+0&0&1&2\\
+0&0&0&1
+\end{vmatrix}.$$</p>
+  <p>它已经是上三角矩阵，所以直接取对角元：</p>
+  <p>$$D=1\cdot1\cdot1\cdot1=1.$$</p>
+  <p>如果题目给的是普通矩阵，目标就是通过“一行加到另一行”的消元，把它变成这个形状；若中途交换过行，最后再补一个负号。</p>
+</div>
+
+<h2>五、马上检查</h2>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>下一课：行列式展开与克莱姆法则。重点是代数余子式符号和含参数方程组。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "把一个行列式的第 1 行与第 3 行交换后，新的行列式与原行列式的关系是？",
+    opts: ["相等", "互为相反数", "绝对值相同且都非负", "一定变成零"],
+    answer: 1,
+    why: "交换任意两行，行列式变号。绝对值相同，但符号相反。"
+  },
+  {
+    stem: "计算 $D=\\begin{vmatrix}2&0&1\\\\1&3&-1\\\\0&2&4\\end{vmatrix}$。",
+    opts: ["$28$", "$30$", "$-30$", "$24$"],
+    answer: 1,
+    why: "沿第一行展开：$2(3\\cdot4-(-1)\\cdot2)+1(1\\cdot2-3\\cdot0)=28+2=30$。"
+  },
+  {
+    stem: "一个四阶矩阵的每一行都形如 $[a^2,(a+1)^2,(a+2)^2,(a+3)^2]$，只是分别取 $a,b,c,d$。它的行列式为何为 $0$？",
+    opts: ["对角元全为 0", "列差后会出现相同/成比例列", "矩阵一定可逆", "行列式展开后只有一项"],
+    answer: 1,
+    why: "平方序列的相邻差是一次序列；再做一次差就得到相同结构，使列之间线性相关。"
+  }
+];
+</script>
+</body>
+</html>

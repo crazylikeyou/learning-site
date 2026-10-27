@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 3 课 · 行列式展开与克莱姆法则</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 3 课 · 行列式展开与克莱姆法则</h1>
+<p class="sub">代数余子式的第一关不是计算，而是正负号与“删去哪一行哪一列”。</p>
+<p class="meta">对应作业第 2 次 · PDF 第 3--4 页 · 预计 25 分钟</p>
+
+<h2>一、余子式和代数余子式</h2>
+<div class="formula-card">
+  <p>删去第 $i$ 行、第 $j$ 列得到的行列式叫余子式 $M_{ij}$。</p>
+  <p>代数余子式：$$A_{ij}=(-1)^{i+j}M_{ij}.$$</p>
+  <p>展开：第 $i$ 行展开 $\det A=\sum_j a_{ij}A_{ij}$。</p>
+</div>
+
+<div class="recipe">
+  <p><strong>符号不是从左上角一路照抄：</strong>棋盘格是</p>
+  <p>$$\begin{matrix}
+ +\quad - \quad + \quad -\\
+ -\quad + \quad - \quad +\\
+ +\quad - \quad + \quad -\\
+ -\quad + \quad - \quad +
+ \end{matrix}$$</p>
+  <p>先看 $i+j$ 的奇偶，再决定符号。</p>
+</div>
+
+<h2>二、为什么不能把 $A_{31}+2A_{32}+A_{34}$ 直接当行列式</h2>
+<p>行列式按第 $3$ 行展开时，系数必须正好是该行元素 $a_{31},a_{32},a_{33},a_{34}$。如果题目给的是别的系数，说明这是“替换某一行后计算新行列式”，并不等于原行列式。看到这种题，可以先写出代数余子式，再按系数求和。</p>
+
+<div class="worked">
+  <h3>参数齐次方程组何时有非零解</h3>
+  <p>$$\begin{cases}
+\lambda x_1+x_2+x_3=0,\\
+x_1+\mu x_2+x_3=0,\\
+x_1+2\mu x_2+x_3=0.
+\end{cases}$$</p>
+  <p>齐次方程总有零解；“有非零解”等价于系数矩阵奇异：</p>
+  <p>$$\begin{vmatrix}
+\lambda&1&1\\
+1&\mu&1\\
+1&2\mu&1
+\end{vmatrix}=0.$$</p>
+  <p>用第三列减第二列：$$\begin{vmatrix}
+\lambda&1&0\\
+1&\mu&1-\mu\\
+1&2\mu&1-2\mu
+\end{vmatrix}=-\lambda\mu+\mu=\mu(1-\lambda).$$</p>
+  <p>因此 $\mu=0$ 或 $\lambda=1$。这一步只回答“有没有非零解”，并没有求通解。</p>
+</div>
+
+<h2>三、克莱姆法则的边界</h2>
+<div class="warning">
+  <p><strong>克莱姆法则只用于方阵且系数行列式非零的唯一解情形。</strong></p>
+  <p>若 $\det A=0$，不能写 $x_i=D_i/D$。此时应回到秩判据：比较 $r(A)$ 与 $r([A|b])$，再决定无解还是无穷多解。</p>
+</div>
+
+<h2>四、马上检查</h2>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>下一课：矩阵运算。先把乘法顺序、转置和秩一矩阵的幂拿下。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "在 $3\\times3$ 矩阵中，代数余子式 $A_{23}$ 的符号是？",
+    opts: ["正号", "负号", "取决于元素值", "一定为零"],
+    answer: 1,
+    why: "$(-1)^{2+3}=-1$。符号只看位置，不看元素本身的正负。"
+  },
+  {
+    stem: "若 $\\det A\\ne0$，用克莱姆法则解 $Ax=b$ 时，$x_j$ 等于？",
+    opts: ["$D_j/D$，$D_j$ 用 $b$ 换第 $j$ 列", "$D/D_j$", "$\\det A/\\det b$", "$\\det(A+b)$"],
+    answer: 0,
+    why: "把系数矩阵第 $j$ 列换成常数列 $b$ 得 $D_j$，则 $x_j=D_j/D$。"
+  },
+  {
+    stem: "齐次方程组有非零解的充要条件是？",
+    opts: ["常数项非零", "系数矩阵可逆", "系数矩阵奇异", "未知数个数小于方程数"],
+    answer: 2,
+    why: "齐次方程总有零解；只有系数矩阵不可逆（行列式为零、秩小于未知数个数）时才可能出现非零解。"
+  }
+];
+</script>
+</body>
+</html>

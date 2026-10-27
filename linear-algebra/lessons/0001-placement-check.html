@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 1 课 · 线性代数起点诊断</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回线性代数课程</a></p>
+<h1>第 1 课 · 起点诊断</h1>
+<p class="sub">12 道题覆盖你的 11 次作业。先看你能不能认出方法，再检查能不能算到底。</p>
+<p class="meta">2026-10-27 · 预计 15 分钟 · 考试 2026-11-10</p>
+
+<blockquote>
+不要查书，也不要为了分数凭感觉排除。答不出、只是不确定、或者知道思路但算不动的题，都直接告诉我题号。诊断决定后面从哪里开始补，不是给你下结论。
+</blockquote>
+
+<div class="recipe">
+  <p><strong>提交结果时请给三层信息：</strong></p>
+  <p>① 错题编号；② 每题你是不会判断、不会算，还是算到一半卡住；③ 任选一道错题写你当时的第一步。</p>
+</div>
+
+<h2>诊断题</h2>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>做完后把错题编号和你的关键步骤发给 Codex。下一次会根据错因从 0002--0011 中选择入口，不机械地从头讲。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "矩阵 $A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ 的特征值是？",
+    opts: ["$1,3$", "$0,4$", "$2,2$", "$-1,3$"],
+    answer: 0,
+    why: "$|\\lambda E-A|=(\\lambda-2)^2-1=(\\lambda-1)(\\lambda-3)$，所以特征值是 $1,3$。"
+  },
+  {
+    stem: "上三角矩阵 $D=\\begin{pmatrix}-2&2&-4&0\\\\0&-1&3&5\\\\0&0&-2&-3\\\\0&0&0&1\\end{pmatrix}$ 的行列式是？",
+    opts: ["$-4$", "$4$", "$8$", "$0$"],
+    answer: 0,
+    why: "上三角矩阵的行列式等于对角元之积：$(-2)(-1)(-2)(1)=-4$，不需求余子式。"
+  },
+  {
+    stem: "若 $A,B$ 都是可逆方阵，$(AB)^{-1}$ 等于？",
+    opts: ["$A^{-1}B^{-1}$", "$B^{-1}A^{-1}$", "$(BA)^{-1}$", "$A^{-1}+B^{-1}$"],
+    answer: 1,
+    why: "$(AB)(B^{-1}A^{-1})=A(BB^{-1})A^{-1}=E$，所以逆矩阵要倒序。"
+  },
+  {
+    stem: "关于转置，哪一条恒成立？",
+    opts: ["$(AB)^T=A^TB^T$", "$(AB)^T=AB$", "$(AB)^T=B^TA^T$", "$(A+B)^T=A-B$"],
+    answer: 2,
+    why: "乘积转置需要交换顺序：$(AB)^T=B^TA^T$。这一条与逆矩阵倒序常一起考。"
+  },
+  {
+    stem: "若非零列向量 $\\alpha,\\beta$ 满足 $A=\\alpha\\beta^T$，则 $r(A)$ 通常是？",
+    opts: ["$0$", "$1$", "$2$", "等于向量维数"],
+    answer: 1,
+    why: "秩一矩阵的每一列都等于 $\\alpha$ 乘一个数，所以所有列张成同一个一维空间；非零时秩为 $1$。"
+  },
+  {
+    stem: "三元齐次方程 $Ax=0$ 的系数矩阵满足 $r(A)=2$。它的解集是？",
+    opts: ["只有零解", "一条过原点的直线", "一个过原点的平面", "一条不过原点的直线"],
+    answer: 1,
+    why: "未知量 $n=3$，自由度 $n-r=1$。齐次方程的解构成过原点的 $1$ 维空间，即一条直线。"
+  },
+  {
+    stem: "若 $\\eta_1,\\eta_2$ 都是 $Ax=b$ 的解，则 $\\eta_1-\\eta_2$ 是？",
+    opts: ["$Ax=0$ 的解", "$Ax=b$ 的解", "$Ax=2b$ 的解", "一定等于零"],
+    answer: 0,
+    why: "$A(\\eta_1-\\eta_2)=b-b=0$。非齐次方程两个解之差属于对应的齐次解空间。"
+  },
+  {
+    stem: "实对称矩阵一定具有哪个性质？",
+    opts: ["所有特征值相同", "一定可逆", "可以正交对角化", "一定是上三角矩阵"],
+    answer: 2,
+    why: "实对称矩阵的特征值全为实数，且不同特征值的特征向量正交；重特征值也可正交化，因此一定存在正交阵 $Q$ 使 $Q^TAQ=\\Lambda$。"
+  },
+  {
+    stem: "二次型 $f=2x_1^2+3x_1x_2+x_2^2$ 的矩阵中，$a_{12}$ 和 $a_{21}$ 分别是？",
+    opts: ["$3,3$", "$3/2,3/2$", "$3,0$", "$0,3$"],
+    answer: 1,
+    why: "对称矩阵中 $2a_{12}x_1x_2=3x_1x_2$，所以 $a_{12}=a_{21}=3/2$。交叉项系数必须各分一半。"
+  },
+  {
+    stem: "已知 $A$ 的特征值为 $1,2,3$，则 $A^2$ 的特征值是？",
+    opts: ["$1,4,9$", "$2,4,6$", "$1,2,3$", "$3,6,9$"],
+    answer: 0,
+    why: "若 $Ax=\\lambda x$，则 $A^2x=\\lambda^2x$。一般地，多项式 $p(A)$ 的特征值是 $p(\\lambda)$。"
+  },
+  {
+    stem: "一个 $3$ 阶矩阵可相似对角化的充要条件是？",
+    opts: ["它可逆", "它是对称矩阵", "它有 $3$ 个线性无关的特征向量", "它的行列式非零"],
+    answer: 2,
+    why: "$P^{-1}AP=\\Lambda$ 的每一列就是 $A$ 的线性无关特征向量。对称矩阵只是一类充分可对角化的矩阵。"
+  },
+  {
+    stem: "用正交变换化二次型为标准形时，还剩下什么？",
+    opts: ["特征值保持不变", "只有交叉项", "所有特征值都变成 $1$", "一定得到负定二次型"],
+    answer: 0,
+    why: "正交相似变换 $Q^TAQ=\\Lambda$ 只把矩阵对角化，新的标准形系数就是原矩阵的特征值。"
+  }
+];
+</script>
+</body>
+</html>

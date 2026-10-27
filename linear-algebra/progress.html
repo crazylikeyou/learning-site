@@ -1,0 +1,144 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>线性代数 · 学习记录</title>
+<link rel="stylesheet" href="../_shared/css/course.css">
+<style>.doc{margin:3rem 0;padding-top:1.5rem;border-top:1px solid var(--rule)}.doc h3{margin:1.6rem 0 .6rem;font-size:1.02rem;border:0;padding:0}pre.code{background:#f6f3ec;padding:.8rem 1rem;overflow:auto;font-size:.85rem}table.md{border-collapse:collapse;margin:1rem 0;font-size:.92rem}table.md td,table.md th{border-bottom:1px solid var(--rule);padding:.4rem .6rem;text-align:left}code{background:#f6f3ec;padding:.1rem .3rem;border-radius:2px}.back{font-size:.9rem}</style>
+</head><body>
+<p class="back"><a href="./">← 返回课程</a></p>
+<h1>线性代数 · 学习记录</h1>
+<p class="sub">任务说明、进度笔记、每次练习的错因分析。这部分随学习持续更新。</p>
+<div class="doc">
+<h3>任务：14 天复习，拿下线性代数考试</h3>
+<h3>为什么学</h3>
+<p>2026-11-10 考试。今天是 2026-10-27，实际可用的是 <strong>14 个准备日加考试当天的一次轻复习</strong>。目标不是把教材从头翻完，而是在有限时间里把 11 次作业覆盖的题型练到能独立识别、独立动笔、独立算完。</p>
+<p>附件作业共 22 页，题型与考试高度相关。课程以这 11 次作业为主干，不另起一套脱离老师要求的题海。</p>
+<h3>成功标准</h3>
+<ul>
+<li>看到题目，能在 30 秒内判断它属于哪一类：行列式、矩阵运算、逆矩阵、秩、线性方程组、向量组、特征值与对角化、正交对角化、二次型。</li>
+<li>能说出每一步变形用了哪条规则，而不是只报最后答案。</li>
+<li>每类题至少有一道能在不看答案的情况下完整做完。</li>
+<li>有限时模拟中，基础选择与填空尽量拿满，计算题优先保住开头和关键步骤。</li>
+<li>同类错误在复盘后不再连续出现两次。</li>
+</ul>
+<h3>范围</h3>
+<p>以附件 11 次作业为准：</p>
+<p>1. 行列式的性质与化三角法</p>
+<p>2. 行列式展开、克莱姆法则</p>
+<p>3. 矩阵及其运算</p>
+<p>4. 逆矩阵、伴随矩阵、分块矩阵</p>
+<p>5. 初等变换、初等矩阵、矩阵的秩</p>
+<p>6. 线性方程组解的存在性、向量组线性相关</p>
+<p>7. 向量组的秩、最大无关组、向量空间</p>
+<p>8. 线性方程组解的结构</p>
+<p>9. 特征值、特征向量、相似对角化</p>
+<p>10. 正交矩阵、实对称矩阵的相似对角化</p>
+<p>11. 二次型、标准形、规范形、正定性</p>
+<h3>约束</h3>
+<ul>
+<li>每节新内容控制在 20--30 分钟；计算量大的模块可以拆成两次。</li>
+<li>先诊断，再根据真实短板调整，不机械地从第一页讲起。</li>
+<li>每个模块至少保留 5 分钟主动回忆：关掉答案，自己写判断依据。</li>
+<li>做错后只回对应的小步骤，不整章重讲。</li>
+<li>考试前最后一天不再开新知识点，只做错题、公式和易错清单。</li>
+</ul>
+<h3>非目标</h3>
+<ul>
+<li>不追求把 22 页作业全部抄成标准答案。</li>
+<li>不追求学习附件范围之外的高级内容。</li>
+<li>不用“看懂了”代替“独立做出来”。</li>
+<li>不靠刷大量相似题掩盖某一条核心规则没有掌握。</li>
+</ul>
+<h3>入口</h3>
+<ul>
+<li>14 天路线、每日任务和过关线：<code>CURRICULUM.md</code></li>
+<li>作业页码与题型映射：<code>HOMEWORK-MAP.md</code></li>
+<li>当前进度和下一课分叉：<code>NOTES.md</code></li>
+<li>资料与工具：<code>RESOURCES.md</code></li>
+<li>第一件事：完成 <code>lessons/0001-placement-check.html</code></li>
+</ul>
+
+</div>
+<div class="doc">
+<h3>工作笔记</h3>
+<h3>当前进度（2026-10-27）</h3>
+<ul>
+<li>已读取附件 22 页，共 11 次作业。</li>
+<li>尚未进行摸底，当前不预设“基础好/基础差”。</li>
+<li>第 1 课已开放，等待用户提交 1--12 题答案或不确定题号。</li>
+<li>完整 14 天路线已建立，后续根据摸底结果调整讲解密度。</li>
+</ul>
+<h3>作业结构</h3>
+<ul>
+<li>第 1 次：行列式性质与计算。</li>
+<li>第 2 次：行列式展开与克莱姆法则。</li>
+<li>第 3 次：矩阵乘法、转置、矩阵多项式、秩一矩阵。</li>
+<li>第 4 次：逆矩阵、伴随矩阵、分块矩阵。</li>
+<li>第 5 次：初等矩阵、行最简形、参数矩阵的秩。</li>
+<li>第 6 次：方程组有解判定、向量组线性相关。</li>
+<li>第 7 次：向量组的秩、最大无关组、基与坐标。</li>
+<li>第 8 次：齐次/非齐次方程组解的结构。</li>
+<li>第 9 次：特征值、特征向量、相似对角化。</li>
+<li>第 10 次：施密特正交化、实对称矩阵正交对角化。</li>
+<li>第 11 次：二次型矩阵、标准形、惯性指数、正定性。</li>
+</ul>
+<h3>教学约定</h3>
+<p>1. 先让用户说“这题是什么类型”，再检查计算。</p>
+<p>2. 选择题答对但无理由，不直接记为掌握。</p>
+<p>3. 计算题优先抓第一处错误，不从头重讲整章。</p>
+<p>4. 矩阵符号使用 <code>A</code>、<code>A^{-1}</code>、<code>A^{*}</code>、<code>r(A)</code>，与常见教材一致。</p>
+<p>5. 用户提交步骤后，按“识别—方法—计算—检查”四层反馈。</p>
+<h3>下一课分叉</h3>
+<ul>
+<li>诊断 1--3 错较多：先补行列式性质与行列展开。</li>
+<li>诊断 4--6 错较多：先补矩阵乘法、逆与行变换。</li>
+<li>诊断 7--9 错较多：先补方程组的秩判据与解结构。</li>
+<li>诊断 10--12 错较多：先补特征值、正交变换与二次型矩阵。</li>
+<li>若各模块都错一题：按作业原顺序推进，但每课缩短讲解、增加独立计算。</li>
+</ul>
+
+</div>
+<div class="doc">
+<h3>资源清单</h3>
+<h3>主资料</h3>
+<ul>
+<li><code>materials/线性代数作业.pdf</code></li>
+<li>22 页，11 次作业。</li>
+<li>本次课程的题型、难度和范围以它为主。</li>
+<li>原始附件：<code>C:\Users\qingyu\Downloads\线性代数作业 (1).pdf</code></li>
+</ul>
+<h3>课程内资料</h3>
+<ul>
+<li><code>HOMEWORK-MAP.md</code>：作业页码、题型与对应微课。</li>
+<li><code>CURRICULUM.md</code>：14 天路线和每日过关线。</li>
+<li><code>NOTES.md</code>：进度、错因与下一次复习建议。</li>
+<li><code>learning-records/</code>：摸底与每轮练习的留痕。</li>
+</ul>
+<h3>公式呈现</h3>
+<ul>
+<li>共用 <code>E:\G\learning\_shared\katex</code> 离线渲染数学公式。</li>
+<li>不依赖外部 CDN，断网也能打开课程页。</li>
+</ul>
+<h3>使用方式</h3>
+<p>1. 双击 <code>E:\G\learning\启动课程.cmd</code>。</p>
+<p>2. 打开 <code>http://127.0.0.1:8765/linear-algebra/</code>。</p>
+<p>3. 从第 1 课开始，完成后把答错题号和关键步骤发给 Codex。</p>
+<p>4. 若服务器没运行，直接打开 <code>启动课程.cmd</code> 后再刷新。</p>
+<h3>边界</h3>
+<p>本课程只覆盖附件 11 次作业所反映的内容。若老师后来明确考试包含附件外章节，应先更新 <code>MISSION.md</code> 与 <code>CURRICULUM.md</code>，不要临时混入未确认范围。</p>
+
+</div>
+<div class="doc">
+<h3>学习记录</h3>
+<p>2026-10-27 建立。</p>
+<p>每次练习追加一条记录，只写：</p>
+<ul>
+<li>日期与课程编号</li>
+<li>正确数/总数</li>
+<li>错题编号</li>
+<li>第一处错误的规则</li>
+<li>下一轮需要重做的最小动作</li>
+</ul>
+
+</div>
+</body></html>
+

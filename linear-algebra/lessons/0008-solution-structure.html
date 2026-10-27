@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 8 课 · 线性方程组解的结构</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 8 课 · 线性方程组解的结构</h1>
+<p class="sub">先求一个能落地的特解，再把所有自由变量方向补上，通解才不会漏。</p>
+<p class="meta">对应作业第 8 次 · PDF 第 15--16 页 · 预计 25 分钟</p>
+
+<h2>一、通解的两层结构</h2>
+<div class="formula-card">
+  <p>非齐次方程 $Ax=b$ 的通解：</p>
+  <p>$$\boxed{x=\eta+c_1\xi_1+\cdots+c_{n-r}\xi_{n-r}}.$$</p>
+  <p>$\eta$ 是一个特解，$\xi_i$ 是齐次方程 $Ax=0$ 的基础解系，$r=r(A)$。</p>
+</div>
+
+<p>基础解系只能来自齐次方程。不要把非齐次方程的两个解直接当基础解系；它们的差才在齐次空间里。</p>
+
+<h2>二、完成一道非齐次方程</h2>
+<div class="worked">
+  <h3>求通解</h3>
+  <p>$$\begin{cases}
+x_1+x_2=5,\\
+2x_1+x_2+x_3+2x_4=1,\\
+5x_1+3x_2+2x_3+2x_4=3.
+\end{cases}$$</p>
+  <p>增广矩阵做行变换：</p>
+  <p>$$\begin{pmatrix}
+1&1&0&0&|&5\\
+2&1&1&2&|&1\\
+5&3&2&2&|&3
+\end{pmatrix}
+\xrightarrow{R_2-2R_1,\ R_3-5R_1}
+\begin{pmatrix}
+1&1&0&0&|&5\\
+0&-1&1&2&|&-9\\
+0&-2&2&2&|&-22
+\end{pmatrix}.$$</p>
+  <p>再用 $R_3-2R_2$ 得最后一行为 $(0,0,0,-2|-4)$，所以 $x_4=2$。代回第二行，$x_2-x_3=13$。令 $x_3=t$，则</p>
+  <p>$$x_2=13+t,\quad x_1=-8-t,\quad x_4=2.$$</p>
+  <p>因此</p>
+  <p>$$\begin{pmatrix}x_1\\x_2\\x_3\\x_4\end{pmatrix}
+=\begin{pmatrix}-8\\13\\0\\2\end{pmatrix}
++t\begin{pmatrix}-1\\1\\1\\0\end{pmatrix},\quad t\in\mathbb R.$$</p>
+  <p>前一个向量是特解，后一个是基础解系。自由度 $4-3=1$，与只有一个参数一致。</p>
+</div>
+
+<div class="warning">
+  <p><strong>检查：</strong>把特解代回原方程，再做一次齐次部分验证。只检查“形式像通解”没有意义。</p>
+</div>
+
+<h2>三、由两个已知解反推结构</h2>
+<p>若 $\eta_1,\eta_2,\eta_3$ 都是 $Ax=b$ 的解，则</p>
+<p>$$A(\eta_1-\eta_2)=0,\qquad A(\eta_2-\eta_3)=0.$$</p>
+<p>所以它们的差可以生成齐次解空间。如果已知系数矩阵的秩，先算 $n-r$，就知道需要几个独立方向。</p>
+
+<h2>四、马上检查</h2>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>下一课：特征值与对角化。计算量会上台阶，重点是先写特征方程，再判断几何重数。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "若 $A$ 是 $3\\times5$ 矩阵且 $r(A)=2$，齐次方程 $Ax=0$ 的基础解系通常含几个向量？",
+    opts: ["$1$", "$2$", "$3$", "$5$"],
+    answer: 2,
+    why: "自由度 $n-r=5-2=3$，基础解系含 $3$ 个线性无关向量。"
+  },
+  {
+    stem: "非齐次方程通解的正确形式是？",
+    opts: ["若干特解相加", "一个特解 + 齐次基础解系的线性组合", "任意两个非齐次解的平均", "只有齐次基础解系"],
+    answer: 1,
+    why: "所有解可以由一个特解加上齐次解空间的任意向量得到。"
+  },
+  {
+    stem: "若 $\\eta_1,\\eta_2$ 都满足 $Ax=b$，则 $2\\eta_1-\\eta_2$ 满足？",
+    opts: ["$Ax=0$", "$Ax=b$", "$Ax=2b$", "$Ax=-b$"],
+    answer: 1,
+    why: "$A(2\\eta_1-\\eta_2)=2b-b=b$。非齐次解可以仿射组合。"
+  }
+];
+</script>
+</body>
+</html>

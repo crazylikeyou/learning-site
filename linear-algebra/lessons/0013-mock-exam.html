@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 13 课 · 90 分钟限时模拟</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 13 课 · 90 分钟限时模拟</h1>
+<p class="sub">先模考再复盘。建议在 2026-11-09 完成，若提前做完也能当作整卷训练。</p>
+<p class="meta">8 题 · 建议 90 分钟 · 总分 100</p>
+
+<div class="gate">
+  <strong>考试策略：</strong>先做会做的题，不在一道绕不出来的行列式或特征值上看超过 8 分钟。计算题写出关键步骤，即使最后数字错，也能保住过程分。
+</div>
+
+<h2>一、模拟题</h2>
+
+<h3>1. 计算行列式（10 分）</h3>
+<p>$$\begin{vmatrix}
+1&2&0\\
+2&3&1\\
+0&1&4
+\end{vmatrix}.$$</p>
+
+<h3>2. 代数余子式（10 分）</h3>
+<p>对于第 1 题中的矩阵，求 $A_{31}$。</p>
+
+<h3>3. 逆矩阵（12 分）</h3>
+<p>求</p>
+<p>$$A=\begin{pmatrix}1&2&3\\0&1&4\\5&6&0\end{pmatrix}$$</p>
+<p>的逆矩阵。</p>
+
+<h3>4. 参数秩（12 分）</h3>
+<p>讨论 $a$ 为何值时，$$\begin{pmatrix}1&a&a^2\\1&2&a\\1&4&a^2\end{pmatrix}$$的秩为 $2$ 或 $3$。</p>
+
+<h3>5. 线性方程组（12 分）</h3>
+<p>解</p>
+<p>$$\begin{cases}
+2x_1+x_2=5,\\
+x_1-x_2+x_3=1,\\
+x_1+x_2+2x_3=8.
+\end{cases}$$</p>
+
+<h3>6. 向量组（12 分）</h3>
+<p>证明 $\alpha_1=(1,0,1)^T,\alpha_2=(1,1,0)^T,\alpha_3=(0,1,1)^T$ 线性无关，并把 $(3,2,3)^T$ 表示成它们的线性组合。</p>
+
+<h3>7. 相似对角化（14 分）</h3>
+<p>求</p>
+<p>$$A=\begin{pmatrix}2&1&0\\1&2&0\\0&0&3\end{pmatrix}$$</p>
+<p>的特征值，并求一个可逆矩阵 $P$，使 $P^{-1}AP$ 为对角阵。</p>
+
+<h3>8. 正定性（18 分）</h3>
+<p>求参数 $a$ 的范围，使二次型</p>
+<p>$$f=x_1^2+x_2^2+x_3^2+2a(x_1x_2+x_2x_3+x_3x_1)$$</p>
+<p>正定。</p>
+
+<h2>二、先提交再对答案</h2>
+<div class="warning">
+  <p>限时结束后，先记录每题实际耗时和第一处卡点，再展开答案。直接对答案是第二轮的事；第一轮先保留真实错误。</p>
+</div>
+
+<details>
+<summary>答案 1--2</summary>
+<p><strong>1.</strong> 沿第一行展开：</p>
+<p>$$D=1(12-1)-2(8-0)=-5.$$</p>
+<p><strong>2.</strong> 删去第 3 行、第 1 列，符号为 $(-1)^{3+1}=+1$，余子式为 $\begin{vmatrix}2&0\\3&1\end{vmatrix}=2$，所以 $A_{31}=2$。</p>
+</details>
+
+<details>
+<summary>答案 3</summary>
+<p>行列式为 $1$，所以逆矩阵等于伴随矩阵。结果为</p>
+<p>$$\boxed{A^{-1}=\begin{pmatrix}
+-24&18&5\\
+20&-15&-4\\
+-5&4&1
+\end{pmatrix}}.$$</p>
+<p>检查一遍第 1 行乘 A 的第 1 列：$-24+0+25=1$；第 1 行乘第 2 列：$-48+18+30=0$。</p>
+</details>
+
+<details>
+<summary>答案 4</summary>
+<p>行列式为 $a(a-1)(4-a)$。因此 $a=0,1,4$ 时秩为 $2$；其余情况秩为 $3$。</p>
+</details>
+
+<details>
+<summary>答案 5</summary>
+<p>系数行列式为 $-7$，有唯一解。写成增广矩阵做行变换，得到</p>
+<p>$$\boxed{x_1=\frac97,\quad x_2=\frac{17}{7},\quad x_3=\frac{15}{7}}.$$</p>
+<p>代回第一式：$2(9/7)+17/7=35/7=5$。</p>
+</details>
+
+<details>
+<summary>答案 6</summary>
+<p>三个向量拼成的矩阵行列式为</p>
+<p>$$\begin{vmatrix}1&1&0\\0&1&1\\1&0&1\end{vmatrix}=2\ne0,$$</p>
+<p>所以线性无关。设 $v=c_1\alpha_1+c_2\alpha_2+c_3\alpha_3$，解方程得 $c_1=2,c_2=1,c_3=1$。</p>
+</details>
+
+<details>
+<summary>答案 7</summary>
+<p>特征值为 $1,3,3$。对应特征向量可取</p>
+<p>$$\xi_1=(1,-1,0)^T,\qquad
+\xi_2=(1,1,0)^T,\qquad
+\xi_3=(0,0,1)^T.$$</p>
+<p>例如</p>
+<p>$$P=(\xi_1,\xi_2,\xi_3),\qquad
+P^{-1}AP=\operatorname{diag}(1,3,3).$$</p>
+<p>顺序可以换，只要 P 的列与对角元一一对应。</p>
+</details>
+
+<details>
+<summary>答案 8</summary>
+<p>矩阵为</p>
+<p>$$A=\begin{pmatrix}1&a&a\\a&1&a\\a&a&1\end{pmatrix}.$$</p>
+<p>特征值为 $1+2a$（一重）与 $1-a$（二重）。两者都大于 0，得到</p>
+<p>$$\boxed{-\frac12&lt;a&lt;1}.$$</p>
+</details>
+
+<h2>三、评分与复盘</h2>
+<table>
+  <thead>
+    <tr><th>分数</th><th>下一步</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>85--100</td><td>保持整卷训练，主攻速度和过程书写。</td></tr>
+    <tr><td>70--84</td><td>回炉错题模块，隔天做同类型变式。</td></tr>
+    <tr><td>50--69</td><td>暂停新综合题，优先补矩阵运算、行变换、方程组。</td></tr>
+    <tr><td>低于 50</td><td>按 0004--0009 重搭主线，不靠背答案抢进度。</td></tr>
+  </tbody>
+</table>
+
+<div class="checkpoint">
+  <p>发送给 Codex 时贴出：每题的耗时、最终答案、第一处不确定的步骤。我会按步骤定位“认题错、公式错、计算错、速度问题”中的哪一种。</p>
+</div>
+
+<div class="foot">
+  <p>下一课：考前速查。最后一天只做回忆和错题，不开新知识。</p>
+</div>
+</body>
+</html>

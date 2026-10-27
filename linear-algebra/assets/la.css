@@ -1,0 +1,112 @@
+.course { margin: 2.2rem 0; }
+.course h2 { margin-bottom: .4rem; }
+ul.lessons { list-style: none; padding: 0; margin: .8rem 0 0; }
+ul.lessons li { padding: .55rem 0; border-bottom: 1px solid var(--rule); }
+ul.lessons li .num {
+  font-family: ui-monospace, Consolas, monospace;
+  color: var(--muted);
+  margin-right: .85rem;
+}
+.status {
+  color: var(--muted);
+  font-size: .88rem;
+  font-family: ui-monospace, Consolas, monospace;
+}
+.gate {
+  margin: 2rem 0;
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--accent);
+  background: #faf7f1;
+}
+.link-grid { display: grid; gap: .9rem; margin: 2rem 0; }
+.link-grid a {
+  display: block;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color .15s, transform .15s;
+}
+.link-grid a:hover { border-color: var(--accent); transform: translateY(-1px); }
+.link-grid strong { display: block; color: var(--accent); margin-bottom: .25rem; }
+.link-grid span { color: var(--muted); font-size: .9rem; }
+.recipe {
+  margin: 1.5rem 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+.recipe p { margin: .35rem 0; }
+.warning {
+  margin: 1.4rem 0;
+  padding: .9rem 1.1rem;
+  border-left: 3px solid #a3352a;
+  background: #fbeceb;
+}
+.warning p { margin: .35rem 0; }
+.checkpoint {
+  margin: 1.4rem 0;
+  padding: .9rem 1.1rem;
+  border-left: 3px solid var(--ok);
+  background: #eef6f0;
+}
+.checkpoint p { margin: .35rem 0; }
+.formula-card {
+  margin: 1.4rem 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+.formula-card p { margin: .4rem 0; }
+.tag {
+  display: inline-block;
+  padding: .1rem .45rem;
+  margin-right: .4rem;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: .78rem;
+  font-family: ui-monospace, Consolas, monospace;
+}
+details {
+  margin: 1rem 0;
+  padding: .8rem 1rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+summary { cursor: pointer; color: var(--accent); font-size: .93rem; }
+.worked {
+  margin: 1.5rem 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+.worked h3 { margin: 0 0 .7rem; font-size: 1rem; }
+.worked p { margin: .45rem 0; }
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: .25rem 0; }
+.manual-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin: 1.4rem 0 2.2rem;
+}
+.manual-nav a {
+  padding: .32rem .65rem;
+  border: 1px solid var(--rule);
+  background: #fff;
+  font-size: .88rem;
+  text-decoration: none;
+}
+.manual-nav a:hover { border-color: var(--accent); }
+.manual-section { scroll-margin-top: 1rem; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0; }
+.table-wrap table { margin: 0; min-width: 42rem; }
+.manual-section ol, .manual-section ul { padding-left: 1.45rem; }
+.small-note { color: var(--muted); font-size: .88rem; }
+table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: .92rem; }
+th, td { padding: .55rem .65rem; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+th { background: #f6f3ec; font-weight: 600; }
+@media (max-width: 600px) {
+  body { padding-left: 1rem; padding-right: 1rem; }
+  ul.lessons li { line-height: 1.55; }
+}

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 7 课 · 方程组与向量组</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/la.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script defer src="../assets/quiz.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+  LAQuiz.render("quiz", QUESTIONS);
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回课程</a></p>
+<h1>第 7 课 · 方程组与向量组</h1>
+<p class="sub">“向量组是否相关”“能否由别的向量表示”“方程组有没有解”本质上是同一个秩问题。</p>
+<p class="meta">对应作业第 6--7 次 · PDF 第 11--14 页 · 预计 30 分钟</p>
+
+<h2>一、三个判据，一张表</h2>
+<div class="formula-card">
+  <p><strong>齐次 $Ax=0$：</strong>恒有零解；有非零解 $\Longleftrightarrow r(A)&lt;n$。</p>
+  <p><strong>非齐次 $Ax=b$：</strong>有解 $\Longleftrightarrow r(A)=r([A|b])$。</p>
+  <p>若相等并记作 $r$，则解的自由度是 $n-r$。$r=n$ 唯一，$r&lt;n$ 无穷多。</p>
+</div>
+
+<p>求解之前先把增广矩阵化成行阶梯。只需要判断解的存在性时，也不要把“未知量的个数”和“方程个数”直接比较。</p>
+
+<h2>二、向量组线性相关就是齐次方程</h2>
+<p>列向量 $\alpha_1,\ldots,\alpha_s$ 线性相关，当且仅当存在不全为零的系数 $x_i$ 使</p>
+<p>$$x_1\alpha_1+\cdots+x_s\alpha_s=0.$$</p>
+<p>把向量按列拼起来得到矩阵 A，就变成 $Ax=0$ 有非零解。因此：</p>
+<p>$$\alpha_1,\ldots,\alpha_s\text{ 线性相关}
+\Longleftrightarrow r(A)&lt;s.$$</p>
+
+<div class="worked">
+  <h3>为什么三角形式的线性组合一定无关</h3>
+  <p>若 $\beta_1=\alpha_1$，$\beta_2=\alpha_1+\alpha_2,\ldots$，并且 $\alpha_1,\ldots,\alpha_r$ 无关，则</p>
+  <p>$$(\beta_1,\ldots,\beta_r)=(\alpha_1,\ldots,\alpha_r)
+\begin{pmatrix}
+1&1&\cdots&1\\
+0&1&\cdots&1\\
+\vdots&0&\ddots&\vdots\\
+0&0&\cdots&1
+\end{pmatrix}.$$</p>
+  <p>右边的三角矩阵行列式为 $1\ne0$，所以 $\beta$ 组的秩与 $\alpha$ 组相同，仍为 $r$，因此无关。</p>
+</div>
+
+<h2>三、最大无关组怎么找</h2>
+<div class="recipe">
+  <p>① 把向量按列拼成矩阵。</p>
+  <p>② 只做行变换化阶梯形，不要做列变换。</p>
+  <p>③ 主元所在的<strong>原矩阵列</strong>构成一个最大无关组。</p>
+  <p>④ 其余向量用这些主元列线性表示时，解对应的齐次方程或直接读行最简形中的系数。</p>
+</div>
+
+<h2>四、基与坐标</h2>
+<p>若三个三维向量组成矩阵的秩为 $3$，它们就是 $\mathbb{R}^3$ 的一个基。求向量 $\nu$ 在该基下的坐标，就是解</p>
+<p>$$(\alpha_1,\alpha_2,\alpha_3)c=\nu.$$</p>
+<p>坐标 $c$ 是相对于这个有序基的系数，不等于 $\nu$ 原本的分量。</p>
+
+<h2>五、马上检查</h2>
+<div id="quiz"></div>
+<div class="score" id="score" hidden>
+  <strong id="scoreText"></strong>
+  <p id="advice" style="margin:.6rem 0 0"></p>
+</div>
+
+<div class="foot">
+  <p>下一课：把线性方程组的解拆成“特解 + 基础解系”。</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    stem: "非齐次方程组 $Ax=b$ 有解的充要条件是？",
+    opts: ["$\\det A\\ne0$", "$r(A)=r([A|b])$", "$r(A)&lt;n$", "$b=0$"],
+    answer: 1,
+    why: "系数矩阵与增广矩阵的秩必须相等。若 A 不是方阵，更不能只看行列式。"
+  },
+  {
+    stem: "四个三维列向量组成的向量组？",
+    opts: ["一定线性无关", "一定线性相关", "可能唯一相关", "无法拼矩阵"],
+    answer: 1,
+    why: "向量个数 $4$ 大于所在空间的维数 $3$，最大秩只能是 $3$，所以一定相关。"
+  },
+  {
+    stem: "求最大无关组时，应该使用哪一种变换？",
+    opts: ["行列都可任意变换", "只用行变换", "先转置再做初等变换", "只能用乘法"],
+    answer: 1,
+    why: "按列拼矩阵后，行变换不改变列之间的线性关系；主元对应原矩阵的列。"
+  }
+];
+</script>
+</body>
+</html>
