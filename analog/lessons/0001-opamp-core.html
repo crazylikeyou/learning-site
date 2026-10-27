@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 1 课 · 理想运放与三种基本放大电路</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .back { font-size: .9rem; }
+  .warn { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: #faf7f1; }
+  .prob { margin: 2.2rem 0; padding: 1.1rem 1.3rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .75rem; font-size: 1rem; border: 0; padding: 0; }
+  details { margin-top: .9rem; }
+  summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { margin-top: .7rem; padding-left: 1rem; border-left: 2px solid var(--rule); font-size: .95rem; }
+  table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
+  table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
+  table.k th { color: #444; font-weight: 600; }
+</style>
+</head>
+<body>
+<p class="back"><a href="../">← 返回模电课程</a></p>
+
+<h1>第 1 课 · 理想运放与三种基本放大电路</h1>
+<p class="sub">先判断能否使用理想模型，再由节点关系和反馈分压求输出。</p>
+<p class="meta">2026-10-27 · 预计 25 分钟 · 对应第 2 章前半部分</p>
+
+<h2>一、理想运放模型</h2>
+<p>放大器的输出电压与差分输入有关：</p>
+<p>$$v_o=A_{ol}(v_+-v_-)$$</p>
+<p>$A_{ol}$ 是开环差模增益。理想运放常用的三个模型条件是：</p>
+
+<table class="k">
+  <tr><th>参数</th><th>理想值</th><th>直接含义</th></tr>
+  <tr><td>开环增益 $A_{ol}$</td><td>无穷大</td><td>负反馈正常时，两个输入端只需要极小差值即可维持有限输出</td></tr>
+  <tr><td>输入电阻 $R_{id}$</td><td>无穷大</td><td>两个输入端吸收的电流近似为零，称为“虚断”</td></tr>
+  <tr><td>输出电阻 $R_o$</td><td>零</td><td>输出端像一个理想电压源，负载变化时输出电压不易下降</td></tr>
+</table>
+
+<p>若理想运放两个输入端相同，则差分输入为零，理想模型会给出一个不确定的输出。因此不能单独从“无穷大增益”推出输出，必须同时有<strong>负反馈</strong>把电路稳定在线性工作区。</p>
+
+<h2>二、虚短与虚断</h2>
+<table class="k">
+  <tr><th>结论</th><th>来源</th><th>成立条件</th></tr>
+  <tr><td>虚断：$i_+=i_-=0$</td><td>输入电阻无穷大</td><td>理想模型近似；实际运放输入电流很小但不为零</td></tr>
+  <tr><td>虚短：$v_+=v_-$</td><td>开环增益无穷大且处于负反馈线性区</td><td>必须是负反馈，输出没有饱和，输入没有超出共模范围</td></tr>
+</table>
+
+<div class="warn">
+  <strong>虚短不是把两个输入端用导线短接。</strong>
+  两个端子之间没有真实电流通过；它们只是被负反馈调节到近似相同电位。输出饱和后，反馈已经不能继续维持该关系，$v_+=v_-$ 不再成立。
+</div>
+
+<h2>三、电压跟随器</h2>
+<p>输出直接接回反相输入端，形成单位负反馈。</p>
+<p>$$v_o=v_i,\qquad A_v=1$$</p>
+<p>电压增益是 1，但它的价值不是“放大电压”，而是<strong>缓冲与隔离</strong>：输入电阻高，几乎不从信号源取电流；输出电阻低，带负载能力比直接连接强。</p>
+
+<h2>四、反相放大电路</h2>
+<p>输入电压 $v_i$ 经 $R_1$ 接到反相端，反相端再经反馈电阻 $R_f$ 接输出；同相端接地。</p>
+
+<svg class="schematic" viewBox="0 0 520 280" role="img" aria-label="反相放大电路示意图">
+  <path class="wire" d="M40 105 H100"/>
+  <rect class="comp" x="100" y="95" width="55" height="20"/>
+  <path class="wire" d="M155 105 H230"/>
+  <path class="comp" d="M230 75 L230 195 L340 135 Z" style="fill:#fff"/>
+  <text class="sign" x="242" y="104">−</text>
+  <text class="sign" x="242" y="172">+</text>
+  <path class="wire" d="M230 80 V105"/>
+  <path class="wire" d="M230 175 V220 H130"/>
+  <path class="wire" d="M130 220 V250"/>
+  <path class="wire" d="M105 250 H155 M115 258 H145 M123 266 H137"/>
+  <path class="wire" d="M340 135 H420"/>
+  <path class="wire" d="M320 105 V40 H270"/>
+  <rect class="comp" x="215" y="30" width="55" height="20"/>
+  <path class="wire" d="M215 40 H175 V105 H155"/>
+  <circle class="dot" cx="155" cy="105" r="3.5"/>
+  <circle class="dot" cx="320" cy="105" r="3.5"/>
+  <text class="lbl" x="127" y="88" text-anchor="middle">R₁</text>
+  <text class="lbl" x="242" y="24" text-anchor="middle">R_f</text>
+  <text class="node" x="55" y="96">v_i</text>
+  <text class="node" x="425" y="128">v_o</text>
+  <text class="node" x="194" y="96" text-anchor="middle">v−</text>
+</svg>
+<p class="caption">反相端是虚地，但同相端与反相端之间并没有真实短接</p>
+
+<p>同相端接地，因此 $v_+=0$。负反馈线性工作时由虚短得 $v_-=0$。对反相节点列 KCL：</p>
+<p>$$\frac{v_i-0}{R_1}+\frac{v_o-0}{R_f}=0$$</p>
+<p>所以：</p>
+<p>$$v_o=-\frac{R_f}{R_1}v_i$$</p>
+<p>输入电流约为 $v_i/R_1$，因此反相放大电路的输入电阻近似为 $R_1$。输出与输入反相，输入电阻也不高，这是它相对同相电路的主要限制。</p>
+
+<h2>五、同相放大电路</h2>
+<p>输入电压直接接同相端；反相端通过 $R_1$ 接地，并通过 $R_f$ 接输出。</p>
+
+<svg class="schematic" viewBox="0 0 520 280" role="img" aria-label="同相放大电路示意图">
+  <path class="wire" d="M40 180 H230"/>
+  <path class="comp" d="M230 75 L230 195 L340 135 Z" style="fill:#fff"/>
+  <text class="sign" x="242" y="104">−</text>
+  <text class="sign" x="242" y="172">+</text>
+  <path class="wire" d="M230 105 H165 V40 H270"/>
+  <rect class="comp" x="270" y="30" width="55" height="20"/>
+  <path class="wire" d="M325 40 H365 V135 H340"/>
+  <path class="wire" d="M165 40 V95"/>
+  <rect class="comp" x="157" y="95" width="16" height="50"/>
+  <path class="wire" d="M165 145 V220"/>
+  <path class="wire" d="M140 220 H190 M148 228 H182 M156 236 H174"/>
+  <path class="wire" d="M340 135 H430"/>
+  <circle class="dot" cx="165" cy="40" r="3.5"/>
+  <circle class="dot" cx="365" cy="40" r="3.5"/>
+  <text class="lbl" x="295" y="24" text-anchor="middle">R_f</text>
+  <text class="lbl" x="194" y="120">R₁</text>
+  <text class="node" x="50" y="171">v_i</text>
+  <text class="node" x="435" y="128">v_o</text>
+  <text class="node" x="195" y="96" text-anchor="middle">v−</text>
+</svg>
+<p class="caption">反馈网络把输出电压的一部分送回反相端</p>
+
+<p>由虚断，$R_1$ 和 $R_f$ 流过同一电流；由虚短，反相端电位等于输入电压。因此：</p>
+<p>$$v_-=v_i,\qquad v_- = v_o\frac{R_1}{R_1+R_f}$$</p>
+<p>$$v_o=\left(1+\frac{R_f}{R_1}\right)v_i,\qquad A_v=1+\frac{R_f}{R_1}$$</p>
+<p>同相端直接看进去的输入电阻很高，理想时接近无穷大。这是同相放大电路的重要优点。</p>
+
+<h2>六、线性区与饱和</h2>
+<p>运放实际输出受电源限制。假设正负饱和电压分别为 $+V_{sat}$ 和 $-V_{sat}$：</p>
+<p>$$-V_{sat}\le v_o\le +V_{sat}$$</p>
+<p>按闭环公式算出的输出若超过这个范围，实际输出被削平，运放进入饱和。此时差分输入不再被负反馈压到零，<strong>虚短失效</strong>。</p>
+
+<h2>七、三种电路对照</h2>
+<table class="k">
+  <tr><th>电路</th><th>闭环增益</th><th>相位</th><th>输入电阻</th><th>典型用途</th></tr>
+  <tr><td>跟随器</td><td>$1$</td><td>同相</td><td>很高</td><td>缓冲、隔离</td></tr>
+  <tr><td>反相放大</td><td>$-R_f/R_1$</td><td>反相</td><td>约 $R_1$</td><td>反相放大、加法的基本结构</td></tr>
+  <tr><td>同相放大</td><td>$1+R_f/R_1$</td><td>同相</td><td>很高</td><td>高输入电阻放大</td></tr>
+</table>
+
+<h2>八、习题</h2>
+
+<div class="prob">
+<h3>题 1 · 虚短条件</h3>
+<p>某运放使用正反馈，输出尚未饱和。能否使用 $v_+=v_-$？如果使用负反馈但输出已经饱和，又能否使用？分别说明理由。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>都不能无条件使用。虚短来自“无穷大开环增益 + 负反馈维持有限输出”的理想近似。正反馈不能把差分输入稳定压到零；输出饱和后反馈失去调节作用，差分输入可以很大。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 2 · 反相放大</h3>
+<p>$R_1=20\,\mathrm{k}\Omega$，$R_f=100\,\mathrm{k}\Omega$，$v_i=-0.3\,\mathrm V$。求输出电压和输入电阻，并判断相位。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$v_o=-\frac{100}{20}(-0.3)=+1.5\,\mathrm V$$</p>
+<p>输入电阻约 $R_1=20\,\mathrm{k}\Omega$。输入为负时输出为正，满足反相关系；此时增益本身为负。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 3 · 同相放大</h3>
+<p>$R_1=20\,\mathrm{k}\Omega$，$R_f=80\,\mathrm{k}\Omega$，$v_i=0.4\,\mathrm V$。求增益、输出电压，并说明输入电阻相对反相电路的主要区别。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$A_v=1+\frac{80}{20}=5,\qquad v_o=5\times0.4=2\,\mathrm V$$</p>
+<p>同相电路输入电阻很高，理想时趋于无穷大；反相电路输入电阻约为 $R_1$。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 4 · 输出饱和</h3>
+<p>反相放大电路增益为 $-10$，输入 $0.8\,\mathrm V$，运放输出饱和电压为 $\pm5\,\mathrm V$。按理想公式输出应为多少？实际输出是多少？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>理想计算为 $v_o=-8\,\mathrm V$，但输出最低只能到 $-5\,\mathrm V$，所以实际输出被限幅在约 $-5\,\mathrm V$。进入饱和后不能再用虚短继续求更精确的闭环输出。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 5 · 跟随器</h3>
+<p>电压跟随器输入 $1.2\,\mathrm V$，处于线性区。求输出。说明它为什么常用在传感器和后续负载之间。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$v_o=1.2\,\mathrm V$。跟随器输入电阻高，几乎不让前级承担负载；输出电阻低，能为后级提供较强驱动，因此起到隔离和缓冲作用。</p>
+</div></details>
+</div>
+
+<p class="foot">完成标准：公式可以忘，但必须能由虚短虚断或反馈分压重新推出来；使用虚短前必须能说出负反馈和线性区条件。</p>
+</body>
+</html>

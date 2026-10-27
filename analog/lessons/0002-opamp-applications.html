@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 2 课 · 运算、动态电路与非理想特性</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .back { font-size: .9rem; }
+  .warn { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: #faf7f1; }
+  .prob { margin: 2.2rem 0; padding: 1.1rem 1.3rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .75rem; font-size: 1rem; border: 0; padding: 0; }
+  details { margin-top: .9rem; }
+  summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { margin-top: .7rem; padding-left: 1rem; border-left: 2px solid var(--rule); font-size: .95rem; }
+  table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
+  table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
+  table.k th { color: #444; font-weight: 600; }
+</style>
+</head>
+<body>
+<p class="back"><a href="../">← 返回模电课程</a></p>
+
+<h1>第 2 课 · 运算、动态电路与非理想特性</h1>
+<p class="sub">看到结构先判断“输入接哪端、反馈元件是什么”，再把元件关系写成运放方程。</p>
+<p class="meta">2026-10-27 · 预计 30 分钟 · 对应第 2 章后半部分</p>
+
+<h2>一、反相加法器</h2>
+<p>多个输入分别经电阻接到同一个反相虚地点，反馈电阻为 $R_f$。各输入电流在反相节点汇总：</p>
+<p>$$v_o=-R_f\left(\frac{v_1}{R_1}+\frac{v_2}{R_2}+\cdots+\frac{v_n}{R_n}\right)$$</p>
+<p>若所有输入电阻都等于 $R$，则：</p>
+<p>$$v_o=-\frac{R_f}{R}\left(v_1+v_2+\cdots+v_n\right)$$</p>
+<p>反相端是“虚地”，所以各路输入之间基本不会互相牵制，相加关系来自 KCL。</p>
+
+<h2>二、减法与差分放大电路</h2>
+<p>差分放大电路分别从同相端和反相端输入，目标是把两路共有的部分抵消，只放大的差模部分。设：</p>
+<ul>
+  <li>$v_1$ 经 $R_1$ 接反相端，反馈电阻为 $R_f$；</li>
+  <li>$v_2$ 经 $R_2$ 接同相端，同相端再经 $R_3$ 接地。</li>
+</ul>
+<p>当电阻满足平衡条件：</p>
+<p>$$\frac{R_f}{R_1}=\frac{R_3}{R_2}=k$$</p>
+<p>则：</p>
+<p>$$v_o=k(v_2-v_1)$$</p>
+<p>若 $R_f=R_2=R$、$R_1=R_3=R_0$，则：</p>
+<p>$$v_o=\frac{R}{R_0}(v_2-v_1)$$</p>
+
+<div class="warn">
+  <strong>减法电路最重要的不是背一个分式，而是检查平衡条件。</strong>
+  电阻比例不匹配时，两路输入前面的系数不同，不能简单写成理想差模增益；共模抑制也会变差。
+</div>
+
+<h2>三、积分器</h2>
+<p>反相输入端接电阻 $R$，反馈电容为 $C$。电容电流与电压的关系是：</p>
+<p>$$i_C=C\frac{\mathrm dv_C}{\mathrm dt}$$</p>
+<p>利用虚短、虚断，可得：</p>
+<p>$$v_o(t)=-\frac{1}{RC}\int_0^t v_i(\tau)\,\mathrm d\tau+v_o(0)$$</p>
+<p>相量形式：</p>
+<p>$$\frac{\dot V_o}{\dot V_i}=-\frac{1}{j\omega RC}=j\frac{1}{\omega RC}$$</p>
+<p>频率越高，积分器增益越小。输入恒定时输出随时间线性变化；输入为方波时，输出大体为三角波，并带反相符号。</p>
+
+<h2>四、微分器</h2>
+<p>把积分器中的电阻与电容位置互换，输入电容 $C$、反馈电阻 $R$：</p>
+<p>$$v_o(t)=-RC\frac{\mathrm dv_i(t)}{\mathrm dt}$$</p>
+<p>相量形式：</p>
+<p>$$\frac{\dot V_o}{\dot V_i}=-j\omega RC$$</p>
+<p>频率越高，微分器增益越大。输入是三角波时，输出近似为方波，因为恒定斜率对应恒定输出。</p>
+
+<table class="k">
+  <tr><th>输入波形</th><th>理想积分器</th><th>理想微分器</th></tr>
+  <tr><td>恒定电压</td><td>线性斜坡</td><td>除跳变瞬间外约为 0</td></tr>
+  <tr><td>方波</td><td>三角波</td><td>正负尖峰</td></tr>
+  <tr><td>三角波</td><td>分段抛物线</td><td>方波</td></tr>
+</table>
+
+<h2>五、实际运放的非理想特性</h2>
+
+<table class="k">
+  <tr><th>特性</th><th>理想模型</th><th>实际影响</th></tr>
+  <tr><td>开环增益 $A_{ol}$</td><td>无穷大</td><td>闭环增益略低，存在稳态误差；高精度时不能直接认为虚短完全成立</td></tr>
+  <tr><td>输入电阻与输入电流</td><td>无穷大、输入电流为零</td><td>偏置电流在高阻节点上产生附加电压误差</td></tr>
+  <tr><td>输出电阻</td><td>零</td><td>带载后输出幅度下降，驱动能力有限</td></tr>
+  <tr><td>输出范围</td><td>不受限</td><td>输出受电源轨限制，会饱和或削顶</td></tr>
+  <tr><td>带宽</td><td>无穷大</td><td>闭环增益越高，可用带宽通常越窄</td></tr>
+  <tr><td>压摆率</td><td>无限快</td><td>大信号高频时输出斜率不足，波形失真</td></tr>
+  <tr><td>直流失调、温漂、噪声</td><td>不存在</td><td>造成零点误差、漂移和信噪比下降</td></tr>
+</table>
+
+<h3>有限开环增益</h3>
+<p>同相放大电路中，设反馈系数：</p>
+<p>$$\beta=\frac{R_1}{R_1+R_f}$$</p>
+<p>考虑有限开环增益后：</p>
+<p>$$A_f=\frac{A_{ol}}{1+\beta A_{ol}}$$</p>
+<p>当 $A_{ol}\to\infty$ 时，$A_f\to 1/\beta=1+R_f/R_1$，回到理想公式。环路增益 $\beta A_{ol}$ 越大，理想近似越准确。</p>
+
+<h3>增益带宽积</h3>
+<p>很多通用运放在主极点范围内近似满足：</p>
+<p>$$\mathrm{GBW}\approx A_{cl}f_H$$</p>
+<p>其中 $A_{cl}$ 是闭环电压增益，$f_H$ 是闭环上限频率。因此，增益提高通常以带宽变窄为代价。</p>
+
+<h3>压摆率</h3>
+<p>压摆率是输出能提供的最大变化速度：</p>
+<p>$$\mathrm{SR}=\max\left|\frac{\mathrm dv_o}{\mathrm dt}\right|$$</p>
+<p>正弦输出 $v_o(t)=V_{om}\sin(2\pi ft)$ 所需的最大斜率为：</p>
+<p>$$\left.\frac{\mathrm dv_o}{\mathrm dt}\right|_{\max}=2\pi fV_{om}$$</p>
+<p>若这个值超过运放的 SR，输出波形会发生三角化或明显失真。</p>
+
+<div class="warn">
+  <strong>带宽限制和压摆率限制不是同一件事。</strong>
+  小信号高频主要暴露有限带宽；大信号快速跳变主要暴露压摆率不足。
+</div>
+
+<h2>六、习题</h2>
+
+<div class="prob">
+<h3>题 1 · 反相加法</h3>
+<p>$R_1=10\,\mathrm{k}\Omega$，$R_2=20\,\mathrm{k}\Omega$，$R_f=40\,\mathrm{k}\Omega$，$v_1=0.2\,\mathrm V$，$v_2=-0.1\,\mathrm V$。求 $v_o$。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$v_o=-40\left(\frac{0.2}{10}+\frac{-0.1}{20}\right)=-0.6\,\mathrm V$$</p>
+<p>单位中的 $10^3$ 已在分子分母同时约掉。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 2 · 减法电路</h3>
+<p>差分电路满足 $R_f/R_1=R_3/R_2=2$，$v_1=0.3\,\mathrm V$，$v_2=0.5\,\mathrm V$。求 $v_o$，并说明共有的 $0.3\,\mathrm V$ 分量会发生什么。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$v_o=2(0.5-0.3)=0.4\,\mathrm V$$</p>
+<p>两路共同拥有的 $0.3\,\mathrm V$ 在差值中抵消，不会被理想差模增益放大；电路放大的是差值 $0.2\,\mathrm V$。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 3 · 积分器</h3>
+<p>理想积分器 $R=10\,\mathrm{k}\Omega$，$C=0.1\,\mu\mathrm F$，初始输出为 0。输入在 $t=0$ 时跳到 $0.5\,\mathrm V$ 并保持不变。求 $t=2\,\mathrm{ms}$ 时的输出。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$RC=10^4\times0.1\times10^{-6}=10^{-3}\,\mathrm s=1\,\mathrm{ms}$$</p>
+<p>输入恒定 $0.5\,\mathrm V$：</p>
+<p>$$v_o(2\,\mathrm{ms})=-\frac{0.5}{10^{-3}}\times2\times10^{-3}=-1\,\mathrm V$$</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 4 · 微分器</h3>
+<p>理想微分器 $R=10\,\mathrm{k}\Omega$，$C=0.1\,\mu\mathrm F$。输入三角波上升段斜率为 $+2000\,\mathrm{V/s}$。求上升段输出，并判断下降段符号。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$RC=10^{-3}\,\mathrm s,\qquad v_o=-10^{-3}\times2000=-2\,\mathrm V$$</p>
+<p>上升段输出约 $-2\,\mathrm V$；下降段斜率为负，因此输出翻成约 $+2\,\mathrm V$。输入若为连续三角波，输出近似方波。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 5 · 增益带宽积</h3>
+<p>某运放 GBW 为 $1\,\mathrm{MHz}$，接成闭环增益 20 的同相放大器。估算其 $-3\,\mathrm{dB}$ 上限频率。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$f_H\approx\frac{\mathrm{GBW}}{A_{cl}}=\frac{10^6}{20}=50\,\mathrm{kHz}$$</p>
+<p>这是主极点和单极点近似的估算，具体还要以数据手册给出的曲线和测试条件为准。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 6 · 压摆率</h3>
+<p>运放输出正弦波，幅值 $2\,\mathrm V$、频率 $20\,\mathrm{kHz}$。运放至少需要多大的压摆率才能基本无斜率失真？若运放 SR 只有 $0.1\,\mathrm{V/\mu s}$，会发生什么？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$\mathrm{SR}_{min}=2\pi fV_{om}=2\pi(20\times10^3)(2)\approx2.51\times10^5\,\mathrm{V/s}\approx0.251\,\mathrm{V/\mu s}$$</p>
+<p>运放需要约 $0.25\,\mathrm{V/\mu s}$。若只有 $0.1\,\mathrm{V/\mu s}$，最大输出斜率不够，正弦波顶部会变尖或被三角化，产生明显非线性失真。</p>
+</div></details>
+</div>
+
+<p class="foot">完成标准：能先判断结构，再由虚短、虚断和元件关系列式；非理想题要指出限制的是稳态误差、带宽、斜率还是输出电压范围。</p>
+</body>
+</html>
