@@ -31,6 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
   table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
   table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
   table.k th { color: #444; font-weight: 600; }
+  .figure { margin: 1.8rem auto 1.2rem; text-align: center; }
+  .figure img {
+    display: block; width: 100%; max-width: 620px; height: auto;
+    margin: 0 auto; padding: .8rem; background: #fff; border: 1px solid var(--rule);
+  }
+  .figure figcaption { margin-top: .55rem; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+  .figure .credit { display: block; margin-top: .2rem; font-size: .78rem; }
 </style>
 </head>
 <body>
@@ -43,6 +50,13 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2>一、反相加法器</h2>
 <p>多个输入分别经电阻接到同一个反相虚地点，反馈电阻为 $R_f$。各输入电流在反相节点汇总：</p>
 <p>$$v_o=-R_f\left(\frac{v_1}{R_1}+\frac{v_2}{R_2}+\cdots+\frac{v_n}{R_n}\right)$$</p>
+<figure class="figure">
+  <img src="../assets/opamp/summing.svg" alt="反相加法器：多个输入电阻接到反相节点，Rf 接在输出与反相节点之间">
+  <figcaption>
+    各输入电流在反相节点汇合，反馈电阻 $R_f$ 决定总增益。
+    <span class="credit">图源：Inductiveload / Wikimedia Commons，Public Domain。</span>
+  </figcaption>
+</figure>
 <p>若所有输入电阻都等于 $R$，则：</p>
 <p>$$v_o=-\frac{R_f}{R}\left(v_1+v_2+\cdots+v_n\right)$$</p>
 <p>反相端是“虚地”，所以各路输入之间基本不会互相牵制，相加关系来自 KCL。</p>
@@ -53,6 +67,13 @@ document.addEventListener("DOMContentLoaded", function () {
   <li>$v_1$ 经 $R_1$ 接反相端，反馈电阻为 $R_f$；</li>
   <li>$v_2$ 经 $R_2$ 接同相端，同相端再经 $R_3$ 接地。</li>
 </ul>
+<figure class="figure">
+  <img src="../assets/opamp/differential.svg" alt="差分放大电路：V1 经 R1 到反相端，Rf 接反馈；V2 经 R2 到同相端，Rg 接地">
+  <figcaption>
+    图中 $R_g$ 对应正文的 $R_3$。平衡时两路输入前面的系数相同，输出与 $v_2-v_1$ 成正比。
+    <span class="credit">图源：Inductiveload / Wikimedia Commons，Public Domain。</span>
+  </figcaption>
+</figure>
 <p>当电阻满足平衡条件：</p>
 <p>$$\frac{R_f}{R_1}=\frac{R_3}{R_2}=k$$</p>
 <p>则：</p>
@@ -67,6 +88,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <h2>三、积分器</h2>
 <p>反相输入端接电阻 $R$，反馈电容为 $C$。电容电流与电压的关系是：</p>
+<figure class="figure">
+  <img src="../assets/opamp/integrator.svg" alt="反相积分器：输入电阻 R 接反相端，反馈电容 C 接在输出与反相端之间">
+  <figcaption>
+    积分器把反馈电阻换成电容，因此输出与输入电压的积分成正比。
+    <span class="credit">图源：Inductiveload / Wikimedia Commons，Public Domain。</span>
+  </figcaption>
+</figure>
 <p>$$i_C=C\frac{\mathrm dv_C}{\mathrm dt}$$</p>
 <p>利用虚短、虚断，可得：</p>
 <p>$$v_o(t)=-\frac{1}{RC}\int_0^t v_i(\tau)\,\mathrm d\tau+v_o(0)$$</p>
@@ -76,6 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <h2>四、微分器</h2>
 <p>把积分器中的电阻与电容位置互换，输入电容 $C$、反馈电阻 $R$：</p>
+<figure class="figure">
+  <img src="../assets/opamp/differentiator.svg" alt="反相微分器：输入电容 C 接反相端，反馈电阻 R 接在输出与反相端之间">
+  <figcaption>
+    微分器把输入电阻换成电容，因此输出与输入电压的变化率成正比。
+    <span class="credit">图源：Inductiveload / Wikimedia Commons，Public Domain。</span>
+  </figcaption>
+</figure>
 <p>$$v_o(t)=-RC\frac{\mathrm dv_i(t)}{\mathrm dt}$$</p>
 <p>相量形式：</p>
 <p>$$\frac{\dot V_o}{\dot V_i}=-j\omega RC$$</p>

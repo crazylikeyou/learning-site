@@ -31,6 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
   table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
   table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
   table.k th { color: #444; font-weight: 600; }
+  .figure { margin: 1.8rem auto 1.2rem; text-align: center; }
+  .figure img {
+    display: block; width: 100%; max-width: 620px; height: auto;
+    margin: 0 auto; padding: .8rem; background: #fff; border: 1px solid var(--rule);
+  }
+  .figure figcaption { margin-top: .55rem; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+  .figure .credit { display: block; margin-top: .2rem; font-size: .78rem; }
 </style>
 </head>
 <body>
@@ -68,45 +75,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <h2>三、电压跟随器</h2>
 <p>输出直接接回反相输入端，形成单位负反馈。</p>
+<figure class="figure">
+  <img src="../assets/opamp/voltage-follower.svg" alt="电压跟随器：输出直接接回反相输入端">
+  <figcaption>
+    电压跟随器：输入接同相端，输出直接反馈到反相端。
+    <span class="credit">图源：Inductiveload / Wikimedia Commons，Public Domain。</span>
+  </figcaption>
+</figure>
 <p>$$v_o=v_i,\qquad A_v=1$$</p>
 <p>电压增益是 1，但它的价值不是“放大电压”，而是<strong>缓冲与隔离</strong>：输入电阻高，几乎不从信号源取电流；输出电阻低，带负载能力比直接连接强。</p>
 
 <h2>四、反相放大电路</h2>
 <p>输入电压 $v_i$ 经 $R_1$ 接到反相端，反相端再经反馈电阻 $R_f$ 接输出；同相端接地。</p>
 
-<svg class="schematic" viewBox="0 0 540 290" role="img" aria-label="反相放大电路示意图">
-  <!-- input branch -->
-  <path class="wire" d="M50 110 H110"/>
-  <rect class="comp" x="110" y="100" width="60" height="20"/>
-  <path class="wire" d="M170 110 H260"/>
-
-  <!-- op amp -->
-  <path class="comp" d="M260 80 V220 L390 150 Z" style="fill:#fff"/>
-  <text class="sign" x="275" y="108">−</text>
-  <text class="sign" x="275" y="198">+</text>
-
-  <!-- non-inverting input to ground, kept separate from the input branch -->
-  <path class="wire" d="M260 190 V255 H170"/>
-  <path class="wire" d="M145 255 H195 M153 264 H187 M161 273 H179"/>
-
-  <!-- feedback from the inverting node to the output -->
-  <path class="wire" d="M230 110 V48 H255"/>
-  <rect class="comp" x="255" y="38" width="60" height="20"/>
-  <path class="wire" d="M315 48 H365 V150 H390"/>
-
-  <!-- output -->
-  <path class="wire" d="M390 150 H500"/>
-
-  <circle class="dot" cx="230" cy="110" r="3.5"/>
-  <circle class="dot" cx="365" cy="150" r="3.5"/>
-  <text class="lbl" x="140" y="90" text-anchor="middle">R₁</text>
-  <text class="lbl" x="285" y="30" text-anchor="middle">R_f</text>
-  <text class="node" x="60" y="101">v_i</text>
-  <text class="node" x="505" y="143">v_o</text>
-  <text class="node" x="292" y="101">v−</text>
-  <text class="node" x="292" y="201">v+</text>
-</svg>
-<p class="caption">连接关系：$v_i$ 经 $R_1$ 到反相端；$R_f$ 跨接反相端与输出；同相端单独接地</p>
+<figure class="figure">
+  <img src="../assets/opamp/inverting.svg" alt="反相放大电路：输入经 Rin 到反相端，Rf 从输出接回反相端">
+  <figcaption>
+    连接关系：$v_i$ 经 $R_1$ 到反相端；$R_f$ 从输出接回反相端；同相端接地。
+    图中 $R_{\mathrm{in}}$ 对应正文的 $R_1$。
+    <span class="credit">图源：Inductiveload / Wikimedia Commons，Public Domain。</span>
+  </figcaption>
+</figure>
 
 <p>同相端接地，因此 $v_+=0$。负反馈线性工作时由虚短得 $v_-=0$。对反相节点列 KCL：</p>
 <p>$$\frac{v_i-0}{R_1}+\frac{v_o-0}{R_f}=0$$</p>
@@ -117,42 +106,14 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2>五、同相放大电路</h2>
 <p>输入电压直接接同相端；反相端通过 $R_1$ 接地，并通过 $R_f$ 接输出。</p>
 
-<svg class="schematic" viewBox="0 0 540 290" role="img" aria-label="同相放大电路示意图">
-  <!-- input goes only to the non-inverting input -->
-  <path class="wire" d="M60 190 H260"/>
-
-  <!-- op amp -->
-  <path class="comp" d="M260 80 V220 L390 150 Z" style="fill:#fff"/>
-  <text class="sign" x="275" y="108">−</text>
-  <text class="sign" x="275" y="198">+</text>
-
-  <!-- inverting input branch -->
-  <path class="wire" d="M260 110 H230"/>
-
-  <!-- R1 from the inverting node to ground; placed left of the input wire -->
-  <path class="wire" d="M230 110 H170"/>
-  <rect class="comp" x="110" y="100" width="60" height="20"/>
-  <path class="wire" d="M110 110 H40 V255"/>
-  <path class="wire" d="M15 255 H65 M23 264 H57 M31 273 H49"/>
-
-  <!-- feedback from the output back to the inverting node -->
-  <path class="wire" d="M230 110 V48 H260"/>
-  <rect class="comp" x="260" y="38" width="60" height="20"/>
-  <path class="wire" d="M320 48 H365 V150 H390"/>
-
-  <!-- output -->
-  <path class="wire" d="M390 150 H500"/>
-
-  <circle class="dot" cx="230" cy="110" r="3.5"/>
-  <circle class="dot" cx="365" cy="150" r="3.5"/>
-  <text class="lbl" x="140" y="90" text-anchor="middle">R₁</text>
-  <text class="lbl" x="290" y="30" text-anchor="middle">R_f</text>
-  <text class="node" x="70" y="181">v_i</text>
-  <text class="node" x="505" y="143">v_o</text>
-  <text class="node" x="292" y="101">v−</text>
-  <text class="node" x="292" y="201">v+</text>
-</svg>
-<p class="caption">连接关系：$v_i$ 只接同相端；$R_1$ 从反相端接地；$R_f$ 从输出接回反相端。输入线没有接地</p>
+<figure class="figure">
+  <img src="../assets/opamp/non-inverting.svg" alt="同相放大电路：输入只接同相端，R1 接地，R2 从输出接回反相端">
+  <figcaption>
+    连接关系：$v_i$ 只接同相端；$R_1$ 从反相端接地；$R_f$ 从输出接回反相端。
+    图中 $R_2$ 对应正文的反馈电阻 $R_f$。
+    <span class="credit">图源：Inductiveload / Wikimedia Commons，Public Domain。</span>
+  </figcaption>
+</figure>
 
 <p>由虚断，$R_1$ 和 $R_f$ 流过同一电流；由虚短，反相端电位等于输入电压。因此：</p>
 <p>$$v_-=v_i,\qquad v_- = v_o\frac{R_1}{R_1+R_f}$$</p>
