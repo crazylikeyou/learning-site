@@ -61,7 +61,7 @@
 <li>反相放大图中反馈电阻未连到输出端的问题。</li>
 <li>减法电路“等阻值特例”中反馈电阻与同相端接地电阻的配对错误。</li>
 </ul>
-<p>同时新增 7 幅 Wikimedia Commons 公有领域运放电路图，来源记录在 <code>assets/opamp/README.md</code>。</p>
+<p>运放电路图最初使用 Wikimedia Commons 公有领域图片，现已改为课程自有的 LaTeX <code>circuitikz</code> 图。源码、PNG 和重建脚本位于 <code>assets/opamp/circuitikz/</code>。</p>
 <h3>已知可迁移基础</h3>
 <ul>
 <li>电阻串并联、输入电阻和电源置零的基础较好。</li>
@@ -249,6 +249,39 @@
 <li>7 幅源 SVG 均已下载到本地。</li>
 <li>已渲染为 PNG 缩略图逐一查看，确认电路结构完整、输入输出和反馈连接正确。</li>
 <li>图片通过本地 <code>assets/opamp/</code> 加载，不依赖第三方站点实时可用。</li>
+</ul>
+
+</div>
+<div class="doc">
+<h3>0005 · 运放电路图改用 circuitikz</h3>
+<h3>日期</h3>
+<p>2026-10-28</p>
+<h3>完成内容</h3>
+<p>课程中的 7 幅运放电路图全部改用 LaTeX <code>circuitikz</code> 重绘：</p>
+<ul>
+<li>电压跟随器</li>
+<li>反相放大</li>
+<li>同相放大</li>
+<li>反相加法</li>
+<li>差分放大</li>
+<li>积分器</li>
+<li>微分器</li>
+</ul>
+<h3>统一规范</h3>
+<ul>
+<li>使用矩形电阻，贴近中文教材常见画法。</li>
+<li>变量与正文统一为 \(R_1,R_2,R_3,R_f,R,C\)。</li>
+<li>每幅图由独立 <code>.tex</code> 文件生成。</li>
+<li>输出 PDF 后使用 <code>pdftoppm</code> 渲染为 300 dpi PNG。</li>
+<li>保留 <code>build.ps1</code>，可一键重新生成全部图。</li>
+</ul>
+<h3>环境</h3>
+<p>本机 LaTeX 包位于 <code>E:\G\codex\texmf</code>，通过 <code>TEXMFHOME</code> 引用，不修改 TinyTeX 系统目录。</p>
+<h3>校验</h3>
+<ul>
+<li>7 个 TeX 源文件均编译通过。</li>
+<li>7 张 PNG 已逐张查看，确认运放输入、输出、反馈与接地连接正确。</li>
+<li>网页本地图片路径和样式已检查。</li>
 </ul>
 
 </div>
