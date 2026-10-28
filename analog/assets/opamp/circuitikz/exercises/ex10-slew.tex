@@ -1,0 +1,15 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  \draw[->] (0,0) -- (8.2,0) node[below] {$t$};
+  \draw[->] (0,-2.1) -- (0,3.2) node[left] {$v_o$};
+  \draw[dashed,domain=0:7.5,samples=160] plot (\x,{1.65*sin(70*\x)});
+  \draw[thick,domain=0:7.5,samples=160] plot (\x,{1.35*tanh(2.0*sin(70*\x))});
+  \draw[dotted] (0,1.65) -- (7.5,1.65);
+  \node[above] at (1.05,1.65) {$+2\,\mathrm V$};
+  \node[anchor=west,font=\small] at (4.7,2.85) {虚线：理想正弦};
+  \node[anchor=west,font=\small] at (4.7,2.45) {实线：压摆受限输出};
+  \node[font=\small] at (5.8,-1.9) {$\mathrm{SR}=0.1\,\mathrm V/\mu\mathrm s$};
+\end{circuitikz}
+\end{document}

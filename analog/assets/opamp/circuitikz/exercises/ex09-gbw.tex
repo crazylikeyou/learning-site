@@ -1,0 +1,31 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{resistors/scale=0.82,capacitors/scale=0.8,bipoles/length=1.2cm}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  % Closed-loop amplifier
+  \node[op amp] (op) at (2.7,0) {};
+  \coordinate (inv) at (op.-);
+  \coordinate (inp) at ([xshift=-2.2cm]op.+);
+  \coordinate (r1top) at ([xshift=-3.5cm]op.-);
+  \draw (inp) node[left] {$v_i$} -- (op.+);
+  \draw (inv) -- (r1top);
+  \draw (r1top) to[R=$R_1$] ++(0,-1.6) node[ground] {};
+  \coordinate (fbleft) at ([yshift=1.6cm]inv);
+  \coordinate (fbright) at (op.out |- fbleft);
+  \draw (inv) -- (fbleft) to[R=$R_f$] (fbright) -- (op.out);
+  \draw (op.out) -- ++(1.1,0) node[right] {$v_o$};
+  \fill (inv) circle (1.5pt);
+  \fill (op.out) circle (1.5pt);
+  \node[font=\small] at (2.7,-2.35) {闭环增益 $A_{cl}=20$};
+
+  % Bode magnitude sketch
+  \draw[->] (7.2,0) -- (11.4,0) node[below] {$f$};
+  \draw[->] (7.2,0) -- (7.2,3.5) node[left] {$|A|$};
+  \draw[thick] (7.8,2.35) -- (9.1,2.35) -- (10.6,0.85);
+  \draw[dashed] (9.1,0) -- (9.1,2.35);
+  \node[anchor=east,font=\small] at (9.1,2.75) {$A_{cl}=20$};
+  \node[below] at (9.1,-0.05) {$f_H=?$};
+  \node[anchor=west,font=\small] at (7.8,3.15) {$\mathrm{GBW}=1\,\mathrm{MHz}$};
+\end{circuitikz}
+\end{document}

@@ -63,6 +63,7 @@
 </ul>
 <p>运放电路图最初使用 Wikimedia Commons 公有领域图片，现已改为课程自有的 LaTeX <code>circuitikz</code> 图。源码、PNG 和重建脚本位于 <code>assets/opamp/circuitikz/</code>。</p>
 <p>2026-10-28 又优化了加法器、差分放大、跟随器和同相放大四幅图的布线：消除反馈线斜率、无节点交叉和标签拥挤，并统一其余三幅图的 <code>circuitikz</code> 设置。</p>
+<p>两节课共 10 道需要图示的习题现已补充 circuitikz 题图，包括 8 幅电路图和 2 幅非理想特性示意图。</p>
 <h3>已知可迁移基础</h3>
 <ul>
 <li>电阻串并联、输入电阻和电源置零的基础较好。</li>
@@ -308,6 +309,35 @@
 </ul>
 <h3>验证</h3>
 <p>使用 <code>latex-circuitikz</code> 技能提供的编译脚本，以 XeLaTeX 编译 PDF，再以 300 dpi 渲染 PNG。七张图均已重新编译，问题图中的线路、节点和标签逐张检查通过。</p>
+
+</div>
+<div class="doc">
+<h3>0007 · 习题补充 circuitikz 图</h3>
+<h3>日期</h3>
+<p>2026-10-28</p>
+<h3>完成内容</h3>
+<p>为第 2 章两节课中需要图示的 10 道习题补充配图：</p>
+<ul>
+<li>4 幅基本运放与饱和题图</li>
+<li>4 幅加法、差分、积分、微分题图</li>
+<li>1 幅增益带宽积示意图</li>
+<li>1 幅压摆率波形对比图</li>
+</ul>
+<p>纯概念题没有强加装饰图。</p>
+<h3>生成方式</h3>
+<ul>
+<li>使用 <code>latex-circuitikz</code> 技能提供的 XeLaTeX 编译脚本。</li>
+<li>每题一个独立 <code>.tex</code> 文件。</li>
+<li>PDF 以 300 dpi 渲染为 PNG，并嵌入题目下方。</li>
+<li>源码、PNG 和 <code>build.ps1</code> 位于 <code>assets/opamp/circuitikz/exercises/</code>。</li>
+</ul>
+<h3>视觉复核</h3>
+<ul>
+<li>全部 10 个 TeX 文件编译通过。</li>
+<li>逐张检查输入、反馈、接地和输出连接。</li>
+<li>修正了增益带宽积图和压摆率图中文字与曲线重叠的问题。</li>
+<li>题图使用版本参数，避免浏览器加载旧缓存。</li>
+</ul>
 
 </div>
 </body></html>

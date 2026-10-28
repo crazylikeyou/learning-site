@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   .figure figcaption { margin-top: .55rem; color: var(--muted); font-size: .84rem; line-height: 1.55; }
   .figure .credit { display: block; margin-top: .2rem; font-size: .78rem; }
+  .figure.exercise-figure img { max-width: 520px; }
 </style>
 </head>
 <body>
@@ -165,6 +166,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="prob">
 <h3>题 1 · 反相加法</h3>
 <p>$R_1=10\,\mathrm{k}\Omega$，$R_2=20\,\mathrm{k}\Omega$，$R_f=40\,\mathrm{k}\Omega$，$v_1=0.2\,\mathrm V$，$v_2=-0.1\,\mathrm V$。求 $v_o$。</p>
+<figure class="figure exercise-figure">
+  <img src="../assets/opamp/circuitikz/exercises/ex05-summing.png?v=20261028-exercises" alt="反相加法习题电路：v1 经 R1、v2 经 R2 汇入反相节点">
+</figure>
 <details><summary>查看答案</summary><div class="sol">
 <p>$$v_o=-40\left(\frac{0.2}{10}+\frac{-0.1}{20}\right)=-0.6\,\mathrm V$$</p>
 <p>单位中的 $10^3$ 已在分子分母同时约掉。</p>
@@ -174,6 +178,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="prob">
 <h3>题 2 · 减法电路</h3>
 <p>差分电路满足 $R_f/R_1=R_3/R_2=2$，$v_1=0.3\,\mathrm V$，$v_2=0.5\,\mathrm V$。求 $v_o$，并说明共有的 $0.3\,\mathrm V$ 分量会发生什么。</p>
+<figure class="figure exercise-figure">
+  <img src="../assets/opamp/circuitikz/exercises/ex06-differential.png?v=20261028-exercises" alt="差分放大习题电路：v1 经 R1 接反相端，v2 经 R2 接同相端，R3 接地">
+</figure>
 <details><summary>查看答案</summary><div class="sol">
 <p>$$v_o=2(0.5-0.3)=0.4\,\mathrm V$$</p>
 <p>两路共同拥有的 $0.3\,\mathrm V$ 在差值中抵消，不会被理想差模增益放大；电路放大的是差值 $0.2\,\mathrm V$。</p>
@@ -183,6 +190,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="prob">
 <h3>题 3 · 积分器</h3>
 <p>理想积分器 $R=10\,\mathrm{k}\Omega$，$C=0.1\,\mu\mathrm F$，初始输出为 0。输入在 $t=0$ 时跳到 $0.5\,\mathrm V$ 并保持不变。求 $t=2\,\mathrm{ms}$ 时的输出。</p>
+<figure class="figure exercise-figure">
+  <img src="../assets/opamp/circuitikz/exercises/ex07-integrator.png?v=20261028-exercises" alt="积分器习题电路：输入电阻 R 与反馈电容 C">
+</figure>
 <details><summary>查看答案</summary><div class="sol">
 <p>$$RC=10^4\times0.1\times10^{-6}=10^{-3}\,\mathrm s=1\,\mathrm{ms}$$</p>
 <p>输入恒定 $0.5\,\mathrm V$：</p>
@@ -193,6 +203,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="prob">
 <h3>题 4 · 微分器</h3>
 <p>理想微分器 $R=10\,\mathrm{k}\Omega$，$C=0.1\,\mu\mathrm F$。输入三角波上升段斜率为 $+2000\,\mathrm{V/s}$。求上升段输出，并判断下降段符号。</p>
+<figure class="figure exercise-figure">
+  <img src="../assets/opamp/circuitikz/exercises/ex08-differentiator.png?v=20261028-exercises" alt="微分器习题电路：输入电容 C 与反馈电阻 R">
+</figure>
 <details><summary>查看答案</summary><div class="sol">
 <p>$$RC=10^{-3}\,\mathrm s,\qquad v_o=-10^{-3}\times2000=-2\,\mathrm V$$</p>
 <p>上升段输出约 $-2\,\mathrm V$；下降段斜率为负，因此输出翻成约 $+2\,\mathrm V$。输入若为连续三角波，输出近似方波。</p>
@@ -202,6 +215,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="prob">
 <h3>题 5 · 增益带宽积</h3>
 <p>某运放 GBW 为 $1\,\mathrm{MHz}$，接成闭环增益 20 的同相放大器。估算其 $-3\,\mathrm{dB}$ 上限频率。</p>
+<figure class="figure exercise-figure">
+  <img src="../assets/opamp/circuitikz/exercises/ex09-gbw.png?v=20261028-exercises" alt="增益带宽积习题图：闭环增益 20 的放大器和幅频响应示意">
+</figure>
 <details><summary>查看答案</summary><div class="sol">
 <p>$$f_H\approx\frac{\mathrm{GBW}}{A_{cl}}=\frac{10^6}{20}=50\,\mathrm{kHz}$$</p>
 <p>这是主极点和单极点近似的估算，具体还要以数据手册给出的曲线和测试条件为准。</p>
@@ -211,6 +227,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="prob">
 <h3>题 6 · 压摆率</h3>
 <p>运放输出正弦波，幅值 $2\,\mathrm V$、频率 $20\,\mathrm{kHz}$。运放至少需要多大的压摆率才能基本无斜率失真？若运放 SR 只有 $0.1\,\mathrm{V}/\mu\mathrm{s}$，会发生什么？</p>
+<figure class="figure exercise-figure">
+  <img src="../assets/opamp/circuitikz/exercises/ex10-slew.png?v=20261028-exercises" alt="压摆率习题图：理想正弦和压摆受限输出对比">
+</figure>
 <details><summary>查看答案</summary><div class="sol">
 <p>$$\mathrm{SR}_{min}=2\pi fV_{om}=2\pi(20\times10^3)(2)\approx2.51\times10^5\,\mathrm{V/s}\approx0.251\,\mathrm{V}/\mu\mathrm{s}$$</p>
 <p>运放需要约 $0.25\,\mathrm{V}/\mu\mathrm{s}$。若只有 $0.1\,\mathrm{V}/\mu\mathrm{s}$，最大输出斜率不够，正弦波顶部会变尖或被三角化，产生明显非线性失真。</p>

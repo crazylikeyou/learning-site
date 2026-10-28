@@ -12,6 +12,8 @@
 | `integrator.tex` | `integrator.png` | 积分器 |
 | `differentiator.tex` | `differentiator.png` | 微分器 |
 
+`exercises/` 还保存两节课 10 道需要图示的习题电路和波形。
+
 ## 统一约定
 
 - 使用欧洲矩形电阻，接近中文模电教材习惯。

@@ -1,0 +1,18 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{resistors/scale=0.82,capacitors/scale=0.8,bipoles/length=1.2cm}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  \node[op amp] (op) at (5.2,0) {};
+  \coordinate (inv) at (op.-);
+  \draw (0,1.45) node[left] {$v_2$} to[R=$R_2$] (2.55,1.45) -- (2.55,0.45) -- (inv);
+  \draw (0,0.45) node[left] {$v_1$} to[R=$R_1$] (2.0,0.45) -- (inv);
+  \coordinate (fbleft) at ([yshift=1.8cm]inv);
+  \coordinate (fbright) at (op.out |- fbleft);
+  \draw (inv) -- (fbleft) to[R=$R_f$] (fbright) -- (op.out);
+  \draw (op.+) -- (op.+ |- 0,-1.6) node[ground] {};
+  \draw (op.out) -- ++(1.2,0) node[right] {$v_o$};
+  \fill (inv) circle (1.5pt);
+  \fill (op.out) circle (1.5pt);
+\end{circuitikz}
+\end{document}
