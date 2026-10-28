@@ -75,30 +75,43 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="prob">
 <h3><span class="score">15 分</span>二、输入电阻</h3>
 <p>端口 a—b。$R_1 = 6\ \Omega$ 与 $R_2 = 3\ \Omega$ 并联接在 a 与 n1 之间；n1 经 $R_3 = 4\ \Omega$ 接到 n2；$R_4 = 6\ \Omega$ 直接接在 a 与 n2 之间；n2 经 $R_5 = 2\ \Omega$ 接到 b。求输入电阻 $R_{ab}$。</p>
-<svg class="schematic" viewBox="0 0 460 260" role="img" aria-label="输入电阻电路">
-  <path class="wire" d="M70 60 H160"/>
-  <path class="wire" d="M70 60 V100"/>
-  <rect class="comp" x="62" y="100" width="16" height="40"/>
-  <path class="wire" d="M70 140 V200"/>
-  <path class="wire" d="M160 60 V100"/>
-  <rect class="comp" x="152" y="100" width="16" height="40"/>
-  <path class="wire" d="M160 140 V200"/>
-  <path class="wire" d="M70 200 H300"/>
-  <path class="wire" d="M260 60 H330"/>
-  <rect class="comp" x="260" y="50" width="50" height="20"/>
-  <path class="wire" d="M330 60 V130"/>
-  <rect class="comp" x="322" y="130" width="16" height="40"/>
-  <path class="wire" d="M330 170 V200"/>
-  <path class="wire" d="M330 60 H400"/>
-  <text class="node" x="56" y="52" text-anchor="end">a</text>
-  <text class="node" x="416" y="64" text-anchor="start">b</text>
-  <text class="val" x="88" y="125">6Ω</text>
-  <text class="val" x="176" y="125">3Ω</text>
-  <text class="lbl" x="285" y="42" text-anchor="middle">R₃</text>
-  <text class="val" x="285" y="88" text-anchor="middle">4Ω</text>
-  <text class="val" x="345" y="155">6Ω</text>
+<svg class="schematic" viewBox="0 0 620 340" role="img" aria-label="输入电阻电路">
+  <path class="wire" d="M70 170 V100 H160"/>
+  <rect class="comp" x="160" y="90" width="50" height="20"/>
+  <path class="wire" d="M210 100 H260 V170"/>
+  <path class="wire" d="M70 170 V240 H160"/>
+  <rect class="comp" x="160" y="230" width="50" height="20"/>
+  <path class="wire" d="M210 240 H260 V170"/>
+  <path class="wire" d="M260 170 H320"/>
+  <rect class="comp" x="320" y="160" width="50" height="20"/>
+  <path class="wire" d="M370 170 H430"/>
+  <path class="wire" d="M70 240 V305 H200"/>
+  <rect class="comp" x="200" y="295" width="50" height="20"/>
+  <path class="wire" d="M250 305 H430 V170"/>
+  <path class="wire" d="M430 170 H490"/>
+  <rect class="comp" x="490" y="160" width="50" height="20"/>
+  <path class="wire" d="M540 170 H590"/>
+  <circle class="dot" cx="70" cy="170" r="3.5"/>
+  <circle class="dot" cx="260" cy="170" r="3.5"/>
+  <circle class="dot" cx="430" cy="170" r="3.5"/>
+  <circle class="dot" cx="430" cy="305" r="3.5"/>
+  <circle class="dot" cx="70" cy="240" r="3.5"/>
+  <text class="node" x="70" y="152" text-anchor="middle">a</text>
+  <text class="node" x="260" y="152" text-anchor="middle">n₁</text>
+  <text class="node" x="430" y="152" text-anchor="middle">n₂</text>
+  <text class="node" x="604" y="176" text-anchor="start">b</text>
+  <text class="lbl" x="185" y="82" text-anchor="middle">R₁</text>
+  <text class="val" x="185" y="128" text-anchor="middle">6Ω</text>
+  <text class="lbl" x="185" y="222" text-anchor="middle">R₂</text>
+  <text class="val" x="185" y="268" text-anchor="middle">3Ω</text>
+  <text class="lbl" x="345" y="152" text-anchor="middle">R₃</text>
+  <text class="val" x="345" y="198" text-anchor="middle">4Ω</text>
+  <text class="lbl" x="225" y="287" text-anchor="middle">R₄</text>
+  <text class="val" x="225" y="333" text-anchor="middle">6Ω</text>
+  <text class="lbl" x="515" y="152" text-anchor="middle">R₅</text>
+  <text class="val" x="515" y="198" text-anchor="middle">2Ω</text>
 </svg>
-<p class="caption">图 · 从 a、b 看进去</p>
+<p class="caption">图 · R₁∥R₂ 后串 R₃，再与 R₄ 并联，最后串 R₅</p>
 <p>（1）求 $R_{ab}$；（2）写出化简的每一步顺序。</p>
 <details>
 <summary>展开答案</summary>
@@ -310,6 +323,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
+
 
 
 
