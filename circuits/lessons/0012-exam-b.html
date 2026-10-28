@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
   details{margin-top:.9rem}
   details summary{cursor:pointer;color:var(--accent);font-size:.92rem}
   .sol{font-size:.94rem;border-left:2px solid var(--rule);padding-left:1rem;margin-top:.6rem}
+  .fig{display:block;max-width:100%;height:auto;margin:1.8rem auto .4rem}
   .head{background:#faf7f1;border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0}
 </style>
 </head>
@@ -41,29 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h3><span class="score">12 分</span>一、功率与 KCL</h3>
 <p>$12\ \mathrm{V}$ 电压源经 $R_1 = 2\ \Omega$ 后，分成两条并联支路：$R_2 = 6\ \Omega$ 与 $R_3 = 3\ \Omega$，再回到电源负极。</p>
 <p>（1）求总电流；（2）求三个电阻的功率和电压源发出的功率；（3）验证功率平衡。</p>
-<svg class="schematic" viewBox="0 0 500 280" role="img" aria-label="串并联功率电路">
-  <path class="wire" d="M80 70 V120"/>
-  <circle class="comp" cx="80" cy="138" r="18"/>
-  <path class="sign" d="M73 131 H87 M80 124 V138"/>
-  <path class="sign" d="M73 151 H87"/>
-  <path class="wire" d="M80 156 V230"/>
-  <path class="wire" d="M80 70 H140"/>
-  <rect class="comp" x="140" y="60" width="50" height="20"/>
-  <path class="wire" d="M190 70 H420"/>
-  <path class="wire" d="M300 70 V100"/>
-  <rect class="comp" x="292" y="100" width="16" height="50"/>
-  <path class="wire" d="M300 150 V230"/>
-  <circle class="dot" cx="300" cy="70" r="3.5"/>
-  <path class="wire" d="M420 70 V100"/>
-  <rect class="comp" x="412" y="100" width="16" height="50"/>
-  <path class="wire" d="M420 150 V230"/>
-  <path class="wire" d="M60 230 H440"/>
-  <text class="lbl" x="165" y="52" text-anchor="middle">R₁</text>
-  <text class="val" x="165" y="98" text-anchor="middle">2Ω</text>
-  <text class="val" x="318" y="128">6Ω</text>
-  <text class="val" x="438" y="128">3Ω</text>
-  <text class="lbl" x="104" y="142">12V</text>
-</svg>
+<img class="fig" src="../assets/figures/exam-b-q1.svg" alt="exam-b-q1">
 <p class="caption">图 · 一个串联电阻 + 两条并联支路</p>
 <details>
 <summary>展开答案</summary>
@@ -81,28 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="prob">
 <h3><span class="score">15 分</span>二、电桥与输入电阻</h3>
 <p>桥式电路：a–c 为 $R_1 = 2\ \Omega$，c–b 为 $R_2 = 4\ \Omega$，a–d 为 $R_3 = 3\ \Omega$，d–b 为 $R_4 = 6\ \Omega$，c–d 之间跨接 $R_5 = 5\ \Omega$。求 $R_{ab}$。</p>
-<svg class="schematic" viewBox="0 0 440 300" role="img" aria-label="电桥电路">
-  <path class="wire" d="M70 150 L250 60"/>
-  <path class="wire" d="M250 60 L430 150"/>
-  <path class="wire" d="M70 150 L250 240"/>
-  <path class="wire" d="M250 240 L430 150"/>
-  <path class="wire" d="M250 60 V110"/>
-  <rect class="comp" x="242" y="110" width="16" height="45"/>
-  <path class="wire" d="M250 155 V240"/>
-  <circle class="dot" cx="70" cy="150" r="3.5"/>
-  <circle class="dot" cx="250" cy="60" r="3.5"/>
-  <circle class="dot" cx="430" cy="150" r="3.5"/>
-  <circle class="dot" cx="250" cy="240" r="3.5"/>
-  <text class="node" x="52" y="150" text-anchor="end">a</text>
-  <text class="node" x="448" y="150" text-anchor="start">b</text>
-  <text class="node" x="250" y="44" text-anchor="middle">c</text>
-  <text class="node" x="250" y="262" text-anchor="middle">d</text>
-  <text class="val" x="120" y="90">2Ω</text>
-  <text class="val" x="350" y="90">4Ω</text>
-  <text class="val" x="120" y="215">3Ω</text>
-  <text class="val" x="350" y="215">6Ω</text>
-  <text class="val" x="268" y="135">5Ω</text>
-</svg>
+<img class="fig" src="../assets/figures/exam-b-q2.svg" alt="exam-b-q2">
 <p class="caption">图 · 桥式电路，ab 为端口</p>
 <p>（1）判断电桥是否平衡，说明依据；（2）求 $R_{ab}$。</p>
 <details>
@@ -120,35 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h3><span class="score">15 分</span>三、电源等效变换</h3>
 <p>$24\ \mathrm{V}$ 串 $4\ \Omega$ 与 $8\ \mathrm{V}$ 串 $4\ \Omega$ 并联，外接 $6\ \Omega$ 负载。</p>
 <p>（1）求等效电压源；（2）求负载电流；（3）若把 $8\ \mathrm{V}$ 电源的极性反接，负载电流变成多少？</p>
-<svg class="schematic" viewBox="0 0 480 250" role="img" aria-label="两电源并联接负载">
-  <path class="wire" d="M90 60 H330"/>
-  <path class="wire" d="M90 60 V80"/>
-  <circle class="comp" cx="90" cy="98" r="16"/>
-  <path class="sign" d="M84 92 H96 M90 86 V98"/>
-  <path class="sign" d="M84 109 H96"/>
-  <path class="wire" d="M90 114 V150"/>
-  <rect class="comp" x="82" y="150" width="16" height="40"/>
-  <path class="wire" d="M90 190 V210"/>
-  <path class="wire" d="M210 60 V80"/>
-  <circle class="comp" cx="210" cy="98" r="16"/>
-  <path class="sign" d="M204 92 H216 M210 86 V98"/>
-  <path class="sign" d="M204 109 H216"/>
-  <path class="wire" d="M210 114 V150"/>
-  <rect class="comp" x="202" y="150" width="16" height="40"/>
-  <path class="wire" d="M210 190 V210"/>
-  <path class="wire" d="M330 60 V150"/>
-  <rect class="comp" x="322" y="150" width="16" height="40"/>
-  <path class="wire" d="M330 190 V210"/>
-  <path class="wire" d="M60 210 H360"/>
-  <circle class="dot" cx="90" cy="60" r="3.5"/>
-  <circle class="dot" cx="210" cy="60" r="3.5"/>
-  <circle class="dot" cx="330" cy="60" r="3.5"/>
-  <text class="lbl" x="112" y="96">24 V</text>
-  <text class="lbl" x="232" y="96">8 V</text>
-  <text class="val" x="104" y="175">4Ω</text>
-  <text class="val" x="224" y="175">4Ω</text>
-  <text class="val" x="352" y="175">6Ω</text>
-</svg>
+<img class="fig" src="../assets/figures/exam-b-q3.svg" alt="exam-b-q3">
 <p class="caption">图 · 两个实际电压源并联，外接 6 Ω 负载</p>
 
 <details>
@@ -167,36 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h3><span class="score">18 分</span>四、回路电流法</h3>
 <p>两个网孔，回路电流均取顺时针。左网孔外侧支路是 $2\ \mathrm{A}$ 电流源（方向与顺时针一致）；两网孔共用中间支路 $R_2 = 4\ \Omega$；右网孔还有 $R_3 = 6\ \Omega$。</p>
 <p>（1）求两个回路电流；（2）求中间共用支路的真实电流和方向；（3）说明这道题为什么只需要一个方程。</p>
-<svg class="schematic" viewBox="0 0 480 300" role="img" aria-label="两网孔电路">
-  <defs>
-    <marker id="arB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#8c2f1f"/></marker>
-    <marker id="arB2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2b2b2b"/></marker>
-  </defs>
-  <path class="wire" d="M90 70 H225"/>
-  <path class="wire" d="M225 70 H320"/>
-  <rect class="comp" x="320" y="60" width="50" height="20"/>
-  <path class="wire" d="M370 70 H410"/>
-  <path class="wire" d="M90 70 V150"/>
-  <circle class="comp" cx="90" cy="168" r="18"/>
-  <path class="sign" d="M90 178 V155" marker-end="url(#arB2)"/>
-  <path class="wire" d="M90 186 V250"/>
-  <path class="wire" d="M225 70 V95"/>
-  <rect class="comp" x="217" y="95" width="16" height="50"/>
-  <path class="wire" d="M225 145 V250"/>
-  <path class="wire" d="M410 70 V250"/>
-  <path class="wire" d="M60 250 H440"/>
-  <circle class="dot" cx="90" cy="70" r="3.5"/>
-  <circle class="dot" cx="225" cy="70" r="3.5"/>
-  <circle class="dot" cx="410" cy="70" r="3.5"/>
-  <path d="M120 165 A 42 42 0 0 1 190 165" fill="none" stroke="#8c2f1f" stroke-width="1.8" marker-end="url(#arB)"/>
-  <path d="M290 165 A 42 42 0 0 1 360 165" fill="none" stroke="#8c2f1f" stroke-width="1.8" marker-end="url(#arB)"/>
-  <text class="node" x="155" y="128" text-anchor="middle">I₁</text>
-  <text class="node" x="325" y="128" text-anchor="middle">I₂</text>
-  <text class="lbl" x="112" y="168">2A</text>
-  <text class="val" x="245" y="125">4Ω</text>
-  <text class="lbl" x="345" y="48" text-anchor="middle">R₃</text>
-  <text class="val" x="345" y="96" text-anchor="middle">6Ω</text>
-</svg>
+<img class="fig" src="../assets/figures/exam-b-q4.svg" alt="exam-b-q4">
 <p class="caption">图 · 电流源在左网孔外围支路</p>
 <details>
 <summary>展开答案</summary>
@@ -213,34 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h3><span class="score">20 分</span>五、戴维南与最大功率</h3>
 <p>$12\ \mathrm{V}$ 电压源经 $R_1 = 4\ \Omega$ 接到节点 b，$R_2 = 6\ \Omega$ 由 b 接地。在 b 与地之间外接可变负载 $R_L$。</p>
 <p>（1）求开路电压 $U_{oc}$、等效内阻 $R_{eq}$、短路电流 $I_{sc}$；（2）画出戴维南和诺顿两种等效电路；（3）$R_L$ 取何值时功率最大，最大功率多少？</p>
-<svg class="schematic" viewBox="0 0 470 300" role="img" aria-label="戴维南电路">
-  <path class="wire" d="M100 80 H150"/>
-  <rect class="comp" x="150" y="70" width="50" height="20"/>
-  <path class="wire" d="M200 80 H300"/>
-  <path class="wire" d="M100 80 V150"/>
-  <circle class="comp" cx="100" cy="168" r="18"/>
-  <path class="sign" d="M93 161 H107 M100 154 V168"/>
-  <path class="sign" d="M93 181 H107"/>
-  <path class="wire" d="M100 186 V260"/>
-  <path class="wire" d="M300 80 V110"/>
-  <rect class="comp" x="292" y="110" width="16" height="50"/>
-  <path class="wire" d="M300 160 V260"/>
-  <path class="wire" d="M300 80 H380"/>
-  <path class="wire" d="M380 80 V115"/>
-  <rect class="comp" x="372" y="115" width="16" height="50"/>
-  <path class="wire" d="M380 165 V260"/>
-  <path class="wire" d="M80 260 H400"/>
-  <circle class="dot" cx="100" cy="80" r="3.5"/>
-  <circle class="dot" cx="300" cy="80" r="3.5"/>
-  <circle class="dot" cx="380" cy="80" r="3.5"/>
-  <text class="node" x="300" y="66" text-anchor="middle">b</text>
-  <text class="lbl" x="175" y="62" text-anchor="middle">R₁</text>
-  <text class="val" x="175" y="108" text-anchor="middle">4Ω</text>
-  <text class="val" x="318" y="140">6Ω</text>
-  <text class="lbl" x="122" y="172">12 V</text>
-  <text class="lbl" x="396" y="135">R_L</text>
-  <text class="val" x="396" y="153">可变</text>
-</svg>
+<img class="fig" src="../assets/figures/exam-b-q5.svg" alt="exam-b-q5">
 <p class="caption">图 · b 与地之间接可变负载 $R_L$</p>
 
 <details>
@@ -260,30 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h3><span class="score">20 分</span>六、相量混联</h3>
 <p>$R_1 = 6\ \Omega$ 与电容（$X_C = 6\ \Omega$）并联得 $Z_1$；$Z_1$ 再与 $R_2 = 3\ \Omega$、电感（$X_L = 3\ \Omega$）串联。接 $\dot U = 60\angle0^\circ\ \mathrm{V}$。</p>
 <p>（1）求 $Z_1$ 和总阻抗 $Z$；（2）求总电流；（3）求两条并联支路的电流，并验算。</p>
-<svg class="schematic" viewBox="0 0 520 230" role="img" aria-label="混联阻抗框图">
-  <path class="wire" d="M60 120 H100"/>
-  <circle class="comp" cx="45" cy="120" r="0"/>
-  <path class="wire" d="M60 120 V180"/>
-  <path class="wire" d="M60 180 H200"/>
-  <path class="wire" d="M200 180 V120"/>
-  <rect class="comp" x="100" y="70" width="100" height="100" style="fill:#faf7f1"/>
-  <text class="lbl" x="150" y="108" text-anchor="middle">Z₁</text>
-  <text class="val" x="150" y="132" text-anchor="middle">R₁ ∥ C</text>
-  <text class="val" x="150" y="152" text-anchor="middle">= 3 − j3 Ω</text>
-  <path class="wire" d="M200 120 H240"/>
-  <rect class="comp" x="240" y="110" width="50" height="20"/>
-  <path class="wire" d="M290 120 H330"/>
-  <rect class="comp" x="330" y="110" width="50" height="20"/>
-  <path class="wire" d="M380 120 H470"/>
-  <path class="wire" d="M470 120 V180"/>
-  <path class="wire" d="M470 180 H60"/>
-  <path class="wire" d="M30 120 H60"/>
-  <text class="lbl" x="265" y="102" text-anchor="middle">R₂</text>
-  <text class="val" x="265" y="150" text-anchor="middle">3Ω</text>
-  <text class="lbl" x="355" y="102" text-anchor="middle">L</text>
-  <text class="val" x="355" y="150" text-anchor="middle">X_L = 3Ω</text>
-  <text class="val" x="24" y="112" text-anchor="end">U</text>
-</svg>
+<img class="fig" src="../assets/figures/exam-b-q6.svg" alt="exam-b-q6">
 <p class="caption">图 · 并联段 $Z_1$ 与 $R_2$、$L$ 串联（框图）</p>
 
 <details>
@@ -307,5 +158,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
