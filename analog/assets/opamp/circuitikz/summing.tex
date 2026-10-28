@@ -1,29 +1,29 @@
-\documentclass[border=8pt]{standalone}
-\usepackage{circuitikz}
-\ctikzset{resistor=european,resistors/scale=0.8,capacitors/scale=0.8,bipoles/length=1.2cm}
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{resistors/scale=0.82,capacitors/scale=0.8,bipoles/length=1.2cm}
 \begin{document}
 \begin{circuitikz}[line width=0.8pt]
-  \node[op amp] (op) at (5,0) {};
+  \node[op amp] (op) at (5.2,0) {};
   \coordinate (inv) at (op.-);
 
-  \draw (0,1.1) node[left] {$v_1$}
-    to[R=$R_1$] (3.1,1.1) -- (3.1,0.45) -- (inv);
-  \draw (0,2.2) node[left] {$v_2$}
-    to[R=$R_2$] (2.7,2.2) -- (2.7,0.45) -- (inv);
+  \draw (0,1.45) node[left] {$v_2$}
+    to[R=$R_2$] (2.55,1.45)
+    -- (2.55,0.45) -- (inv);
+  \draw (0,0.45) node[left] {$v_1$}
+    to[R=$R_1$] (2.0,0.45)
+    -- (inv);
 
-  \draw (inv) -- ++(0,1.8) coordinate (fb-left)
-    to[R=$R_f$] ++(3.2,0) coordinate (fb-right)
-    -- (fb-right |- op.out)
+  \coordinate (fbleft) at ([yshift=1.8cm]inv);
+  \coordinate (fbright) at (op.out |- fbleft);
+  \draw (inv) -- (fbleft)
+    to[R=$R_f$] (fbright)
     -- (op.out);
 
-  \draw (op.+) -- (op.+ |- 0,-1.5) node[ground] {};
-  \draw (op.out) -- ++(1.2,0) coordinate (out) node[right] {$v_o$};
+  \draw (op.+) -- (op.+ |- 0,-1.6) node[ground] {};
+  \draw (op.out) -- ++(1.2,0) node[right] {$v_o$};
 
-  \fill (inv) circle (1.4pt);
-  \fill (3.1,0.45) circle (1.2pt);
-  \fill (fb-right |- op.out) circle (1.4pt);
-  \fill (out) circle (1.4pt);
-  \draw (op.-) node[above left=1pt] {$v_-$};
-  \draw (op.+) node[below left=1pt] {$v_+$};
+  \fill (inv) circle (1.5pt);
+  \draw (inv) node[above left=2pt] {$v_-$};
+  \draw (op.+) node[below left=2pt] {$v_+$};
 \end{circuitikz}
 \end{document}

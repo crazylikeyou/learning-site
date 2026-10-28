@@ -1,16 +1,12 @@
-\documentclass[border=8pt]{standalone}
-\usepackage{circuitikz}
-\ctikzset{
-  resistor=european,
-  resistors/scale=0.8,
-  capacitors/scale=0.8,
-  bipoles/length=1.2cm
-}
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{resistors/scale=0.82,capacitors/scale=0.8,bipoles/length=1.2cm}
 \begin{document}
 \begin{circuitikz}[line width=0.8pt]
-  \node[op amp] (op) at (4,0) {};
+  \node[op amp] (op) at (4.5,0) {};
+  \coordinate (inp) at ([xshift=-4cm]op.-);
 
-  \draw (0,0) node[left] {$v_i$}
+  \draw (inp) node[left] {$v_i$}
     to[R=$R_1$] (op.-);
 
   \draw (op.+) -- (op.+ |- 0,-1.5) node[ground] {};
