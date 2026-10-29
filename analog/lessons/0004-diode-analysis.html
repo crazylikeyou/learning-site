@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 4 课 · 图解分析、小信号与开关电路</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .back { font-size: .9rem; }
+  .warn { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: #faf7f1; }
+  .prob { margin: 2.2rem 0; padding: 1.1rem 1.3rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .75rem; font-size: 1rem; border: 0; padding: 0; }
+  details { margin-top: .9rem; }
+  summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { margin-top: .7rem; padding-left: 1rem; border-left: 2px solid var(--rule); font-size: .95rem; }
+  table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
+  table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
+  table.k th { color: #444; font-weight: 600; }
+  .figure { margin: 1.8rem auto 1.2rem; text-align: center; }
+  .figure img { display:block; width:100%; max-width:600px; height:auto; margin:0 auto; padding:.8rem; background:#fff; border:1px solid var(--rule); }
+  .figure figcaption { margin-top:.55rem; color:var(--muted); font-size:.84rem; }
+</style>
+</head>
+<body>
+<p class="back"><a href="../">← 返回模电课程</a></p>
+
+<h1>第 4 课 · 图解分析、小信号与开关电路</h1>
+<p class="sub">图解分析给出工作点，简化模型负责计算，小信号模型处理工作点附近的微小变化。</p>
+<p class="meta">2026-10-29 · 预计 25 分钟 · 对应课堂第 3 章分析方法</p>
+
+<h2>一、图解分析：负载线与工作点</h2>
+<p>对左侧“电源—电阻—二极管”回路列 KVL：</p>
+<p>$$V_{DD}=i_DR+v_D$$</p>
+<p>整理成直线：</p>
+<p>$$i_D=-\frac{1}{R}v_D+\frac{V_{DD}}{R}$$</p>
+<p>这条直线称为<strong>负载线</strong>，斜率是 $-1/R$；它与二极管伏安特性曲线的交点就是静态工作点 $Q(V_D,I_D)$。</p>
+
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-loadline.png?v=20261029-diode1" alt="二极管串联电路及其负载线与 Q 点">
+  <figcaption>负载线与二极管特性的交点给出工作点 $Q$。</figcaption>
+</figure>
+
+<table class="k">
+  <tr><th>截距</th><th>条件</th><th>坐标</th></tr>
+  <tr><td>电流轴截距</td><td>$v_D=0$</td><td>$(0,V_{DD}/R)$</td></tr>
+  <tr><td>电压轴截距</td><td>$i_D=0$</td><td>$(V_{DD},0)$</td></tr>
+</table>
+
+<h2>二、简化模型分析的判断流程</h2>
+<p>遇到二极管电路，不要先套公式。按以下顺序：</p>
+<ol>
+  <li>先假设二极管截止，画出开路电路。</li>
+  <li>计算阳极和阴极电位，判断 $v_D$ 的假定符号。</li>
+  <li>若应导通，再换成短路、恒压降或折线模型重新计算。</li>
+  <li>用真实电流方向检查假设：正向电流必须为正；反向时不能出现强制正向电流。</li>
+</ol>
+
+<div class="warn">
+  <strong>“开路判断法”是后续多个电路共同的入口。</strong>
+  判断二极管状态时，先把二极管拿掉最安全。普通整流二极管不能直接当作双向开关。
+</div>
+
+<h2>三、小信号模型</h2>
+<p>指数模型在工作点 $Q$ 附近可以线性化，切线斜率就是二极管的增量电导：</p>
+<p>$$g_d=\left.\frac{\mathrm di_D}{\mathrm dv_D}\right|_Q
+=\frac{I_S}{V_T}e^{v_D/V_T}\approx\frac{I_{DQ}}{V_T}$$</p>
+<p>因此小信号电阻为：</p>
+<p>$$r_d=\frac{1}{g_d}\approx\frac{V_T}{I_{DQ}}$$</p>
+<p>在 $T=300\,\mathrm K$ 时，若电流单位取 mA：</p>
+<p>$$r_d\approx\frac{26\,\mathrm{mV}}{I_{DQ}(\mathrm{mA})}\ \Omega$$</p>
+
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-small-signal.png?v=20261029-diode1" alt="二极管在 Q 点附近切线与小信号电阻等效模型">
+  <figcaption>在 $Q$ 点附近，非线性二极管可用动态电阻 $r_d$ 近似。</figcaption>
+</figure>
+
+<p>总电流可以写成 \(i_D=I_{DQ}+i_d\)，其中 $i_d$ 是围绕工作点的微小变化。$r_d$ 只在给定工作点附近有效，不能当成一个固定不变的器件参数到处套用。</p>
+
+<h2>四、开关电路：先断开二极管</h2>
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-switch.png?v=20261029-diode1" alt="带 6 伏和 12 伏电源的二极管开关电路例题">
+  <figcaption>课堂例题：先断开 $D$，求两端电位；再判断是否导通。</figcaption>
+</figure>
+
+<p>以图中 $O$ 点为 0 V。先断开二极管：</p>
+<p>$$V_A^{(\text{open})}=-6\,\mathrm V$$</p>
+<p>另一侧的阴极经电阻和电源接到 $O$，在无电流时：</p>
+<p>$$V_K^{(\text{open})}=-12\,\mathrm V$$</p>
+<p>阳极电位高于阴极，因此二极管导通。理想模型导通后压降为 0，所以：</p>
+<p>$$V_A=V_K=-6\,\mathrm V,\qquad v_{AO}=-6\,\mathrm V$$</p>
+
+<h2>五、习题</h2>
+
+<div class="prob">
+<h3>题 1 · 负载线截距</h3>
+<p>$V_{DD}=10\,\mathrm V$、$R=1\,\mathrm{k}\Omega$。求负载线在两个坐标轴上的截距和斜率。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>电压轴截距为 $10\,\mathrm V$；电流轴截距为 $10/1000=10\,\mathrm{mA}$。斜率是 $-1/R=-1\,\mathrm{mS}$。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 2 · 小信号电阻</h3>
+<p>某二极管静态电流 $I_{DQ}=2\,\mathrm{mA}$，求常温下的小信号电阻 $r_d$。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>$$r_d\approx\frac{26\,\mathrm{mV}}{2\,\mathrm{mA}}=13\,\Omega$$</p>
+<p>这是 $2\mathrm{mA}$ 工作点附近的增量电阻，换成其他直流电流就要重新计算。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 3 · 开关判断</h3>
+<p>先断开二极管时，测得阳极 $1\,\mathrm V$、阴极 $-2\,\mathrm V$。理想二极管接下来处于什么状态？导通后两端电压近似多少？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>开路时 $v_D=1-(-2)=3\,\mathrm V>0$，所以二极管将导通。理想模型下导通压降约为 0，阳极与阴极电位近似相等。</p>
+</div></details>
+</div>
+
+<p class="foot"><a href="0005-diode-applications.html">下一课：半波整流、限幅与钳位 →</a></p>
+</body>
+</html>

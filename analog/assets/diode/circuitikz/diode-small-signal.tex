@@ -1,0 +1,23 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{resistors/scale=0.82,bipoles/length=1.2cm}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  \draw[->] (0,0) -- (5,0) node[below] {$v_D$};
+  \draw[->] (0,0) -- (0,4.2) node[left] {$i_D$};
+  \draw[thick,domain=1.2:4.3,samples=100] plot (\x,{0.15*exp(0.9*(\x-1.2))});
+  \draw[dashed] (3.1,0) -- (3.1,2.35) -- (0,2.35);
+  \fill (3.1,2.35) circle (2pt) node[above right] {$Q$};
+  \node[below] at (3.1,-0.05) {$V_{DQ}$};
+  \node[left] at (0,2.35) {$I_{DQ}$};
+  \draw[thick] (1.5,1.2) -- (4.8,3.6);
+  \node[right] at (4.1,3.3) {切线};
+
+  \draw (8.0,0.4) node[circ]{} -- (8.0,0.9);
+  \draw (7.5,0.9) rectangle (8.5,2.5);
+  \node at (8.0,1.7) {$r_d$};
+  \draw (8.0,2.5) -- (8.0,3.0) node[circ]{};
+  \draw[<->] (7.0,0.9) -- (7.0,2.5) node[midway,left] {$\Delta v_D$};
+  \draw[->,thick] (8.8,3.15) -- (8.8,2.5) node[midway,right] {$\Delta i_D$};
+\end{circuitikz}
+\end{document}

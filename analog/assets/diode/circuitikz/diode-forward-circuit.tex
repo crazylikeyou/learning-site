@@ -1,0 +1,12 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{resistors/scale=0.82,diodes/scale=0.9,bipoles/length=1.2cm}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  \draw (0,0) to[V,l=$5\,\mathrm V$] (0,3)
+    to[R=$1\,\mathrm{k}\Omega$] (3,3)
+    to[D*=$D$, v=$v_D$] (3,0) -- (0,0);
+  \node[right] at (3.25,1.5) {$i_D$};
+  \draw[->] (3.55,1.8) -- (3.55,1.2);
+\end{circuitikz}
+\end{document}

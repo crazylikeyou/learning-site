@@ -1,0 +1,17 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{capacitors/scale=0.8,diodes/scale=0.9,bipoles/length=1.2cm}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  \draw (0,0) to[V,l=$v_i$] (0,3)
+    to[C=$C$] (3.2,3) -- (5.2,3) node[right] {$v_o$}
+    to[D*=$D$] (5.2,0) -- (0,0);
+
+  \draw[->] (0.7,-1.5) -- (7.4,-1.5) node[below] {$\omega t$};
+  \draw[thick,dashed,domain=0.9:7.1,samples=120] plot (\x,{-1.5+0.85*sin(100*(\x-0.9))});
+  \draw[thick,domain=0.9:7.1,samples=120] plot (\x,{-1.05-0.85*sin(100*(\x-0.9))});
+  \draw[dotted] (0.9,0.05) -- (7.1,0.05);
+  \node[above] at (1.0,0.05) {$0$};
+  \node[anchor=west,font=\small] at (0.7,-0.45) {虚线：$v_i$；实线：$v_o$};
+\end{circuitikz}
+\end{document}

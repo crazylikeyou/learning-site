@@ -1,0 +1,16 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{resistors/scale=0.82,diodes/scale=0.9,bipoles/length=1.2cm}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  \draw (0,0) to[V,l=$v_i$] (0,3)
+    to[R=$R$] (3.2,3) -- (5.2,3) node[right] {$v_o$}
+    to[D*=$D$] (5.2,0)
+    to[V,l=$V_{REF}$] (3.2,0) -- (0,0);
+
+  \draw[->] (0.7,-2.7) -- (7.4,-2.7) node[below] {$\omega t$};
+  \draw[thick,dashed,domain=0.9:7.1,samples=150] plot (\x,{-2.7+0.9*sin(100*(\x-0.9))});
+  \draw[thick] plot[smooth] coordinates {(0.9,-2.7) (1.7,-1.15) (2.2,-1.15) (2.6,-1.7) (3.2,-2.7) (4.0,-1.15) (4.5,-1.15) (4.9,-1.7) (5.5,-2.7) (6.3,-1.15) (6.8,-1.15) (7.1,-1.9)};
+  \node[above] at (2.0,-1.15) {$V_{REF}$};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 5 课 · 半波整流、限幅与钳位</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .back { font-size: .9rem; }
+  .warn { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: #faf7f1; }
+  .prob { margin: 2.2rem 0; padding: 1.1rem 1.3rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .75rem; font-size: 1rem; border: 0; padding: 0; }
+  details { margin-top: .9rem; }
+  summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { margin-top: .7rem; padding-left: 1rem; border-left: 2px solid var(--rule); font-size: .95rem; }
+  table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
+  table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
+  table.k th { color: #444; font-weight: 600; }
+  .figure { margin: 1.8rem auto 1.2rem; text-align: center; }
+  .figure img { display:block; width:100%; max-width:600px; height:auto; margin:0 auto; padding:.8rem; background:#fff; border:1px solid var(--rule); }
+  .figure figcaption { margin-top:.55rem; color:var(--muted); font-size:.84rem; line-height:1.55; }
+</style>
+</head>
+<body>
+<p class="back"><a href="../">← 返回模电课程</a></p>
+
+<h1>第 5 课 · 半波整流、限幅与钳位</h1>
+<p class="sub">波形不能靠背形状；每一段都由二极管“导通或截止”推出。</p>
+<p class="meta">2026-10-29 · 预计 25 分钟 · 对应课堂第 3 章应用</p>
+
+<h2>一、半波整流</h2>
+<p>交流源、二极管和负载串联。采用理想二极管模型时：</p>
+<ul>
+  <li>输入为正向半周，二极管导通，$v_L=v_s$。</li>
+  <li>输入为负向半周，二极管截止，$v_L=0$。</li>
+</ul>
+
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-halfwave.png?v=20261029-diode1" alt="半波整流电路和输入输出波形">
+  <figcaption>理想半波整流：只保留正向半周。</figcaption>
+</figure>
+
+<p>若使用恒压降模型，导通时还要满足：</p>
+<p>$$v_L=v_s-V_D$$</p>
+<p>因此只有当 $v_s>V_D$ 时，二极管才产生明显正向电流。</p>
+
+<h2>二、限幅电路</h2>
+<p>输入经电阻接到输出节点，二极管支路将输出限制在参考电平附近。理想模型下：</p>
+<p>$$v_o\le V_{REF}$$</p>
+<p>输入峰值高于 $V_{REF}$ 时，二极管导通，输出顶部被削平；低于参考电平时二极管截止，输出跟随输入。</p>
+
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-limiter.png?v=20261029-diode1" alt="二极管限幅电路、输入正弦和限幅后的输出">
+  <figcaption>理想限幅电路的顶部箝位在 $V_{REF}$。</figcaption>
+</figure>
+
+<p>若改用恒压降模型，则要考虑二极管自身压降：</p>
+<p>$$v_{o,\max}=V_{REF}+V_D$$</p>
+
+<div class="warn">
+  <strong>限幅先看方向和阈值。</strong>
+  二极管反向不会在 $V_{REF}$ 处导通；同样，输入未达到阈值时，输出仍由电阻和负载关系决定。
+</div>
+
+<h2>三、钳位电路</h2>
+<p>钳位电路用电容保存一个直流电平，使波形的交流形状基本保留，但整体上下平移。稳态分析时，先判断电容已经充到什么电压，再把二极管当作理想开关。</p>
+
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-clamp.png?v=20261029-diode1" alt="二极管钳位电路、输入波形和整体下移后的输出波形">
+  <figcaption>理想钳位：输入为正峰值时二极管导通，电容充电；随后输出整体平移。</figcaption>
+</figure>
+
+<p>若输入幅值为 $V_m$，且电容在正峰时充电到 $V_m$，那么输出峰谷位置约为：</p>
+<p>$$v_{o,\max}=0,\qquad v_{o,\min}=-2V_m$$</p>
+<p>这是本页所示二极管方向的负向钳位。改变二极管或电源方向，输出会被推到另一侧；不要只背“上移/下移”。</p>
+
+<h2>四、开关电路</h2>
+<p>课堂例题的基本步骤仍是“先断开二极管”：</p>
+<ol>
+  <li>把二极管开路，求出阳极和阴极电位。</li>
+  <li>若阳极高于阴极，则假设导通；反之假设截止。</li>
+  <li>换成理想短路或恒压降模型重新计算。</li>
+  <li>检查电流方向是否与导通假设一致。</li>
+</ol>
+
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-switch.png?v=20261029-diode1" alt="含 6 伏和 12 伏电源的二极管开关电路">
+  <figcaption>断开 $D$ 后得到阳极 $-6\,\mathrm V$、阴极 $-12\,\mathrm V$，故理想二极管导通。</figcaption>
+</figure>
+
+<h2>五、习题</h2>
+
+<div class="prob">
+<h3>题 1 · 半波整流峰值</h3>
+<p>理想半波整流电路输入峰值为 $10\,\mathrm V$。输出正峰约是多少？另外半个周期输出怎样？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>正向半周二极管导通，输出正峰约 $10\,\mathrm V$；负向半周截止，输出约为 0。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 2 · 限幅电平</h3>
+<p>限幅电路 $V_{REF}=3\,\mathrm V$。若二极管分别为理想模型和恒压降模型，顶部输出限制约在何处？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>理想模型约限制在 $3\,\mathrm V$；恒压降模型还要加上二极管正向压降，若取 $V_D=0.7\,\mathrm V$，则约限制在 $3.7\,\mathrm V$。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 3 · 钳位后的峰谷</h3>
+<p>按本课图示，输入正弦幅值 $V_m=4\,\mathrm V$，电容已充电到稳态。输出最大值约为 0，最小值约为多少？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>输出整体下移约 $V_m$，峰谷差仍为 $8\,\mathrm V$。所以最大值约 0，最小值约 $-8\,\mathrm V$。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 4 · 开关电路</h3>
+<p>若课堂电路中把右侧 $12\,\mathrm V$ 电源改成 $2\,\mathrm V$，仍以原来的负极方向连接，重新判断二极管状态。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>断开二极管时，阳极仍为 $-6\,\mathrm V$，阴极变为 $-2\,\mathrm V$。此时阴极电位高于阳极，二极管截止，电路不能继续使用“导通后 $v_D=0$”的结论。</p>
+</div></details>
+</div>
+
+<p class="foot">完成标准：能从“二极管状态”推出波形，而不是凭形状猜；能先求 Q 点，再使用小信号电阻。</p>
+</body>
+</html>

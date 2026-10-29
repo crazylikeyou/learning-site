@@ -1,0 +1,18 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\ctikzset{resistors/scale=0.82,diodes/scale=0.9,bipoles/length=1.2cm}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  \draw (0,0) to[V,l=$V_{DD}$] (0,4)
+    -- (1.5,4) to[R=$R$] (3.5,4) -- (5,4)
+    to[D*=$D$, v=$v_D$] (5,0) -- (0,0);
+  \draw[->] (7.2,0) -- (12.1,0) node[below] {$v_D$};
+  \draw[->] (7.2,0) -- (7.2,4.2) node[left] {$i_D$};
+  \draw[thick] (7.8,3.6) -- (11.3,0.2) node[below left] {负载线};
+  \draw[thick,domain=7.8:10.9,samples=100] plot (\x,{0.06*exp(0.72*(\x-8))});
+  \fill (9.65,1.95) circle (2pt) node[above right] {$Q$};
+  \draw[dashed] (9.65,0) -- (9.65,1.95) -- (7.2,1.95);
+  \node[below] at (9.65,-0.05) {$V_D$};
+  \node[left] at (7.2,1.95) {$I_D$};
+\end{circuitikz}
+\end{document}

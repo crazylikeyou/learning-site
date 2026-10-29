@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 3 课 · 二极管器件与模型</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .back { font-size: .9rem; }
+  .warn { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: #faf7f1; }
+  .prob { margin: 2.2rem 0; padding: 1.1rem 1.3rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .75rem; font-size: 1rem; border: 0; padding: 0; }
+  details { margin-top: .9rem; }
+  summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { margin-top: .7rem; padding-left: 1rem; border-left: 2px solid var(--rule); font-size: .95rem; }
+  table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
+  table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
+  table.k th { color: #444; font-weight: 600; }
+  .figure { margin: 1.8rem auto 1.2rem; text-align: center; }
+  .figure img { display:block; width:100%; max-width:520px; height:auto; margin:0 auto; padding:.8rem; background:#fff; border:1px solid var(--rule); }
+  .figure figcaption { margin-top:.55rem; color:var(--muted); font-size:.84rem; }
+</style>
+</head>
+<body>
+<p class="back"><a href="../">← 返回模电课程</a></p>
+
+<h1>第 3 课 · 二极管器件与模型</h1>
+<p class="sub">先判断二极管能不能导通，再决定采用哪一个等效模型。</p>
+<p class="meta">2026-10-29 · 预计 20 分钟 · 对应课堂第 3 章前半部分</p>
+
+<h2>一、从 PN 结到二极管</h2>
+<p>二极管的核心是一个 PN 结。常用半导体材料是硅和锗；通过掺杂形成 N 型或 P 型半导体。多数载流子的运动由浓度差造成扩散，电场又会形成漂移，二者共同决定 PN 结的平衡状态。</p>
+
+<table class="k">
+  <tr><th>偏置</th><th>连接</th><th>主要现象</th></tr>
+  <tr><td>正向偏置</td><td>P 区电位高于 N 区</td><td>势垒降低，正向电流明显增加</td></tr>
+  <tr><td>反向偏置</td><td>P 区电位低于 N 区</td><td>势垒增加，只有很小的反向电流</td></tr>
+  <tr><td>反向击穿</td><td>反向电压达到 $V_{BR}$</td><td>反向电流急剧增加，需检查电路限流</td></tr>
+</table>
+
+<p>二极管还具有结电容效应；高频或快速开关时，还要考虑反向恢复时间。</p>
+
+<h2>二、二极管的主要参数</h2>
+<ul>
+  <li><strong>最大整流电流</strong> $I_F$：允许长期通过的正向电流上限。</li>
+  <li><strong>反向击穿电压</strong> $V_{BR}$：不允许普通整流二极管随便进入的区域。</li>
+  <li><strong>反向电流</strong> $I_R$：反向未击穿时的漏电流，通常越小越好。</li>
+  <li><strong>极间电容</strong> $C_d$：影响高频响应和开关速度。</li>
+  <li><strong>反向恢复时间</strong> $t_{rr}$：从导通切换到截止所需时间，开关电路的重要限制。</li>
+</ul>
+
+<h2>三、指数模型</h2>
+<p>二极管电流与电压的最基本非线性模型是：</p>
+<p>$$i_D=I_S\left(e^{v_D/V_T}-1\right)$$</p>
+<p>$I_S$ 是反向饱和电流，$V_T$ 是热电压。常温 $T=300\,\mathrm K$ 时通常取：</p>
+<p>$$V_T\approx26\,\mathrm{mV}$$</p>
+<p>当正向电压明显大于 $V_T$ 时，指数项远大于 1，常近似为：</p>
+<p>$$i_D\approx I_S e^{v_D/V_T}$$</p>
+
+<h2>四、常用简化模型</h2>
+<table class="k">
+  <tr><th>模型</th><th>导通时</th><th>截止时</th><th>适用场景</th></tr>
+  <tr><td>理想模型</td><td>短路，$v_D=0$</td><td>开路，$i_D=0$</td><td>只关心大方向、做定性判断</td></tr>
+  <tr><td>恒压降模型</td><td>串一个固定电压源 $V_D$（硅管常取约 $0.7\,\mathrm V$）</td><td>开路</td><td>普通直流或整流估算</td></tr>
+  <tr><td>折线模型</td><td>门槛电压 $V_{th}$ 串动态电阻 $r_D$</td><td>开路</td><td>需要保留正向斜率时</td></tr>
+  <tr><td>指数模型</td><td colspan="2">直接使用指数关系</td><td>精确计算或作图</td></tr>
+  <tr><td>小信号模型</td><td colspan="2">在静态工作点 $Q$ 附近等效成电阻 $r_d$</td><td>直流工作点已经求得后分析小变化</td></tr>
+</table>
+
+<div class="warn">
+  <strong>模型不是越复杂越好。</strong>
+  先看题目精度要求和元件所处状态。恒定压降模型也要求先判断导通；若反向截止，就不能把 $0.7\,\mathrm V$ 电压源硬塞进电路。
+</div>
+
+<h2>五、本书符号约定</h2>
+<table class="k">
+  <tr><th>写法</th><th>含义</th><th>例子</th></tr>
+  <tr><td>大写字母、大写下标</td><td>静态值（直流）</td><td>$I_B$、$V_D$</td></tr>
+  <tr><td>小写字母、大写下标</td><td>总量（直流加交流）</td><td>$i_B$、$v_D$</td></tr>
+  <tr><td>小写字母、小写下标</td><td>交流瞬时值或变化量</td><td>$i_b$、$v_d$</td></tr>
+</table>
+
+<h2>六、习题</h2>
+
+<div class="prob">
+<h3>题 1 · 正向与反向</h3>
+<p>理想二极管阳极接 $+3\,\mathrm V$，阴极接 $+1\,\mathrm V$。二极管是否导通？若把两端电压反过来呢？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>第一种情况阳极电位高于阴极，正向偏置，二极管导通；理想模型中导通后两端电压近似为 0。反接后截止，电流近似为 0。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 2 · 恒压降模型</h3>
+<p>$5\,\mathrm V$ 电源经 $1\,\mathrm{k}\Omega$ 电阻接硅二极管，二极管正向导通。取 $V_D=0.7\,\mathrm V$，求电流及二极管功耗。</p>
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-forward-circuit.png?v=20261029-diode1" alt="5 伏电源经 1 千欧电阻和二极管构成的正向回路">
+</figure>
+<details><summary>查看答案</summary><div class="sol">
+<p>电阻两端电压为 $5-0.7=4.3\,\mathrm V$，因此：</p>
+<p>$$I_D=\frac{4.3}{1000}=4.3\,\mathrm{mA}$$</p>
+<p>二极管功耗为 $P_D=V_DI_D=0.7\times4.3\,\mathrm{mA}\approx3.01\,\mathrm{mW}$。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 3 · 模型选择</h3>
+<p>分别说明下列场景优先选择哪种模型：①判断电路有没有明显单向导电；②估算 LED 回路的平均电流；③求二极管在已知静态工作点附近对微小电压变化的响应。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>①理想模型；②恒压降或折线模型；③小信号模型。小信号模型必须建立在已求出的直流工作点上。</p>
+</div></details>
+</div>
+
+<p class="foot"><a href="0004-diode-analysis.html">下一课：图解分析、小信号与开关电路 →</a></p>
+</body>
+</html>
