@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 13 课 · 限时模拟与考前查漏 · 电路</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/css/circuit.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .downloads{display:grid;gap:.7rem;margin:1.2rem 0 2rem}
+  .downloads a{display:block;padding:.8rem 1rem;border:1px solid var(--rule);background:#fff;text-decoration:none}
+  .downloads a:hover{border-color:var(--accent)}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.8rem}
+  th,td{text-align:left;padding:.55rem .6rem;border-bottom:1px solid var(--rule);vertical-align:top}
+  .checklist li{margin:.45rem 0}
+  .foot{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--rule)}
+</style>
+</head>
+<body>
+
+<h1>第 13 课 · 限时模拟与考前查漏</h1>
+<p class="sub">这一课不再学新知识：用一套完整试卷检查“会做的题能不能在规定时间内拿到分”。</p>
+<p class="meta">预计 120 分钟模拟 + 30 分钟复盘</p>
+
+<blockquote>
+模拟卷按完整试卷结构重编：填空 15 分、计算 40 分、综合化简 15 分、综合计算 30 分。先闭卷完成，再打开答案。
+</blockquote>
+
+<h2>一、先模考，不看答案</h2>
+
+<p>点击下面文件，先做试题部分。建议使用纸笔并设置 120 分钟计时器；不要在手机上边看边查公式。</p>
+
+<div class="downloads">
+  <a href="../assets/电路模拟试卷C及答案.pdf" target="_blank">打开：电路模拟试卷 C（试题 + 答案解析）</a>
+  <a href="0011-exam-a.html">复习：模拟试卷 A（基础卷）</a>
+  <a href="0012-exam-b.html">复习：模拟试卷 B（综合卷）</a>
+</div>
+
+<h2>二、120 分钟时间分配</h2>
+
+<table>
+  <thead><tr><th>时间</th><th>任务</th><th>目标</th></tr></thead>
+  <tbody>
+    <tr><td>0--15 分钟</td><td>填空与简单等效</td><td>先拿稳定的基础分</td></tr>
+    <tr><td>15--40 分钟</td><td>输入电阻、节点电压法</td><td>先选参考点，再列方程</td></tr>
+    <tr><td>40--65 分钟</td><td>回路电流法、叠加定理</td><td>标清网孔方向和电源置零方式</td></tr>
+    <tr><td>65--85 分钟</td><td>戴维南、诺顿与最大功率</td><td>先求开路电压和等效内阻</td></tr>
+    <tr><td>85--110 分钟</td><td>电源等效、电桥、相量混联</td><td>保留关键中间步骤</td></tr>
+    <tr><td>110--120 分钟</td><td>回查</td><td>方向、因子 $4R_{eq}$、相量超前/滞后</td></tr>
+  </tbody>
+</table>
+
+<h2>三、交卷后的复盘方法</h2>
+
+<p>不要只看总分。把每道错题归入下面的错误类型，特别标出“以为会、其实卡住”的步骤。</p>
+
+<table>
+  <thead><tr><th>错误类型</th><th>自问</th></tr></thead>
+  <tbody>
+    <tr><td>概念错</td><td>不知道用哪种等效或分析方法，还是不知道定理条件？</td></tr>
+    <tr><td>方向错</td><td>电压正负、电流注入方向、网孔方向是否标清？</td></tr>
+    <tr><td>代数错</td><td>并联公式、节点方程系数、复阻抗负号错在哪里？</td></tr>
+    <tr><td>条件漏</td><td>戴维南求内阻时电源置零了吗？</td></tr>
+    <tr><td>时间错</td><td>会做但算太久，还是卡在选择方法上？</td></tr>
+  </tbody>
+</table>
+
+<h2>四、考前最后清单</h2>
+
+<ul class="checklist">
+  <li>串联、并联是否按“共同端点”判断，而不是只看图形位置？</li>
+  <li>节点法是否先选参考节点，并写出 $n-1$ 个独立方程？</li>
+  <li>回路法是否先标每个网孔电流的方向？</li>
+  <li>叠加时电压源是否按短路处理，电流源是否按开路处理？</li>
+  <li>戴维南内阻是否在独立源置零后求？</li>
+  <li>最大功率公式是否用了 $P_{\max}=\dfrac{U_{oc}^2}{4R_{eq}}$？</li>
+  <li>电桥平衡是否比较对角乘积，而不是相邻乘积？</li>
+  <li>相量题是否分清 $R$、$jX_L$ 和 $-jX_C$？</li>
+  <li>最后是否明确写了电流超前还是滞后？</li>
+</ul>
+
+<div class="foot">
+  <p>模拟后回复我：总分、错题编号，以及每题属于“概念 / 方向 / 代数 / 条件 / 时间”中的哪一类。下一轮只做错因回炉，不再从头讲。</p>
+</div>
+
+</body>
+</html>
