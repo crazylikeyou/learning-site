@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 6 课 · N 沟道增强型 MOSFET 基础</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+<style>
+  .back { font-size: .9rem; }
+  .warn { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: #faf7f1; }
+  .prob { margin: 2.2rem 0; padding: 1.1rem 1.3rem; border: 1px solid var(--rule); background: #fff; }
+  .prob h3 { margin: 0 0 .75rem; font-size: 1rem; border: 0; padding: 0; }
+  details { margin-top: .9rem; }
+  summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+  .sol { margin-top: .7rem; padding-left: 1rem; border-left: 2px solid var(--rule); font-size: .95rem; }
+  table.k { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .92rem; }
+  table.k th, table.k td { border-bottom: 1px solid var(--rule); padding: .45rem .5rem; text-align: left; vertical-align: top; }
+  table.k th { color: #444; font-weight: 600; }
+  .figure { margin: 1.8rem auto 1.2rem; text-align: center; }
+  .figure img { display:block; width:100%; max-width:620px; height:auto; margin:0 auto; padding:.8rem; background:#fff; border:1px solid var(--rule); }
+  .figure figcaption { margin-top:.55rem; color:var(--muted); font-size:.84rem; line-height:1.55; }
+</style>
+</head>
+<body>
+<p class="back"><a href="../">← 返回模电课程</a></p>
+
+<h1>第 6 课 · N 沟道增强型 MOSFET 基础</h1>
+<p class="sub">先分清栅源电压是否打开沟道，再研究漏源电压怎样把沟道推向夹断与饱和。</p>
+<p class="meta">2026-11-04 · 预计 20 分钟 · 对应课堂 4.1.1 节</p>
+
+<h2>一、场效应管的分类</h2>
+<p>场效应管是<strong>电压控制电流器件</strong>，参与导电的主要只有一种载流子，因此也称单极型器件。</p>
+
+<table class="k">
+  <tr><th>分类维度</th><th>类型</th></tr>
+  <tr><td>结构和控制方式</td><td>结型场效应管 JFET；绝缘栅型场效应管 MOSFET</td></tr>
+  <tr><td>沟道载流子</td><td>N 沟道；P 沟道</td></tr>
+  <tr><td>默认导电状态</td><td>增强型；耗尽型</td></tr>
+</table>
+
+<p>本章课堂重点先看 <strong>N 沟道增强型 MOSFET</strong>。它默认没有现成导电沟道，必须靠正的 \(v_{GS}\) 诱导出来。</p>
+
+<h2>二、端子与符号</h2>
+<figure class="figure">
+  <img src="../assets/mosfet/circuitikz/nmos-symbol.png?v=20261104-mosfet1" alt="N 沟道增强型 MOSFET 符号，标注漏极、栅极、源极和衬底">
+  <figcaption>N 沟道增强型 MOSFET 的四个端子：\(D\) 漏极、\(G\) 栅极、\(S\) 源极、\(B\) 衬底。</figcaption>
+</figure>
+
+<table class="k">
+  <tr><th>端子</th><th>英文</th><th>作用</th></tr>
+  <tr><td>\(G\)</td><td>Gate，栅极</td><td>通过电场控制沟道，栅极与沟道绝缘</td></tr>
+  <tr><td>\(D\)</td><td>Drain，漏极</td><td>在 N 沟道器件中，常规电流从这里流入沟道</td></tr>
+  <tr><td>\(S\)</td><td>Source，源极</td><td>载流子源端，常作为电压参考端</td></tr>
+  <tr><td>\(B\)</td><td>Body，衬底</td><td>半导体衬底，常与源极连接使用</td></tr>
+</table>
+
+<p>因为栅极下面是绝缘层，直流下近似有：</p>
+<p>$$i_G\approx0$$</p>
+<p>所以 MOSFET 的输入电阻很高，可以用很小的栅极电荷和电场控制较大的漏极电流。</p>
+
+<h2>三、增强型 N 沟道怎样形成</h2>
+<p>设阈值电压为 \(V_{TN}>0\)。</p>
+
+<table class="k">
+  <tr><th>条件</th><th>沟道状态</th><th>漏极电流</th></tr>
+  <tr><td>\(v_{GS}<V_{TN}\)</td><td>没有形成有效 N 沟道</td><td>近似为 0，截止</td></tr>
+  <tr><td>\(v_{GS}>V_{TN}\)</td><td>感应出 N 沟道</td><td>可以形成 \(i_D\)</td></tr>
+</table>
+
+<p>在相同的较小 \(v_{DS}\) 下，\(v_{GS}\) 越大，沟道越厚，等效电阻越小，\(i_D\) 越大。这就是“电压控制电流”的基本含义。</p>
+
+<div class="warn">
+  <strong>有两个电压，不要混在一起。</strong>
+  \(v_{GS}\) 决定沟道“开得有多强”；\(v_{DS}\) 决定沿着沟道方向的电场和沟道形状。判断是否开始导通，首先看 \(v_{GS}\) 是否超过 \(V_{TN}\)。
+</div>
+
+<h2>四、漏源电压增大后发生了什么</h2>
+<p>固定 \(v_{GS}>V_{TN}\)，逐渐增大 \(v_{DS}\)：</p>
+<ol>
+  <li>漏极电位升高，沟道两端的电位差增大，\(i_D\) 随 \(v_{DS}\) 增加。</li>
+  <li>靠近漏端的位置，栅极与当地沟道之间的电压变小，沟道逐渐变薄。</li>
+  <li>当 \(v_{GD}=V_{TN}\) 时，漏端附近刚好夹断。</li>
+  <li>继续增大 \(v_{DS}\)，夹断点向源端移动；在理想模型中，\(i_D\) 基本不再随 \(v_{DS}\) 增加，主要由 \(v_{GS}\) 决定。</li>
+</ol>
+
+<figure class="figure">
+  <img src="../assets/mosfet/circuitikz/nmos-channel-stages.png?v=20261104-mosfet1" alt="N 沟道 MOSFET 在连续沟道和漏端夹断时的沟道形状">
+  <figcaption>沟道从近似连续逐渐变为漏端夹断。电子漂移方向与常规电流 \(i_D\) 相反。</figcaption>
+</figure>
+
+<p>由 \(v_{GD}=v_{GS}-v_{DS}\)，夹断条件可写成：</p>
+<p>$$v_{DS}=v_{GS}-V_{TN}$$</p>
+
+<table class="k">
+  <tr><th>区域</th><th>条件</th><th>主要特征</th></tr>
+  <tr><td>可变电阻区（线性区）</td><td>\(v_{GS}>V_{TN}\)，$0<v_{DS}<v_{GS}-V_{TN}$</td><td>$i_D$ 随 \(v_{DS}\) 增加较明显，沟道近似连续</td></tr>
+  <tr><td>夹断边界</td><td>\(v_{DS}=v_{GS}-V_{TN}\)</td><td>漏端刚好夹断</td></tr>
+  <tr><td>饱和区</td><td>\(v_{DS}\ge v_{GS}-V_{TN}\)</td><td>理想模型中 \(i_D\) 近似只受 \(v_{GS}\) 控制</td></tr>
+</table>
+
+<figure class="figure">
+  <img src="../assets/mosfet/circuitikz/nmos-output-characteristic.png?v=20261104-mosfet1" alt="N 沟道 MOSFET 输出特性曲线和夹断边界">
+  <figcaption>不同 \(v_{GS}\) 下的一组输出特性；虚线连接夹断点。</figcaption>
+</figure>
+
+<h2>五、习题</h2>
+
+<div class="prob">
+<h3>题 1 · 端子辨认</h3>
+<p>指出 N 沟道增强型 MOSFET 的 \(G,D,S\) 分别控制什么或承担什么作用。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>\(G\) 是栅极，用电压经电场控制沟道；\(D\) 是漏极，是 N 沟道常规电流的流入端；\(S\) 是源极，提供载流子并常作参考端。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 2 · 判断是否导通</h3>
+<p>\(V_{TN}=2\,\mathrm V\)。当 \(v_{GS}=1\,\mathrm V\) 时，增强型 NMOS 是否形成有效沟道？当 \(v_{GS}=3\,\mathrm V\) 呢？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>\(1\,\mathrm V<2\,\mathrm V\)，截止；\(3\,\mathrm V>2\,\mathrm V\)，形成沟道，可能在 \(v_{DS}\) 作用下产生漏极电流。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 3 · 夹断边界</h3>
+<p>已知 \(v_{GS}=5\,\mathrm V\)、\(V_{TN}=1\,\mathrm V\)。漏端开始夹断所需的 \(v_{DS}\) 是多少？若 \(v_{DS}=2\,\mathrm V\)，处于哪一区？若 \(v_{DS}=6\,\mathrm V\) 呢？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>夹断边界为 \(v_{DS}=v_{GS}-V_{TN}=4\,\mathrm V\)。\(2\,\mathrm V<4\,\mathrm V\)，处于可变电阻区；\(6\,\mathrm V>4\,\mathrm V\)，已进入饱和区。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 4 · 栅极电流</h3>
+<p>MOSFET 的 \(i_G\approx0\)，为什么还能有很大的 \(i_D\)？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>栅极由绝缘层隔离，控制依靠电场而不是栅极电流。栅源电压改变沟道厚度与电阻，而漏极到源极之间仍有主电流通路，因此可以用极小的栅极电荷控制较大的 \(i_D\)。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 5 · 常见误判</h3>
+<p>“只要继续增大 \(v_{DS}\)，\(i_D\) 就一定继续大幅增加。”这句话对吗？</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>不对。沟道夹断前，$i_D$ 随 \(v_{DS}\) 增加明显；进入饱和区后，理想模型的 \(i_D\) 基本保持稳定，由 \(v_{GS}\) 决定。</p>
+</div></details>
+</div>
+
+<p class="foot">完成标准：能先由 \(v_{GS}\) 与 \(V_{TN}\) 判断导通，再由 \(v_{DS}\) 与 \(v_{GS}-V_{TN}\) 判断可变电阻区和饱和区。</p>
+</body>
+</html>

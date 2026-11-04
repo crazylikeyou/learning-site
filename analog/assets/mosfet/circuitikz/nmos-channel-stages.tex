@@ -1,0 +1,29 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  % Left: finite channel
+  \draw[thick] (0,2.5) -- (3.6,2.5);
+  \node[above] at (1.8,2.5) {$G$};
+  \fill[gray!35] (0,1.2) rectangle (3.6,1.75);
+  \fill[gray!65] (0,1.2) rectangle (0.7,1.75);
+  \fill[gray!65] (2.9,1.2) rectangle (3.6,1.75);
+  \draw[thick] (0,1.2) -- (3.6,1.2);
+  \node[left] at (0,1.45) {$S$};
+  \node[right] at (3.6,1.45) {$D$};
+  \draw[->] (0.4,0.75) -- (3.1,0.75) node[midway,below] {$i_D$};
+  \node[font=\small,align=center] at (1.8,-0.1) {$v_{DS}<v_{GS}-V_{TN}$\\沟道连续};
+
+  % Right: pinch-off near drain
+  \draw[thick] (5.4,2.5) -- (9.0,2.5);
+  \node[above] at (7.2,2.5) {$G$};
+  \fill[gray!35] (5.4,1.7) -- (5.4,1.2) -- (8.2,1.2) -- (8.8,1.55) -- (8.8,1.7) -- cycle;
+  \fill[gray!65] (5.4,1.2) rectangle (6.1,1.7);
+  \fill[gray!65] (8.2,1.2) rectangle (8.8,1.7);
+  \draw[thick] (5.4,1.2) -- (8.8,1.2);
+  \node[left] at (5.4,1.45) {$S$};
+  \node[right] at (8.8,1.45) {$D$};
+  \draw[->] (5.8,0.75) -- (8.4,0.75) node[midway,below] {$i_D$};
+  \node[font=\small,align=center] at (7.2,-0.1) {$v_{GD}=V_{TN}$\\漏端夹断};
+\end{circuitikz}
+\end{document}

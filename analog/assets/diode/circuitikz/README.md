@@ -11,5 +11,6 @@
 | `diode-small-signal` | Q 点切线与小信号电阻等效 |
 | `diode-switch` | 理想二极管开关电路例题 |
 | `diode-forward-circuit` | 正向模型计算练习电路 |
+| `diode-special` | Zener、肖特基、变容、光电、LED 和太阳能电池符号 |
 
 运行 `build.ps1` 可使用 XeLaTeX 重新生成全部 PDF 和 300 dpi PNG。

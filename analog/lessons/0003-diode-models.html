@@ -86,7 +86,25 @@ document.addEventListener("DOMContentLoaded", function () {
   先看题目精度要求和元件所处状态。恒定压降模型也要求先判断导通；若反向截止，就不能把 $0.7\,\mathrm V$ 电压源硬塞进电路。
 </div>
 
-<h2>五、本书符号约定</h2>
+<h2>五、特殊二极管</h2>
+<figure class="figure">
+  <img src="../assets/diode/circuitikz/diode-special.png?v=20261104-diodes2" alt="普通稳压、肖特基、变容、光电、LED 和太阳能电池的电路符号">
+  <figcaption>特殊二极管首先记符号，再把符号与工作条件和用途对应起来。</figcaption>
+</figure>
+
+<table class="k">
+  <tr><th>器件</th><th>主要特征</th><th>典型用途</th></tr>
+  <tr><td>稳压二极管（Zener）</td><td>工作在反向击穿区，电压较稳定</td><td>稳压、限压、基准电压</td></tr>
+  <tr><td>肖特基二极管</td><td>正向压降较低，开关速度快</td><td>高频整流、快速开关</td></tr>
+  <tr><td>变容二极管</td><td>反偏时结电容随反向电压变化</td><td>调谐、压控振荡</td></tr>
+  <tr><td>光电二极管</td><td>反向偏置时，光强影响反向电流</td><td>光检测、光通信</td></tr>
+  <tr><td>发光二极管 LED</td><td>正向导通时发光</td><td>指示、照明、显示</td></tr>
+  <tr><td>太阳能电池</td><td>吸收光能并产生电动势</td><td>光电能量转换</td></tr>
+</table>
+
+<p>激光二极管也属于光电器件，特点是输出相干光；分析时仍需考虑正向电流、阈值电流和散热限制。</p>
+
+<h2>六、本书符号约定</h2>
 <table class="k">
   <tr><th>写法</th><th>含义</th><th>例子</th></tr>
   <tr><td>大写字母、大写下标</td><td>静态值（直流）</td><td>$I_B$、$V_D$</td></tr>
@@ -94,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
   <tr><td>小写字母、小写下标</td><td>交流瞬时值或变化量</td><td>$i_b$、$v_d$</td></tr>
 </table>
 
-<h2>六、习题</h2>
+<h2>七、习题</h2>
 
 <div class="prob">
 <h3>题 1 · 正向与反向</h3>
@@ -122,6 +140,14 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>分别说明下列场景优先选择哪种模型：①判断电路有没有明显单向导电；②估算 LED 回路的平均电流；③求二极管在已知静态工作点附近对微小电压变化的响应。</p>
 <details><summary>查看答案</summary><div class="sol">
 <p>①理想模型；②恒压降或折线模型；③小信号模型。小信号模型必须建立在已求出的直流工作点上。</p>
+</div></details>
+</div>
+
+<div class="prob">
+<h3>题 4 · 特殊二极管用途</h3>
+<p>分别指出下列用途最可能采用哪种器件：①稳压；②高频快速整流；③用反向电压改变电容；④把光信号变成电流。</p>
+<details><summary>查看答案</summary><div class="sol">
+<p>①稳压二极管；②肖特基二极管；③变容二极管；④光电二极管。</p>
 </div></details>
 </div>
 

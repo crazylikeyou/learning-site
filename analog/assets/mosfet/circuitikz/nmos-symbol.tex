@@ -1,0 +1,13 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[european,american voltages,american inductors,american currents]{circuitikz}
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+  \node[nmos] (M) at (0,0) {};
+  \draw (M.D) -- ++(0,1.0) node[above] {$D$ 漏极};
+  \draw (M.G) -- ++(-1.1,0) node[left] {$G$ 栅极};
+  \draw (M.S) -- ++(0,-1.0) node[below] {$S$ 源极};
+  \draw (M.B) -- ++(1.0,0) node[right] {$B$ 衬底};
+  \draw[->] (M.D) ++(0.55,0.4) -- ++(0,-0.65) node[midway,right] {$i_D$};
+  \node[font=\small,anchor=west] at (1.6,-1.25) {$i_G\approx0$};
+\end{circuitikz}
+\end{document}
