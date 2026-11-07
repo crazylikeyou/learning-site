@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 11 课 · 光的量子性与物质波</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0010-polarization.html">← 上一课</a> · <a href="../">首页</a> · <a href="0012-bohr-quantum-states.html">下一课 →</a></p>
+<h1>第 11 课 · 光的量子性与物质波</h1>
+<p class="sub">能量与动量分开记；eV 与焦耳先统一；光电效应看“单个光子能不能打出电子”。</p>
+<p class="meta">建议 26 分钟 · 重点：光子、光电效应、康普顿、德布罗意波</p>
+
+<div class="formula-card">
+  <h3>光子</h3>
+  \[
+  E=h\nu=\frac{hc}{\lambda},
+  \qquad
+  p=\frac{h}{\lambda}.
+  \]
+  <p>实用换算：\[
+  E(\mathrm{eV})\approx\frac{1240}{\lambda(\mathrm{nm})}.
+  \]</p>
+</div>
+
+<h2>光电效应</h2>
+<div class="formula-card">
+  \[
+  h\nu=W+\frac12m_ev_{\max}^2.
+  \]
+  <p>遏止电压 \(U_a\)：\[
+  eU_a=E_{k,\max}.
+  \]</p>
+  <p>截止频率：\[
+  \nu_0=\frac W h.
+  \]</p>
+</div>
+<div class="warning">
+  <p><strong>光强与频率分别管什么：</strong>提高光强只增加单位时间入射光子数，从而增加饱和光电流；不改变最大初动能。提高频率才会改变单个光子的能量。</p>
+</div>
+
+<div class="worked">
+  <h3>例题：截止电压</h3>
+  <p>波长 \(400\,\mathrm{nm}\) 的光照射逸出功 \(2.0\,\mathrm{eV}\) 的金属。求最大初动能与遏止电压。</p>
+  \[
+  E_\gamma=\frac{1240}{400}=3.1\,\mathrm{eV}.
+  \]
+  \[
+  E_{k,\max}=3.1-2.0=1.1\,\mathrm{eV},
+  \qquad
+  U_a=1.1\,\mathrm V.
+  \]
+</div>
+
+<h2>康普顿散射</h2>
+\[
+\Delta\lambda
+=\frac{h}{m_ec}(1-\cos\varphi)
+=\lambda_C(1-\cos\varphi),
+\]
+其中 \(\lambda_C=2.43\times10^{-12}\,\mathrm m\)。散射角 \(90^\circ\) 时，波长增加一个康普顿波长。</p>
+<p>康普顿效应说明光子不仅具有能量，也具有动量，且碰撞近似满足能量与动量守恒。</p>
+
+<h2>德布罗意物质波</h2>
+\[
+\lambda=\frac hp.
+\]
+<p>非相对论电子经电压 \(U\) 加速：</p>
+\[
+p=\sqrt{2m_eeU},
+\qquad
+\lambda=\frac{h}{\sqrt{2m_eeU}}.
+\]
+<p>实用近似：\(\lambda\approx1.226/\sqrt{U(\mathrm V)}\,\mathrm{nm}\)。</p>
+
+<div class="worked">
+  <h3>例题：电子的物质波</h3>
+  <p>电子经 \(100\,\mathrm V\) 电压加速，求德布罗意波长。</p>
+  \[
+  \lambda\approx\frac{1.226}{\sqrt{100}}\,\mathrm{nm}
+  =0.1226\,\mathrm{nm}\approx1.23\times10^{-10}\,\mathrm m.
+  \]
+</div>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 光子波长 \(300\,\mathrm{nm}\)，求其能量（eV）和动量大小。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    E=\frac{1240}{300}=4.13\,\mathrm{eV}.
+    \]
+    \[
+    p=\frac{h}{\lambda}
+    =\frac{6.63\times10^{-34}}{300\times10^{-9}}
+    =2.21\times10^{-27}\,\mathrm{kg\cdot m/s}.
+    \]</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 某金属逸出功 \(2.5\,\mathrm{eV}\)。用 \(3.5\,\mathrm{eV}\) 的光子照射，遏止电压是多少？</p>
+  <details><summary>答案</summary>
+    <p>\(E_{k,\max}=3.5-2.5=1.0\,\mathrm{eV}\)，所以 \(U_a=1.0\,\mathrm V\)。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 非相对论电子经 \(200\,\mathrm V\) 加速，德布罗意波长约为多少？</p>
+  <details><summary>答案</summary>
+    <p>\[
+    \lambda\approx\frac{1.226}{\sqrt{200}}\,\mathrm{nm}
+    \approx0.0867\,\mathrm{nm}.
+    \]</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>看到光强、频率、遏止电压同时出现时，你能说明各自改变什么，而不是把所有量都塞进一个公式。</p>
+</div>
+</body>
+</html>
+
+
+
+

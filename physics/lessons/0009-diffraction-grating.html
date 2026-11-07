@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 9 课 · 单缝、圆孔与光栅</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0008-films-wedge-newton.html">← 上一课</a> · <a href="../">首页</a> · <a href="0010-polarization.html">下一课 →</a></p>
+<h1>第 9 课 · 单缝、圆孔与光栅</h1>
+<p class="sub">单缝公式给出“包络”，多缝公式给出“细亮线”。光栅缺级是两者重合。</p>
+<p class="meta">建议 28 分钟 · 重点：暗纹位置、中央明纹宽度、缺级、焦平面距离</p>
+
+<h2>单缝衍射</h2>
+<div class="formula-card">
+  <p>暗纹条件：\[
+  a\sin\theta=k\lambda,\qquad k=\pm1,\pm2,\ldots
+  \]
+  <p>中央明纹半角宽满足第一暗纹 \(a\sin\theta_1=\lambda\)。小角近似下，屏上中央明纹全宽：</p>
+  \[
+  \Delta y_0=\frac{2f\lambda}{a}.
+  \]
+  <p>若题目给屏距 \(L\) 而非焦距，并且远场条件成立，\(L\approx f\) 时代入。</p>
+</div>
+
+<div class="warning">
+  <p><strong>不要把 \(k=0\) 当暗纹。</strong>\(k=0\) 对应中心明纹；第一条暗纹是 \(k=1\)。</p>
+</div>
+
+<h2>圆孔衍射</h2>
+<p>直径 \(D\) 的圆孔，艾里斑第一暗环角半径近似</p>
+\[
+\theta_1\approx1.22\frac{\lambda}{D}.
+\]
+<p>若已知两个物体的角间距小于该值，它们无法被分辨。考试中常见选择题，计算量通常很小。</p>
+
+<h2>光栅</h2>
+<div class="formula-card">
+  <p>光栅常数 \(d\)，主极大条件：\[
+  d\sin\theta=k\lambda.
+  \]
+  <p>单缝衍射包络的暗纹：\[
+  a\sin\theta=k'\lambda.
+  \]
+  <p>若同一方向同时满足两者，则该主极大缺级：</p>
+  \[
+  k=\frac da\,k',\qquad k'=1,2,\ldots
+  \]
+</div>
+
+<div class="notice">
+  <p><strong>N 条缝的作用：</strong>中央主极大的光强是单缝中央主极大的 \(N^2\) 倍。不要把 \(N\) 与光栅常数 \(d\) 混在一起。</p>
+</div>
+
+<div class="worked">
+  <h3>例题：双缝衍射中的中央包络</h3>
+  <p>双缝间距 \(d=0.10\,\mathrm{mm}\)，每缝宽 \(a=0.025\,\mathrm{mm}\)，波长 \(400\,\mathrm{nm}\)，透镜焦距 \(f=0.50\,\mathrm m\)。</p>
+  <p>单缝中央明纹全宽：</p>
+  \[
+  \Delta y_0=\frac{2f\lambda}{a}
+  =\frac{2(0.5)(400\times10^{-9})}{0.025\times10^{-3}}
+  =16\,\mathrm{mm}.
+  \]
+  <p>缺级因子 \(d/a=4\)，缺级为 \(k=\pm4,\pm8,\ldots\)。中央单缝包络内可出现的双缝主极大为</p>
+  \[
+  k=0,\pm1,\pm2,\pm3,
+  \]
+  <p>共 7 条。题目问“包络内有多少条”时，边界是否恰落在暗纹上要单独看。</p>
+</div>
+
+<h2>高频计算型</h2>
+<p>已知“两个第三条暗纹之间距离 \(D_3\)”，先用</p>
+\[
+y_3=f(3\lambda/a)
+\]
+得到一侧位置，再令 \(2y_3=6\,\mathrm{mm}\)。不要把它当成相邻暗纹间距 \(\lambda f/a\)。</p>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 波长 \(500\,\mathrm{nm}\)、缝宽 \(0.25\,\mathrm{mm}\)，屏距 \(2\,\mathrm m\)。求中央明纹全宽。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    \Delta y_0=\frac{2(2)(500\times10^{-9})}{0.25\times10^{-3}}
+    =8\,\mathrm{mm}.
+    \]</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 光栅常数 \(d=6a\)，单缝宽为 \(a\)。哪些级次缺级？</p>
+  <details><summary>答案</summary>
+    <p>\(k=(d/a)k'=6k'\)，所以 \(k=\pm6,\pm12,\pm18,\ldots\) 缺级。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 某光栅每毫米 500 条刻线。求光栅常数，并求 \(600\,\mathrm{nm}\) 光的第一级主极大衍射角。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    d=\frac{1}{500}\,\mathrm{mm}=2.0\times10^{-6}\,\mathrm m.
+    \]
+    \[
+    \sin\theta_1=\frac{\lambda}{d}
+    =\frac{600\times10^{-9}}{2.0\times10^{-6}}=0.30,
+    \]
+    \[
+    \theta_1\approx17.5^\circ.
+    \]</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>看到“缺级”先写两条 \(\sin\theta\) 条件，再用比值 \(d/a\)；看到中央明纹宽度先确认是“全宽”还是“半宽”。</p>
+</div>
+</body>
+</html>
+
+
+
+

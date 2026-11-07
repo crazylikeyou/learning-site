@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 3 课 · 安培环路定理与磁通量</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0002-biot-savart.html">← 上一课</a> · <a href="../">首页</a> · <a href="0004-magnetic-force.html">下一课 →</a></p>
+<h1>第 3 课 · 安培环路定理与磁通量</h1>
+<p class="sub">环路定理负责“求场”，磁通量负责“为电磁感应铺路”。两者不能混用。</p>
+<p class="meta">建议 25 分钟 · 重点：对称性、圆柱导体内部磁场、穿过矩形面的磁通量</p>
+
+<h2>安培环路定理到底说了什么</h2>
+<div class="formula-card">
+  \[
+  \oint_L\mathbf B\cdot d\mathbf l=\mu_0 I_{\text{穿过}}.
+  \]
+  <p>左边是沿整条回路累积的“旋度”；右边只由穿过回路、按右手规则带符号计数的净电流决定。</p>
+</div>
+
+<div class="warning">
+  <p><strong>最常见误判：</strong>回路上 \(\mathbf B\) 不为零，但它的切向部分正负抵消，环路积分仍可能为零。反之，\(\oint\mathbf B\cdot d\mathbf l=0\) 也不能说明回路上处处 \(\mathbf B=0\)。</p>
+</div>
+
+<h2>什么时候能直接用它求 \(B\)</h2>
+<p>要有足够高的对称性，使回路上 \(B\) 大小恒定且方向与 \(d\mathbf l\) 平行或垂直。常考只有四类：</p>
+<div class="grid two">
+  <div class="card"><strong>无限长直导线/圆柱</strong><span>取同心圆回路，\(B\cdot2\pi r=\mu_0I_{\rm in}\)</span></div>
+  <div class="card"><strong>无限长密绕螺线管</strong><span>内部 \(B=\mu_0 nI\)，外部理想为零</span></div>
+  <div class="card"><strong>环形螺线管</strong><span>取与环同轴的圆；不同半径处 \(B\) 不同</span></div>
+  <div class="card"><strong>无限大载流平面</strong><span>取穿过平面的矩形回路，\(2Bl=\mu_0I_{\rm enc}\)</span></div>
+</div>
+
+<h2>圆柱导体内外的磁场</h2>
+<p>半径 \(R\) 的无限长圆柱导体，电流 \(I\) 均匀穿过截面：</p>
+\[
+B(r)=
+\begin{cases}
+\dfrac{\mu_0 I r}{2\pi R^2}, & r<R,\\[6pt]
+\dfrac{\mu_0 I}{2\pi r}, & r\ge R.
+\end{cases}
+\]
+<p><strong>关键理解：</strong>内部只有 \(r^2/R^2\) 比例的电流穿过半径 \(r\) 的回路；外部则含全部电流。</p>
+
+<div class="worked">
+  <h3>例题：穿过圆柱导体附近矩形的磁通量</h3>
+  <p>半径 \(R\) 的无限长铜导体通电流 \(I\)，取长为 \(1\,\mathrm m\)、宽为 \(2R\) 的矩形面。矩形的一边从圆柱轴到表面，另一边从表面到 \(2R\)。求总磁通量。</p>
+  <p>矩形跨过两个区域，必须分段积分。取 \(dS=1\,dr\)：</p>
+  \[
+  \Phi_1=\int_0^R\frac{\mu_0 Ir}{2\pi R^2}\,dr=\frac{\mu_0I}{4\pi},
+  \]
+  \[
+  \Phi_2=\int_R^{2R}\frac{\mu_0 I}{2\pi r}\,dr
+  =\frac{\mu_0I}{2\pi}\ln2.
+  \]
+  \[
+  \Phi=\frac{\mu_0I}{4\pi}+\frac{\mu_0I}{2\pi}\ln2.
+  \]
+  <p>这类题不是套一个 \(B\)，而是先画 \(B(r)\)，再按区域拆分积分。</p>
+</div>
+
+<h2>磁通量的固定动作</h2>
+<div class="flow">选面元并定正法向 → 写 \(B(x)\) → 判断 \(B\) 与 \(dS\) 是否平行 → \(\Phi=\int B\,dS\) → 检查面积单位</div>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 半径 \(R\) 的无限长圆柱导体，电流 \(I\) 均匀分布。求距轴 \(r=R/2\) 处的磁场。</p>
+  <details><summary>答案</summary>
+    <p>在导体内部，穿过半径 \(r\) 回路的电流为 \(I(r/R)^2\)，所以</p>
+    \[
+    B(2\pi r)=\mu_0I\frac{r^2}{R^2},
+    \quad B(r)=\frac{\mu_0Ir}{2\pi R^2}.
+    \]
+    <p>代入 \(r=R/2\)：\(B=\mu_0I/(8\pi R)\)。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 长直导线电流 \(I\) 沿 \(z\) 轴。一个与导线共面的矩形线圈，近边距导线 \(a\)，远边距 \(b\)，宽为 \(L_w\)。求穿过线圈的磁通量。</p>
+  <details><summary>答案</summary>
+    <p>距导线 \(x\) 处 \(B=\mu_0I/(2\pi x)\)，取宽 \(dx\) 的条带：</p>
+    \[
+    \Phi=\int_a^b\frac{\mu_0I}{2\pi x}L_w\,dx
+    =\frac{\mu_0IL_w}{2\pi}\ln\frac ba.
+    \]
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 一圆形电流中心处的同心圆回路 \(L\) 全在电流所在平面内。\(\oint_L\mathbf B\cdot d\mathbf l\) 为什么为零？</p>
+  <details><summary>答案</summary>
+    <p>回路与电流环共面，没有电流穿过该圆面。虽然回路上各点 \(\mathbf B\) 一般不为零，但环路积分为零；还要注意 \(\mathbf B\) 的方向与 \(d\mathbf l\) 垂直。</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>遇到“求磁通量”时，你先检查 \(B(x)\) 是否分段，而不是把整个面代同一个 \(B\)。</p>
+</div>
+</body>
+</html>
+
+
+
+

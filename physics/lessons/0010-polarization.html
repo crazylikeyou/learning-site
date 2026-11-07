@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 10 课 · 偏振</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0009-diffraction-grating.html">← 上一课</a> · <a href="../">首页</a> · <a href="0011-photons-matter-waves.html">下一课 →</a></p>
+<h1>第 10 课 · 偏振</h1>
+<p class="sub">自然光先减半，已经偏振的光才直接进入 \( \cos^2\theta \) 的计算。</p>
+<p class="meta">建议 18 分钟 · 重点：偏振片、马吕斯定律、干涉条纹的变化</p>
+
+<h2>三句话规则</h2>
+<div class="formula-card">
+  <p>自然光通过理想偏振片后：\[
+  I_1=\frac12 I_0.
+  \]</p>
+  <p>线偏振光通过检偏器：\[
+  I=I_1\cos^2\theta.
+  \]</p>
+  <p>两偏振片的透光轴正交时，理论上无光通过；平行时透射最强。</p>
+</div>
+
+<div class="notice">
+  <p><strong>自然光不是“光强减半所以没有偏振”。</strong>自然光包含各方向振动；过第一片后只剩一个方向，之后才使用马吕斯定律。</p>
+</div>
+
+<div class="worked">
+  <h3>例题：自然光通过两片偏振片</h3>
+  <p>强度 \(I_0\) 的自然光垂直通过两片偏振片，二者透光轴夹角 \(60^\circ\)。求透射光强。</p>
+  \[
+  I=\frac12I_0\cos^2 60^\circ
+  =\frac12I_0\left(\frac12\right)^2
+  =\frac18I_0.
+  \]
+</div>
+
+<h2>双缝后加偏振片</h2>
+<p>若在双缝后分别放一个偏振片，通过每缝的光强减小，因此整个干涉图案的亮度减弱。只要两缝出射光仍具有相同振动方向且保持相干，条纹间距仍为 \(\lambda D/d\)。</p>
+<p>若两偏振片互相正交，两缝出射光的振动方向垂直，不能形成普通双缝干涉，条纹消失。考试常见问法是把“同向”和“正交”混在一起。</p>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 自然光通过两个偏振片后光强为入射自然光的 \(1/4\)。两片透光轴夹角是多少？</p>
+  <details><summary>答案</summary>
+    <p>\[
+    \frac12I_0\cos^2\theta=\frac14I_0
+    \Rightarrow \cos^2\theta=\frac12
+    \Rightarrow \theta=45^\circ.
+    \]</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 强度 \(I_0\) 的线偏振光通过检偏器，透射光强为 \(I_0/2\)。夹角是？</p>
+  <details><summary>答案</summary>
+    <p>\(I=I_0\cos^2\theta=I_0/2\)，所以 \(\theta=45^\circ\)（或 \(135^\circ\)，若只问最小正角则取 \(45^\circ\)）。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 在双缝后各放一个相同方向的理想偏振片，条纹间距如何变化？亮度如何变化？</p>
+  <details><summary>答案</summary>
+    <p>两束出射光仍同偏振、仍相干，条纹间距不变；每束光强减半，叠加强度随之减弱。</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>你先问“入射光是自然光还是线偏振光”，再决定是否出现 \(1/2\)。</p>
+</div>
+</body>
+</html>
+
+
+
+

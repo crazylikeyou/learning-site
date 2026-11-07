@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 6 课 · 感生电场、自感互感与磁能</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0005-faraday-motional-emf.html">← 上一课</a> · <a href="../">首页</a> · <a href="0007-interference.html">下一课 →</a></p>
+<h1>第 6 课 · 感生电场、自感互感与磁能</h1>
+<p class="sub">磁场变化会在空间中产生闭合电场；回路附近的磁场变化又会定义自感与互感。</p>
+<p class="meta">建议 28 分钟 · 重点：感生电场、\(L\)、\(M\)、磁能密度</p>
+
+<h2>感生电场</h2>
+<div class="formula-card">
+  \[
+  \oint_L\mathbf E_{\rm ind}\cdot d\mathbf l
+  =-\frac{d}{dt}\int_S\mathbf B\cdot d\mathbf S.
+  \]
+  <p>这里的 \(\mathbf E_{\rm ind}\) 由变化磁场产生，方向按楞次定律判断。它不同于电荷产生的静电场：感生电场的电场线闭合。</p>
+</div>
+
+<p>半径 \(a\) 的无限长螺线管内部磁场均匀，外部理想为零。若磁场变化率为 \(dB/dt\)，则：</p>
+\[
+E(r)=
+\begin{cases}
+\dfrac{r}{2}\dfrac{dB}{dt}, & r<a,\\[6pt]
+\dfrac{a^2}{2r}\dfrac{dB}{dt}, & r>a.
+\end{cases}
+\]
+<p>注意外部 \(B=0\) 但 \(E\ne0\)。变化磁场只在有磁场的区域贡献磁通量，但产生的电场可延伸到外部。</p>
+
+<h2>自感与互感</h2>
+<div class="formula-card">
+  <p>自感：\[
+  L=\frac{\Phi}{I},
+  \qquad
+  \varepsilon_L=-L\frac{dI}{dt}.
+  \]</p>
+  <p>互感：\[
+  M=\frac{\Phi_{21}}{I_1},
+  \qquad
+  \varepsilon_{21}=-M\frac{dI_1}{dt}.
+  \]</p>
+  <p>\(L,M\) 只与线圈几何形状、大小、匝数、相对位置和周围磁介质有关；理想无铁磁介质时，它们不随电流大小改变。</p>
+</div>
+
+<div class="worked">
+  <h3>例题：长直导线与矩形线框的互感</h3>
+  <p>长直导线电流 \(I\)，旁边有共面的单匝矩形线框：近边距导线 \(a/2\)，远边距导线 \(3a/2\)，宽为 \(a\)。求互感系数。</p>
+  <p>距导线 \(x\) 处的磁感应强度 \(B=\mu_0I/(2\pi x)\)。取宽 \(dx\)、长 \(a\) 的条带：</p>
+  \[
+  d\Phi=B a\,dx
+  =\frac{\mu_0Ia}{2\pi x}dx.
+  \]
+  \[
+  \Phi=\int_{a/2}^{3a/2}\frac{\mu_0Ia}{2\pi x}dx
+  =\frac{\mu_0Ia}{2\pi}\ln3.
+  \]
+  \[
+  M=\frac\Phi I=\frac{\mu_0a}{2\pi}\ln3.
+  \]
+</div>
+
+<h2>磁场能量</h2>
+<div class="formula-card">
+  <p>自感线圈储能：\[
+  W=\frac12LI^2.
+  \]</p>
+  <p>磁场能量密度：\[
+  u_m=\frac{B^2}{2\mu_0}.
+  \]</p>
+  <p>无限长直导线在距离 \(r\) 处：\[
+  B=\frac{\mu_0I}{2\pi r},
+  \qquad
+  u_m=\frac{\mu_0I^2}{8\pi^2r^2}.
+  \]</p>
+</div>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 半径 \(a\) 的螺线管电流 \(i=I_0\sin\omega t\)，单位长度匝数 \(n\)。一个半径为 \(r>a\) 的同轴圆形回路包围螺线管。求回路内感生电动势大小。</p>
+  <details><summary>答案</summary>
+    <p>只有螺线管内部面积含有磁通量：</p>
+    \[
+    \Phi=\mu_0 n i\,\pi a^2.
+    \]
+    \[
+    |\varepsilon|=\left|\frac{d\Phi}{dt}\right|
+    =\mu_0n\pi a^2I_0\omega|\cos\omega t|.
+    \]</p>
+    <p>不是用外部回路面积 \(\pi r^2\)。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 自感线圈中电流在 \(0.002\,\mathrm s\) 内从 \(10\,\mathrm A\) 均匀增到 \(12\,\mathrm A\)，自感电动势大小为 \(400\,\mathrm V\)。求 \(L\)。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    |\varepsilon_L|=L\left|\frac{dI}{dt}\right|
+    =L\frac{2}{0.002}.
+    \]
+    \[
+    L=\frac{400}{1000}=0.4\,\mathrm H.
+    \]</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 距无限长直导线 \(a\) 处的磁能密度是多少？</p>
+  <details><summary>答案</summary>
+    <p>\[
+    B=\frac{\mu_0I}{2\pi a},
+    \quad
+    u_m=\frac{B^2}{2\mu_0}
+    =\frac{\mu_0I^2}{8\pi^2a^2}.
+    \]</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>你能解释“螺线管外部 \(B=0\)，但感生电场不为零”，并能由 \(\Phi=\int B\,dS\) 得到互感。</p>
+</div>
+</body>
+</html>
+
+
+
+

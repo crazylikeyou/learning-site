@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 12 课 · 玻尔模型、量子数与波函数</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0011-photons-matter-waves.html">← 上一课</a> · <a href="../">首页</a> · <a href="0013-mock-review.html">下一课 →</a></p>
+<h1>第 12 课 · 玻尔模型、量子数与波函数</h1>
+<p class="sub">速度按 \(1/n\)，半径按 \(n^2\)，能量按 \(-1/n^2\)。先分清这条，再做跃迁和状态数。</p>
+<p class="meta">建议 25 分钟 · 重点：玻尔模型、能级跃迁、四个量子数、概率密度</p>
+
+<h2>氢原子玻尔模型</h2>
+<div class="formula-card">
+  \[
+  r_n=n^2r_1,
+  \qquad
+  v_n=\frac{v_1}{n},
+  \qquad
+  E_n=-\frac{13.6\,\mathrm{eV}}{n^2}.
+  \]
+  <p>基态 \(n=1\)：\(r_1=0.0529\,\mathrm{nm}\)，\(E_1=-13.6\,\mathrm{eV}\)。</p>
+  <p>能级跃迁：\[
+  h\nu=E_i-E_f,
+  \qquad
+  \lambda\approx\frac{1240}{E_i-E_f}\ \mathrm{nm}
+  \]
+  （能量差用 eV 时）。</p>
+</div>
+
+<div class="worked">
+  <h3>例题：从基态跃迁到 \(n=3\)</h3>
+  <p>\[
+  E_3=-\frac{13.6}{9}=-1.51\,\mathrm{eV}.
+  \]
+  \[
+  \Delta E=E_3-E_1=12.09\,\mathrm{eV},
+  \qquad
+  \lambda\approx\frac{1240}{12.09}=102.6\,\mathrm{nm}.
+  \]
+  <p>跃迁方向要分清：吸收光子从低能级到高能级，辐射光子从高能级到低能级。</p>
+</div>
+
+<h2>四个量子数</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>量子数</th><th>允许值</th><th>决定什么</th></tr></thead>
+<tbody>
+<tr><td>主量子数 \(n\)</td><td>\(1,2,3,\ldots\)</td><td>壳层与主要能量</td></tr>
+<tr><td>角量子数 \(l\)</td><td>\(0,1,\ldots,n-1\)</td><td>亚壳层、角动量大小</td></tr>
+<tr><td>磁量子数 \(m_l\)</td><td>\(-l,\ldots,0,\ldots,l\)</td><td>角动量的空间取向</td></tr>
+<tr><td>自旋磁量子数 \(m_s\)</td><td>\(+\tfrac12,-\tfrac12\)</td><td>自旋取向</td></tr>
+</tbody>
+</table>
+</div>
+<p>给定 \(n\) 最多 \(2n^2\) 个电子；给定 \(n,l\) 最多 \(2(2l+1)\) 个电子。</p>
+
+<div class="warning">
+  <p><strong>常见错误：</strong>看到“\(n\) 一定时有多少量子态”直接写 \(n^2\)。每个空间态还有两种自旋，所以是 \(2n^2\)。</p>
+</div>
+
+<h2>波函数</h2>
+<div class="formula-card">
+  <p>\(|\psi(\mathbf r,t)|^2\) 是概率密度，不是概率本身。概率为</p>
+  \[
+  P(V)=\int_V|\psi|^2\,dV.
+  \]
+  <p>归一化：\[
+  \int_{\text{全空间}}|\psi|^2\,dV=1.
+  \]</p>
+</div>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 氢原子电子从 \(n=2\) 态跃迁到 \(n=1\) 态，求辐射光子能量和波长。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    E_2=-3.4\,\mathrm{eV},
+    \qquad
+    \Delta E=10.2\,\mathrm{eV}.
+    \]
+    \[
+    \lambda\approx\frac{1240}{10.2}=121.6\,\mathrm{nm}.
+    \]</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 当 \(n=4\) 时，\(l\) 可能取哪些值？\(l=2\) 的亚壳层最多容纳多少电子？</p>
+  <details><summary>答案</summary>
+    <p>\(l=0,1,2,3\)。对于 \(l=2\)，\(m_l=-2,-1,0,1,2\)，共 5 个空间态；再乘 2 个自旋，最多 10 个电子。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 某三维波函数在某点满足 \(|\psi|^2=2.0\times10^6\,\mathrm{m^{-3}}\)。体积 \(1.0\times10^{-9}\,\mathrm{m^3}\) 的小区域中找到粒子的概率约为多少？</p>
+  <details><summary>答案</summary>
+    <p>\[
+    P\approx|\psi|^2\Delta V
+    =2.0\times10^6\times1.0\times10^{-9}
+    =2.0\times10^{-3}.
+    \]</p>
+    <p>约为 \(0.2\%\)。</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>能在 30 秒内区分速度比、半径比、能量比，并完整写出一个壳层的状态数。</p>
+</div>
+</body>
+</html>
+
+
+
+

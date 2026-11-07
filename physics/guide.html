@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>大学物理 I（下）复习指南</title>
+<link rel="stylesheet" href="../_shared/css/course.css">
+<link rel="stylesheet" href="assets/physics.css">
+<link rel="stylesheet" href="../_shared/katex/katex.min.css">
+<script defer src="../_shared/katex/katex.min.js"></script>
+<script defer src="../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="./">← 返回物理复习首页</a></p>
+<h1>大学物理 I（下）复习指南</h1>
+<p class="sub">先做会考的模型，再用整卷检查速度和正确率。</p>
+
+<nav class="manual-nav">
+  <a href="#mission">任务说明</a>
+  <a href="#exam-map">真题地图</a>
+  <a href="#route">13 天路线</a>
+  <a href="#notes">工作笔记</a>
+  <a href="#resources">资料</a>
+</nav>
+
+<section id="mission">
+<h2>任务说明</h2>
+<p>教材为李虎、王兵、曲忠伟主编，西北工业大学出版社《大学物理（下册）》。目标不是“学完整本教材”，而是在 2026-11-20 前把已给真题对应的高频模型练到能独立做对。</p>
+<div class="grid two">
+  <div class="card"><strong>主线一 · 磁学</strong><span>磁场叠加、安培环路、磁场力、电磁感应、自感与互感</span></div>
+  <div class="card"><strong>主线二 · 波动光学</strong><span>双缝、薄膜、劈尖、牛顿环、单缝、光栅、偏振</span></div>
+  <div class="card"><strong>主线三 · 近代物理</strong><span>光子、光电效应、康普顿、德布罗意、玻尔模型、量子数</span></div>
+  <div class="card"><strong>核心要求</strong><span>看到题先认模型；每个公式知道适用条件；数值题检查单位与量级</span></div>
+</div>
+<div class="warning">
+  <p><strong>范围说明：</strong>以上由 2023–24、2024–25 两套期末卷和 2025–26 期中卷反推。教材已确认，但具体版次或老师删减范围尚未确认，所以暂时不能把这份清单当成官方大纲。</p>
+</div>
+</section>
+
+<section id="exam-map">
+<h2>真题题型地图</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>模块</th><th>历年反复出现的动作</th><th>优先微课</th></tr></thead>
+<tbody>
+<tr><td>稳恒磁场</td><td>有限直导线、圆环、螺线管、薄板与圆环叠加；圆柱导体内外磁场</td><td>0002–0003</td></tr>
+<tr><td>磁场力</td><td>带电粒子偏转、平行/非平行载流导线受力、磁矩力矩与做功</td><td>0004</td></tr>
+<tr><td>电磁感应</td><td>转杆、动杆、旋转线框、变化磁场中的回路、感生电场方向</td><td>0005–0006</td></tr>
+<tr><td>自感与互感</td><td>由磁通量求 \(L,M\)；电流均匀变化求电动势；自感系数与电流无关</td><td>0006</td></tr>
+<tr><td>干涉</td><td>双缝条纹间距、插玻璃片移条纹、迈克耳孙、薄膜与牛顿环</td><td>0007–0008</td></tr>
+<tr><td>衍射</td><td>单缝暗纹与中央明纹宽度、光栅主极大、缺级、缝数影响中央强度</td><td>0009</td></tr>
+<tr><td>偏振</td><td>自然光过偏振片、两偏振片夹角、干涉条纹亮度变化</td><td>0010</td></tr>
+<tr><td>量子基础</td><td>光子能量/动量、光电方程、截止电压、康普顿散射、德布罗意波长</td><td>0011</td></tr>
+<tr><td>原子与量子态</td><td>玻尔速度/轨道/能级、跃迁光子能量、四个量子数、\(|\psi|^2\)</td><td>0012</td></tr>
+</tbody>
+</table>
+</div>
+<div class="notice">
+  <p><strong>粗估分值：</strong>磁学与电磁感应 45%–50%，光学 30%–35%，近代物理 15%–20%。复习顺序按“高频 × 容易稳定得分”，不平均用力。</p>
+</div>
+</section>
+
+<section id="route">
+<h2>13 天路线</h2>
+<div class="day"><div class="date">11-07</div><div><strong>起点诊断</strong><p>12 题，约 18 分钟。只记录错因，不因总分焦虑。</p></div></div>
+<div class="day"><div class="date">11-08</div><div><strong>磁场叠加</strong><p>直导线、圆环、螺线管；把“微元 → 场 → 积分”做成固定动作。</p></div></div>
+<div class="day"><div class="date">11-09</div><div><strong>安培环路与磁通量</strong><p>只对高度对称情形使用环路定理；磁通量难度来自 \(B(x)\) 随位置变化。</p></div></div>
+<div class="day"><div class="date">11-10</div><div><strong>磁场力与磁矩</strong><p>洛伦兹力、载流导线受力、磁矩力矩、电子轨道磁矩。</p></div></div>
+<div class="day"><div class="date">11-11</div><div><strong>法拉第定律与动生电动势</strong><p>先写磁通量，再求导；转杆用微元 \(d\varepsilon=vB\,dr\)。</p></div></div>
+<div class="day"><div class="date">11-12</div><div><strong>感生电场、自感互感与磁能</strong><p>变化磁场产生闭合电场；由磁通量定义 \(L,M\)。</p></div></div>
+<div class="day"><div class="date">11-13</div><div><strong>双缝、光程与迈克耳孙</strong><p>条纹间距、玻璃片移条纹、一个波长光程差对应什么。</p></div></div>
+<div class="day"><div class="date">11-14</div><div><strong>薄膜、劈尖与牛顿环</strong><p>每道题先判断反射相位突变，再写干涉条件。</p></div></div>
+<div class="day"><div class="date">11-15</div><div><strong>单缝、圆孔与光栅</strong><p>把单缝包络与多缝主极大分开；缺级条件一次写对。</p></div></div>
+<div class="day"><div class="date">11-16</div><div><strong>偏振</strong><p>自然光先减半；夹角只进入马吕斯定律。</p></div></div>
+<div class="day"><div class="date">11-17</div><div><strong>光的量子性与物质波</strong><p>能量与动量分开，eV 与焦耳先统一。</p></div></div>
+<div class="day"><div class="date">11-18</div><div><strong>玻尔模型与量子态</strong><p>速度、半径、能量分别按 \(1/n\)、\(n^2\)、\(1/n^2\) 变化。</p></div></div>
+<div class="day"><div class="date">11-19</div><div><strong>整卷与错题回炉</strong><p>120 分钟，先拿选择填空，再做计算题的第一问。</p></div></div>
+<div class="day"><div class="date">11-20</div><div><strong>考试</strong><p>只复习公式卡、方向判断和错因清单。</p></div></div>
+
+<h3>每课 25 分钟模板</h3>
+<div class="recipe">
+  <p><strong>4 分钟回忆</strong>：遮住答案，复述上一课的核心判断。</p>
+  <p><strong>10 分钟核心课</strong>：识别信号、物理图像、标准动作、一个完整例题。</p>
+  <p><strong>8 分钟即时检查</strong>：三道题必须写关键步骤。</p>
+  <p><strong>3 分钟记录</strong>：只写错在第几步、下次先看哪条。</p>
+</div>
+</section>
+
+<section id="notes">
+<h2>工作笔记</h2>
+<p>当前尚未摸底。默认从诊断开始，不预设基础好坏。课程会按真实错题调整，不按教材页码机械推进。</p>
+<ul>
+  <li>方向题必须写出右手定则或叉乘判断过程。</li>
+  <li>公式题先写适用条件，再代数值。</li>
+  <li>计算题先抓第一处错误，不从头重讲整章。</li>
+  <li>同一类错误连续出现两次，暂停新内容，只做该模型一道例题加两道变式。</li>
+</ul>
+</section>
+
+<section id="resources">
+<h2>资料与记录</h2>
+<div class="grid two">
+  <a class="card" href="materials/23-24_大学物理I下_A卷.pdf"><strong>23–24 期末卷</strong><span>10 选择 + 8 组填空 + 4 计算</span></a>
+  <a class="card" href="materials/23-24_大学物理I下_AB答案.pdf"><strong>23–24 AB 答案</strong><span>含分步评分要点</span></a>
+  <a class="card" href="materials/24-25_大学物理I下_A卷.pdf"><strong>24–25 期末卷</strong><span>目前最贴近本轮考试的结构</span></a>
+  <a class="card" href="materials/24-25_大学物理I下_AB答案.pdf"><strong>24–25 AB 答案</strong><span>含选择题与计算题答案</span></a>
+  <a class="card" href="materials/25-26_大学物理I下_期中卷.pdf"><strong>25–26 期中卷</strong><span>确认本学期磁学与感应重点</span></a>
+  <a class="card" href="materials/25-26_大学物理I下_期中答案.pdf"><strong>25–26 期中答案</strong><span>微元积分法与方向判断参照</span></a>
+  <a class="card" href="materials/大学物理I下_考前速查.pdf"><strong>考前速查 PDF</strong><span>5 页公式、相位判断、量子数表与最后 15 分钟清单</span></a>
+</div>
+</section>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 7 课 · 双缝、光程与迈克耳孙干涉仪</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0006-induced-field-inductance.html">← 上一课</a> · <a href="../">首页</a> · <a href="0008-films-wedge-newton.html">下一课 →</a></p>
+<h1>第 7 课 · 双缝、光程与迈克耳孙干涉仪</h1>
+<p class="sub">干涉条件只认“光程差”，不是把几何路程直接相减。</p>
+<p class="meta">建议 24 分钟 · 重点：条纹间距、插片移条纹、光程差改变</p>
+
+<h2>先统一语言</h2>
+<div class="formula-card">
+  <p>光在折射率 \(n\) 的介质中走几何程 \(d\)，对应光程为 \(\delta=n d\)。</p>
+  <p>双缝小角近似，屏上坐标 \(y\)：</p>
+  \[
+  \Delta=d\sin\theta\approx\frac{d\,y}{D}.
+  \]
+  <p>明纹：\(\Delta=k\lambda\)；暗纹：\(\Delta=(k+\tfrac12)\lambda\)。</p>
+  <p>相邻明纹间距：\[
+  \Delta x=\frac{\lambda D}{d}.
+  \]
+</div>
+
+<div class="notice">
+  <p><strong>完整规则：</strong>真正决定明暗的是总光程差加上反射引起的相位突变。双缝后面直接看屏时通常没有反射问题；薄膜题才必须逐界面判断。</p>
+</div>
+
+<h2>一缝后加玻璃片</h2>
+<p>厚度 \(e\)、折射率 \(n\) 的玻璃片只遮住一缝，光程增加 \((n-1)e\)。条纹整体移动，经过的条纹级数为</p>
+\[
+N=\frac{(n-1)e}{\lambda}.
+\]
+<p>若原本零级明纹处现在满足</p>
+\[
+(n-1)e=k\lambda,
+\]
+则零级明纹移到原来的第 \(k\) 级明纹位置。因为介质色散与入射方向会影响结果，题目通常默认近轴、均匀薄片。</p>
+
+<div class="worked">
+  <h3>例题：玻璃片使零级条纹移动</h3>
+  <p>双缝后一缝覆盖 \(e=5.0\times10^{-6}\,\mathrm m\)、\(n=1.5\) 的玻璃片，入射波长 \(500\,\mathrm{nm}\)。零级明纹移到原第几级？</p>
+  \[
+  N=\frac{(1.5-1)(5.0\times10^{-6})}{500\times10^{-9}}=5.
+  \]
+  <p>因此移到原来的第 5 级明纹处。</p>
+</div>
+
+<h2>迈克耳孙干涉仪</h2>
+<p>移动一面镜子距离 \(d\)，光在那一臂往返，光程改变 \(2d\)，条纹移动数为</p>
+\[
+N=\frac{2d}{\lambda}.
+\]
+<p>在一条光路中插入厚度 \(e\)、折射率 \(n\) 的薄膜，因光束通常往返穿过该臂，若题目明确“在一条光路中放入”，按经典装置题意光程差改变常为</p>
+\[
+\Delta\delta=2(n-1)e.
+\]
+<p>若题目检测的是“光程差改变一个波长”，则</p>
+\[
+e=\frac{\lambda}{2(n-1)}.
+\]
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 双缝间距 \(d=0.4\,\mathrm{mm}\)，屏距 \(D=2\,\mathrm m\)，波长 \(500\,\mathrm{nm}\)。求相邻明纹间距，以及零级两侧第 10 级明纹中心距离。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    \Delta x=\frac{500\times10^{-9}\times2}{0.4\times10^{-3}}
+    =2.5\,\mathrm{mm}.
+    \]
+    两侧第 10 级相距 \(20\Delta x=50\,\mathrm{mm}=5.0\,\mathrm{cm}\)。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 迈克耳孙干涉仪中，一面镜子移动 \(0.1\,\mathrm{mm}\)，波长 \(500\,\mathrm{nm}\)。条纹移动多少条？</p>
+  <details><summary>答案</summary>
+    <p>\[
+    N=\frac{2d}{\lambda}
+    =\frac{2\times0.1\times10^{-3}}{500\times10^{-9}}
+    =400.
+    \]</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 双缝光路的一路插入折射率 \(n=1.4\)、厚度 \(1.0\times10^{-6}\,\mathrm m\) 的薄片。波长 \(600\,\mathrm{nm}\)。条纹移动几条？</p>
+  <details><summary>答案</summary>
+    <p>此处只是一侧增加单次穿过程，故</p>
+    \[
+    N=\frac{(n-1)e}{\lambda}
+    =\frac{0.4\times10^{-6}}{600\times10^{-9}}
+    =\frac23,
+    \]
+    <p>即移动 \(2/3\) 个条纹间距。若无整数，答案不必强行凑成整条。</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>迈克耳孙题你会先判断“镜子移动一次光走两遍”还是“薄片只在单程中”。</p>
+</div>
+</body>
+</html>
+
+
+
+

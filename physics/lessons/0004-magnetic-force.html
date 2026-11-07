@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 4 课 · 磁场力与磁矩</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0003-ampere-flux.html">← 上一课</a> · <a href="../">首页</a> · <a href="0005-faraday-motional-emf.html">下一课 →</a></p>
+<h1>第 4 课 · 磁场力与磁矩</h1>
+<p class="sub">先分开三种对象：运动电荷、载流导线、磁矩。公式不同，方向都靠叉乘。</p>
+<p class="meta">建议 25 分钟 · 重点：粒子偏转、导线受力、磁矩力矩与做功</p>
+
+<div class="formula-card">
+  <h3>三组核心公式</h3>
+  <p>运动电荷：\[
+  \mathbf F=q\mathbf v\times\mathbf B.
+  \]</p>
+  <p>载流导线：\[
+  d\mathbf F=I\,d\mathbf l\times\mathbf B,
+  \qquad
+  \mathbf F=I\int d\mathbf l\times\mathbf B.
+  \]</p>
+  <p>磁矩与力矩：\[
+  \mathbf p_m=NI\mathbf S,
+  \qquad
+  \boldsymbol\tau=\mathbf p_m\times\mathbf B.
+  \]</p>
+  <p>磁矩在外场中的势能：\[
+  U=-\mathbf p_m\cdot\mathbf B.
+  \]
+  从 \(\theta_1\) 转到 \(\theta_2\)，外力矩做功</p>
+  \[
+  W_{\rm ext}=p_mB(\cos\theta_1-\cos\theta_2).
+  \]
+</div>
+
+<h2>带电粒子的标准动作</h2>
+<ol>
+  <li>若 \(\mathbf v\perp\mathbf B\)，轨迹是圆，半径 \(R=mv/(|q|B)=p/(|q|B)\)。</li>
+  <li>若只穿入宽度 \(D\) 的磁场区，偏转角由 \(\sin\alpha=D/R\) 得到。</li>
+  <li>若速度有沿磁场分量，轨迹是螺旋线；沿磁场方向不受力。</li>
+</ol>
+
+<div class="worked">
+  <h3>例题：电子穿过矩形磁场区</h3>
+  <p>电子动量为 \(p\)，垂直进入宽度 \(D\)、磁感应强度 \(B\) 的均匀磁场。求出射方向相对入射方向的夹角。</p>
+  <p>轨道半径 \(R=p/(eB)\)。穿过磁场区的横向宽度为 \(D\)，所以</p>
+  \[
+  \sin\alpha=\frac{D}{R}=\frac{eBD}{p}.
+  \]
+  <p>前提是电子能穿过该区域，即 \(D\le R\)。若题目只说“进入”，要先检查是否发生回折。</p>
+</div>
+
+<h2>载流导线受力</h2>
+<p>若导线处在非均匀磁场中，绝不能用总长度直接乘“某个 B”，必须分段写 \(B(x)\) 后积分。</p>
+<div class="notice">
+  <p><strong>平行直导线：</strong>同向电流相互吸引，反向电流相互排斥。单位长度作用力 \(f=\mu_0I_1I_2/(2\pi d)\)。</p>
+</div>
+
+<h2>磁矩题识别</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>已知</th><th>先写什么</th><th>常见问题</th></tr></thead>
+<tbody>
+<tr><td>单匝平面线圈、面积 \(S\)、电流 \(I\)</td><td>\(p_m=IS\)</td><td>把 \(p_m\) 与磁通量混淆</td></tr>
+<tr><td>\(N\) 匝线圈</td><td>\(p_m=NIS\)</td><td>漏掉 \(N\)</td></tr>
+<tr><td>\(\mathbf p_m\) 与 \(\mathbf B\) 夹角</td><td>\(\tau=p_mB\sin\theta\)</td><td>用 \(\cos\theta\) 表示力矩</td></tr>
+<tr><td>从夹角 \(0^\circ\) 转到 \(180^\circ\)</td><td>外力做功 \(2p_mB\)</td><td>把磁场做功符号弄反</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="worked">
+  <h3>例题：氢原子电子轨道磁矩</h3>
+  <p>电子以速率 \(v\) 在半径 \(r\) 的圆轨道运动。等效电流与磁矩分别为</p>
+  \[
+  I=\frac eT=\frac{ev}{2\pi r},
+  \qquad
+  p_m=IS=\frac{ev}{2\pi r}\pi r^2=\frac{evr}{2}.
+  \]
+  <p>轨道中心磁感应强度：</p>
+  \[
+  B=\frac{\mu_0I}{2r}=\frac{\mu_0ev}{4\pi r^2}.
+  \]
+  <p>这是真题中“一个对象串起三个公式”的典型问法。</p>
+</div>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 一电量为 \(q\)、质量为 \(m\) 的粒子以速度 \(v\) 垂直进入磁场 \(B\)。求轨道半径和周期，并说明周期是否依赖速度。</p>
+  <details><summary>答案</summary>
+    <p>\(R=mv/(|q|B)\)；\(T=2\pi R/v=2\pi m/(|q|B)\)。非相对论下周期与速度无关。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 长直导线电流 \(I_1\)，旁边垂直放置一段长度 \(L\) 的直导体，通电流 \(I_2\)，近端距长导线 \(r_0\)。求该段导体受力。</p>
+  <details><summary>答案</summary>
+    <p>距长导线 \(r\) 处 \(B=\mu_0I_1/(2\pi r)\)。取 \(dr\) 段：</p>
+    \[
+    dF=I_2B\,dr=I_2\frac{\mu_0I_1}{2\pi r}dr.
+    \]
+    \[
+    F=\frac{\mu_0I_1I_2}{2\pi}\ln\frac{r_0+L}{r_0}.
+    \]
+    <p>方向用 \(d\mathbf l\times\mathbf B\) 逐段判断；本题各段受力同向。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 磁矩为 \(p_m\) 的载流线圈置于均匀磁场 \(B\) 中，从 \(p_m\) 与 \(B\) 同向转到反向。外力矩做功多少？</p>
+  <details><summary>答案</summary>
+    <p>势能 \(U=-p_mB\cos\theta\)。外力从 \(0^\circ\) 转到 \(180^\circ\)：</p>
+    \[
+    W_{\rm ext}=U(180^\circ)-U(0^\circ)=2p_mB.
+    \]
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>看到“线圈在磁场中转”时，你能在“感应电动势”和“磁力矩做功”之间先判断题目问的是哪一个。</p>
+</div>
+</body>
+</html>
+
+
+
+

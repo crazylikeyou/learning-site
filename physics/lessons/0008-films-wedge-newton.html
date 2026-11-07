@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 8 课 · 薄膜、劈尖与牛顿环</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0007-interference.html">← 上一课</a> · <a href="../">首页</a> · <a href="0009-diffraction-grating.html">下一课 →</a></p>
+<h1>第 8 课 · 薄膜、劈尖与牛顿环</h1>
+<p class="sub">先找两束反射光，再判断每个界面是否存在半波损失。</p>
+<p class="meta">建议 26 分钟 · 重点：等厚干涉、相位突变、条纹移动</p>
+
+<h2>薄膜干涉的判断顺序</h2>
+<div class="flow">认出两束反射光 → 写膜内往返光程 \(2ne\) → 判断上下界面反射时的相位突变次数 → 写附加光程差 → 套明暗条件</div>
+<p>光近似垂直入射时，膜内几何光程是 \(2e\)，对应的光程是 \(2ne\)。</p>
+
+<div class="warning">
+  <p><strong>半波损失只看折射率关系。</strong>光从折射率小的介质射向折射率大的介质并反射时，有 \( \pi \) 相位突变，相当于附加 \( \lambda/2 \) 光程差；从折射率大的介质射向小的介质并反射时没有这个突变。</p>
+  <p>两层反射的“额外相位”要比较，不要看到薄膜就机械地加 \( \lambda/2 \)。</p>
+</div>
+
+<h2>空气薄膜：最常见的两种条件</h2>
+<p>两块玻璃之间夹空气膜，光从上方玻璃进入空气，再在下层玻璃表面反射。只有其中一个有效反射界面发生相位突变，所以：</p>
+\[
+\text{明纹： }2e=\left(k+\frac12\right)\lambda,
+\qquad
+\text{暗纹： }2e=k\lambda.
+\]
+<p>中心接触处 \(e=0\)，表现为暗纹。空气膜若改用折射率 \(n\) 的液体充满，则把 \(e\) 换成光学厚度 \(ne\)。</p>
+
+<h2>劈尖</h2>
+<p>若劈尖角 \(\theta\) 很小，距棱边 \(x\) 处的膜厚约为 \(e\approx x\theta\)。相邻条纹的厚度差为 \(\lambda/(2n)\)，所以条纹间距为</p>
+\[
+\Delta x=\frac{\lambda}{2n\theta}.
+\]
+<p>劈尖角变大，条纹变密；棱边位置可能移动。2024–25 选择题中的“转动玻璃片、条纹变窄”考的就是这一点。</p>
+
+<h2>牛顿环</h2>
+<p>平凸透镜与平板玻璃之间的空气层厚度随半径增加。对空气膜：</p>
+\[
+r_k^2=kR\lambda
+\qquad\text{（第 }k\text{ 个暗环）},
+\]
+\[
+r_k^2=\left(k-\frac12\right)R\lambda
+\qquad\text{（第 }k\text{ 个明环）}.
+\]
+<p>此处 \(k=1,2,\ldots\)，中心是暗斑。真题更常直接问“某两个明环对应的空气膜厚度差”：由 \(2e+\lambda/2=k\lambda\)，得第 \(k\) 个明环的厚度</p>
+\[
+e_k=\frac{(k-\tfrac12)\lambda}{2}.
+\]
+
+<div class="worked">
+  <h3>例题：两个明环的厚度差</h3>
+  <p>波长 \(600\,\mathrm{nm}\) 的光垂直照射牛顿环装置。求第二个明环与第五个明环对应的空气膜厚度差。</p>
+  \[
+  e_2=\frac{(2-\tfrac12)\lambda}{2},
+  \qquad
+  e_5=\frac{(5-\tfrac12)\lambda}{2}.
+  \]
+  \[
+  e_5-e_2=\frac32\lambda=900\,\mathrm{nm}.
+  \]
+</div>
+
+<h2>薄膜表面的油层题</h2>
+<p>若油膜夹在空气与海水之间，上、下观察时两束反射光经过的界面顺序不同，附加相位要分别判断。考试时先写清楚“哪一束在哪一层反射”，再把该方向得到的条件与题给观察位置对应。历年评分标准会明确给出该观察方向的附加项，复习时以原卷为准。</p>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 空气劈尖用波长 \(600\,\mathrm{nm}\) 的单色光垂直照射。若相邻暗纹间距为 \(3\,\mathrm{mm}\)，求劈尖角。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    \Delta x=\frac{\lambda}{2\theta},
+    \quad
+    \theta=\frac{600\times10^{-9}}{2\times3\times10^{-3}}
+    =1.0\times10^{-4}\,\mathrm{rad}.
+    \]</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 折射率 \(n=1.5\)、厚度 \(e=400\,\mathrm{nm}\) 的薄膜置于空气中，垂直入射，认为两界面相位突变相互抵消。求可见光范围内的反射增强波长。</p>
+  <details><summary>答案</summary>
+    <p>无净附加相位时，反射增强满足 \(2ne=k\lambda\)：</p>
+    \[
+    \lambda=\frac{2ne}{k}
+    =\frac{1200}{k}\,\mathrm{nm}.
+    \]
+    <p>可见光 390–760 nm 内取 \(k=2\)，\(\lambda=600\,\mathrm{nm}\)。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 观察牛顿环时，把平凸透镜向上略微抬起，中心斑点会怎样变化？</p>
+  <details><summary>答案</summary>
+    <p>中心空气层厚度 \(e\) 增大。对空气膜亮纹满足 \(2e=(k+\tfrac12)\lambda\)。厚度增加时，同一半径处的干涉级次改变，条纹整体向中心收缩，中心亮暗会按半个波长的倍数交替。</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>你会在写公式之前，用一句话说清楚“有几处反射发生半波损失”。</p>
+</div>
+</body>
+</html>
+
+
+
+

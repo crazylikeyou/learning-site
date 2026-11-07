@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 13 课 · 限时模拟与考前速查</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0012-bohr-quantum-states.html">← 上一课</a> · <a href="../">首页</a> · <a href="../guide.html#route">路线</a></p>
+<h1>第 13 课 · 限时模拟与考前速查</h1>
+<p class="sub">整卷先做能稳定拿分的题；最后两天只处理实际错题，不再追求覆盖新知识。</p>
+<p class="meta">11-19 整卷 · 11-20 考前轻复习</p>
+
+<div class="notice">
+  <p><strong>本轮整卷建议：</strong>先做 <a href="../mock-exam.html">100 分混合模拟卷</a>（120 分钟）；若时间允许，再做一套历年原卷。</p>
+</div>
+
+<h2>整卷顺序</h2>
+<div class="recipe">
+  <p><strong>0–10 分钟：</strong>浏览全卷，在题号旁标记“稳、会但慢、不会”。</p>
+  <p><strong>10–45 分钟：</strong>选择题、填空题。先拿能确定的分，遇到积分或符号复杂的选择题暂时跳过。</p>
+  <p><strong>45–75 分钟：</strong>简单计算。优先做磁场叠加、电动势、双缝/光栅。</p>
+  <p><strong>75–115 分钟：</strong>大计算题。每题先写模型与公式，再代数和算数；第一问通常比分更稳。</p>
+  <p><strong>最后 5 分钟：</strong>检查单位、角度制、方向、是否把“一边距离”当“两侧总距离”。</p>
+</div>
+
+<h2>最后 15 个高频提醒</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>场景</th><th>一秒钟判断</th></tr></thead>
+<tbody>
+<tr><td>直导线</td><td>\(B=\mu_0I/(2\pi r)\)，方向用右手螺旋</td></tr>
+<tr><td>圆环圆心</td><td>\(B=\mu_0I/(2R)\)</td></tr>
+<tr><td>密绕螺线管</td><td>\(B=\mu_0nI\)；外部理想为 0，但感生电场可不为 0</td></tr>
+<tr><td>安培环路</td><td>只直接求出对称场；积分零不等于局域场零</td></tr>
+<tr><td>带电粒子</td><td>\(R=mv/(|q|B)=p/(|q|B)\)</td></tr>
+<tr><td>动生电动势</td><td>\(\varepsilon=\int(\mathbf v\times\mathbf B)\cdot d\mathbf l\)</td></tr>
+<tr><td>法拉第定律</td><td>先求磁通量，再对时间求导；负号管楞次定律</td></tr>
+<tr><td>自感/互感</td><td>先积分磁场求 \(\Phi\)，再除以电流</td></tr>
+<tr><td>双缝</td><td>\(\Delta x=\lambda D/d\)；插片移动 \((n-1)e/\lambda\) 条</td></tr>
+<tr><td>牛顿环</td><td>明纹 \(2e+\lambda/2=k\lambda\)，中心暗</td></tr>
+<tr><td>单缝</td><td>暗纹 \(a\sin\theta=k\lambda\)，\(k=0\) 不是暗纹</td></tr>
+<tr><td>光栅</td><td>主极大 \(d\sin\theta=k\lambda\)，缺级 \(k=(d/a)k'\)</td></tr>
+<tr><td>光子</td><td>\(E=1240/\lambda(\mathrm{nm})\,\mathrm{eV}\)</td></tr>
+<tr><td>玻尔模型</td><td>\(v\propto1/n\)，\(r\propto n^2\)，\(E\propto-1/n^2\)</td></tr>
+<tr><td>量子态</td><td>给定 \(n\)：\(2n^2\)；给定 \(n,l\)：\(2(2l+1)\)</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>错因复盘模板</h2>
+<p>每道错题只写这四项，不抄整道答案：</p>
+<ol>
+  <li><strong>模型：</strong>我把它当成了什么题？实际是什么题？</li>
+  <li><strong>第一处错误：</strong>漏判方向、漏除 \(2\pi\)、面积用错、相位多算 \(\lambda/2\)，还是代数？</li>
+  <li><strong>应固定的动作：</strong>下次先写哪一行？</li>
+  <li><strong>回炉题：</strong>同类再做一个变式即可。</li>
+</ol>
+<div class="warning">
+  <p><strong>不要用“看懂了”结案。</strong>遮住答案，重新写出模型、公式和第一处中间步骤；三步都能独立写出来，才算已修正。</p>
+</div>
+
+<h2>12 分钟终检</h2>
+<div class="question">
+  <p><span class="no">01</span> 写出无限长圆柱导体内部、外部磁场的表达式，并说明分界点是否连续。</p>
+  <details><summary>答案</summary>
+    <p>内部 \(B=\mu_0Ir/(2\pi R^2)\)，外部 \(B=\mu_0I/(2\pi r)\)。在 \(r=R\) 均为 \(\mu_0I/(2\pi R)\)，连续。</p>
+  </details>
+</div>
+<div class="question">
+  <p><span class="no">02</span> 判断：感生电场的电场线一定是闭合的；静电场可以闭合。</p>
+  <details><summary>答案</summary>
+    <p>前半句正确，变化磁场产生的感生电场旋度非零；静电场由静电荷产生，沿闭合路径积分为零，不能形成闭合电场线。</p>
+  </details>
+</div>
+<div class="question">
+  <p><span class="no">03</span> 为什么双缝干涉放偏振片后条纹间距不一定变？</p>
+  <details><summary>答案</summary>
+    <p>条纹间距由波长、缝距和屏距决定。相同方向的偏振片只改变每缝透过的光强，并不改变两束光的波长与几何传播差。</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>最终目标：</strong>考试时不在“用叠加、环路、磁通量、干涉条件、光子/玻尔模型”上犹豫超过 30 秒。</p>
+</div>
+</body>
+</html>
+
+
+
+

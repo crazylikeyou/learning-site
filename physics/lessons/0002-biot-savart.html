@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 2 课 · 毕奥–萨伐尔与磁场叠加</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="../">← 返回物理复习首页</a> · <a href="0003-ampere-flux.html">下一课：安培环路 →</a></p>
+<h1>第 2 课 · 毕奥–萨伐尔与磁场叠加</h1>
+<p class="sub">看到无对称、连续电流分布，先拆成微元，再把“方向相同”的部分积分相加。</p>
+<p class="meta">建议 25 分钟 · 重点：直导线、圆环、螺线管、薄板积分</p>
+
+<h2>先认模型</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>题面信号</th><th>首选方法</th><th>为什么</th></tr></thead>
+<tbody>
+<tr><td>有限长直导线、P 点到导线的垂距已知</td><td>有限长直导线公式或微元积分</td><td>电流元磁场方向一致，可直接叠加</td></tr>
+<tr><td>圆环、圆弧在圆心处的磁场</td><td>\(B=\mu_0 I\theta/(4\pi R)\)</td><td>整个圆弧到圆心等距，方向相同</td></tr>
+<tr><td>无限长螺线管内部或环内</td><td>安培环路定理</td><td>平移/轴对称，先判断环路</td></tr>
+<tr><td>无限长薄板、非均匀绕线圆盘</td><td>切成无限长细条或圆环后积分</td><td>每一细元都是已知模型</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="formula-card">
+  <h3>核心公式</h3>
+  <p>电流元：\[
+  d\mathbf B=\frac{\mu_0}{4\pi}\frac{I\,d\mathbf l\times\hat{\mathbf r}}{r^2}.
+  \]</p>
+  <p>有限长直导线：\[
+  B=\frac{\mu_0 I}{4\pi r}(\cos\theta_1+\cos\theta_2).
+  \]
+  无限长时 \(\theta_1=\theta_2=0\)，得 \(B=\mu_0 I/(2\pi r)\)。</p>
+  <p>半径 \(R\) 圆环在圆心：\[
+  B=\frac{\mu_0 I}{2R}.
+  \]
+  张角为 \(\theta\) 的圆弧：\(B=\mu_0 I\theta/(4\pi R)\)。</p>
+  <p>无限长密绕螺线管内部：\[
+  B=\mu_0 nI,
+  \]
+  外部理想情况下为零。有限长螺线管靠近端点时约为内部的一半。</p>
+</div>
+
+<div class="warning">
+  <p><strong>方向不要靠图感。</strong> 直导线用右手螺旋：拇指沿电流，四指绕向就是 \(\mathbf B\) 方向；圆环用四指顺电流，拇指为中心磁场方向。</p>
+</div>
+
+<h2>标准动作</h2>
+<div class="flow">识别已知模型 → 取微元并写 \(dI\) → 决定每个微元产生的 dB 方向 → 只积分同向分量 → 检查单位和符号</div>
+
+<div class="worked">
+  <h3>例题：无限长载流薄板的磁场</h3>
+  <p>宽为 \(a\) 的无限长金属薄片通电流 \(I\)，电流均匀分布。求与薄片共面、距近边 \(b\) 的点 P 的磁感应强度。</p>
+  <p><strong>第一步，切条。</strong> 距 P 为 \(x\) 处取宽 \(dx\) 的细条，细条电流</p>
+  \[
+  dI=\frac{I}{a}dx.
+  \]
+  <p><strong>第二步，用无限长直导线结果。</strong></p>
+  \[
+  dB=\frac{\mu_0\,dI}{2\pi x}=\frac{\mu_0 I}{2\pi a}\frac{dx}{x}.
+  \]
+  <p><strong>第三步，积分。</strong> P 到薄片近边距离为 \(b\)，各细条到 P 的范围是 \(b\) 到 \(a+b\)：</p>
+  \[
+  B=\frac{\mu_0 I}{2\pi a}\int_b^{a+b}\frac{dx}{x}
+  =\frac{\mu_0 I}{2\pi a}\ln\left(1+\frac{a}{b}\right).
+  \]
+  <p>所有细条在 P 点产生的磁场方向相同，因此直接作标量积分。</p>
+</div>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 两根平行无限长直导线相距 \(d\)，电流分别为 \(I\) 和 \(2I\)，方向相同。求两导线中点处的合磁感应强度。</p>
+  <details><summary>答案与关键步骤</summary>
+    <p>中点到两导线距离均为 \(d/2\)。两者在中点产生的 \(\mathbf B\) 方向相反：</p>
+    <p>\[
+    B=\frac{\mu_0}{2\pi(d/2)}(2I-I)=\frac{\mu_0 I}{\pi d},
+    \]
+    方向由 \(2I\) 导线按右手定则决定。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 半径为 \(R\) 的圆环和边长为 \(2R\) 的正方形线圈均通电流 \(I\)。比较它们在各自中心处的磁场大小。</p>
+  <details><summary>答案与关键步骤</summary>
+    <p>圆环中心：\(B_c=\mu_0I/(2R)\)。</p>
+    <p>正方形中心到每边距离 \(d=R\)，每条边贡献为 \(\mu_0I/(4\pi R)(\sin45^\circ+\sin45^\circ)\)，四条边叠加：</p>
+    \[
+    B_s=\frac{\sqrt2\mu_0I}{\pi R}\approx0.450\frac{\mu_0I}{R},
+    \quad B_c=0.5\frac{\mu_0I}{R}.
+    \]
+    <p>因此 \(B_c>B_s\)。两条电流路径在中心产生的磁场方向都由右手定则决定。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 一圆形平面线圈内半径 \(R_1\)、外半径 \(R_2\)，共 \(N\) 匝且沿径向均匀密绕，电流为 \(I\)。求圆心处磁场。</p>
+  <details><summary>答案与关键步骤</summary>
+    <p>半径 \(r\) 到 \(r+dr\) 的圆环有 \(dN=N\,dr/(R_2-R_1)\) 匝，电流元 \(dI=I\,dN\)。</p>
+    \[
+    dB=\frac{\mu_0\,dI}{2r}
+    =\frac{\mu_0 NI}{2(R_2-R_1)}\frac{dr}{r}.
+    \]
+    \[
+    B=\frac{\mu_0 NI}{2(R_2-R_1)}
+    \ln\frac{R_2}{R_1}.
+    \]
+    <p>此题来自 2025–26 期中卷；考的是“圆环→积分”，不是直接套一圈圆环公式。</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>你能在不看答案的情况下，解释薄板题里为什么积分上下限是 \(b\) 和 \(a+b\)，并写出一段圆弧的磁场。</p>
+</div>
+</body>
+</html>
+
+
+
+

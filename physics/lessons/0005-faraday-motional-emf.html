@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 5 课 · 法拉第定律与动生电动势</title>
+<link rel="stylesheet" href="../../_shared/css/course.css">
+<link rel="stylesheet" href="../assets/physics.css">
+<link rel="stylesheet" href="../../_shared/katex/katex.min.css">
+<script defer src="../../_shared/katex/katex.min.js"></script>
+<script defer src="../../_shared/katex/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+});
+</script>
+</head>
+<body>
+<p class="status"><a href="0004-magnetic-force.html">← 上一课</a> · <a href="../">首页</a> · <a href="0006-induced-field-inductance.html">下一课 →</a></p>
+<h1>第 5 课 · 法拉第定律与动生电动势</h1>
+<p class="sub">先问“磁通量为什么变”：回路变、磁场变，还是两者都在变。不同原因对应不同计算动作。</p>
+<p class="meta">建议 28 分钟 · 重点：方向、符号、转杆、动杆、旋转线框</p>
+
+<div class="formula-card">
+  <h3>法拉第定律</h3>
+  \[
+  \varepsilon=-\frac{d\Phi}{dt},
+  \qquad
+  \Phi=\int_S\mathbf B\cdot d\mathbf S.
+  \]
+  <p>负号表示感应电动势产生的电流要阻碍磁通量的变化，这就是楞次定律。</p>
+</div>
+
+<div class="warning">
+  <p><strong>方向题先选正法向。</strong>先规定回路正方向与面积正法向满足右手关系，再求 \(d\Phi/dt\)。如果先乱判“增加/减少”，后面符号很容易反。</p>
+</div>
+
+<h2>磁通量为什么变</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>变化来源</th><th>典型模型</th><th>标准动作</th></tr></thead>
+<tbody>
+<tr><td>面积变</td><td>金属棒在导轨上滑动，转杆扫过面积</td><td>面积增量或动生电动势积分</td></tr>
+<tr><td>磁场变</td><td>螺线管电流变化，磁场中的静止回路</td><td>先积分得到 \(\Phi(B)\)，再对时间求导</td></tr>
+<tr><td>夹角变</td><td>线圈在均匀磁场中转动</td><td>\(\Phi=BA\cos\omega t\) 后求导</td></tr>
+<tr><td>介质或面积分段</td><td>非均匀磁场中的矩形框</td><td>先写 \(B(x)\)，再积分求磁通量</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>动生电动势</h2>
+<div class="formula-card">
+  <p>导体在磁场中运动时，非静电力来源于电荷受到的洛伦兹力：</p>
+  \[
+  \varepsilon_{\rm mot}=\int_L(\mathbf v\times\mathbf B)\cdot d\mathbf l.
+  \]
+  <p>只有速度垂直磁场、导体方向又有沿 \(\mathbf v\times\mathbf B\) 的分量时，才有电动势贡献。</p>
+</div>
+
+<div class="worked">
+  <h3>例题一：在直导线磁场中平移</h3>
+  <p>无限长直导线电流为 \(I_1\)。一段与导线垂直、长度为 \(L\) 的直导体 AB，近端距导线 \(x_0\)，整体以速度 \(v\) 沿平行于长导线的方向平移。求 AB 中电动势大小。</p>
+  <p>距长导线 \(x\) 处 \(B=\mu_0I_1/(2\pi x)\)。各小段 \(dx\) 的动生电动势为</p>
+  \[
+  d\varepsilon=vB\,dx
+  =\frac{\mu_0I_1v}{2\pi x}dx.
+  \]
+  \[
+  \varepsilon=\int_{x_0}^{x_0+L}
+  \frac{\mu_0I_1v}{2\pi x}dx
+  =\frac{\mu_0I_1v}{2\pi}\ln\frac{x_0+L}{x_0}.
+  \]
+  <p>这题考的不是 \(BLv\)，因为 \(B\) 沿导线长度方向变化，必须积分。</p>
+</div>
+
+<div class="worked">
+  <h3>例题二：转轴不在端点的金属杆</h3>
+  <p>长 \(L\) 的金属杆 AB 绕竖直轴 \(OO'\) 在水平面内以角速度 \(\omega\) 转动，\(OO'\) 距 A 端 \(2L/3\)。地磁场竖直分量 \(B\) 可视为均匀。求 \(U_A-U_B\)。</p>
+  <p>轴上取为原点。A 的坐标为 \(-2L/3\)，B 的坐标为 \(L/3\)。距轴 \(r\) 的微元速度 \(v=\omega r\)。对同一侧积分：</p>
+  \[
+  \varepsilon_A=\int_0^{2L/3}B\omega r\,dr
+  =\frac12B\omega\left(\frac{2L}{3}\right)^2
+  =\frac29B\omega L^2,
+  \]
+  \[
+  \varepsilon_B=\int_0^{L/3}B\omega r\,dr
+  =\frac12B\omega\left(\frac{L}{3}\right)^2
+  =\frac1{18}B\omega L^2.
+  \]
+  <p>两端在不同方向上相对轴有相反的动生电动势，合电动势为两端大小之差：</p>
+  \[
+  |\varepsilon_{AB}|=\left(\frac29-\frac1{18}\right)B\omega L^2
+  =\frac16B\omega L^2.
+  \]
+  <p>方向由 \(v\times B\) 判断；这是 2024–25、2025–26 两份卷都出现的模板。</p>
+</div>
+
+<h2>旋转线框</h2>
+<p>面积 \(S\) 的线圈在均匀磁场 \(B\) 中绕与 \(B\) 垂直的轴匀角速转动：</p>
+\[
+\Phi=BS\cos\omega t,
+\qquad
+\varepsilon=BS\omega\sin\omega t.
+\]
+<p>若磁场本身也随时间变化，例如 \(B=B_0\sin\omega t\)，就必须对乘积 \(B(t)S\cos\omega_1t\) 用乘积法则。</p>
+
+<h2>即时检查</h2>
+<div class="question">
+  <p><span class="no">01</span> 长 \(L\) 的金属杆一端为轴，在垂直均匀磁场 \(B\) 中以角速度 \(\omega\) 转动。求两端电动势。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    \varepsilon=\int_0^L B(\omega r)dr=\frac12B\omega L^2.
+    \]</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">02</span> 半径 \(a\) 的圆形线圈共有 \(N\) 匝，在均匀磁场 \(B\) 中以角速度 \(\omega\) 绕直径转动，转轴与 \(B\) 垂直。求 \(t=0\) 时线圈法向与 \(B\) 同向的感应电动势。</p>
+  <details><summary>答案</summary>
+    <p>\[
+    \Phi=N B\pi a^2\cos\omega t,
+    \qquad
+    \varepsilon=-\frac{d\Phi}{dt}
+    =NB\pi a^2\omega\sin\omega t.
+    \]</p>
+    <p>如果题目只问“大小”，取绝对值；若问方向，还要结合规定正法向判断。</p>
+  </details>
+</div>
+
+<div class="question">
+  <p><span class="no">03</span> 一根长为 \(L\) 的直杆以速度 \(v\) 沿自身长度方向运动，磁场垂直于杆但在运动过程中保持不变。杆两端是否有动生电动势？</p>
+  <details><summary>答案</summary>
+    <p>没有。\(\mathbf v\parallel d\mathbf l\)，而 \(\mathbf v\times\mathbf B\) 垂直于杆，\((\mathbf v\times\mathbf B)\cdot d\mathbf l=0\)。</p>
+  </details>
+</div>
+
+<div class="checkpoint">
+  <p><strong>本课过关：</strong>看到转轴不在端点的杆，你会先写各点到轴的坐标，再分别积分，而不是直接套 \(\tfrac12B\omega L^2\)。</p>
+</div>
+</body>
+</html>
+
+
+
+
